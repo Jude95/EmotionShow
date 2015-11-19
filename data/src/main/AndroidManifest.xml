@@ -1,0 +1,19 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.jude.emotionshow.data">
+
+    <application
+        android:allowBackup="true"
+        android:label="@string/app_name"
+        android:supportsRtl="true">
+
+        <meta-data
+            android:name="MODEL"
+            android:value="
+            com.jude.emotionshow.data.model.CommonModel,
+            com.jude.emotionshow.data.model.SeedModel,
+            com.jude.emotionshow.data.model.ImageModel,
+            com.jude.emotionshow.data.model.UserModel"
+            />
+    </application>
+
+</manifest>

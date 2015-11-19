@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f1f1f1">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:background="?colorPrimary"
+        android:layout_height="48dp">
+
+        <TextView
+            android:text="发现"
+            android:layout_centerInParent="true"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/search"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="16dp"
+            android:layout_alignParentRight="true"/>
+    </RelativeLayout>
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="32dp">
+        <com.jude.rollviewpager.RollPagerView
+            android:id="@+id/banner"
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            app:rollviewpager_play_delay="3000"
+            app:rollviewpager_hint_mode="point"
+            app:rollviewpager_hint_gravity="right"
+            app:rollviewpager_hint_paddingRight="16dp"
+            app:rollviewpager_hint_paddingBottom="16dp"/>
+        <com.jude.emotionshow.presentation.widget.RecyclerViewPager
+            android:layout_marginTop="20dp"
+            android:id="@+id/seed_cards"
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            android:paddingLeft="60dp"
+            android:paddingRight="60dp"
+            app:triggerOffset="0.1"
+            app:singlePageFling="true"
+            android:clipToPadding="false"/>
+        <com.jude.emotionshow.presentation.widget.CategoryViewGroup
+            android:id="@+id/category_scence"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:background="@color/white"/>
+
+        <com.jude.emotionshow.presentation.widget.CategoryViewGroup
+            android:id="@+id/category_process"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"/>
+    </LinearLayout>
+
+</ScrollView>
+
+</LinearLayout>

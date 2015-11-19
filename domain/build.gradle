@@ -1,0 +1,36 @@
+apply plugin: 'com.android.library'
+apply plugin: 'me.tatarka.retrolambda'
+apply plugin: 'com.neenbedankt.android-apt'
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "23.0.1"
+
+    defaultConfig {
+        minSdkVersion 15
+        targetSdkVersion 23
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    def domainDependencies = rootProject.ext.domainDependencies
+    compile domainDependencies.gson
+    compile domainDependencies.retrofit
+    compile domainDependencies.utils
+    compile domainDependencies.dagger
+    apt  domainDependencies.daggerCompiler
+    compile domainDependencies.rxAndroid
+    compile domainDependencies.rxJava
+}

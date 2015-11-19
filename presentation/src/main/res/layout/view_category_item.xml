@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge
+    tools:showIn=".widget.CategoryItemView"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <FrameLayout
+        android:layout_width="76dp"
+        android:layout_height="76dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        >
+        <ImageView
+            android:id="@+id/background"
+            android:scaleType="centerCrop"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:src="@color/black"/>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/title_zh"
+                style="@style/TextAppearance.AppCompat.Subhead"
+                tools:text="暗恋"
+                android:textColor="@color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/title_en"
+                style="@style/TextAppearance.AppCompat.Body2"
+                tools:text="secret"
+                android:textColor="@color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </FrameLayout>
+    <com.jude.easyrecyclerview.EasyRecyclerView
+        android:id="@+id/list"
+        android:layout_width="match_parent"
+        android:layout_height="76dp"
+        android:layout_marginRight="8dp"
+        />
+</merge>

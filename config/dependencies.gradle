@@ -1,0 +1,66 @@
+
+ext {
+    //Version
+    beamVersion             = '2.4.9'
+    supportLibraryVersion   = '23.1.1'
+    swipeBackHelperVersion  = '2.1.2'
+    butterKnife             = '7.0.1'
+    utilsVersion            = '1.0.9'
+    materialDialogsVersion  = '0.8.5.0'
+    gsonVersion             = '2.4'
+    tagViewiewVersion       = '2.1.4'
+    rollviewpagerVersion    = '1.0.4'
+    retrofitVersion         = '1.9.0'
+    okHttpVersion           = '2.4.0'
+    daggerVersion           = '2.0.1'
+    eventBusVersion         = '3.0.0-beta1'
+    rxAndroid               = '1.0.1'
+    rxJava                  = '1.0.16'
+    exgridviewVersion       = '1.1.5'
+    picassoVersion          = '2.5.2'
+    qiniuVersion            = '7.0.1'
+
+    //libraries dependencies
+    presentationDependencies = [
+            appcompat           : "com.android.support:appcompat-v7:${supportLibraryVersion}",
+            design              : "com.android.support:design:${supportLibraryVersion}",
+            card                : "com.android.support:cardview-v7:${supportLibraryVersion}",
+            beam                : "com.jude:beam:${beamVersion}",
+            swipeBackHelper     : "com.jude:swipebackhelper:${swipeBackHelperVersion}",
+            butterKnife         : "com.jakewharton:butterknife:${butterKnife}",
+            utils               : "com.jude:utils:${utilsVersion}",
+            materialDialogsCommons     : "com.afollestad.material-dialogs:commons:${materialDialogsVersion}@aar",
+            materialDialogsCore     : "com.afollestad.material-dialogs:core:${materialDialogsVersion}@aar",
+            tagview             : "com.jude:tagview:${tagViewiewVersion}",
+            rollviewpager       : "com.jude:rollviewpager:${rollviewpagerVersion}",
+            eventBus            : "de.greenrobot:eventbus:${eventBusVersion}",
+            rxAndroid           : "io.reactivex:rxandroid:${rxAndroid}",
+            rxJava              : "io.reactivex:rxjava:${rxJava}",
+            exgridview          : "com.jude:exgridview:${exgridviewVersion}",
+            picasso             : "com.squareup.picasso:picasso:${picassoVersion}"
+    ]
+
+    dataDependencies = [
+            dagger              : "com.google.dagger:dagger:${daggerVersion}",
+            daggerCompiler      : "com.google.dagger:dagger-compiler:${daggerVersion}",
+            gson                : "com.google.code.gson:gson:${gsonVersion}",
+            beam                : "com.jude:beam:${beamVersion}",
+            utils               : "com.jude:utils:${utilsVersion}",
+            retrofit            : "com.squareup.retrofit:retrofit:${retrofitVersion}",
+            eventBus            : "de.greenrobot:eventbus:${eventBusVersion}",
+            okHttp              : "com.squareup.okhttp:okhttp:${okHttpVersion}",
+            rxAndroid           : "io.reactivex:rxandroid:${rxAndroid}",
+            rxJava              : "io.reactivex:rxjava:${rxJava}",
+            qiniu               : "com.qiniu:qiniu-android-sdk:${qiniuVersion}"
+    ]
+
+    domainDependencies = [
+            dagger              : "com.google.dagger:dagger:${daggerVersion}",
+            daggerCompiler      : "com.google.dagger:dagger-compiler:${daggerVersion}",
+            retrofit            : "com.squareup.retrofit:retrofit:${retrofitVersion}",
+            gson                : "com.google.code.gson:gson:${gsonVersion}",
+            utils               : "com.jude:utils:${utilsVersion}",
+            rxAndroid           : "io.reactivex:rxandroid:${rxAndroid}",
+            rxJava              : "io.reactivex:rxjava:${rxJava}"
+    ]
+}

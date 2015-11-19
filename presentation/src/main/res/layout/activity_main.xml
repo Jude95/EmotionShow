@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <FrameLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="56dp">
+
+    </FrameLayout>
+    <RelativeLayout
+        android:layout_gravity="bottom"
+        android:layout_width="match_parent"
+        android:layout_height="72dp"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/gray_light">
+            <LinearLayout
+                android:id="@+id/find"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:layout_height="match_parent">
+                <ImageView
+                    android:id="@+id/img_find"
+                    android:src="@drawable/find_red"
+                    android:layout_width="32dp"
+                    android:layout_height="24dp" />
+                <TextView
+                    android:id="@+id/tv_find"
+                    android:layout_width="wrap_content"
+                    android:layout_height="24dp"
+                    android:textSize="13sp"
+                    android:textColor="@color/orange_deep"
+                    android:text="发现"/>
+            </LinearLayout>
+            <View
+                android:layout_width="48dp"
+                android:layout_height="match_parent"/>
+            <LinearLayout
+                android:id="@+id/mine"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:layout_height="match_parent">
+                <ImageView
+                    android:id="@+id/img_mine"
+                    android:src="@drawable/mine_gray"
+                    android:layout_width="32dp"
+                    android:layout_height="24dp" />
+                <TextView
+                    android:id="@+id/tv_mine"
+                    android:layout_width="wrap_content"
+                    android:layout_height="24dp"
+                    android:textSize="13sp"
+                    android:textColor="@color/gray"
+                    android:text="个人"/>
+            </LinearLayout>
+        </LinearLayout>
+        <ImageView
+            android:id="@+id/kiss"
+            android:layout_width="54dp"
+            android:layout_height="54dp"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/kiss"/>
+    </RelativeLayout>
+
+</FrameLayout>
