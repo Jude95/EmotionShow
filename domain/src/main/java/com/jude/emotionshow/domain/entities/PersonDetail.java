@@ -2,10 +2,12 @@ package com.jude.emotionshow.domain.entities;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+
 /**
  * Created by Mr.Jude on 2015/11/19.
  */
-public class PersonDetail extends PersonBrief {
+public class PersonDetail extends PersonBrief  implements Serializable {
     @SerializedName("bg")
     private String background;
     private String address;
