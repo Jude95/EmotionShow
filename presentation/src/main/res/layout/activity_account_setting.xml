@@ -3,9 +3,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#f1f1f1"
-    >
-
+    android:background="#f1f1f1">
     <RelativeLayout
         android:layout_width="match_parent"
         android:background="?colorPrimary"
@@ -25,7 +23,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="我"
+                android:text="设置"
                 android:textSize="17sp"
                 android:gravity="center"
                 android:textColor="@color/white"/>
@@ -33,56 +31,115 @@
 
 
         <TextView
-            android:text="设置"
+            android:text="账号设置"
             android:layout_centerInParent="true"
             android:textSize="18sp"
             android:textStyle="bold"
             android:textColor="@color/white"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
+
     </RelativeLayout>
-
     <LinearLayout
-        android:id="@+id/account"
+        android:id="@+id/password"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:gravity="center_vertical"
         android:paddingLeft="16dp"
         android:paddingRight="16dp"
+        android:layout_marginTop="16dp"
         android:background="@color/white">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="账号设置"/>
-    </LinearLayout>
-    <LinearLayout
-        android:id="@+id/feedback"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:gravity="center_vertical"
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp"
-        android:layout_marginTop="1dp"
-        android:background="@color/white">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="用户反馈"/>
+            android:text="修改密码"/>
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/logout"
+        android:id="@+id/phone"
+        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:gravity="center_vertical"
         android:paddingLeft="16dp"
         android:paddingRight="16dp"
-        android:layout_marginTop="1dp"
-        android:background="@color/white">
+        android:layout_marginTop="16dp"
+        android:background="@color/white"
+        >
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/phone"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="退出登录"/>
+            android:layout_marginLeft="8dp"
+            android:text="手机"/>
+
     </LinearLayout>
+    <LinearLayout
+        android:id="@+id/wx"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:gravity="center_vertical"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:background="@color/white"
+        >
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/wx"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:text="微信"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/qq"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:gravity="center_vertical"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:background="@color/white"
+        >
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/qq"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:text="QQ"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/weibo"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:gravity="center_vertical"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:background="@color/white"
+        >
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/weibo"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:text="新浪微博"/>
+
+    </LinearLayout>
+
 
 </LinearLayout>

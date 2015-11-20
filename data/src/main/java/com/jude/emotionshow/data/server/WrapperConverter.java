@@ -3,6 +3,7 @@ package com.jude.emotionshow.data.server;
 import com.google.gson.Gson;
 import com.jude.emotionshow.domain.api.Code;
 import com.jude.emotionshow.domain.api.Wrapper;
+import com.jude.emotionshow.domain.exception.ServiceException;
 
 import org.json.JSONException;
 import org.json.JSONObject;

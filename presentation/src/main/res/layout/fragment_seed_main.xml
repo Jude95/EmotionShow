@@ -8,6 +8,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:background="?colorPrimary"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         android:layout_height="48dp">
 
         <TextView

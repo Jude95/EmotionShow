@@ -9,8 +9,6 @@ import com.jude.beam.bijection.RequiresPresenter;
 import com.jude.beam.expansion.BeamBaseActivity;
 import com.jude.emotionshow.R;
 import com.jude.emotionshow.data.model.UserModel;
-import com.jude.emotionshow.presentation.user.LoginActivity;
-import com.jude.utils.JActivityManager;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -37,11 +35,16 @@ public class SettingActivity extends BeamBaseActivity<SettingPresenter> {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
         ButterKnife.bind(this);
-        back.setOnClickListener(v->finish());
+        back.setOnClickListener(v -> finish());
         logout.setOnClickListener(v->{
             UserModel.getInstance().logout();
-            JActivityManager.getInstance().closeAllActivity();
-            startActivity(new Intent(this, LoginActivity.class));
+        });
+        feedback.setOnClickListener(v->{
+            startActivity(new Intent(this, FeedbackActivity.class));
+        });
+        account.setOnClickListener(v->{
+            startActivity(new Intent(this,AccountSettingActivity.class));
+
         });
     }
 }

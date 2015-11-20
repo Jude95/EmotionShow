@@ -1,4 +1,4 @@
-package com.jude.emotionshow.data.server;
+package com.jude.emotionshow.domain.exception;
 
 import retrofit.converter.ConversionException;
 

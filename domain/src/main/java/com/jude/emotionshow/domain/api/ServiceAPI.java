@@ -75,7 +75,7 @@ public interface ServiceAPI {
             @Field("id") String id);
 
     @FormUrlEncoded
-    @POST("/home/user/feedback")
+    @POST("/home/index/feedback")
     Observable<Object> feedback(
             @Field("content") String content);
 
@@ -93,6 +93,7 @@ public interface ServiceAPI {
             @Field("face") String face,
             @Field("name") String name,
             @Field("sign") String sign,
+            @Field("intro") String intro,
             @Field("bg") String bg
     );
 

@@ -113,7 +113,6 @@ public class CategoryItemView extends LinearLayout {
         @Override
         public void setData(Image data) {
             Image image = ImageModel.getSmallImage(data);
-            JUtils.Log("width"+image.getWidth()+"   height"+image.getHeight()+"  url:"+image.getUrl());
             Picasso.with(getContext())
                     .load(image.getUrl())
                     .resize(image.getWidth(),image.getHeight())

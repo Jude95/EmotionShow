@@ -1,5 +1,6 @@
 package com.jude.emotionshow.presentation.user;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
@@ -18,6 +19,7 @@ import com.jude.beam.expansion.data.BeamDataActivity;
 import com.jude.emotionshow.R;
 import com.jude.emotionshow.domain.entities.Account;
 import com.jude.emotionshow.presentation.widget.CircleTransform;
+import com.jude.emotionshow.presentation.widget.RegionView;
 import com.squareup.picasso.Picasso;
 
 import butterknife.Bind;
@@ -26,8 +28,8 @@ import butterknife.ButterKnife;
 /**
  * Created by Mr.Jude on 2015/11/20.
  */
-@RequiresPresenter(UserDetailModifyPresenter.class)
-public class UserDetailModifyActivity extends BeamDataActivity<UserDetailModifyPresenter, Account> {
+@RequiresPresenter(UserDetailEditPresenter.class)
+public class UserDetailEditActivity extends BeamDataActivity<UserDetailEditPresenter, Account> {
 
     @Bind(R.id.back_img)
     ImageView backImg;
@@ -57,6 +59,21 @@ public class UserDetailModifyActivity extends BeamDataActivity<UserDetailModifyP
     LinearLayout viewIntro;
     @Bind(R.id.done)
     LinearLayout done;
+    @Bind(R.id.flag)
+    ImageView flag;
+    @Bind(R.id.name_label)
+    TextView nameLabel;
+    @Bind(R.id.sign_label)
+    TextView signLabel;
+    @Bind(R.id.sign)
+    EditText sign;
+    @Bind(R.id.viewSign)
+    RelativeLayout viewSign;
+    @Bind(R.id.address_label)
+    TextView addressLabel;
+    @Bind(R.id.intro_label)
+    TextView introLabel;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,8 +81,24 @@ public class UserDetailModifyActivity extends BeamDataActivity<UserDetailModifyP
         setContentView(R.layout.activity_user_detail_modify);
         ButterKnife.bind(this);
         back.setOnClickListener(v -> finish());
-        done.setOnClickListener(v->getPresenter().submit());
-        avatar.setOnClickListener(v->showSelectorDialog());
+        done.setOnClickListener(v -> getPresenter().submit());
+        avatar.setOnClickListener(v -> showSelectorDialog());
+        sign.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                getPresenter().data.setSign(s.toString());
+            }
+        });
         name.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -83,6 +116,25 @@ public class UserDetailModifyActivity extends BeamDataActivity<UserDetailModifyP
             }
         });
         genderSelect.setOnCheckedChangeListener((group, checkedId) -> getPresenter().data.setGender(checkedId == R.id.male ? 0 : 1));
+        viewAddress.setOnClickListener(v -> showCityDialog(500000));
+        viewIntro.setOnClickListener(v -> {
+            Intent i = new Intent(this, IntroEditActivity.class);
+            i.putExtra("content", getPresenter().data.getIntro());
+            startActivityForResult(i, 10086);
+        });
+    }
+
+    private MaterialDialog dialog;
+
+    public void showCityDialog(int laseRegionCode) {
+        RegionView view = new RegionView(this, region -> {
+            getPresenter().finishAddCity(region);
+            dialog.dismiss();
+        }, laseRegionCode);
+        dialog = new MaterialDialog.Builder(this)
+                .title("选择感兴趣的地区")
+                .customView(view, false)
+                .show();
     }
 
     @Override
@@ -96,6 +148,8 @@ public class UserDetailModifyActivity extends BeamDataActivity<UserDetailModifyP
         if (data.getGender() == 0) male.setChecked(true);
         else female.setChecked(true);
         address.setText(data.getAddress());
+        sign.setText(data.getSign());
+        intro.setText(data.getIntro());
     }
 
     public void showSelectorDialog() {
@@ -110,5 +164,14 @@ public class UserDetailModifyActivity extends BeamDataActivity<UserDetailModifyP
                 .load(uri)
                 .transform(new CircleTransform())
                 .into(avatar);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 10086 && resultCode == RESULT_OK) {
+            getPresenter().data.setIntro(data.getStringExtra("content"));
+            intro.setText(data.getStringExtra("content"));
+        }
     }
 }

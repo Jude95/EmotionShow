@@ -1,9 +1,8 @@
 package com.jude.emotionshow.data.server;
 
-import android.content.Context;
-
+import com.jude.emotionshow.data.model.UserModel;
 import com.jude.emotionshow.domain.api.Code;
-import com.jude.utils.JActivityManager;
+import com.jude.emotionshow.domain.exception.ServiceException;
 import com.jude.utils.JUtils;
 
 import rx.Observer;
@@ -37,8 +36,8 @@ public class ServiceResponse<T> implements Observer<T> {
 
     public void onServiceError(int status,String info){
         if(status == Code.UserInvalid){
-            Context ctx = JActivityManager.getInstance().currentActivity();
-            //ctx.startActivity(new Intent(ctx, LoginActivity.class));
+            UserModel.getInstance().logout();
+            JUtils.Toast("您的账号有风险，请重新登录");
             return;
         }
         JUtils.Toast(info);

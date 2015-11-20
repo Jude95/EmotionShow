@@ -7,7 +7,7 @@ import java.io.Serializable;
 /**
  * Created by Mr.Jude on 2015/11/19.
  */
-public class PersonBrief implements Serializable{
+public class PersonBrief implements Serializable,Cloneable{
     private int id;
     private String name;
     @SerializedName("face")

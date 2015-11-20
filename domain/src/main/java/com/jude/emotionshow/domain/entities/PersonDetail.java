@@ -7,7 +7,7 @@ import java.io.Serializable;
 /**
  * Created by Mr.Jude on 2015/11/19.
  */
-public class PersonDetail extends PersonBrief  implements Serializable {
+public class PersonDetail extends PersonBrief  implements Serializable,Cloneable {
     @SerializedName("bg")
     private String background;
     private String address;

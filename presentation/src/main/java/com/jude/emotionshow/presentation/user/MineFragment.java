@@ -15,6 +15,7 @@ import com.jude.beam.bijection.RequiresPresenter;
 import com.jude.beam.expansion.data.BeamDataFragment;
 import com.jude.emotionshow.R;
 import com.jude.emotionshow.domain.entities.Account;
+import com.jude.emotionshow.presentation.setting.AboutActivity;
 import com.jude.emotionshow.presentation.setting.SettingActivity;
 import com.jude.emotionshow.presentation.widget.CircleTransform;
 import com.squareup.picasso.Picasso;
@@ -69,8 +70,9 @@ public class MineFragment extends BeamDataFragment<MinePresenter,Account> {
             startActivity(new Intent(getActivity(), SettingActivity.class));
         });
         containerUser.setOnClickListener(v->{
-            startActivity(new Intent(getActivity(),UserDetailModifyActivity.class));
+            startActivity(new Intent(getActivity(),UserDetailEditActivity.class));
         });
+        about.setOnClickListener(v->startActivity(new Intent(getActivity(),AboutActivity.class)));
         return view;
     }
 
@@ -83,6 +85,8 @@ public class MineFragment extends BeamDataFragment<MinePresenter,Account> {
                 .into(avatar);
         name.setText(data.getName());
         sign.setText(data.getSign());
+        praiseCount.setText(""+data.getPraiseCount());
+        seedCount.setText(""+data.getSeedCount());
     }
 
     @Override

@@ -20,6 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:layout_alignParentBottom="true"
+            android:paddingTop="4dp"
             android:background="@color/gray_light">
             <LinearLayout
                 android:id="@+id/find"
@@ -62,7 +63,7 @@
                     android:layout_height="24dp"
                     android:textSize="13sp"
                     android:textColor="@color/gray"
-                    android:text="个人"/>
+                    android:text="我"/>
             </LinearLayout>
         </LinearLayout>
         <ImageView

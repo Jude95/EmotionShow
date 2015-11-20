@@ -15,7 +15,7 @@ android {
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
-        manifestPlaceholders = [UMENG_APPKEY_VALUE: props['UMENG_APPKEY']]
+        manifestPlaceholders = [UMENG_APPKEY: props['UMENG_APPKEY']]
     }
 
     productFlavors {
@@ -25,7 +25,7 @@ android {
     }
 
     productFlavors.all { flavor ->
-        manifestPlaceholders.put("UMENG_CHANNEL_VALUE",name)
+        manifestPlaceholders.put("UMENG_CHANNEL",name)
     }
 
     signingConfigs {
@@ -74,6 +74,7 @@ dependencies {
     compile presentationDependencies.exgridview
     compile presentationDependencies.umengAnalytics
     compile presentationDependencies.imageprovider
+    compile presentationDependencies.ripple
 
     compile project(':data')
     compile project(':domain')

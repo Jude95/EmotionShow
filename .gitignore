@@ -34,3 +34,4 @@ proguard/
 .idea
 
 signing.properties
+key.properties

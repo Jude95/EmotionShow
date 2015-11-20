@@ -1,6 +1,7 @@
 package com.jude.emotionshow.presentation.main;
 
 import android.os.Bundle;
+import android.support.v4.app.FragmentTransaction;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -56,15 +57,25 @@ public class MainActivity extends BeamBaseActivity<MainPresenter> {
             showMine();
         });
         kiss.setOnClickListener(v-> getPresenter().createSeed());
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.add(R.id.container, MineFragment.getInstance());
+        transaction.add(R.id.container, SeedMainFragment.getInstance());
+        transaction.commit();
         showFind();
     }
 
     void showFind(){
-        getSupportFragmentManager().beginTransaction().replace(R.id.container, SeedMainFragment.getInstance()).commit();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.show(SeedMainFragment.getInstance());
+        transaction.hide(MineFragment.getInstance());
+        transaction.commit();
     }
 
     void showMine(){
-        getSupportFragmentManager().beginTransaction().replace(R.id.container, MineFragment.getInstance()).commit();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.hide(SeedMainFragment.getInstance());
+        transaction.show(MineFragment.getInstance());
+        transaction.commit();
     }
 
     void focusFind(boolean focus) {

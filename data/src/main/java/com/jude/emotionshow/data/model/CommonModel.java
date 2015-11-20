@@ -32,4 +32,8 @@ public class CommonModel extends AbsModel {
     public Observable<List<Banner>> getBanner(){
         return mServiceAPI.getBanner().compose(new DefaultTransform<>());
     }
+
+    public Observable<Object> feedBack(String content){
+        return mServiceAPI.feedback(content).compose(new DefaultTransform<>());
+    }
 }

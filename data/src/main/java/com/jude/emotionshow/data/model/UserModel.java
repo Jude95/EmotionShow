@@ -106,8 +106,12 @@ public class UserModel extends AbsModel {
     }
 
     public Observable<Object> modify(Account account){
-        return mServiceAPI.modifyInfo(account.getGender(),account.getAddress(),account.getAvatar(),account.getName(),account.getSign(),account.getBackground())
+        return mServiceAPI.modifyInfo(account.getGender(),account.getAddress(),account.getAvatar(),account.getName(),account.getSign(),account.getIntro(),account.getBackground())
                 .doOnNext(data -> updateMyInfo().subscribe(new ServiceResponse<>()))
                 .compose(new DefaultTransform<>());
+    }
+
+    public Observable<Object> changePassword(String originalPassword,String newPassword){
+        return mServiceAPI.modPass(originalPassword,newPassword).compose(new DefaultTransform<>());
     }
 }

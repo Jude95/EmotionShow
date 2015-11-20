@@ -5,9 +5,11 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import com.jude.beam.expansion.data.BeamDataActivityPresenter;
+import com.jude.emotionshow.data.model.RegionModel;
 import com.jude.emotionshow.data.model.UserModel;
 import com.jude.emotionshow.data.server.ServiceResponse;
 import com.jude.emotionshow.domain.entities.Account;
+import com.jude.emotionshow.domain.entities.Region;
 import com.jude.library.imageprovider.ImageProvider;
 import com.jude.library.imageprovider.OnImageSelectListener;
 import com.jude.utils.JUtils;
@@ -15,7 +17,7 @@ import com.jude.utils.JUtils;
 /**
  * Created by Mr.Jude on 2015/11/20.
  */
-public class UserDetailModifyPresenter extends BeamDataActivityPresenter<UserDetailModifyActivity,Account> {
+public class UserDetailEditPresenter extends BeamDataActivityPresenter<UserDetailEditActivity,Account> {
     Account data;
     private ImageProvider provider;
     OnImageSelectListener listener = new OnImageSelectListener() {
@@ -54,7 +56,7 @@ public class UserDetailModifyPresenter extends BeamDataActivityPresenter<UserDet
 
 
     @Override
-    protected void onCreate(UserDetailModifyActivity view, Bundle savedState) {
+    protected void onCreate(UserDetailEditActivity view, Bundle savedState) {
         super.onCreate(view, savedState);
         provider = new ImageProvider(getView());
         UserModel.getInstance().getAccountUpdate()
@@ -80,7 +82,10 @@ public class UserDetailModifyPresenter extends BeamDataActivityPresenter<UserDet
     }
 
     public void submit(){
-        UserModel.getInstance().modify(data).subscribe(new ServiceResponse<Object>(){
+        getView().getExpansion().showProgressDialog("提交中");
+        UserModel.getInstance().modify(data)
+                .doOnNext(data -> getView().getExpansion().dismissProgressDialog())
+                .subscribe(new ServiceResponse<Object>() {
             @Override
             public void onNext(Object o) {
                 super.onNext(o);
@@ -91,4 +96,16 @@ public class UserDetailModifyPresenter extends BeamDataActivityPresenter<UserDet
     }
 
 
+    public void finishAddCity(Region region) {
+        String province =RegionModel.getInstance().findProvince(region.getCid()).getName();
+        String city=RegionModel.getInstance().findCity(region.getCid()).getName();
+        String district =RegionModel.getInstance().findRegion(region.getCid()).getName();
+        String address = province;
+        if (!province.equals(city)){
+            address+=city;
+        }
+        address+=district;
+        data.setAddress(address);
+        publishObject(data);
+    }
 }
