@@ -1,5 +1,6 @@
 package com.jude.emotionshow.presentation.user;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -14,6 +15,7 @@ import com.jude.beam.bijection.RequiresPresenter;
 import com.jude.beam.expansion.data.BeamDataFragment;
 import com.jude.emotionshow.R;
 import com.jude.emotionshow.domain.entities.Account;
+import com.jude.emotionshow.presentation.setting.SettingActivity;
 import com.jude.emotionshow.presentation.widget.CircleTransform;
 import com.squareup.picasso.Picasso;
 
@@ -63,6 +65,9 @@ public class MineFragment extends BeamDataFragment<MinePresenter,Account> {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_mine, container, false);
         ButterKnife.bind(this, view);
+        setting.setOnClickListener(v->{
+            startActivity(new Intent(getActivity(), SettingActivity.class));
+        });
         return view;
     }
 

@@ -35,11 +35,12 @@ public class UserModel extends AbsModel {
         super.onAppCreate(ctx);
         DaggerUserComponent.builder().build().inject(this);
         setAccount((Account) JFileManager.getInstance().getFolder(Dir.Object).readObjectFromFile(FILE_ACCOUNT));
-        updateMyInfo().subscribe(new ServiceResponse<Account>() {
-            @Override
-            public void onServiceError(int status, String info) {
-            }
-        });
+        if (isLogin())
+            updateMyInfo().subscribe(new ServiceResponse<Account>() {
+                @Override
+                public void onServiceError(int status, String info) {
+                }
+            });
     }
 
     public Observable<Account> getAccountUpdate(){
@@ -89,6 +90,18 @@ public class UserModel extends AbsModel {
             HeaderInterceptors.TOKEN = "";
             HeaderInterceptors.UID = "";
         }
+    }
 
+    public void logout(){
+        saveAccount(null);
+        setAccount(null);
+    }
+
+    public Observable<Object> checkTel(String tel){
+        return mServiceAPI.checkTel(tel).compose(new DefaultTransform<>());
+    }
+
+    public Observable<Object> register(String tel,String code,String password){
+        return mServiceAPI.register(tel,code,password).compose(new DefaultTransform<>());
     }
 }

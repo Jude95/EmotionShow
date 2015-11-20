@@ -3,6 +3,9 @@ package com.jude.emotionshow.presentation.app;
 import android.app.Application;
 
 import com.jude.beam.Beam;
+import com.jude.beam.expansion.BeamBaseActivity;
+import com.jude.beam.expansion.overlay.ViewExpansionDelegate;
+import com.jude.beam.expansion.overlay.ViewExpansionDelegateProvider;
 import com.jude.emotionshow.BuildConfig;
 import com.jude.emotionshow.domain.Dir;
 import com.jude.utils.JFileManager;
@@ -25,5 +28,12 @@ public class APP extends Application {
         JUtils.initialize(this);
         JUtils.setDebug(BuildConfig.DEBUG, "Emotion");
         Beam.init(this);
+        Beam.setActivityLifeCycleDelegateProvider(ActivityDelegate::new);
+        Beam.setViewExpansionDelegateProvider(new ViewExpansionDelegateProvider() {
+            @Override
+            public ViewExpansionDelegate createViewExpansionDelegate(BeamBaseActivity activity) {
+                return new PaddingTopViewExpansion(activity);
+            }
+        });
     }
 }

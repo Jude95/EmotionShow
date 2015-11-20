@@ -1,5 +1,6 @@
 package com.jude.emotionshow.presentation.user;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.widget.EditText;
@@ -46,6 +47,10 @@ public class LoginActivity extends BeamBaseActivity<LoginPresenter> {
         login.setOnClickListener(v->{
             checkSubmit();
         });
+
+        register.setOnClickListener(v->{
+            startActivityForResult(new Intent(this,RegisterActivity.class),10086);
+        });
     }
 
     private void checkSubmit(){
@@ -62,4 +67,13 @@ public class LoginActivity extends BeamBaseActivity<LoginPresenter> {
         getPresenter().login(accountText,passwordText);
     }
 
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 10086&&resultCode == RESULT_OK){
+            account.setText(data.getStringExtra("account"));
+            password.setText(data.getStringExtra("password"));
+        }
+    }
 }

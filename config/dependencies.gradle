@@ -6,7 +6,7 @@ ext {
     swipeBackHelperVersion  = '2.1.2'
     butterKnife             = '7.0.1'
     utilsVersion            = '1.0.9'
-    materialDialogsVersion  = '0.8.5.0'
+    materialDialogsVersion  = '0.8.5.1'
     gsonVersion             = '2.4'
     tagViewiewVersion       = '2.1.4'
     rollviewpagerVersion    = '1.0.4'
@@ -19,6 +19,7 @@ ext {
     exgridviewVersion       = '1.1.5'
     picassoVersion          = '2.5.2'
     qiniuVersion            = '7.0.1'
+    umengAnalyticsVersion   = 'latest.integration'
 
     //libraries dependencies
     presentationDependencies = [
@@ -29,7 +30,6 @@ ext {
             swipeBackHelper     : "com.jude:swipebackhelper:${swipeBackHelperVersion}",
             butterKnife         : "com.jakewharton:butterknife:${butterKnife}",
             utils               : "com.jude:utils:${utilsVersion}",
-            materialDialogsCommons     : "com.afollestad.material-dialogs:commons:${materialDialogsVersion}@aar",
             materialDialogsCore     : "com.afollestad.material-dialogs:core:${materialDialogsVersion}@aar",
             tagview             : "com.jude:tagview:${tagViewiewVersion}",
             rollviewpager       : "com.jude:rollviewpager:${rollviewpagerVersion}",
@@ -37,7 +37,8 @@ ext {
             rxAndroid           : "io.reactivex:rxandroid:${rxAndroid}",
             rxJava              : "io.reactivex:rxjava:${rxJava}",
             exgridview          : "com.jude:exgridview:${exgridviewVersion}",
-            picasso             : "com.squareup.picasso:picasso:${picassoVersion}"
+            picasso             : "com.squareup.picasso:picasso:${picassoVersion}",
+            umengAnalytics      : "com.umeng.analytics:analytics:${umengAnalyticsVersion}"
     ]
 
     dataDependencies = [

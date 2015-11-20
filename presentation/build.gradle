@@ -2,7 +2,8 @@ apply plugin: 'com.android.application'
 apply plugin: 'me.tatarka.retrolambda'
 
 Properties props = new Properties()
-props.load(new FileInputStream(file("signing.properties")))
+props.load(new FileInputStream(file("../config/signing.properties")))
+props.load(new FileInputStream(file("../config/key.properties")))
 
 android {
     compileSdkVersion 23
@@ -14,7 +15,19 @@ android {
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
+        manifestPlaceholders = [UMENG_APPKEY_VALUE: props['UMENG_APPKEY']]
     }
+
+    productFlavors {
+        xiaomi{}
+        baidu{}
+        wandoujia{}
+    }
+
+    productFlavors.all { flavor ->
+        manifestPlaceholders.put("UMENG_CHANNEL_VALUE",name)
+    }
+
     signingConfigs {
         release{
             keyAlias props['KEY_ALIAS']
@@ -34,6 +47,7 @@ android {
             signingConfig signingConfigs.release
         }
     }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -49,9 +63,8 @@ dependencies {
     compile presentationDependencies.beam
     compile presentationDependencies.swipeBackHelper
     compile presentationDependencies.butterKnife
-    compile presentationDependencies.utils
-    compile presentationDependencies.materialDialogsCore
-    compile presentationDependencies.materialDialogsCommons
+    compile (presentationDependencies.utils)
+    compile (presentationDependencies.materialDialogsCore){ transitive = true }
     compile presentationDependencies.tagview
     compile presentationDependencies.rollviewpager
     compile presentationDependencies.picasso
@@ -59,6 +72,10 @@ dependencies {
     compile presentationDependencies.rxAndroid
     compile presentationDependencies.rxJava
     compile presentationDependencies.exgridview
+    compile presentationDependencies.umengAnalytics
+
+
     compile project(':data')
     compile project(':domain')
+    compile project(':SMSSDK')
 }
