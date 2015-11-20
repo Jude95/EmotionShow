@@ -20,6 +20,7 @@ ext {
     picassoVersion          = '2.5.2'
     qiniuVersion            = '7.0.1'
     umengAnalyticsVersion   = 'latest.integration'
+    imageproviderVersion    = '2.0.0'
 
     //libraries dependencies
     presentationDependencies = [
@@ -38,7 +39,8 @@ ext {
             rxJava              : "io.reactivex:rxjava:${rxJava}",
             exgridview          : "com.jude:exgridview:${exgridviewVersion}",
             picasso             : "com.squareup.picasso:picasso:${picassoVersion}",
-            umengAnalytics      : "com.umeng.analytics:analytics:${umengAnalyticsVersion}"
+            umengAnalytics      : "com.umeng.analytics:analytics:${umengAnalyticsVersion}",
+            imageprovider       : "com.jude:imageprovider:${imageproviderVersion}"
     ]
 
     dataDependencies = [

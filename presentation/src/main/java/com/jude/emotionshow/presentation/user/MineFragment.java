@@ -65,8 +65,11 @@ public class MineFragment extends BeamDataFragment<MinePresenter,Account> {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_mine, container, false);
         ButterKnife.bind(this, view);
-        setting.setOnClickListener(v->{
+        setting.setOnClickListener(v -> {
             startActivity(new Intent(getActivity(), SettingActivity.class));
+        });
+        containerUser.setOnClickListener(v->{
+            startActivity(new Intent(getActivity(),UserDetailModifyActivity.class));
         });
         return view;
     }

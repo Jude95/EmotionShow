@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * Created by Mr.Jude on 2015/11/19.
  */
-public class Account extends PersonDetail  implements Serializable {
+public class Account extends PersonDetail  implements Serializable,Cloneable {
     private String token;
     private int gender;
 
@@ -24,5 +24,16 @@ public class Account extends PersonDetail  implements Serializable {
 
     public void setToken(String token) {
         this.token = token;
+    }
+
+    @Override
+    public Account clone() {
+        Account o = null;
+        try {
+            o = (Account) super.clone();
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
+        return o;
     }
 }

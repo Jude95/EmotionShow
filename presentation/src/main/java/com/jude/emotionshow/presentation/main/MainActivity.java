@@ -11,6 +11,7 @@ import com.jude.beam.expansion.BeamBaseActivity;
 import com.jude.emotionshow.R;
 import com.jude.emotionshow.presentation.seed.SeedMainFragment;
 import com.jude.emotionshow.presentation.user.MineFragment;
+import com.jude.swipbackhelper.SwipeBackHelper;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -42,6 +43,7 @@ public class MainActivity extends BeamBaseActivity<MainPresenter> {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        SwipeBackHelper.getCurrentPage(this).setSwipeBackEnable(false);
         ButterKnife.bind(this);
         find.setOnClickListener(v -> {
             focusFind(true);

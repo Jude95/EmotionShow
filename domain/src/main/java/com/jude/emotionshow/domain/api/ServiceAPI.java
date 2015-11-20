@@ -83,7 +83,19 @@ public interface ServiceAPI {
     Observable<Object> myAttend();
 
     @GET("/home/user/getMyinfo")
-    Observable<Account> getMyinfo();
+    Observable<Account> getMyInfo();
+
+    @FormUrlEncoded
+    @POST("/home/user/modInfo")
+    Observable<Object> modifyInfo(
+            @Field("gender") int gender,
+            @Field("address") String address,
+            @Field("face") String face,
+            @Field("name") String name,
+            @Field("sign") String sign,
+            @Field("bg") String bg
+    );
+
 
     @FormUrlEncoded
     @POST("/home/user/attend")

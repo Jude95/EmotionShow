@@ -37,6 +37,7 @@ public class SettingActivity extends BeamBaseActivity<SettingPresenter> {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
         ButterKnife.bind(this);
+        back.setOnClickListener(v->finish());
         logout.setOnClickListener(v->{
             UserModel.getInstance().logout();
             JActivityManager.getInstance().closeAllActivity();

@@ -46,6 +46,7 @@ public class RegisterActivity extends BeamBaseActivity<RegisterPresenter> implem
         ButterKnife.bind(this);
         sendCode.setOnClickListener(v -> sendCode());
         register.setOnClickListener(v->register());
+        back.setOnClickListener(v->finish());
     }
 
     public void sendCode() {

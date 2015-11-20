@@ -73,7 +73,7 @@ dependencies {
     compile presentationDependencies.rxJava
     compile presentationDependencies.exgridview
     compile presentationDependencies.umengAnalytics
-
+    compile presentationDependencies.imageprovider
 
     compile project(':data')
     compile project(':domain')

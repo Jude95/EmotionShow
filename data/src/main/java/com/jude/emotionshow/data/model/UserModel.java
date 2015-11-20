@@ -61,7 +61,7 @@ public class UserModel extends AbsModel {
     }
 
     public Observable<Account> updateMyInfo(){
-        return mServiceAPI.getMyinfo()
+        return mServiceAPI.getMyInfo()
                 .doOnNext(account -> {
                     saveAccount(account);
                     setAccount(account);
@@ -102,6 +102,12 @@ public class UserModel extends AbsModel {
     }
 
     public Observable<Object> register(String tel,String code,String password){
-        return mServiceAPI.register(tel,code,password).compose(new DefaultTransform<>());
+        return mServiceAPI.register(tel, code, password).compose(new DefaultTransform<>());
+    }
+
+    public Observable<Object> modify(Account account){
+        return mServiceAPI.modifyInfo(account.getGender(),account.getAddress(),account.getAvatar(),account.getName(),account.getSign(),account.getBackground())
+                .doOnNext(data -> updateMyInfo().subscribe(new ServiceResponse<>()))
+                .compose(new DefaultTransform<>());
     }
 }
