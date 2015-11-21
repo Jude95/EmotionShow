@@ -15,12 +15,15 @@ public class LoginPresenter extends Presenter<LoginActivity> {
 
 
     public void login(String account,String password){
-        UserModel.getInstance().login(account,password).subscribe(new ServiceResponse<Account>(){
-            @Override
-            public void onNext(Account account) {
-                getView().finish();
-                getView().startActivity(new Intent(getView(), MainActivity.class));
-            }
-        });
+        getView().getExpansion().showProgressDialog("登录中");
+        UserModel.getInstance().login(account,password)
+                .finallyDo(() -> getView().getExpansion().dismissProgressDialog())
+                .subscribe(new ServiceResponse<Account>() {
+                    @Override
+                    public void onNext(Account account) {
+                        getView().finish();
+                        getView().startActivity(new Intent(getView(), MainActivity.class));
+                    }
+                });
     }
 }

@@ -31,6 +31,9 @@ public class RegisterPresenter extends Presenter<RegisterActivity> {
     }
 
     public void checkTelAndSend(String number){
+        if (!getView().requestPermission()){
+            return;
+        }
         getView().getExpansion().showProgressDialog("提交中");
         UserModel.getInstance().checkTel(number)
                 .finallyDo(() -> getView().getExpansion().dismissProgressDialog())

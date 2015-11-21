@@ -1,6 +1,7 @@
 package com.jude.emotionshow.presentation.widget;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
@@ -19,10 +20,9 @@ import com.jude.emotionshow.data.model.ImageModel;
 import com.jude.emotionshow.domain.entities.Category;
 import com.jude.emotionshow.domain.entities.Image;
 import com.jude.emotionshow.domain.entities.Seed;
+import com.jude.emotionshow.presentation.seed.SeedDetailActivity;
 import com.jude.utils.JUtils;
 import com.squareup.picasso.Picasso;
-
-import java.util.ArrayList;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -70,15 +70,11 @@ public class CategoryItemView extends LinearLayout {
         titleEn.setText(category.getTitle().getEn());
         titleZh.setText(category.getTitle().getCh());
         adapter.clear();
-        ArrayList<Image> arr = new ArrayList<>();
-        for (Seed seed : category.getData()) {
-            arr.add(seed.getPics().get(0));
-        }
+
         adapter.addFooter(new RecyclerArrayAdapter.ItemView() {
             @Override
             public View onCreateView(ViewGroup parent) {
-                View view = LayoutInflater.from(getContext()).inflate(R.layout.view_category_footer,parent,false);
-                return view;
+                return LayoutInflater.from(getContext()).inflate(R.layout.view_category_footer,parent,false);
             }
 
             @Override
@@ -86,10 +82,10 @@ public class CategoryItemView extends LinearLayout {
 
             }
         });
-        adapter.addAll(arr);
+        adapter.addAll(category.getData());
     }
 
-    private class Adapter extends RecyclerArrayAdapter<Image> {
+    private class Adapter extends RecyclerArrayAdapter<Seed> {
         public Adapter(Context context) {
             super(context);
         }
@@ -100,7 +96,7 @@ public class CategoryItemView extends LinearLayout {
         }
     }
 
-    private class ViewHolder extends BaseViewHolder<Image>{
+    private class ViewHolder extends BaseViewHolder<Seed>{
 
         public ViewHolder(ViewGroup parent) {
             super(new ImageView(parent.getContext()));
@@ -111,8 +107,13 @@ public class CategoryItemView extends LinearLayout {
         }
 
         @Override
-        public void setData(Image data) {
-            Image image = ImageModel.getSmallImage(data);
+        public void setData(Seed data) {
+            itemView.setOnClickListener(v -> {
+                Intent i = new Intent(getContext(), SeedDetailActivity.class);
+                i.putExtra("id",data.getId());
+                getContext().startActivity(i);
+            });
+            Image image = ImageModel.getSmallImage(data.getPics().get(0));
             Picasso.with(getContext())
                     .load(image.getUrl())
                     .resize(image.getWidth(),image.getHeight())

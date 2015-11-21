@@ -6,8 +6,10 @@ import com.google.gson.Gson;
 import com.jude.beam.model.AbsModel;
 import com.jude.emotionshow.data.di.DaggerSeedComponent;
 import com.jude.emotionshow.data.server.DefaultTransform;
+import com.jude.emotionshow.data.server.ServiceResponse;
 import com.jude.emotionshow.domain.api.ServiceAPI;
 import com.jude.emotionshow.domain.entities.Category;
+import com.jude.emotionshow.domain.entities.SeedDetail;
 import com.jude.emotionshow.domain.entities.SeedEditable;
 import com.jude.emotionshow.domain.entities.Topic;
 
@@ -47,6 +49,30 @@ public class SeedModel extends AbsModel {
         return mServiceAPI.getScence().compose(new DefaultTransform<>());
     }
     public Observable<Object> publishSeed(SeedEditable data){
-        return mServiceAPI.addSeed(data.getContent(),data.getScene(),data.getProcess(),data.getAddress(),data.getScope(),"",mGson.toJson(data.getPictures())).compose(new DefaultTransform<>());
+        return mServiceAPI.addSeed(data.getContent(), data.getScene(), data.getProcess(), data.getAddress(), data.getScope(), "", mGson.toJson(data.getPictures()))
+                .doOnNext(o -> UserModel.getInstance().updateMyInfo().subscribe(new ServiceResponse<>()))
+                .compose(new DefaultTransform<>());
+    }
+
+    public Observable<SeedDetail> getSeedDetail(int id){
+        return mServiceAPI.getSeedDetail(id).compose(new DefaultTransform<>());
+    }
+
+    public Observable<Object> comment(int seedId,int commentId,String content){
+        return mServiceAPI.comment(seedId, commentId, content).compose(new DefaultTransform<>());
+    }
+
+    public Observable<Object> praise(int id){
+        return mServiceAPI.praiseSeed(id)
+                .doOnNext(o -> UserModel.getInstance().updateMyInfo().subscribe(new ServiceResponse<>()))
+                .compose(new DefaultTransform<>());
+    }
+
+    public Observable<Object> collect(int id){
+        return mServiceAPI.collect(id).compose(new DefaultTransform<>());
+    }
+
+    public Observable<Object> report(int id){
+        return mServiceAPI.report(id).compose(new DefaultTransform<>());
     }
 }

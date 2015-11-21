@@ -5,6 +5,7 @@ import com.jude.emotionshow.domain.entities.Account;
 import com.jude.emotionshow.domain.entities.Banner;
 import com.jude.emotionshow.domain.entities.Category;
 import com.jude.emotionshow.domain.entities.PersonDetail;
+import com.jude.emotionshow.domain.entities.SeedDetail;
 import com.jude.emotionshow.domain.entities.Token;
 import com.jude.emotionshow.domain.entities.Topic;
 
@@ -42,7 +43,7 @@ public interface ServiceAPI {
             @Field("type") String type);
 
     @FormUrlEncoded
-    @POST("/home/user/register")
+    @POST("/home/user/registerForA")
     Observable<Object> register(
             @Field("tel") String tel,
             @Field("code") String code,
@@ -124,4 +125,36 @@ public interface ServiceAPI {
     Observable<Object> uploadAddress(
             @Field("lat") double lat,
             @Field("lng") double lng);
+
+    @FormUrlEncoded
+    @POST("/home/history/item")
+    Observable<SeedDetail> getSeedDetail(
+            @Field("id") int id
+    );
+
+    @FormUrlEncoded
+    @POST("/home/history/comment")
+    Observable<Object> comment(
+            @Field("hid") int seedId,
+            @Field("fid") int commentId,
+            @Field("content") String content
+    );
+
+    @FormUrlEncoded
+    @POST("/home/history/zan")
+    Observable<SeedDetail> praiseSeed(
+            @Field("id") int id
+    );
+
+    @FormUrlEncoded
+    @POST("/home/history/collect")
+    Observable<Object> collect(
+            @Field("id") int id
+    );
+
+    @FormUrlEncoded
+    @POST("/home/index/jubao")
+    Observable<Object> report(
+            @Field("hid") int hid
+    );
 }

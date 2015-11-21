@@ -29,7 +29,11 @@ public class  NetImageAdapter extends ArrayAdapter<Image> implements View.OnClic
         super(context, 0, objects.toArray(new Image[objects.size()]));
     }
 
-    private int size;
+    public NetImageAdapter(Context context, Collection<Image> objects,int size) {
+        super(context, 0, objects.toArray(new Image[objects.size()]));
+        this.size = size;
+    }
+    private int size = ImageModel.IMAGE_SIZE_SMALL;
 
     public void setSize(int size) {
         this.size = size;

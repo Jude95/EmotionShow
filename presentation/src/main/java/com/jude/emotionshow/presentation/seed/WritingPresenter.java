@@ -63,6 +63,8 @@ public class WritingPresenter extends BeamDataActivityPresenter<WritingActivity,
     protected void onCreate(WritingActivity view, Bundle savedState) {
         super.onCreate(view, savedState);
         data = new SeedEditable();
+        data.setScene(getView().SCENE[0]);
+        data.setProcess(getView().PROCESS[0]);
         data.setAddress(LocationModel.getInstance().getCurLocation().getAddress());
         provider = new ImageProvider(getView());
         editPicture();

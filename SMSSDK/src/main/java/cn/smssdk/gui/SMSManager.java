@@ -44,7 +44,8 @@ public class SMSManager {
 
     public boolean sendMessage(Context ctx,String number){
         if (!inited){
-            SMSSDK.initSDK(ctx, "a30a97f391a4", "e8c24150fed6240b94a7e3bd0dff5291");
+            Log.i("Message", "开始初始化");
+            SMSSDK.initSDK(ctx, "c8a81f57a956", "f02b5d6293f0004b57e6d0e3eb034624");
             SMSSDK.registerEventHandler(new EventHandler(){
                 @Override
                 public void afterEvent(int event, int result, Object data) {
