@@ -67,6 +67,7 @@
         <activity android:name=".presentation.setting.AccountSettingActivity"/>
         <activity android:name=".presentation.user.PasswordEditActivity"/>
         <activity android:name=".presentation.setting.AboutActivity"/>
+        <activity android:name=".presentation.seed.WritingActivity"/>
     </application>
 
 </manifest>

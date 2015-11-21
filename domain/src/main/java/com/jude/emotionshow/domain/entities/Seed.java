@@ -10,6 +10,7 @@ public class Seed {
     private int uid;
     private String name;
     private String face;
+
     private List<Image> pics;
 
     public int getId() {

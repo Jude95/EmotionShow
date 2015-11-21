@@ -20,7 +20,7 @@ ext {
     picassoVersion          = '2.5.2'
     qiniuVersion            = '7.0.1'
     umengAnalyticsVersion   = 'latest.integration'
-    imageproviderVersion    = '2.0.0'
+    imageproviderVersion    = '2.0.5'
     rippleVersion           = '1.0.2'
 
     //libraries dependencies
