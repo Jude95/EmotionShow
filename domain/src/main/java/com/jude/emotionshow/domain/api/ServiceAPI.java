@@ -5,6 +5,7 @@ import com.jude.emotionshow.domain.entities.Account;
 import com.jude.emotionshow.domain.entities.Banner;
 import com.jude.emotionshow.domain.entities.Category;
 import com.jude.emotionshow.domain.entities.PersonDetail;
+import com.jude.emotionshow.domain.entities.Token;
 import com.jude.emotionshow.domain.entities.Topic;
 
 import java.util.List;
@@ -102,4 +103,25 @@ public interface ServiceAPI {
     @POST("/home/user/attend")
     Observable<Object> attend(
             @Field("id") String id);
+
+    @FormUrlEncoded
+    @POST("/home/history/add")
+    Observable<Object> addSeed(
+            @Field("content") String content,
+            @Field("ctag") String scene,
+            @Field("ltag") String process,
+            @Field("address") String address,
+            @Field("rights") int scope,
+            @Field("tag") String tag,
+            @Field("pics") String pics
+            );
+
+    @GET("/home/index/qiniuToken")
+    Observable<Token> qiniuToken();
+
+    @FormUrlEncoded
+    @POST("/home/user/address")
+    Observable<Object> uploadAddress(
+            @Field("lat") double lat,
+            @Field("lng") double lng);
 }

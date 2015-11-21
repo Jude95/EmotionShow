@@ -36,6 +36,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
+        <!-- 高德-->
+        <meta-data
+            android:name="com.amap.api.v2.apikey"
+            android:value="${AMAP_APPKEY}"/>
+
         <!-- 友盟 -->
         <meta-data
             android:name="UMENG_APPKEY"

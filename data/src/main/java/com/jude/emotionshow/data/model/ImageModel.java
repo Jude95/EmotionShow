@@ -6,12 +6,20 @@ import android.graphics.BitmapFactory;
 import android.os.Environment;
 
 import com.jude.beam.model.AbsModel;
+import com.jude.emotionshow.data.server.DefaultTransform;
+import com.jude.emotionshow.data.server.ServiceResponse;
 import com.jude.emotionshow.domain.entities.Image;
+import com.jude.emotionshow.domain.entities.Token;
+import com.jude.utils.JUtils;
 import com.qiniu.android.storage.UploadManager;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+
+import rx.Observable;
+import rx.Subscriber;
+import rx.schedulers.Schedulers;
 
 
 /**
@@ -61,6 +69,8 @@ public class ImageModel extends AbsModel {
         return image;
     }
 
+
+
     private static Image calculateScaling(Image image,int targetWidth,int targetHeight){
         int width = image.getWidth();
         int height = image.getHeight();
@@ -75,47 +85,116 @@ public class ImageModel extends AbsModel {
         return realName;
     }
 
-//    /**
-//     *
-//     * @param file 需上传文件
-//     * @return 上传文件访问地址
-//     */
-//    public Observable<String> putImage(final File file){
-//        return Observable.just(createName(file))
-//                .doOnNext(name -> ServiceClient.getService().getQiNiuToken().subscribe(new ServiceResponse<Token>() {
-//                    @Override
-//                    public void onNext(Token token) {
-//                        mUploadManager.put(compressImage(file), name, token.getToken(), (key, info, response) -> {
-//                            if (!info.isOK()) JUtils.Toast("图片上传失败!");
-//                            else JUtils.Log("图片已上传");
-//                        }, null);
-//                    }
-//                }))
-//                .map(name -> ADDRESS + name);
-//    }
-//
-//
-//
-//
-//    public Observable<String> putImage(final File[] file){
-//        return Observable.from(file)
-//                .map(file1 -> {
-//                    String name = createName(file1);
-//                    ServiceClient.getService().getQiNiuToken().subscribe(new ServiceResponse<Token>() {
-//                        @Override
-//                        public void onNext(Token token) {
-//                            mUploadManager.put(compressImage(file1), name, token.getToken(), (key, info, response) -> {
-//                                if (!info.isOK()) JUtils.Toast("图片上传失败!");
-//                                else JUtils.Log("图片已上传：" + name);
-//                            }, null);
-//                        }
-//                    });
-//                    return name;
-//                })
-//                .subscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .map(name -> ADDRESS + name);
-//    }
+    /**
+     * 异步上传
+     * TODO 更改返回类型
+     * @param file 需上传文件
+     * @return 上传文件访问地址
+     */
+    public Observable<String> putImageAsync(Context ctx,final File file){
+        return Observable.just(createName(file))
+                .doOnNext(name -> CommonModel.getInstance().getQiNiuToken().subscribe(new ServiceResponse<Token>() {
+                    @Override
+                    public void onNext(Token token) {
+                        mUploadManager.put(compressImage(ctx, file), name, token.getToken(), (key, info, response) -> {
+                            if (!info.isOK()) JUtils.Toast("图片上传失败!");
+                            else JUtils.Log("图片已上传");
+                        }, null);
+                    }
+                }))
+                .subscribeOn(Schedulers.io())
+                .map(name -> ADDRESS + name)
+                .compose(new DefaultTransform<>());
+    }
+
+
+
+
+    public Observable<String> putImageAsync(Context ctx,final File[] file){
+        return Observable.from(file)
+                .map(file1 -> {
+                    String name = createName(file1);
+                    CommonModel.getInstance().getQiNiuToken().subscribe(new ServiceResponse<Token>() {
+                        @Override
+                        public void onNext(Token token) {
+                            mUploadManager.put(compressImage(ctx, file1), name, token.getToken(), (key, info, response) -> {
+                                if (!info.isOK()) JUtils.Toast("图片上传失败!");
+                                else JUtils.Log("图片已上传：" + name);
+                            }, null);
+                        }
+                    });
+                    return name;
+                })
+                .subscribeOn(Schedulers.io())
+                .map(name -> ADDRESS + name)
+                .compose(new DefaultTransform<>());
+    }
+
+    /**
+     * 同步上传
+     * @param file 需上传文件
+     * @return 上传文件访问地址
+     */
+    public Observable<Image> putImageSync(Context ctx,final File file){
+        String name = createName(file);
+        return CommonModel.getInstance().getQiNiuToken()
+                .flatMap(token -> Observable.create(new Observable.OnSubscribe<Image>() {
+                    @Override
+                    public void call(Subscriber<? super Image> subscriber) {
+                        File f = compressImage(ctx, file);
+                        Image i =  getSizeFromFile(f);
+                        i.setUrl(ADDRESS + name);
+
+                        mUploadManager.put(f, name, token.getToken(), (key, info, response) -> {
+                            if (!info.isOK()) {
+                                JUtils.Toast("图片上传失败!");
+                                subscriber.onError(new Throwable("key:" + key + "  info:" + info + "  response:" + response));
+                            } else {
+                                JUtils.Log("图片已上传");
+                                subscriber.onNext(i);
+                            }
+                            subscriber.onCompleted();
+                        }, null);
+                    }
+                }))
+                .doOnNext(s -> JUtils.Log("已上传：" + s))
+                .compose(new DefaultTransform<>());
+    }
+
+
+
+
+    public Observable<Image> putImageSync(Context ctx,final File[] file){
+        final int[] count = {0};
+        return CommonModel.getInstance().getQiNiuToken()
+                .flatMap(token -> Observable.create(new Observable.OnSubscribe<Image>() {
+                    @Override
+                    public void call(Subscriber<? super Image> subscriber) {
+                        for (File temp : file) {
+                            String name = createName(temp);
+                            File f = compressImage(ctx, temp);
+                            Image i = getSizeFromFile(f);
+                            i.setUrl(ADDRESS + name);
+
+                            mUploadManager.put(f, name, token.getToken(), (key, info, response) -> {
+                                if (!info.isOK()) {
+                                    JUtils.Toast("图片上传失败!");
+                                    subscriber.onError(new Throwable("key:" + key + "  info:" + info + "  response:" + response));
+                                } else {
+                                    JUtils.Log("图片已上传");
+                                    subscriber.onNext(i);
+                                }
+                                count[0]++;
+                                if (count[0] == file.length)subscriber.onCompleted();
+                            }, null);
+                        }
+
+                    }
+                }))
+                .doOnNext(s -> JUtils.Log("已上传：" + s))
+                .compose(new DefaultTransform<>());
+    }
+
 
     private File compressImage(Context ctx,File file){
         BitmapFactory.Options options = new BitmapFactory.Options();
@@ -147,6 +226,13 @@ public class ImageModel extends AbsModel {
         return tempfile;
     }
 
+    private Image getSizeFromFile(File file){
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inJustDecodeBounds = true;
+        BitmapFactory.decodeFile(file.getPath(), options);
+        return new  Image(file.getPath(),options.outWidth,options.outHeight);
+    }
+
     private File createTempImage(Context ctx){
         String state = Environment.getExternalStorageState();
         String name = Math.random()*10000+System.nanoTime()+".jpg";
@@ -161,5 +247,7 @@ public class ImageModel extends AbsModel {
             return tmpFile;
         }
     }
+
+
 
 }

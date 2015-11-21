@@ -15,7 +15,11 @@ android {
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
-        manifestPlaceholders = [UMENG_APPKEY: props['UMENG_APPKEY']]
+        manifestPlaceholders = [
+                UMENG_APPKEY    : props['UMENG_APPKEY'],
+                AMAP_APPKEY     : props['AMAP_APPKEY']
+        ]
+
     }
 
     productFlavors {

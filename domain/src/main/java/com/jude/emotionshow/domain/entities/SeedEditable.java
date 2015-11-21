@@ -2,10 +2,12 @@ package com.jude.emotionshow.domain.entities;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
 /**
  * Created by Mr.Jude on 2015/11/21.
  */
-public class SeedDetail extends Seed {
+public class SeedEditable extends Seed {
     @SerializedName("ctag")
     private String scene;
     @SerializedName("ltag")
@@ -13,6 +15,25 @@ public class SeedDetail extends Seed {
     private String address;
     @SerializedName("right")
     private int scope;
+    @SerializedName("pics")
+    private List<Image> pictures;
+    private String content;
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public List<Image> getPictures() {
+        return pictures;
+    }
+
+    public void setPictures(List<Image> pictures) {
+        this.pictures = pictures;
+    }
 
     public String getScene() {
         return scene;

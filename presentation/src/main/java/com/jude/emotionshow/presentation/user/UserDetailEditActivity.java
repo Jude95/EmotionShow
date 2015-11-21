@@ -17,6 +17,7 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.jude.beam.bijection.RequiresPresenter;
 import com.jude.beam.expansion.data.BeamDataActivity;
 import com.jude.emotionshow.R;
+import com.jude.emotionshow.data.model.LocationModel;
 import com.jude.emotionshow.domain.entities.Account;
 import com.jude.emotionshow.presentation.widget.CircleTransform;
 import com.jude.emotionshow.presentation.widget.RegionView;
@@ -116,7 +117,7 @@ public class UserDetailEditActivity extends BeamDataActivity<UserDetailEditPrese
             }
         });
         genderSelect.setOnCheckedChangeListener((group, checkedId) -> getPresenter().data.setGender(checkedId == R.id.male ? 0 : 1));
-        viewAddress.setOnClickListener(v -> showCityDialog(500000));
+        viewAddress.setOnClickListener(v -> showCityDialog(LocationModel.getInstance().getCurLocation().regionCode));
         viewIntro.setOnClickListener(v -> {
             Intent i = new Intent(this, IntroEditActivity.class);
             i.putExtra("content", getPresenter().data.getIntro());

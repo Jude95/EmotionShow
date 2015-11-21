@@ -63,7 +63,7 @@ public class SeedMainPresenter extends Presenter<SeedMainFragment> {
         });
     }
     public void getCategoryScence(){
-        SeedModel.getInstance().getScence().subscribe(new ServiceResponse<List<Category>>() {
+        SeedModel.getInstance().getScene().subscribe(new ServiceResponse<List<Category>>() {
             @Override
             public void onNext(List<Category> categories) {
                 mCategoryScenceSubject.onNext(categories);

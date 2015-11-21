@@ -8,6 +8,9 @@ public class Image {
     private int width;
     private int height;
 
+    public Image() {
+    }
+
     public Image(String url, int width, int height) {
         this.url = url;
         this.width = width;
@@ -36,5 +39,10 @@ public class Image {
 
     public void setHeight(int height) {
         this.height = height;
+    }
+
+    @Override
+    public String toString() {
+        return "url:"+url+"     width:"+width+"     height:"+height;
     }
 }

@@ -13,7 +13,8 @@
             com.jude.emotionshow.data.model.SeedModel,
             com.jude.emotionshow.data.model.ImageModel,
             com.jude.emotionshow.data.model.RegionModel,
-            com.jude.emotionshow.data.model.UserModel"
+            com.jude.emotionshow.data.model.UserModel,
+            com.jude.emotionshow.data.model.LocationModel"
             />
     </application>
 
