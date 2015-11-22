@@ -1,4 +1,4 @@
-package com.jude.emotionshow.presentation.widget;
+package com.jude.emotionshow.presentation.seed;
 
 import android.content.Context;
 import android.content.Intent;
