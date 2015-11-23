@@ -51,7 +51,7 @@ public class SeedMainPresenter extends Presenter<SeedMainFragment> {
         mBannerSubject.subscribe(data -> getView().setBanner(data));
         mTopicSubject.subscribe(data -> getView().setTopic(data));
         mCategoryProcessSubject.subscribe(data -> getView().setCategoryProcess(data));
-        mCategoryScenceSubject.subscribe(data -> getView().setCategoryScence(data));
+        mCategoryScenceSubject.subscribe(data -> getView().setCategoryScene(data));
     }
 
     public void getCategoryProcess(){

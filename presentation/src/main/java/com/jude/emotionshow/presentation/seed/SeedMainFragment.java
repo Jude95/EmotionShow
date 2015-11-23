@@ -1,11 +1,11 @@
 package com.jude.emotionshow.presentation.seed;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +19,7 @@ import com.jude.emotionshow.R;
 import com.jude.emotionshow.domain.entities.Banner;
 import com.jude.emotionshow.domain.entities.Category;
 import com.jude.emotionshow.domain.entities.Topic;
+import com.jude.emotionshow.presentation.main.SearchActivity;
 import com.jude.emotionshow.presentation.widget.LoopRecyclerViewPagerAdapter;
 import com.jude.emotionshow.presentation.widget.RecyclerViewPager;
 import com.jude.rollviewpager.RollPagerView;
@@ -45,6 +46,8 @@ public class SeedMainFragment extends BeamFragment<SeedMainPresenter> {
     CategoryViewGroup categoryScence;
     @Bind(R.id.category_process)
     CategoryViewGroup categoryProcess;
+    @Bind(R.id.search)
+    ImageView search;
 
     public static SeedMainFragment getInstance() {
         if (instance == null) instance = new SeedMainFragment();
@@ -59,6 +62,7 @@ public class SeedMainFragment extends BeamFragment<SeedMainPresenter> {
         LinearLayoutManager layout = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         seedCards.setLayoutManager(layout);
         seedCards.setHasFixedSize(true);
+        search.setOnClickListener(v -> startActivity(new Intent(getContext(), SearchActivity.class)));
         seedCards.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int scrollState) {
@@ -94,12 +98,6 @@ public class SeedMainFragment extends BeamFragment<SeedMainPresenter> {
                         v.setScaleX(0.9f + rate * 0.1f);
                     }
                 }
-            }
-        });
-        seedCards.addOnPageChangedListener(new RecyclerViewPager.OnPageChangedListener() {
-            @Override
-            public void OnPageChanged(int oldPosition, int newPosition) {
-                Log.d("test", "oldPosition:" + oldPosition + " newPosition:" + newPosition);
             }
         });
 
@@ -165,10 +163,10 @@ public class SeedMainFragment extends BeamFragment<SeedMainPresenter> {
         TopicAdapter adapter = new TopicAdapter(getContext());
         seedCards.setAdapter(new LoopRecyclerViewPagerAdapter<>(seedCards, adapter));
         adapter.addAll(topic);
-        seedCards.scrollToPosition(topic.size() / 2);
+        seedCards.scrollToPosition(100);
     }
 
-    public void setCategoryScence(List<Category> list){
+    public void setCategoryScene(List<Category> list){
         categoryScence.setting("场景", () -> getPresenter().getCategoryScence());
         categoryScence.setCategoryList(list);
     }

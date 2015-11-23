@@ -63,6 +63,7 @@
         android:layout_height="match_parent"
         android:padding="8dp"
         android:gravity="top"
+        android:hint="请输入您的简介"
         android:background="@color/white"/>
 
 </LinearLayout>

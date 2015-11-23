@@ -2,6 +2,7 @@ package com.jude.emotionshow.presentation.seed;
 
 import android.os.Bundle;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.text.TextUtils;
 import android.view.ViewGroup;
 
 import com.jude.beam.bijection.RequiresPresenter;
@@ -23,17 +24,21 @@ public class SeedSearchFragment extends BeamListFragment<SeedSearchPresenter,See
 
     @Override
     protected ListConfig getConfig() {
-        return super.getConfig().setLoadmoreAble(true).setRefreshAble(false);
+        return super.getConfig().setLoadmoreAble(false).setRefreshAble(false).setNoMoreAble(false);
     }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        getListView().setLayoutManager(new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL));
+        getListView().setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
+        getListView().showRecycler();
     }
 
     @Override
     public void search(String query) {
+        if (!TextUtils.isEmpty(query))
         getPresenter().search(query);
+        else
+            getPresenter().getAdapter().clear();
     }
 }

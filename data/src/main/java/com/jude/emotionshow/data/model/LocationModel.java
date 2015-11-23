@@ -4,7 +4,7 @@ import android.content.Context;
 
 import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
-import com.amap.api.location.AMapLocationListener;
+import com.amap.api.location.AMapLocationClientOption;
 import com.jude.beam.model.AbsModel;
 import com.jude.emotionshow.data.server.ServiceResponse;
 import com.jude.emotionshow.domain.Dir;
@@ -49,24 +49,22 @@ public class LocationModel extends AbsModel {
         mLocation = (Location) JFileManager.getInstance().getFolder(Dir.Object).readObjectFromFile(FILENAME);
         if (mLocation == null)mLocation = new Location();
         startLocation(ctx);
-        registerLocationChange(new Action1<Location>() {
-            @Override
-            public void call(Location location) {
-                mLocation = location;
-                JFileManager.getInstance().getFolder(Dir.Object).writeObjectToFile(location, FILENAME);
-                uploadAddress();
-            }
+        registerLocationChange(location -> {
+            mLocation = location;
+            JFileManager.getInstance().getFolder(Dir.Object).writeObjectToFile(location, FILENAME);
+            uploadAddress();
         });
     }
 
     public void startLocation(final Context ctx){
         AMapLocationClient mLocationClient = new AMapLocationClient(ctx);
-        mLocationClient.setLocationListener(new AMapLocationListener() {
-            @Override
-            public void onLocationChanged(AMapLocation aMapLocation) {
-                mLocationSubject.onNext(createLocation(aMapLocation));
-            }
+        AMapLocationClientOption option = new AMapLocationClientOption();
+        option.setInterval(600000);
+        mLocationClient.setLocationOption(option);
+        mLocationClient.setLocationListener(aMapLocation -> {
+            mLocationSubject.onNext(createLocation(aMapLocation));
         });
+        mLocationClient.startLocation();
     }
 
     private Location createLocation(AMapLocation aMapLocation){
@@ -86,7 +84,6 @@ public class LocationModel extends AbsModel {
     }
 
     public void uploadAddress(){
-        JUtils.Log("Update Address");
         if (UserModel.getInstance().isLogin())
         CommonModel.getInstance().updateAddress(mLocation.getLatitude(), mLocation.getLongitude())
                 .subscribe(new ServiceResponse<Object>() {

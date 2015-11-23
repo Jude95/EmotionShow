@@ -37,10 +37,14 @@ public class ImageModel extends AbsModel {
     public static ImageModel getInstance() {
         return getInstance(ImageModel.class);
     }
-    public static final String ADDRESS = "http://7xnrrg.com2.z0.glb.qiniucdn.com/";
+    public static final String ADDRESS = "qiniucdn.com/";
 
     private UploadManager mUploadManager;
 
+
+    public static boolean isQiniuAddress(String address){
+        return address.contains(ADDRESS);
+    }
 
     @Override
     protected void onAppCreate(Context ctx) {
@@ -51,39 +55,39 @@ public class ImageModel extends AbsModel {
     public static Image getSmallImage(Image image){
         if (image==null||image.getUrl()==null)return null;
         image = calculateScaling(image,IMAGE_SIZE_SMALL,IMAGE_SIZE_SMALL);
-        if (image.getUrl().startsWith(ADDRESS)) image.setUrl(image.getUrl()+"?imageView2/0/w/"+IMAGE_SIZE_SMALL);
+        if (isQiniuAddress(image.getUrl())) image.setUrl(image.getUrl()+"?imageView2/0/w/"+IMAGE_SIZE_SMALL);
         return image;
     }
 
     public static Image getLargeImage(Image image){
         if (image==null||image.getUrl()==null)return null;
         image = calculateScaling(image,IMAGE_SIZE_LARGE,IMAGE_SIZE_LARGE);
-        if (image.getUrl().startsWith(ADDRESS)) image.setUrl(image.getUrl()+"?imageView2/0/w/"+IMAGE_SIZE_LARGE);
+        if (isQiniuAddress(image.getUrl())) image.setUrl(image.getUrl()+"?imageView2/0/w/"+IMAGE_SIZE_LARGE);
         return image;
     }
 
     public static Image getSizeImage(Image image,int width){
         if (image==null||image.getUrl()==null)return null;
         image = calculateScaling(image,width,width);
-        if (image.getUrl().startsWith(ADDRESS)) image.setUrl(image.getUrl()+"?imageView2/0/w/"+width);
+        if (isQiniuAddress(image.getUrl())) image.setUrl(image.getUrl()+"?imageView2/0/w/"+width);
         return image;
     }
 
     public static String getSmallImage(String image){
         if (image==null)return null;
-        if (image.startsWith(ADDRESS)) image+="?imageView2/0/w/"+IMAGE_SIZE_SMALL;
+        if (isQiniuAddress(image)) image+="?imageView2/0/w/"+IMAGE_SIZE_SMALL;
         return image;
     }
 
     public static String getLargeImage(String image){
         if (image==null)return null;
-        if (image.startsWith(ADDRESS)) image+="?imageView2/0/w/"+IMAGE_SIZE_LARGE;
+        if (isQiniuAddress(image)) image+="?imageView2/0/w/"+IMAGE_SIZE_LARGE;
         return image;
     }
 
     public static String getSizeImage(String image,int width){
         if (image==null)return null;
-        if (image.startsWith(ADDRESS)) image+="?imageView2/0/w/"+width;
+        if (isQiniuAddress(image)) image+="?imageView2/0/w/"+width;
         return image;
     }
 
