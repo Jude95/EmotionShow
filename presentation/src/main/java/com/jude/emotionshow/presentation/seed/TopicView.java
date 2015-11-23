@@ -1,6 +1,7 @@
-package com.jude.emotionshow.presentation.widget;
+package com.jude.emotionshow.presentation.seed;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.AttributeSet;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
@@ -10,6 +11,8 @@ import com.jude.emotionshow.R;
 import com.jude.emotionshow.data.model.ImageModel;
 import com.jude.emotionshow.domain.entities.Image;
 import com.jude.emotionshow.domain.entities.Topic;
+import com.jude.emotionshow.presentation.seed.RecommendActivity;
+import com.jude.emotionshow.presentation.widget.NetImageAdapter;
 import com.jude.exgridview.ExGridView;
 import com.jude.utils.JUtils;
 
@@ -42,9 +45,10 @@ public class TopicView extends FrameLayout {
     private void init() {
         inflate(getContext(), R.layout.view_topic, this);
         ButterKnife.bind(this, this);
-        setLayoutParams(new ViewGroup.LayoutParams((int) (JUtils.getScreenWidth()*0.6), ViewGroup.LayoutParams.WRAP_CONTENT));
+        setLayoutParams(new ViewGroup.LayoutParams((int) (JUtils.getScreenWidth() * 0.6), ViewGroup.LayoutParams.WRAP_CONTENT));
         image.setAdapter(adapter = new NetImageAdapter(getContext()));
         adapter.setSize(ImageModel.IMAGE_SIZE_SMALL);
+
     }
 
     public void setTopic(Topic topic){
@@ -57,6 +61,11 @@ public class TopicView extends FrameLayout {
             }
         }
         adapter.addAll(urls);
+        setOnClickListener(v -> {
+            Intent i = new Intent(getContext(), RecommendActivity.class);
+            i.putExtra("type",0);
+            getContext().startActivity(i);
+        });
     }
 
 }
