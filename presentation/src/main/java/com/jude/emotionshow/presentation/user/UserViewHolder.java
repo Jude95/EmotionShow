@@ -9,6 +9,7 @@ import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.emotionshow.R;
 import com.jude.emotionshow.data.model.ImageModel;
 import com.jude.emotionshow.domain.entities.PersonBrief;
+import com.jude.emotionshow.presentation.widget.CircleTransform;
 import com.squareup.picasso.Picasso;
 
 import butterknife.Bind;
@@ -40,6 +41,7 @@ public class UserViewHolder extends BaseViewHolder<PersonBrief> {
         id = data.getId();
         Picasso.with(getContext())
                 .load(ImageModel.getSmallImage(data.getAvatar()))
+                .transform(new CircleTransform())
                 .into(avatar);
         name.setText(data.getName());
     }
