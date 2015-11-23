@@ -5,6 +5,7 @@ import com.jude.emotionshow.domain.entities.Account;
 import com.jude.emotionshow.domain.entities.Banner;
 import com.jude.emotionshow.domain.entities.Category;
 import com.jude.emotionshow.domain.entities.CategoryDetail;
+import com.jude.emotionshow.domain.entities.PersonBrief;
 import com.jude.emotionshow.domain.entities.PersonDetail;
 import com.jude.emotionshow.domain.entities.Seed;
 import com.jude.emotionshow.domain.entities.SeedDetail;
@@ -219,4 +220,13 @@ public interface ServiceAPI {
             @Field("code") String code,
             @Field("password") String password);
 
+    @FormUrlEncoded
+    @POST("/home/history/search")
+    Observable<List<Seed>> searchSeed(
+            @Field("key") String key);
+
+    @FormUrlEncoded
+    @POST("/home/user/search")
+    Observable<List<PersonBrief>> searchUser(
+            @Field("key") String key);
 }

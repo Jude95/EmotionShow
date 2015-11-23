@@ -96,8 +96,11 @@ public class SeedModel extends AbsModel {
 
     }
 
-    public Observable<List<Seed>> getRcommendSeedList(int type,int page){
+    public Observable<List<Seed>> getRecommendSeedList(int type, int page){
         return mServiceAPI.getRecommendSeedList(type,page).compose(new DefaultTransform<>());
     }
 
+    public Observable<List<Seed>> searchSeed(String text){
+        return mServiceAPI.searchSeed(text).compose(new DefaultTransform<>());
+    }
 }

@@ -10,6 +10,7 @@ import com.jude.emotionshow.data.server.ServiceResponse;
 import com.jude.emotionshow.domain.Dir;
 import com.jude.emotionshow.domain.api.ServiceAPI;
 import com.jude.emotionshow.domain.entities.Account;
+import com.jude.emotionshow.domain.entities.PersonBrief;
 import com.jude.emotionshow.domain.entities.PersonDetail;
 import com.jude.emotionshow.domain.entities.Seed;
 import com.jude.utils.JFileManager;
@@ -140,5 +141,9 @@ public class UserModel extends AbsModel {
 
     public Observable<Object> findPassword(String tel,String code,String password){
         return mServiceAPI.findPassword(tel, code, password).compose(new DefaultTransform<>());
+    }
+
+    public Observable<List<PersonBrief>> searchUser(String text){
+        return mServiceAPI.searchUser(text).compose(new DefaultTransform<>());
     }
 }

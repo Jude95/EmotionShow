@@ -25,12 +25,12 @@ public class RecommendItemPresenter extends BeamListFragmentPresenter<RecommendI
 
     @Override
     public void onRefresh() {
-        SeedModel.getInstance().getRcommendSeedList(type, getCurPage())
+        SeedModel.getInstance().getRecommendSeedList(type, getCurPage())
                 .unsafeSubscribe(getRefreshSubscriber());
     }
 
     @Override
     public void onLoadMore() {
-        SeedModel.getInstance().getRcommendSeedList(type,getCurPage()).unsafeSubscribe(getMoreSubscriber());
+        SeedModel.getInstance().getRecommendSeedList(type, getCurPage()).unsafeSubscribe(getMoreSubscriber());
     }
 }
