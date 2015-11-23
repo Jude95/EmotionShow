@@ -32,7 +32,7 @@ public class CommentViewHolder extends BaseViewHolder<Comment> {
             String originalName = data.getOriginalAuthorName();
             spannableInfo = new SpannableString(data.getAuthorName() +" 回复 "+originalName+ " : " + data.getContent());
             spannableInfo.setSpan(new UserClickableSpan(getContext(), data.getAuthorId()), 0, data.getAuthorName().length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-            spannableInfo.setSpan(new UserClickableSpan(getContext(), data.getAuthorId()), data.getAuthorName().length()+4, data.getAuthorName().length()+2+originalName.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            spannableInfo.setSpan(new UserClickableSpan(getContext(), data.getAuthorId()), data.getAuthorName().length()+4, data.getAuthorName().length()+4+originalName.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         }
         ((TextView)itemView).setText(spannableInfo);
     }

@@ -50,20 +50,20 @@
             android:layout_marginTop="20dp"
             android:id="@+id/seed_cards"
             android:layout_width="match_parent"
-            android:layout_height="400dp"
+            android:layout_height="435dp"
             android:paddingLeft="60dp"
             android:paddingRight="60dp"
             app:triggerOffset="0.1"
             app:singlePageFling="true"
             android:clipToPadding="false"/>
-        <com.jude.emotionshow.presentation.widget.CategoryViewGroup
+        <com.jude.emotionshow.presentation.seed.CategoryViewGroup
             android:id="@+id/category_scence"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:background="@color/white"/>
 
-        <com.jude.emotionshow.presentation.widget.CategoryViewGroup
+        <com.jude.emotionshow.presentation.seed.CategoryViewGroup
             android:id="@+id/category_process"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

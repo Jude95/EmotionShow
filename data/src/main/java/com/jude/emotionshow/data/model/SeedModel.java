@@ -9,6 +9,8 @@ import com.jude.emotionshow.data.server.DefaultTransform;
 import com.jude.emotionshow.data.server.ServiceResponse;
 import com.jude.emotionshow.domain.api.ServiceAPI;
 import com.jude.emotionshow.domain.entities.Category;
+import com.jude.emotionshow.domain.entities.CategoryDetail;
+import com.jude.emotionshow.domain.entities.Seed;
 import com.jude.emotionshow.domain.entities.SeedDetail;
 import com.jude.emotionshow.domain.entities.SeedEditable;
 import com.jude.emotionshow.domain.entities.Topic;
@@ -75,4 +77,27 @@ public class SeedModel extends AbsModel {
     public Observable<Object> report(int id){
         return mServiceAPI.report(id).compose(new DefaultTransform<>());
     }
+
+    public Observable<List<Seed>> getUserSeedList(int id){
+        return mServiceAPI.getUserSeedList(-1, id, 1).compose(new DefaultTransform<>());
+    }
+
+    public Observable<CategoryDetail> getCategoryDetail(String name){
+        return mServiceAPI.getCategoryDetail(name).compose(new DefaultTransform<>());
+
+    }
+
+    public Observable<List<Seed>> getCategorySeedList(String name,int page,int type){
+        if (type == 0){
+            return mServiceAPI.getSceneSeedList(page,name).compose(new DefaultTransform<>());
+        }else{
+            return mServiceAPI.getProcessSeedList(page, name).compose(new DefaultTransform<>());
+        }
+
+    }
+
+    public Observable<List<Seed>> getRcommendSeedList(int type,int page){
+        return mServiceAPI.getRecommendSeedList(type,page).compose(new DefaultTransform<>());
+    }
+
 }

@@ -51,6 +51,10 @@ public class LoginActivity extends BeamBaseActivity<LoginPresenter> {
         register.setOnClickListener(v->{
             startActivityForResult(new Intent(this,RegisterActivity.class),10086);
         });
+
+        findPassword.setOnClickListener(v->{
+            startActivityForResult(new Intent(this,FindPasswordActivity.class),10086);
+        });
     }
 
     private void checkSubmit(){

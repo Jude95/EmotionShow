@@ -14,7 +14,7 @@ import rx.Subscriber;
  * Created by Mr.Jude on 2015/11/21.
  */
 public class SeedDetailPresenter extends BeamDataActivityPresenter<SeedDetailActivity,SeedDetail> {
-    private int id;
+    public int id;
     @Override
     protected void onCreate(SeedDetailActivity view, Bundle savedState) {
         super.onCreate(view, savedState);
@@ -66,12 +66,15 @@ public class SeedDetailPresenter extends BeamDataActivityPresenter<SeedDetailAct
     }
 
     public void collect(){
-        SeedModel.getInstance().collect(id).subscribe(new ServiceResponse<Object>(){
-            @Override
-            public void onNext(Object o) {
-                JUtils.Toast("您收藏了这条印记");
-            }
-        });
+        getView().getExpansion().showProgressDialog("收藏中");
+        SeedModel.getInstance().collect(id)
+                .finallyDo(() -> getView().getExpansion().dismissProgressDialog())
+                .subscribe(new ServiceResponse<Object>() {
+                    @Override
+                    public void onNext(Object o) {
+                        JUtils.Toast("您收藏了这条印记");
+                    }
+                });
     }
     public void report(){
         SeedModel.getInstance().report(id).subscribe(new ServiceResponse<Object>(){

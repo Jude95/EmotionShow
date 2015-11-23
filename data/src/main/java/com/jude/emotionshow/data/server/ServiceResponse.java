@@ -5,13 +5,13 @@ import com.jude.emotionshow.domain.api.Code;
 import com.jude.emotionshow.domain.exception.ServiceException;
 import com.jude.utils.JUtils;
 
-import rx.Observer;
+import rx.Subscriber;
 
 /**
  * Created by Mr.Jude on 2015/8/24.
  * 服务器返回的回调
  */
-public class ServiceResponse<T> implements Observer<T> {
+public class ServiceResponse<T> extends Subscriber<T> {
 
     @Override
     public void onNext(T t) {

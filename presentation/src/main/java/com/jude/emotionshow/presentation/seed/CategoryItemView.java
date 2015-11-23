@@ -20,7 +20,6 @@ import com.jude.emotionshow.data.model.ImageModel;
 import com.jude.emotionshow.domain.entities.Category;
 import com.jude.emotionshow.domain.entities.Image;
 import com.jude.emotionshow.domain.entities.Seed;
-import com.jude.emotionshow.presentation.seed.SeedDetailActivity;
 import com.jude.utils.JUtils;
 import com.squareup.picasso.Picasso;
 
@@ -74,7 +73,13 @@ public class CategoryItemView extends LinearLayout {
         adapter.addFooter(new RecyclerArrayAdapter.ItemView() {
             @Override
             public View onCreateView(ViewGroup parent) {
-                return LayoutInflater.from(getContext()).inflate(R.layout.view_category_footer,parent,false);
+                View view = LayoutInflater.from(getContext()).inflate(R.layout.view_category_footer, parent, false);
+                view.setOnClickListener(v->{
+                    Intent i = new Intent(getContext(),CategoryActivity.class);
+                    i.putExtra("name",category.getTitle().getCh());
+                    getContext().startActivity(i);
+                });
+                return view;
             }
 
             @Override
@@ -83,6 +88,12 @@ public class CategoryItemView extends LinearLayout {
             }
         });
         adapter.addAll(category.getData());
+
+        background.setOnClickListener(v->{
+            Intent i = new Intent(getContext(),CategoryActivity.class);
+            i.putExtra("name",category.getTitle().getCh());
+            getContext().startActivity(i);
+        });
     }
 
     private class Adapter extends RecyclerArrayAdapter<Seed> {

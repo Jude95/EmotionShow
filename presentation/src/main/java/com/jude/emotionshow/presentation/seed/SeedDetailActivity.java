@@ -1,5 +1,6 @@
 package com.jude.emotionshow.presentation.seed;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.view.View;
@@ -19,6 +20,7 @@ import com.jude.emotionshow.R;
 import com.jude.emotionshow.data.model.ImageModel;
 import com.jude.emotionshow.domain.entities.Comment;
 import com.jude.emotionshow.domain.entities.SeedDetail;
+import com.jude.emotionshow.presentation.user.UserPreviewActivity;
 import com.jude.emotionshow.presentation.widget.CircleTransform;
 import com.jude.emotionshow.presentation.widget.LinearWrapContentRecyclerView;
 import com.jude.emotionshow.presentation.widget.NetImageAdapter;
@@ -96,7 +98,7 @@ public class SeedDetailActivity extends BeamDataActivity<SeedDetailPresenter, Se
     @Override
     public void setData(SeedDetail data) {
         super.setData(data);
-        Picasso.with(this).load(data.getAuthor().getAvatar())
+        Picasso.with(this).load(ImageModel.getSmallImage(data.getAuthor().getAvatar()))
                 .transform(new CircleTransform())
                 .into(avatar);
         name.setText(data.getAuthor().getName());
@@ -117,6 +119,11 @@ public class SeedDetailActivity extends BeamDataActivity<SeedDetailPresenter, Se
         mCommentAdapter.addAll(data.getComment());
         commentList.setAdapter(mCommentAdapter);
         reply.setText("");
+        authorContainer.setOnClickListener(v -> {
+            Intent i = new Intent(this, UserPreviewActivity.class);
+            i.putExtra("id", data.getAuthor().getId());
+            startActivity(i);
+        });
     }
 
     void showToolDialog(){

@@ -50,33 +50,35 @@ public class BlurTransformation implements Transformation {
   }
 
   @Override public Bitmap transform(Bitmap source) {
+    try {
+      int scaledWidth = source.getWidth() / mSampling;
+      int scaledHeight = source.getHeight() / mSampling;
 
-    int scaledWidth = source.getWidth() / mSampling;
-    int scaledHeight = source.getHeight() / mSampling;
+      Bitmap bitmap = Bitmap.createBitmap(scaledWidth, scaledHeight, Bitmap.Config.ARGB_8888);
 
-    Bitmap bitmap = Bitmap.createBitmap(scaledWidth, scaledHeight, Bitmap.Config.ARGB_8888);
+      Canvas canvas = new Canvas(bitmap);
+      canvas.scale(1 / (float) mSampling, 1 / (float) mSampling);
+      Paint paint = new Paint();
+      paint.setFlags(Paint.FILTER_BITMAP_FLAG);
+      canvas.drawBitmap(source, 0, 0, paint);
 
-    Canvas canvas = new Canvas(bitmap);
-    canvas.scale(1 / (float) mSampling, 1 / (float) mSampling);
-    Paint paint = new Paint();
-    paint.setFlags(Paint.FILTER_BITMAP_FLAG);
-    canvas.drawBitmap(source, 0, 0, paint);
+      RenderScript rs = RenderScript.create(mContext);
+      Allocation input = Allocation.createFromBitmap(rs, bitmap, Allocation.MipmapControl.MIPMAP_NONE,
+              Allocation.USAGE_SCRIPT);
+      Allocation output = Allocation.createTyped(rs, input.getType());
+      ScriptIntrinsicBlur blur = ScriptIntrinsicBlur.create(rs, Element.U8_4(rs));
 
-    RenderScript rs = RenderScript.create(mContext);
-    Allocation input = Allocation.createFromBitmap(rs, bitmap, Allocation.MipmapControl.MIPMAP_NONE,
-        Allocation.USAGE_SCRIPT);
-    Allocation output = Allocation.createTyped(rs, input.getType());
-    ScriptIntrinsicBlur blur = ScriptIntrinsicBlur.create(rs, Element.U8_4(rs));
+      blur.setInput(input);
+      blur.setRadius(mRadius);
+      blur.forEach(output);
+      output.copyTo(bitmap);
 
-    blur.setInput(input);
-    blur.setRadius(mRadius);
-    blur.forEach(output);
-    output.copyTo(bitmap);
-
-    source.recycle();
-    rs.destroy();
-
-    return bitmap;
+      source.recycle();
+      rs.destroy();
+      return bitmap;
+    }catch (Exception e){
+    }
+    return source;
   }
 
   @Override public String key() {

@@ -1,5 +1,7 @@
 package com.jude.emotionshow.domain.entities;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.List;
 
 /**
@@ -10,8 +12,17 @@ public class Seed {
     private int uid;
     private String name;
     private String face;
-
+    @SerializedName("zan")
+    private int praiseCount;
     private List<Image> pics;
+
+    public int getPraiseCount() {
+        return praiseCount;
+    }
+
+    public void setPraiseCount(int praiseCount) {
+        this.praiseCount = praiseCount;
+    }
 
     public int getId() {
         return id;

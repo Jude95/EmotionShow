@@ -15,7 +15,9 @@ import java.util.Collection;
 /**
  * Created by Mr.Jude on 2015/9/16.
  */
-public class  NetImageAdapter extends ArrayAdapter<Image> implements View.OnClickListener{
+public class  NetImageAdapter extends ArrayAdapter<Image> {
+
+    private OnItemClickListener mListener;
 
     public NetImageAdapter(Context context) {
         super(context, 0);
@@ -38,6 +40,9 @@ public class  NetImageAdapter extends ArrayAdapter<Image> implements View.OnClic
     public void setSize(int size) {
         this.size = size;
     }
+    public void setListener(OnItemClickListener mListener) {
+        this.mListener = mListener;
+    }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -55,19 +60,14 @@ public class  NetImageAdapter extends ArrayAdapter<Image> implements View.OnClic
                     .load(getItem(position).getUrl())
                     .into(view);
         }
+        if (mListener!=null){
+            view.setOnClickListener(v->mListener.onClick(position));
+        }
         return view;
     }
 
 
-    @Override
-    public void onClick(View v) {
-//        ArrayList<Uri> uris = new ArrayList<>();
-//        for (int i = 0; i < getCount(); i++) {
-//            uris.add(ImageModel.getInstance().getLargeImage(getItem(i)));
-//        }
-//        Intent i = new Intent(v.getContext(), ImageViewActivity.class);
-//        i.putParcelableArrayListExtra(ImageViewActivity.KEY_URIS,uris);
-//        i.putExtra(ImageViewActivity.KEY_INDEX, (int) v.getTag());
-//        v.getContext().startActivity(i);
+    public interface OnItemClickListener{
+        void onClick(int position);
     }
 }

@@ -14,8 +14,6 @@ public class SeedDetail extends Seed {
     @SerializedName("ctag")
     private String scene;
     private String address;
-    @SerializedName("zan")
-    private int praiseCount;
     private long time;
     private String tag;
     private PersonBrief author;
@@ -26,7 +24,6 @@ public class SeedDetail extends Seed {
     @SerializedName("collect")
     private int collectCount;
     private List<Comment> comment;
-
 
     public String getContent() {
         return content;
@@ -60,13 +57,6 @@ public class SeedDetail extends Seed {
         this.address = address;
     }
 
-    public int getPraiseCount() {
-        return praiseCount;
-    }
-
-    public void setPraiseCount(int praiseCount) {
-        this.praiseCount = praiseCount;
-    }
 
     public long getTime() {
         return time;

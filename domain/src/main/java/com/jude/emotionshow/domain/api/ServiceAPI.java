@@ -4,7 +4,9 @@ package com.jude.emotionshow.domain.api;
 import com.jude.emotionshow.domain.entities.Account;
 import com.jude.emotionshow.domain.entities.Banner;
 import com.jude.emotionshow.domain.entities.Category;
+import com.jude.emotionshow.domain.entities.CategoryDetail;
 import com.jude.emotionshow.domain.entities.PersonDetail;
+import com.jude.emotionshow.domain.entities.Seed;
 import com.jude.emotionshow.domain.entities.SeedDetail;
 import com.jude.emotionshow.domain.entities.Token;
 import com.jude.emotionshow.domain.entities.Topic;
@@ -72,8 +74,8 @@ public interface ServiceAPI {
             @Field("intro") String intro);
 
     @FormUrlEncoded
-    @POST("/home/user/getUserinfo")
-    Observable<PersonDetail> getUserinfo(
+    @POST("/home/user/getUserDetail")
+    Observable<PersonDetail> getUserDetail(
             @Field("id") String id);
 
     @FormUrlEncoded
@@ -102,8 +104,13 @@ public interface ServiceAPI {
 
     @FormUrlEncoded
     @POST("/home/user/attend")
-    Observable<Object> attend(
-            @Field("id") String id);
+    Observable<Object> follow(
+            @Field("id") int id);
+
+    @FormUrlEncoded
+    @POST("/home/user/unAttend")
+    Observable<Object> unFollow(
+            @Field("id") int id);
 
     @FormUrlEncoded
     @POST("/home/history/add")
@@ -157,4 +164,59 @@ public interface ServiceAPI {
     Observable<Object> report(
             @Field("hid") int hid
     );
+
+    @FormUrlEncoded
+    @POST("/home/user/getUserinfo")
+    Observable<PersonDetail> getUserDetail(
+            @Field("id") int id
+    );
+
+    @FormUrlEncoded
+    @POST("/home/history/homepage")
+    Observable<List<Seed>> getUserSeedList(
+            @Field("page") int page,
+            @Field("id") int id,
+            @Field("first") int first
+    );
+
+    @FormUrlEncoded
+    @POST("/home/history/myCollect")
+    Observable<List<Seed>> getCollections(
+            @Field("page") int page
+    );
+
+
+    @FormUrlEncoded
+    @POST("/home/discover/getTag")
+    Observable<CategoryDetail> getCategoryDetail(
+            @Field("name") String name
+    );
+
+    @FormUrlEncoded
+    @POST("/home/discover/getByLtag")
+    Observable<List<Seed>> getProcessSeedList(
+            @Field("page") int page,
+            @Field("ltag") String process
+    );
+
+    @FormUrlEncoded
+    @POST("/home/discover/getByCtag")
+    Observable<List<Seed>> getSceneSeedList(
+            @Field("page") int page,
+            @Field("ctag") String process
+    );
+    @FormUrlEncoded
+    @POST("/home/discover/getHistoryList")
+    Observable<List<Seed>> getRecommendSeedList(
+            @Field("type") int type,
+            @Field("page") int page
+    );
+
+    @FormUrlEncoded
+    @POST("/home/user/resetPass")
+    Observable<Object> findPassword(
+            @Field("tel") String tel,
+            @Field("code") String code,
+            @Field("password") String password);
+
 }

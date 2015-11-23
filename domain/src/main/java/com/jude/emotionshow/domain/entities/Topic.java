@@ -1,5 +1,7 @@
 package com.jude.emotionshow.domain.entities;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.List;
 
 /**
@@ -8,6 +10,16 @@ import java.util.List;
 public class Topic {
     private List<Seed> data;
     private String title;
+    @SerializedName("typeId")
+    private int type;
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
 
     public List<Seed> getData() {
         return data;

@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.jude.beam.bijection.RequiresPresenter;
 import com.jude.beam.expansion.data.BeamDataFragment;
 import com.jude.emotionshow.R;
+import com.jude.emotionshow.data.model.ImageModel;
 import com.jude.emotionshow.domain.entities.Account;
 import com.jude.emotionshow.presentation.setting.AboutActivity;
 import com.jude.emotionshow.presentation.setting.SettingActivity;
@@ -73,6 +74,7 @@ public class MineFragment extends BeamDataFragment<MinePresenter,Account> {
             startActivity(new Intent(getActivity(),UserDetailEditActivity.class));
         });
         about.setOnClickListener(v->startActivity(new Intent(getActivity(),AboutActivity.class)));
+        collect.setOnClickListener(v->startActivity(new Intent(getActivity(),CollectionActivity.class)));
         return view;
     }
 
@@ -80,13 +82,18 @@ public class MineFragment extends BeamDataFragment<MinePresenter,Account> {
     public void setData(Account data) {
         super.setData(data);
         Picasso.with(getContext())
-                .load(data.getAvatar())
+                .load(ImageModel.getSmallImage(data.getAvatar()))
                 .transform(new CircleTransform())
                 .into(avatar);
         name.setText(data.getName());
         sign.setText(data.getSign());
         praiseCount.setText(""+data.getPraiseCount());
         seedCount.setText(""+data.getSeedCount());
+        seed.setOnClickListener(v -> {
+            Intent i = new Intent(getContext(), UserDetailActivity.class);
+            i.putExtra("id", data.getId());
+            startActivity(i);
+        });
     }
 
     @Override

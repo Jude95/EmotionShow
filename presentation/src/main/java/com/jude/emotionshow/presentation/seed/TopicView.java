@@ -11,7 +11,6 @@ import com.jude.emotionshow.R;
 import com.jude.emotionshow.data.model.ImageModel;
 import com.jude.emotionshow.domain.entities.Image;
 import com.jude.emotionshow.domain.entities.Topic;
-import com.jude.emotionshow.presentation.seed.RecommendActivity;
 import com.jude.emotionshow.presentation.widget.NetImageAdapter;
 import com.jude.exgridview.ExGridView;
 import com.jude.utils.JUtils;
@@ -63,7 +62,7 @@ public class TopicView extends FrameLayout {
         adapter.addAll(urls);
         setOnClickListener(v -> {
             Intent i = new Intent(getContext(), RecommendActivity.class);
-            i.putExtra("type",0);
+            i.putExtra("type",topic.getType());
             getContext().startActivity(i);
         });
     }

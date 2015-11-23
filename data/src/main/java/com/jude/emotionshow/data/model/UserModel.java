@@ -10,7 +10,11 @@ import com.jude.emotionshow.data.server.ServiceResponse;
 import com.jude.emotionshow.domain.Dir;
 import com.jude.emotionshow.domain.api.ServiceAPI;
 import com.jude.emotionshow.domain.entities.Account;
+import com.jude.emotionshow.domain.entities.PersonDetail;
+import com.jude.emotionshow.domain.entities.Seed;
 import com.jude.utils.JFileManager;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -47,6 +51,9 @@ public class UserModel extends AbsModel {
         return userAccountDataBehaviorSubject.compose(new DefaultTransform<>());
     }
 
+    public Account getCurAccount(){
+        return userAccountData;
+    }
     public boolean isLogin(){
         return userAccountData != null;
     }
@@ -112,6 +119,26 @@ public class UserModel extends AbsModel {
     }
 
     public Observable<Object> changePassword(String originalPassword,String newPassword){
-        return mServiceAPI.modPass(originalPassword,newPassword).compose(new DefaultTransform<>());
+        return mServiceAPI.modPass(originalPassword, newPassword).compose(new DefaultTransform<>());
+    }
+
+    public Observable<PersonDetail> getUserDetail(int id){
+        return mServiceAPI.getUserDetail(id).compose(new DefaultTransform<>());
+    }
+
+    public Observable<Object> follow(int id){
+        return mServiceAPI.follow(id).compose(new DefaultTransform<>());
+    }
+
+    public Observable<Object> unFollow(int id){
+        return mServiceAPI.unFollow(id).compose(new DefaultTransform<>());
+    }
+
+    public Observable<List<Seed>> getCollections(){
+        return mServiceAPI.getCollections(-1).compose(new DefaultTransform<>());
+    }
+
+    public Observable<Object> findPassword(String tel,String code,String password){
+        return mServiceAPI.findPassword(tel, code, password).compose(new DefaultTransform<>());
     }
 }

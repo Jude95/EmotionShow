@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import com.jude.beam.expansion.data.BeamDataActivityPresenter;
+import com.jude.emotionshow.data.model.ImageModel;
 import com.jude.emotionshow.data.model.RegionModel;
 import com.jude.emotionshow.data.model.UserModel;
 import com.jude.emotionshow.data.server.ServiceResponse;
@@ -14,12 +15,15 @@ import com.jude.library.imageprovider.ImageProvider;
 import com.jude.library.imageprovider.OnImageSelectListener;
 import com.jude.utils.JUtils;
 
+import java.io.File;
+
 /**
  * Created by Mr.Jude on 2015/11/20.
  */
 public class UserDetailEditPresenter extends BeamDataActivityPresenter<UserDetailEditActivity,Account> {
     Account data;
     private ImageProvider provider;
+    Uri face;
     OnImageSelectListener listener = new OnImageSelectListener() {
 
         @Override
@@ -38,6 +42,7 @@ public class UserDetailEditPresenter extends BeamDataActivityPresenter<UserDetai
 
                 @Override
                 public void onImageLoaded(Uri uri) {
+                    face = uri;
                     getView().setAvatar(uri);
                 }
 
@@ -83,16 +88,18 @@ public class UserDetailEditPresenter extends BeamDataActivityPresenter<UserDetai
 
     public void submit(){
         getView().getExpansion().showProgressDialog("提交中");
-        UserModel.getInstance().modify(data)
-                .doOnNext(data -> getView().getExpansion().dismissProgressDialog())
+        ImageModel.getInstance().putImageSync(getView(),new File(face.getPath()))
+                .doOnError(throwable -> JUtils.Toast("上传失败"))
+                .doOnNext(image -> data.setAvatar(image.getUrl()))
+                .flatMap(image -> UserModel.getInstance().modify(data))
+                .finallyDo(() -> getView().getExpansion().dismissProgressDialog())
                 .subscribe(new ServiceResponse<Object>() {
-            @Override
-            public void onNext(Object o) {
-                super.onNext(o);
-                getView().finish();
-                JUtils.Toast("修改成功");
-            }
-        });
+                    @Override
+                    public void onNext(Object o) {
+                        getView().finish();
+                        JUtils.Toast("修改成功");
+                    }
+                });
     }
 
 

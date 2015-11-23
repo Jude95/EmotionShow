@@ -22,6 +22,8 @@ ext {
     umengAnalyticsVersion   = 'latest.integration'
     imageproviderVersion    = '2.0.5'
     rippleVersion           = '1.0.2'
+    recyclerViewHeaderVersion   = '1.2.0'
+    pagerSlidingTabStripVersion = '1.0.1'
 
     //libraries dependencies
     presentationDependencies = [
@@ -42,7 +44,9 @@ ext {
             picasso             : "com.squareup.picasso:picasso:${picassoVersion}",
             umengAnalytics      : "com.umeng.analytics:analytics:${umengAnalyticsVersion}",
             imageprovider       : "com.jude:imageprovider:${imageproviderVersion}",
-            ripple              : "com.balysv:material-ripple:${rippleVersion}"
+            ripple              : "com.balysv:material-ripple:${rippleVersion}",
+            recyclerViewHeader  : "com.bartoszlipinski.recyclerviewheader:library:${recyclerViewHeaderVersion}",
+            pagerSlidingTabStrip: "com.astuetz:pagerslidingtabstrip:${pagerSlidingTabStripVersion}"
     ]
 
     dataDependencies = [
