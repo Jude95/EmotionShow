@@ -78,7 +78,7 @@ public class SeedModel extends AbsModel {
         return mServiceAPI.report(id).compose(new DefaultTransform<>());
     }
 
-    public Observable<List<Seed>> getUserSeedList(int id){
+    public Observable<List<SeedDetail>> getUserSeedList(int id){
         return mServiceAPI.getUserSeedList(-1, id, 1).compose(new DefaultTransform<>());
     }
 

@@ -82,6 +82,7 @@
         <activity android:name=".presentation.seed.RecommendActivity"/>
         <activity android:name=".presentation.user.FindPasswordActivity"/>
         <activity android:name=".presentation.main.SearchActivity"/>
+        <activity android:name=".presentation.main.ImageViewActivity"/>
     </application>
 
 </manifest>

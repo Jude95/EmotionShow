@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#f1f1f1">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="64dp"
+        android:layout_marginTop="16dp"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/day"
+            android:layout_width="48dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            tools:text="21"/>
+        <TextView
+            android:id="@+id/month"
+            android:layout_width="48dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            tools:text="1月"/>
+    </LinearLayout>
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@color/gray"/>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bubble">
+        <ImageView
+            android:id="@+id/image"
+            android:scaleType="centerCrop"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_margin="2dp"/>
+        <TextView
+            android:id="@+id/content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            tools:text="安装包为什么那么大？是什么让App安装包的体积变得如此之大？我们在前面的章节看到了iOS和Android安装包的内部结构，对于可执行文件，我们无能为力；对于xml文件，这些文件在App打包压缩后会极大减小体积，所以也不用管它们；那么就只能在图片和音频文件上做文章了。"
+            android:maxLines="3"
+            android:gravity="center_vertical"
+            android:padding="8dp"
+            android:ellipsize="end"/>
+    </LinearLayout>
+
+
+</LinearLayout>

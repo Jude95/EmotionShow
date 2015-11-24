@@ -1,29 +1,35 @@
 package com.jude.emotionshow.presentation.user;
 
-import android.content.Intent;
+import android.content.Context;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bartoszlipinski.recyclerviewheader.RecyclerViewHeader;
 import com.jude.beam.bijection.RequiresPresenter;
 import com.jude.beam.expansion.data.BeamDataActivity;
+import com.jude.easyrecyclerview.adapter.BaseViewHolder;
+import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.jude.emotionshow.R;
 import com.jude.emotionshow.data.model.ImageModel;
 import com.jude.emotionshow.data.model.UserModel;
-import com.jude.emotionshow.domain.entities.Image;
 import com.jude.emotionshow.domain.entities.PersonDetail;
-import com.jude.emotionshow.domain.entities.Seed;
-import com.jude.emotionshow.presentation.seed.SeedDetailActivity;
+import com.jude.emotionshow.domain.entities.SeedDetail;
+import com.jude.emotionshow.presentation.seed.SeedCalendarViewHolder;
+import com.jude.emotionshow.presentation.seed.SeedViewHolder;
 import com.jude.emotionshow.presentation.widget.BlurTransformation;
 import com.jude.emotionshow.presentation.widget.CircleTransform;
-import com.jude.emotionshow.presentation.widget.NetImageAdapter;
-import com.jude.exgridview.ExGridView;
 import com.jude.utils.JUtils;
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
@@ -34,15 +40,6 @@ import butterknife.ButterKnife;
  */
 @RequiresPresenter(UserDetailPresenter.class)
 public class UserDetailActivity extends BeamDataActivity<UserDetailPresenter, PersonDetail> {
-
-    @Bind(R.id.back_img)
-    ImageView backImg;
-    @Bind(R.id.back)
-    LinearLayout back;
-    @Bind(R.id.follow)
-    LinearLayout follow;
-    @Bind(R.id.follow_text)
-    TextView followText;
     @Bind(R.id.background)
     ImageView background;
     @Bind(R.id.avatar)
@@ -63,50 +60,109 @@ public class UserDetailActivity extends BeamDataActivity<UserDetailPresenter, Pe
     TextView praiseCount;
     @Bind(R.id.container_praise)
     LinearLayout containerPraise;
-    @Bind(R.id.pictures)
-    ExGridView pictures;
+    @Bind(R.id.back_img)
+    ImageView backImg;
+    @Bind(R.id.back)
+    LinearLayout back;
+    @Bind(R.id.follow_text)
+    TextView followText;
+    @Bind(R.id.follow)
+    LinearLayout follow;
+    @Bind(R.id.recycler)
+    RecyclerView recycler;
+    @Bind(R.id.sort)
+    ImageView sort;
 
-    NetImageAdapter adapter;
+    private static int style = 0;
+    private SeedCalendarAdapter adapter;
+
+    TextView tvIld;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_detail);
+        RecyclerViewHeader header = RecyclerViewHeader.fromXml(this, R.layout.head_user);
+        recycler = (RecyclerView) findViewById(R.id.recycler);
+        recycler.setLayoutManager(style == 0?new LinearLayoutManager(this):new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL));
+        header.attachTo(recycler);
+        JUtils.Log("name" + (name == null));
         ButterKnife.bind(this);
+        JUtils.Log("name" + (name == null));
+        recycler.setAdapter(adapter = new SeedCalendarAdapter(this));
+
         back.setOnClickListener(v -> finish());
         follow.setOnClickListener(v -> getPresenter().follow());
-        pictures.setAdapter(adapter = new NetImageAdapter(this));
+        sort.setOnClickListener(v -> {
+            if (style == 0) {
+                style = 1;
+            } else {
+                style = 0;
+            }
+            recreate();
+        });
+        JUtils.Log("Create hash:" + hashCode());
+        avatar.setOnClickListener(v -> {
+            JUtils.Log("name" + name.getText() + "  sign" + sign.getText() + "Click hash:" + name.getContext().hashCode());
+        });
+        name.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                JUtils.Log("name changed");
+            }
+        });
     }
+
 
     @Override
     public void setData(PersonDetail data) {
+        JUtils.Log("setData" + (Thread.currentThread().getName()));
         Picasso.with(this).load(ImageModel.getSmallImage(data.getAvatar())).resize(150, 150).transform(new CircleTransform()).into(avatar);
         Picasso.with(this).load(data.getAvatar()).transform(new BlurTransformation(this, 20)).into(background);
         name.setText(data.getName());
+        JUtils.Log("setData hash:"+hashCode());
+
         sign.setText(data.getSign());
         seedCount.setText(data.getSeedCount() + "");
         visitCount.setText(data.getVisitCount() + "");
         praiseCount.setText(data.getPraiseCount() + "");
-        JUtils.Log("data.getFollowed" + data.getFollowed());
-        followText.setText(data.getFollowed() == 0 ? "关注" : "取消关注");
-        if (data.getId() == UserModel.getInstance().getCurAccount().getId()){
+        followText.setText(getPresenter().data.getFollowed() == 0 ? "关注" : "取消关注");
+        if (getPresenter().data.getId() == UserModel.getInstance().getCurAccount().getId()) {
             followText.setVisibility(View.INVISIBLE);
+        }
+        JUtils.Log("name"+name.getText()+"  sign"+sign.getText());
+    }
+
+    public void addSeed(List<SeedDetail> data){
+        adapter.addAll(data);
+    }
+
+    private class SeedCalendarAdapter extends RecyclerArrayAdapter<SeedDetail> {
+
+        public SeedCalendarAdapter(Context context) {
+            super(context);
+        }
+
+        @Override
+        public BaseViewHolder OnCreateViewHolder(ViewGroup parent, int viewType) {
+            if (style == 0) return new SeedCalendarViewHolder(parent);
+            return new SeedViewHolder(parent);
         }
     }
 
-    public void setSeedList(List<Seed> data){
-        adapter.setListener(position -> {
-            Intent i = new Intent(this, SeedDetailActivity.class);
-            i.putExtra("id",data.get(position).getId());
-            startActivity(i);
-        });
-        adapter.clear();
-        List<Image> list = new ArrayList<>();
-        for (Seed seed : data) {
-            list.add(seed.getPics().get(0));
-        }
-        adapter.addAll(list);
-
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        JUtils.Log("onDestroy");
     }
 }

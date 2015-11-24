@@ -18,7 +18,7 @@ public class Image {
     }
 
     public String getUrl() {
-        return url;
+        return url==null?"http://img.hb.aicdn.com/359072babc85be489bae58ba7dced3835d4b9db13519-J0HYnM_fw658":url;
     }
 
     public void setUrl(String url) {

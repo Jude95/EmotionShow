@@ -174,7 +174,7 @@ public interface ServiceAPI {
 
     @FormUrlEncoded
     @POST("/home/history/homepage")
-    Observable<List<Seed>> getUserSeedList(
+    Observable<List<SeedDetail>> getUserSeedList(
             @Field("page") int page,
             @Field("id") int id,
             @Field("first") int first

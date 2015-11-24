@@ -1,6 +1,7 @@
 package com.jude.emotionshow.presentation.seed;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.view.View;
@@ -20,6 +21,7 @@ import com.jude.emotionshow.R;
 import com.jude.emotionshow.data.model.ImageModel;
 import com.jude.emotionshow.domain.entities.Comment;
 import com.jude.emotionshow.domain.entities.SeedDetail;
+import com.jude.emotionshow.presentation.main.ImageViewActivity;
 import com.jude.emotionshow.presentation.user.UserPreviewActivity;
 import com.jude.emotionshow.presentation.widget.CircleTransform;
 import com.jude.emotionshow.presentation.widget.LinearWrapContentRecyclerView;
@@ -28,6 +30,8 @@ import com.jude.exgridview.ExGridView;
 import com.jude.tagview.TAGView;
 import com.jude.utils.JTimeTransform;
 import com.squareup.picasso.Picasso;
+
+import java.util.ArrayList;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -78,6 +82,7 @@ public class SeedDetailActivity extends BeamDataActivity<SeedDetailPresenter, Se
             return new CommentViewHolder(parent);
         }
     };
+    NetImageAdapter mImageAdapter;
 
 
     @Override
@@ -108,8 +113,19 @@ public class SeedDetailActivity extends BeamDataActivity<SeedDetailPresenter, Se
         commentCount.setText(data.getCommentCount() + "");
         pictures.removeAllViews();
         if (data.getPics() != null && data.getPics().size() != 0) {
-            pictures.setAdapter(new NetImageAdapter(this, data.getPics(), ImageModel.IMAGE_SIZE_SMALL * (4 - Math.min(data.getPics().size(), 3))));
+            pictures.setAdapter(mImageAdapter = new NetImageAdapter(this, data.getPics(), ImageModel.IMAGE_SIZE_SMALL * (4 - Math.min(data.getPics().size(), 3))));
             pictures.setColumnCount(Math.min(data.getPics().size(), 3));
+            mImageAdapter.setListener(position -> {
+                ArrayList<Uri> uris = new ArrayList<>();
+                for (int i = 0; i < data.getPics().size(); i++) {
+                    uris.add(Uri.parse(ImageModel.getLargeImage(data.getPics().get(i)).getUrl()));
+                }
+                Intent i = new Intent(SeedDetailActivity.this, ImageViewActivity.class);
+                i.putParcelableArrayListExtra(ImageViewActivity.KEY_URIS,uris);
+                i.putExtra(ImageViewActivity.KEY_INDEX, position);
+                SeedDetailActivity.this.startActivity(i);
+            });
+            mImageAdapter.notifyDataSetChanged();
         }
         commentList.setOnItemClickListener(position -> {
             reply.setHint("回复: " + data.getComment().get(position).getAuthorName());
@@ -124,6 +140,7 @@ public class SeedDetailActivity extends BeamDataActivity<SeedDetailPresenter, Se
             i.putExtra("id", data.getAuthor().getId());
             startActivity(i);
         });
+
     }
 
     void showToolDialog(){

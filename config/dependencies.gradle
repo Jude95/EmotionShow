@@ -1,7 +1,7 @@
 
 ext {
     //Version
-    beamVersion             = '2.4.9'
+    beamVersion             = '2.5.0'
     supportLibraryVersion   = '23.1.1'
     swipeBackHelperVersion  = '2.1.2'
     butterKnife             = '7.0.1'
@@ -24,7 +24,8 @@ ext {
     rippleVersion           = '1.0.2'
     recyclerViewHeaderVersion   = '1.2.0'
     pagerSlidingTabStripVersion = '1.0.1'
-
+    photoViewVersion        = '1.2.4'
+    progressVersion         = '1.7'
     //libraries dependencies
     presentationDependencies = [
             appcompat           : "com.android.support:appcompat-v7:${supportLibraryVersion}",
@@ -46,7 +47,9 @@ ext {
             imageprovider       : "com.jude:imageprovider:${imageproviderVersion}",
             ripple              : "com.balysv:material-ripple:${rippleVersion}",
             recyclerViewHeader  : "com.bartoszlipinski.recyclerviewheader:library:${recyclerViewHeaderVersion}",
-            pagerSlidingTabStrip: "com.astuetz:pagerslidingtabstrip:${pagerSlidingTabStripVersion}"
+            pagerSlidingTabStrip: "com.astuetz:pagerslidingtabstrip:${pagerSlidingTabStripVersion}",
+            photoView           : "com.commit451:PhotoView:${photoViewVersion}",
+            progress            : "com.pnikosis:materialish-progress:${progressVersion}"
     ]
 
     dataDependencies = [
