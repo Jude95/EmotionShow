@@ -28,6 +28,7 @@ android {
         xiaomi{}
         baidu{}
         wandoujia{}
+        origin{}
     }
 
     productFlavors.all { flavor ->
@@ -78,7 +79,6 @@ dependencies {
     compile presentationDependencies.rxAndroid
     compile presentationDependencies.rxJava
     compile presentationDependencies.exgridview
-    compile presentationDependencies.umengAnalytics
     compile presentationDependencies.imageprovider
     compile presentationDependencies.ripple
     compile presentationDependencies.recyclerViewHeader
@@ -88,4 +88,6 @@ dependencies {
     compile project(':data')
     compile project(':domain')
     compile project(':SMSSDK')
+    compile project(':umengfamily')
+
 }

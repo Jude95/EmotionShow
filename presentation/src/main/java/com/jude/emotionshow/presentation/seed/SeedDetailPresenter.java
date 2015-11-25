@@ -7,6 +7,7 @@ import com.jude.emotionshow.data.model.SeedModel;
 import com.jude.emotionshow.data.server.ServiceResponse;
 import com.jude.emotionshow.domain.entities.SeedDetail;
 import com.jude.utils.JUtils;
+import com.umeng.share.ShareManager;
 
 import rx.Subscriber;
 
@@ -15,6 +16,7 @@ import rx.Subscriber;
  */
 public class SeedDetailPresenter extends BeamDataActivityPresenter<SeedDetailActivity,SeedDetail> {
     public int id;
+    public SeedDetail mData;
     @Override
     protected void onCreate(SeedDetailActivity view, Bundle savedState) {
         super.onCreate(view, savedState);
@@ -23,22 +25,24 @@ public class SeedDetailPresenter extends BeamDataActivityPresenter<SeedDetailAct
     }
 
     private void refresh(){
-        SeedModel.getInstance().getSeedDetail(id).unsafeSubscribe(new Subscriber<SeedDetail>() {
-            @Override
-            public void onCompleted() {
+        SeedModel.getInstance().getSeedDetail(id)
+                .doOnNext(data->mData = data)
+                .unsafeSubscribe(new Subscriber<SeedDetail>() {
+                    @Override
+                    public void onCompleted() {
 
-            }
+                    }
 
-            @Override
-            public void onError(Throwable e) {
+                    @Override
+                    public void onError(Throwable e) {
 
-            }
+                    }
 
-            @Override
-            public void onNext(SeedDetail seedDetail) {
-                publishObject(seedDetail);
-            }
-        });
+                    @Override
+                    public void onNext(SeedDetail seedDetail) {
+                        publishObject(seedDetail);
+                    }
+                });
     }
 
     public void comment(int commentId,String content){
@@ -77,12 +81,17 @@ public class SeedDetailPresenter extends BeamDataActivityPresenter<SeedDetailAct
                 });
     }
     public void report(){
-        SeedModel.getInstance().report(id).subscribe(new ServiceResponse<Object>(){
+        SeedModel.getInstance().report(id).subscribe(new ServiceResponse<Object>() {
             @Override
             public void onNext(Object o) {
                 JUtils.Toast("举报成功");
             }
         });
+    }
+
+    public void share(){
+        String content = mData.getContent();
+        ShareManager.getInstance(getView()).share(getView(), content, "么么秀分享", "http://baidu.com", mData.getPics().get(0).getUrl());
     }
 }
 

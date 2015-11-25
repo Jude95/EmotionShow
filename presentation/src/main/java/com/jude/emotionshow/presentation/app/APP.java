@@ -35,6 +35,7 @@ public class APP extends Application {
         JFileManager.getInstance().init(this, Dir.values());
         JUtils.initialize(this);
         JUtils.setDebug(BuildConfig.DEBUG, "Emotion");
+//        ShareSDK.initSDK(this);
         Beam.init(this);
         Beam.setActivityLifeCycleDelegateProvider(ActivityDelegate::new);
         Beam.setViewExpansionDelegateProvider(new ViewExpansionDelegateProvider() {

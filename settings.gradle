@@ -1,1 +1,1 @@
-include ':presentation', ':data', ':domain', ':SMSSDK'
+include ':presentation', ':data', ':domain', ':SMSSDK', ':umengfamily'

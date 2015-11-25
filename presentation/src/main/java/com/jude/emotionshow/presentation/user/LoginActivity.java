@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.jude.beam.bijection.RequiresPresenter;
 import com.jude.beam.expansion.BeamBaseActivity;
 import com.jude.emotionshow.R;
+import com.jude.swipbackhelper.SwipeBackHelper;
 import com.jude.tagview.TAGView;
 import com.jude.utils.JUtils;
 
@@ -44,17 +45,21 @@ public class LoginActivity extends BeamBaseActivity<LoginPresenter> {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
-        login.setOnClickListener(v->{
+        SwipeBackHelper.getCurrentPage(this).setSwipeBackEnable(false);
+        login.setOnClickListener(v -> {
             checkSubmit();
         });
 
-        register.setOnClickListener(v->{
-            startActivityForResult(new Intent(this,RegisterActivity.class),10086);
+        register.setOnClickListener(v -> {
+            startActivityForResult(new Intent(this, RegisterActivity.class), 10086);
         });
 
-        findPassword.setOnClickListener(v->{
-            startActivityForResult(new Intent(this,FindPasswordActivity.class),10086);
+        findPassword.setOnClickListener(v -> {
+            startActivityForResult(new Intent(this, FindPasswordActivity.class), 10086);
         });
+        qq.setOnClickListener(v->getPresenter().loginQQ());
+        weibo.setOnClickListener(v->getPresenter().loginSina());
+        wx.setOnClickListener(v->getPresenter().loginWX());
     }
 
     private void checkSubmit(){

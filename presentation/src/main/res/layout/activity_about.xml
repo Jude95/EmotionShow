@@ -65,6 +65,7 @@
         tools:text="1.0"/>
 
     <com.jude.tagview.TAGView
+        android:id="@+id/spread"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_margin="24dp"

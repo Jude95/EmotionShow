@@ -121,7 +121,7 @@ public class SeedDetailActivity extends BeamDataActivity<SeedDetailPresenter, Se
                     uris.add(Uri.parse(ImageModel.getLargeImage(data.getPics().get(i)).getUrl()));
                 }
                 Intent i = new Intent(SeedDetailActivity.this, ImageViewActivity.class);
-                i.putParcelableArrayListExtra(ImageViewActivity.KEY_URIS,uris);
+                i.putParcelableArrayListExtra(ImageViewActivity.KEY_URIS, uris);
                 i.putExtra(ImageViewActivity.KEY_INDEX, position);
                 SeedDetailActivity.this.startActivity(i);
             });
@@ -152,10 +152,11 @@ public class SeedDetailActivity extends BeamDataActivity<SeedDetailPresenter, Se
         View collect = $(view, R.id.collect);
         View report = $(view,R.id.report);
 
-        share.setOnClickListener(v->{
+        share.setOnClickListener(v -> {
             dialog.dismiss();
+            getPresenter().share();
         });
-        collect.setOnClickListener(v->{
+        collect.setOnClickListener(v -> {
             getPresenter().collect();
             dialog.dismiss();
         });
@@ -164,4 +165,5 @@ public class SeedDetailActivity extends BeamDataActivity<SeedDetailPresenter, Se
             dialog.dismiss();
         });
     }
+
 }

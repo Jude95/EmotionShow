@@ -19,7 +19,6 @@ ext {
     exgridviewVersion       = '1.1.5'
     picassoVersion          = '2.5.2'
     qiniuVersion            = '7.0.1'
-    umengAnalyticsVersion   = 'latest.integration'
     imageproviderVersion    = '2.0.5'
     rippleVersion           = '1.0.2'
     recyclerViewHeaderVersion   = '1.2.0'
@@ -43,7 +42,6 @@ ext {
             rxJava              : "io.reactivex:rxjava:${rxJava}",
             exgridview          : "com.jude:exgridview:${exgridviewVersion}",
             picasso             : "com.squareup.picasso:picasso:${picassoVersion}",
-            umengAnalytics      : "com.umeng.analytics:analytics:${umengAnalyticsVersion}",
             imageprovider       : "com.jude:imageprovider:${imageproviderVersion}",
             ripple              : "com.balysv:material-ripple:${rippleVersion}",
             recyclerViewHeader  : "com.bartoszlipinski.recyclerviewheader:library:${recyclerViewHeaderVersion}",

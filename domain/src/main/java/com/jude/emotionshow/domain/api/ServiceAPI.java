@@ -229,4 +229,13 @@ public interface ServiceAPI {
     @POST("/home/user/search")
     Observable<List<PersonBrief>> searchUser(
             @Field("key") String key);
+
+    @FormUrlEncoded
+    @POST("/home/user/thirdLogin")
+    Observable<Account> loginByThird(
+            @Field("type") String type,
+            @Field("uid") String uid,
+            @Field("face") String face,
+            @Field("name") String name,
+            @Field("authType") int authType);
 }

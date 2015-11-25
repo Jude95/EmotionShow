@@ -68,6 +68,15 @@ public class UserModel extends AbsModel {
                 .compose(new DefaultTransform<>());
     }
 
+    public Observable<Account> loginByThird(String uid,String avatar,String name,int type){
+        return mServiceAPI.loginByThird("0", uid, avatar, name, type)
+                .doOnNext(account1 -> {
+                    saveAccount(account1);
+                    setAccount(account1);
+                })
+                .compose(new DefaultTransform<>());
+    }
+
     public Observable<Account> updateMyInfo(){
         return mServiceAPI.getMyInfo()
                 .doOnNext(account -> {
