@@ -37,13 +37,13 @@ public class ImageModel extends AbsModel {
     public static ImageModel getInstance() {
         return getInstance(ImageModel.class);
     }
-    public static final String ADDRESS = "qiniucdn.com/";
-
+    public static final String ADDRESS = "http://7xnrrg.com2.z0.glb.qiniucdn.com/";
+    public static final String QINIU = "qiniucdn.com";
     private UploadManager mUploadManager;
 
 
     public static boolean isQiniuAddress(String address){
-        return address.contains(ADDRESS);
+        return address.contains(QINIU);
     }
 
     @Override

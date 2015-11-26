@@ -65,7 +65,9 @@ public class UserDetailEditPresenter extends BeamDataActivityPresenter<UserDetai
         super.onCreate(view, savedState);
         provider = new ImageProvider(getView());
         UserModel.getInstance().getAccountUpdate()
-                .doOnNext(account->data=account.clone())
+                .doOnNext(account -> {
+                    data = account.clone();
+                })
                 .subscribe(this);
     }
 
@@ -88,18 +90,31 @@ public class UserDetailEditPresenter extends BeamDataActivityPresenter<UserDetai
 
     public void submit(){
         getView().getExpansion().showProgressDialog("提交中");
-        ImageModel.getInstance().putImageSync(getView(),new File(face.getPath()))
-                .doOnError(throwable -> JUtils.Toast("上传失败"))
-                .doOnNext(image -> data.setAvatar(image.getUrl()))
-                .flatMap(image -> UserModel.getInstance().modify(data))
-                .finallyDo(() -> getView().getExpansion().dismissProgressDialog())
-                .subscribe(new ServiceResponse<Object>() {
-                    @Override
-                    public void onNext(Object o) {
-                        getView().finish();
-                        JUtils.Toast("修改成功");
-                    }
-                });
+        if (face==null){
+            UserModel.getInstance().modify(data)
+                    .finallyDo(() -> getView().getExpansion().dismissProgressDialog())
+                    .subscribe(new ServiceResponse<Object>() {
+                        @Override
+                        public void onNext(Object o) {
+                            getView().finish();
+                            JUtils.Toast("修改成功");
+                        }
+                    });
+        }else{
+            ImageModel.getInstance().putImageSync(getView(),new File(face.getPath()))
+                    .doOnError(throwable -> JUtils.Toast("上传失败"))
+                    .doOnNext(image -> data.setAvatar(image.getUrl()))
+                    .flatMap(image -> UserModel.getInstance().modify(data))
+                    .finallyDo(() -> getView().getExpansion().dismissProgressDialog())
+                    .subscribe(new ServiceResponse<Object>() {
+                        @Override
+                        public void onNext(Object o) {
+                            getView().finish();
+                            JUtils.Toast("修改成功");
+                        }
+                    });
+        }
+
     }
 
 
