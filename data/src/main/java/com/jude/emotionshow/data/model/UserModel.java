@@ -13,6 +13,7 @@ import com.jude.emotionshow.domain.entities.Account;
 import com.jude.emotionshow.domain.entities.PersonBrief;
 import com.jude.emotionshow.domain.entities.PersonDetail;
 import com.jude.emotionshow.domain.entities.Seed;
+import com.jude.emotionshow.domain.entities.ThirdInfo;
 import com.jude.utils.JFileManager;
 
 import java.util.List;
@@ -154,5 +155,17 @@ public class UserModel extends AbsModel {
 
     public Observable<List<PersonBrief>> searchUser(String text){
         return mServiceAPI.searchUser(text).compose(new DefaultTransform<>());
+    }
+
+    public Observable<ThirdInfo> thirdBind(int type,String uid,String name){
+        return mServiceAPI.thirdBind(type, uid, name);
+    }
+
+    public Observable<ThirdInfo> getThirdInfo(){
+        return mServiceAPI.getThirdBind().compose(new DefaultTransform<>());
+    }
+
+    public Observable<Object> telBind(String tel,String code){
+        return mServiceAPI.bindTel(tel, code).compose(new DefaultTransform<>());
     }
 }

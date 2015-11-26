@@ -84,7 +84,7 @@
         <activity android:name=".presentation.user.FindPasswordActivity"/>
         <activity android:name=".presentation.main.SearchActivity"/>
         <activity android:name=".presentation.main.ImageViewActivity"/>
-
+        <activity android:name=".presentation.user.PhoneEditActivity"/>
     </application>
 
 </manifest>

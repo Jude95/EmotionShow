@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -92,10 +93,17 @@
             android:layout_height="24dp"
             android:src="@drawable/wx"/>
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
             android:text="微信"/>
+        <TextView
+            android:id="@+id/wx_name"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            tools:text="FUCK"/>
 
     </LinearLayout>
     <LinearLayout
@@ -113,10 +121,18 @@
             android:layout_height="24dp"
             android:src="@drawable/qq"/>
         <TextView
-            android:layout_width="wrap_content"
+
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
             android:text="QQ"/>
+        <TextView
+            android:id="@+id/qq_name"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            tools:text="FUCK"/>
 
     </LinearLayout>
     <LinearLayout
@@ -134,10 +150,18 @@
             android:layout_height="24dp"
             android:src="@drawable/weibo"/>
         <TextView
-            android:layout_width="wrap_content"
+
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
             android:text="新浪微博"/>
+        <TextView
+            android:id="@+id/sina_name"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            tools:text="FUCK"/>
 
     </LinearLayout>
 

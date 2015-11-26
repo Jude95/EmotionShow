@@ -37,6 +37,7 @@ public class PasswordEditActivity extends BeamBaseActivity<PasswordEditPresenter
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_password_edit);
+        back.setOnClickListener(v->finish());
         ButterKnife.bind(this);
         edit.setOnClickListener(v->check());
     }

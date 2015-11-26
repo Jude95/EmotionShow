@@ -9,6 +9,7 @@ import com.jude.emotionshow.domain.entities.PersonBrief;
 import com.jude.emotionshow.domain.entities.PersonDetail;
 import com.jude.emotionshow.domain.entities.Seed;
 import com.jude.emotionshow.domain.entities.SeedDetail;
+import com.jude.emotionshow.domain.entities.ThirdInfo;
 import com.jude.emotionshow.domain.entities.Token;
 import com.jude.emotionshow.domain.entities.Topic;
 
@@ -238,4 +239,14 @@ public interface ServiceAPI {
             @Field("face") String face,
             @Field("name") String name,
             @Field("authType") int authType);
+
+    @FormUrlEncoded
+    @POST("/home/user/bindThird")
+    Observable<ThirdInfo> thirdBind(
+            @Field("type") int type,
+            @Field("uid") String uid,
+            @Field("name") String name);
+
+    @GET("/home/user/getBindInfo")
+    Observable<ThirdInfo> getThirdBind();
 }
