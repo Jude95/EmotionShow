@@ -1,5 +1,15 @@
 
 ext {
+
+    applicationId = "com.mredrock.cyxbs"
+    versionCode = 2
+    versionName = "1.1"
+    androidBuildToolsVersion = '23.0.1'
+    androidMinSdkVersion = 15
+    androidTargetSdkVersion = 23
+    androidCompileSdkVersion = 23
+    androidSupportSdkVersion = '23.1.1'
+
     //Version
     beamVersion             = '2.5.0'
     supportLibraryVersion   = '23.1.1'
@@ -25,6 +35,7 @@ ext {
     pagerSlidingTabStripVersion = '1.0.1'
     photoViewVersion        = '1.2.4'
     progressVersion         = '1.7'
+
     //libraries dependencies
     presentationDependencies = [
             appcompat           : "com.android.support:appcompat-v7:${supportLibraryVersion}",

@@ -6,15 +6,16 @@ props.load(new FileInputStream(file("../config/signing.properties")))
 props.load(new FileInputStream(file("../config/key.properties")))
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion "23.0.1"
+    compileSdkVersion rootProject.ext.androidCompileSdkVersion
+    buildToolsVersion rootProject.ext.androidBuildToolsVersion
 
     defaultConfig {
-        applicationId "com.jude.emotionshow"
-        minSdkVersion 15
-        targetSdkVersion 23
-        versionCode 1
-        versionName "1.0"
+        applicationId rootProject.ext.applicationId
+        minSdkVersion rootProject.ext.androidMinSdkVersion
+        targetSdkVersion rootProject.ext.androidTargetSdkVersion
+        versionCode rootProject.ext.versionCode
+        versionName rootProject.ext.versionName
+
         renderscriptTargetApi 23
         renderscriptSupportModeEnabled true
         manifestPlaceholders = [
