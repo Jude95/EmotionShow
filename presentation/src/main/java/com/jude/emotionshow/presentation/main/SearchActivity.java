@@ -9,6 +9,7 @@ import android.support.v4.view.ViewPager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.jude.beam.bijection.RequiresPresenter;
 import com.jude.beam.expansion.BeamBaseActivity;
@@ -35,6 +36,8 @@ public class SearchActivity extends BeamBaseActivity<SearchPresenter> {
     ViewPager viewpager;
 
     SeedFragmentListAdapter pagerAdapter;
+    @Bind(R.id.cancel)
+    TextView cancel;
 
 
     @Override
@@ -42,6 +45,7 @@ public class SearchActivity extends BeamBaseActivity<SearchPresenter> {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
         ButterKnife.bind(this);
+        cancel.setOnClickListener(v->finish());
         viewpager.setAdapter(pagerAdapter = new SeedFragmentListAdapter(getSupportFragmentManager()));
         tabs.setupWithViewPager(viewpager);
         viewpager.setCurrentItem(getIntent().getIntExtra("type", 0));
@@ -67,6 +71,7 @@ public class SearchActivity extends BeamBaseActivity<SearchPresenter> {
 
     class SeedFragmentListAdapter extends FragmentPagerAdapter {
         ArrayList<Fragment> list = new ArrayList<>();
+
         public SeedFragmentListAdapter(FragmentManager fm) {
             super(fm);
         }
@@ -75,15 +80,15 @@ public class SearchActivity extends BeamBaseActivity<SearchPresenter> {
         public Fragment getItem(int position) {
             Fragment f = null;
             if (position == 0)
-                 f = new UserSearchFragment();
+                f = new UserSearchFragment();
             if (position == 1)
-                 f = new SeedSearchFragment();
-            list.add(position,f);
+                f = new SeedSearchFragment();
+            list.add(position, f);
             return f;
         }
 
-        public Fragment getFragmentByIndex(int index){
-           return list.get(index);
+        public Fragment getFragmentByIndex(int index) {
+            return list.get(index);
         }
 
         @Override
@@ -93,10 +98,13 @@ public class SearchActivity extends BeamBaseActivity<SearchPresenter> {
 
         @Override
         public CharSequence getPageTitle(int position) {
-            switch (position){
-                case 0:return "用户";
-                case 1:return "印记";
-                default:throw new RuntimeException("页数不存在");
+            switch (position) {
+                case 0:
+                    return "用户";
+                case 1:
+                    return "印记";
+                default:
+                    throw new RuntimeException("页数不存在");
             }
         }
     }

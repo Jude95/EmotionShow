@@ -20,7 +20,8 @@ android {
         renderscriptSupportModeEnabled true
         manifestPlaceholders = [
                 UMENG_APPKEY    : props['UMENG_APPKEY'],
-                AMAP_APPKEY     : props['AMAP_APPKEY']
+                AMAP_APPKEY     : props['AMAP_APPKEY'],
+                RONGYUN_APPKEY  : props['RONGYUN_APPKEY']
         ]
 
     }

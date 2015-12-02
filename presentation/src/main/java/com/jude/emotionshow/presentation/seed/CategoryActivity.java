@@ -60,6 +60,7 @@ public class CategoryActivity extends BeamDataActivity<CategoryPresenter, Catego
         recycler.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
         header.attachTo(recycler);
         ButterKnife.bind(this);
+        back.setOnClickListener(v -> finish());
         recycler.setAdapter(adapter = new SeedAdapter(this));
         adapter.setMore(new View(this), () -> {
             getPresenter().loadMore();

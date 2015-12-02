@@ -135,6 +135,9 @@ public class SeedMainFragment extends BeamFragment<SeedMainPresenter> {
     }
 
     public void setBanner(List<Banner> banners) {
+        if (banners==null||banners.size() == 0) {
+            return;
+        }
         banner.setAdapter(new StaticPagerAdapter() {
             @Override
             public View getView(ViewGroup container, int position) {
@@ -160,6 +163,8 @@ public class SeedMainFragment extends BeamFragment<SeedMainPresenter> {
                 topic.remove(topic1);
             }
         }
+        if (topic.size()==0){return;}
+
         TopicAdapter adapter = new TopicAdapter(getContext());
         seedCards.setAdapter(new LoopRecyclerViewPagerAdapter<>(seedCards, adapter));
         adapter.addAll(topic);
@@ -167,12 +172,14 @@ public class SeedMainFragment extends BeamFragment<SeedMainPresenter> {
     }
 
     public void setCategoryScene(List<Category> list){
+        if (list==null||list.size()==0){return;}
         categoryScence.setting("场景", () -> getPresenter().getCategoryScence());
         categoryScence.setCategoryList(list);
     }
 
 
     public void setCategoryProcess(List<Category> list){
+        if (list==null||list.size()==0){return;}
         categoryProcess.setting("情感", () -> getPresenter().getCategoryProcess());
         categoryProcess.setCategoryList(list);
     }
