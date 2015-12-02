@@ -37,7 +37,7 @@ public interface ServiceAPI {
     Observable<List<Category>> getProcess();
 
     @GET("/home/discover/ctagIndex")
-    Observable<List<Category>> getScence();
+    Observable<List<Category>> getScene();
 
     @FormUrlEncoded
     @POST("/home/user/login")
@@ -254,4 +254,9 @@ public interface ServiceAPI {
     @POST("/home/user/search")
     PersonBrief getUserBrief(
             @Field("id") String id);
+
+    @FormUrlEncoded
+    @POST("/home/user/myFriend")
+    Observable<List<PersonBrief>> getFriends(
+            @Field("page") String page);
 }

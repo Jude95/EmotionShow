@@ -45,19 +45,33 @@
             android:id="@+id/follow"
             android:orientation="horizontal"
             android:layout_width="wrap_content"
+            android:gravity="center"
             android:layout_alignParentRight="true"
             android:layout_height="match_parent">
-            <TextView
-                android:id="@+id/follow_text"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:paddingLeft="16dp"
-                android:text="关注"
-                android:textSize="17sp"
-                android:gravity="center"
-                android:textColor="@color/white"/>
-        </LinearLayout>
 
+            <ImageView
+                android:id="@+id/follow_image"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/follow_add"
+                android:tint="@color/white"/>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/chat"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:gravity="center"
+            android:layout_toLeftOf="@id/follow"
+            android:layout_marginRight="8dp"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/chat_image"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/chat"
+                android:tint="@color/white"/>
+        </LinearLayout>
     </RelativeLayout>
 
     <android.support.v7.widget.RecyclerView

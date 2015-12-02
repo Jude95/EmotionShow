@@ -1,5 +1,6 @@
 package com.jude.emotionshow.presentation.main;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.widget.FrameLayout;
@@ -10,7 +11,9 @@ import android.widget.TextView;
 import com.jude.beam.bijection.RequiresPresenter;
 import com.jude.beam.expansion.BeamBaseActivity;
 import com.jude.emotionshow.R;
+import com.jude.emotionshow.data.model.UserModel;
 import com.jude.emotionshow.presentation.seed.SeedMainFragment;
+import com.jude.emotionshow.presentation.user.LoginActivity;
 import com.jude.emotionshow.presentation.user.MineFragment;
 import com.jude.swipbackhelper.SwipeBackHelper;
 
@@ -52,6 +55,10 @@ public class MainActivity extends BeamBaseActivity<MainPresenter> {
             showFind();
         });
         mine.setOnClickListener(v -> {
+            if (!UserModel.getInstance().isLogin()){
+                startActivity(new Intent(this, LoginActivity.class));
+                return;
+            }
             focusFind(false);
             focusMine(true);
             showMine();
@@ -64,6 +71,16 @@ public class MainActivity extends BeamBaseActivity<MainPresenter> {
         showFind();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (!UserModel.getInstance().isLogin()){
+            focusFind(true);
+            focusMine(false);
+            showFind();
+        }
+    }
+
     void showFind(){
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.show(SeedMainFragment.getInstance());
@@ -72,6 +89,7 @@ public class MainActivity extends BeamBaseActivity<MainPresenter> {
     }
 
     void showMine(){
+
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.hide(SeedMainFragment.getInstance());
         transaction.show(MineFragment.getInstance());

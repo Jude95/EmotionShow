@@ -158,7 +158,7 @@ public class UserModel extends AbsModel {
     }
 
     public Observable<ThirdInfo> thirdBind(int type,String uid,String name){
-        return mServiceAPI.thirdBind(type, uid, name);
+        return mServiceAPI.thirdBind(type, uid, name).compose(new DefaultTransform<>());
     }
 
     public Observable<ThirdInfo> getThirdInfo(){
@@ -171,5 +171,9 @@ public class UserModel extends AbsModel {
 
     public PersonBrief getUserBrief(String id){
         return mServiceAPI.getUserBrief(id);
+    }
+
+    public Observable<List<PersonBrief>> getFriends(){
+        return mServiceAPI.getFriends("-1").compose(new DefaultTransform<>());
     }
 }

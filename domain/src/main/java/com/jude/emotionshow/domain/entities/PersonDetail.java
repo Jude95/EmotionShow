@@ -11,7 +11,6 @@ public class PersonDetail extends PersonBrief  implements Serializable,Cloneable
     @SerializedName("bg")
     private String background;
     private String address;
-    private String sign;
     private String intro;
     @SerializedName("fans")
     private int fansCount;
@@ -62,14 +61,6 @@ public class PersonDetail extends PersonBrief  implements Serializable,Cloneable
 
     public void setAddress(String address) {
         this.address = address;
-    }
-
-    public String getSign() {
-        return sign;
-    }
-
-    public void setSign(String sign) {
-        this.sign = sign;
     }
 
     public int getFansCount() {

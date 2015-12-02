@@ -61,6 +61,7 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
 }
 
 dependencies {
@@ -77,7 +78,7 @@ dependencies {
     compile presentationDependencies.tagview
     compile presentationDependencies.rollviewpager
     compile presentationDependencies.picasso
-    compile presentationDependencies.eventBus
+    //compile presentationDependencies.eventBus
     compile presentationDependencies.rxAndroid
     compile presentationDependencies.rxJava
     compile presentationDependencies.exgridview
@@ -85,12 +86,11 @@ dependencies {
     compile presentationDependencies.ripple
     compile presentationDependencies.recyclerViewHeader
     compile presentationDependencies.pagerSlidingTabStrip
-    compile presentationDependencies.photoView
+    //compile presentationDependencies.photoView
     compile presentationDependencies.progress
     compile project(':data')
     compile project(':domain')
     compile project(':SMSSDK')
     compile project(':umengfamily')
-    compile project(':IMKit')
 
 }

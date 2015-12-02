@@ -1,6 +1,8 @@
 package com.jude.emotionshow.data.server;
 
 
+import android.text.TextUtils;
+
 import retrofit.RequestInterceptor;
 
 /**
@@ -12,6 +14,7 @@ public class HeaderInterceptors implements RequestInterceptor {
 
     @Override
     public void intercept(RequestFacade request) {
+        if (TextUtils.isEmpty(TOKEN)||TextUtils.isEmpty(UID))return;
         request.addHeader("uid", UID);
         request.addHeader("token", TOKEN);
     }

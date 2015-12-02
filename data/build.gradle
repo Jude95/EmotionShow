@@ -30,7 +30,7 @@ dependencies {
     compile dataDependencies.retrofit
     compile dataDependencies.dagger
     apt dataDependencies.daggerCompiler
-    compile dataDependencies.eventBus
+    //compile dataDependencies.eventBus
     compile dataDependencies.okHttp
     compile dataDependencies.rxAndroid
     compile dataDependencies.rxJava

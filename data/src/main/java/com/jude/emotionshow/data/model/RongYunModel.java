@@ -2,6 +2,8 @@ package com.jude.emotionshow.data.model;
 
 import android.content.Context;
 import android.net.Uri;
+import android.text.TextUtils;
+import android.view.View;
 
 import com.jude.beam.model.AbsModel;
 import com.jude.emotionshow.domain.entities.PersonBrief;
@@ -25,9 +27,14 @@ public class RongYunModel extends AbsModel {
         return getInstance(RongYunModel.class);
     }
     public BehaviorSubject<Integer> mNotifyBehaviorSubject = BehaviorSubject.create();
+    public RongYunDelegate mDelegate;
 
-    public RongIM getRongIMInstance(){
-        return RongIM.getInstance();
+    public interface RongYunDelegate{
+        void onPersonClick(Context context, Conversation.ConversationType conversationType, UserInfo userInfo);
+    }
+
+    public void setRongYunDelegate(RongYunDelegate delegate){
+        this.mDelegate = delegate;
     }
 
     @Override
@@ -48,6 +55,10 @@ public class RongYunModel extends AbsModel {
     }
 
     public void connectRongYun1(String token){
+        if (TextUtils.isEmpty(token)){
+            JUtils.Log("TOKEN is Empty，Fuck！");
+            return;
+        }
         RongIM.connect(token, new RongIMClient.ConnectCallback() {
             @Override
             public void onTokenIncorrect() {
@@ -68,6 +79,7 @@ public class RongYunModel extends AbsModel {
     }
 
     public void setRongYun(){
+        JUtils.Log("setRongYun");
         try {
             RongIM.setUserInfoProvider(userId -> {
                 PersonBrief p;
@@ -93,6 +105,34 @@ public class RongYunModel extends AbsModel {
                     mNotifyBehaviorSubject.onNext(i);
                 }
             }, Conversation.ConversationType.PRIVATE);
+
+            RongIM.getInstance().setConversationBehaviorListener(new RongIM.ConversationBehaviorListener() {
+            @Override
+            public boolean onUserPortraitClick(Context context, Conversation.ConversationType conversationType, UserInfo userInfo) {
+                mDelegate.onPersonClick(context, conversationType, userInfo);
+                return true;
+            }
+
+            @Override
+            public boolean onUserPortraitLongClick(Context context, Conversation.ConversationType conversationType, UserInfo userInfo) {
+                return false;
+            }
+
+            @Override
+            public boolean onMessageClick(Context context, View view, Message message) {
+                return false;
+            }
+
+            @Override
+            public boolean onMessageLinkClick(Context context, String s) {
+                return false;
+            }
+
+            @Override
+            public boolean onMessageLongClick(Context context, View view, Message message) {
+                return false;
+            }
+        });
         } catch (Exception e) {
             JUtils.Log("融云出错");
         }

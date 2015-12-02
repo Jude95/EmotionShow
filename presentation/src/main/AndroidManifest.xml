@@ -91,6 +91,7 @@
         <activity android:name=".presentation.main.SearchActivity"/>
         <activity android:name=".presentation.main.ImageViewActivity"/>
         <activity android:name=".presentation.user.PhoneEditActivity"/>
+        <activity android:name=".presentation.user.FriendsActivity"/>
     </application>
 
 </manifest>

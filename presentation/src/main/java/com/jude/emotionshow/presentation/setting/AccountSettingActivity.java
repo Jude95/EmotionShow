@@ -2,6 +2,7 @@ package com.jude.emotionshow.presentation.setting;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -59,8 +60,8 @@ public class AccountSettingActivity extends BeamDataActivity<AccountSettingPrese
     @Override
     public void setData(ThirdInfo data) {
         super.setData(data);
-        wxName.setText(data.getWx());
-        qqName.setText(data.getQq());
-        sinaName.setText(data.getSina());
+        wxName.setText(TextUtils.isEmpty(data.getWx())?"未绑定":data.getWx());
+        qqName.setText(TextUtils.isEmpty(data.getQq())?"未绑定":data.getQq());
+        sinaName.setText(TextUtils.isEmpty(data.getSina())?"未绑定":data.getSina());
     }
 }

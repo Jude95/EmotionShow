@@ -9,7 +9,6 @@ import com.jude.beam.bijection.Presenter;
 import com.jude.emotionshow.data.model.UserModel;
 import com.jude.emotionshow.data.server.ServiceResponse;
 import com.jude.emotionshow.domain.entities.Account;
-import com.jude.emotionshow.presentation.main.MainActivity;
 import com.jude.utils.JUtils;
 import com.umeng.share.ShareManager;
 import com.umeng.socialize.bean.SHARE_MEDIA;
@@ -32,7 +31,7 @@ public class LoginPresenter extends Presenter<LoginActivity> {
                     @Override
                     public void onNext(Account account) {
                         getView().finish();
-                        getView().startActivity(new Intent(getView(), MainActivity.class));
+                        //getView().startActivity(new Intent(getView(), MainActivity.class));
                     }
                 });
     }
@@ -117,11 +116,12 @@ public class LoginPresenter extends Presenter<LoginActivity> {
                                         info.get("screen_name").toString(),
                                         1)
                                         .finallyDo(() -> getView().getExpansion().dismissProgressDialog())
+                                        .first()
                                         .subscribe(new ServiceResponse<Account>() {
                                             @Override
                                             public void onNext(Account account) {
                                                 getView().finish();
-                                                getView().startActivity(new Intent(getView(), MainActivity.class));
+                                                //getView().startActivity(new Intent(getView(), MainActivity.class));
                                             }
                                         });
                             }else{

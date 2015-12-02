@@ -12,6 +12,24 @@ public class PersonBrief implements Serializable,Cloneable{
     private String name;
     @SerializedName("face")
     private String avatar;
+    private String sign;
+    private int type;
+
+    public String getSign() {
+        return sign;
+    }
+
+    public void setSign(String sign) {
+        this.sign = sign;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
 
     public int getId() {
         return id;

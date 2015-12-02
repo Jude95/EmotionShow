@@ -27,8 +27,8 @@ import rx.schedulers.Schedulers;
  */
 public class ImageModel extends AbsModel {
     public static String UID = "";
-    public static final int IMAGE_SIZE_SMALL = 150;
-    public static final int IMAGE_SIZE_LARGE = 960;
+    public static final int IMAGE_SIZE_SMALL = 200;
+    public static final int IMAGE_SIZE_LARGE = 1280;
 
 
     public static final int IMAGE_WIDTH_MAX=480;

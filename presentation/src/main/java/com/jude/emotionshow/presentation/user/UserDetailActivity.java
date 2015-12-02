@@ -126,21 +126,18 @@ public class UserDetailActivity extends BeamDataActivity<UserDetailPresenter, Pe
 
     @Override
     public void setData(PersonDetail data) {
-        JUtils.Log("setData" + (Thread.currentThread().getName()));
         Picasso.with(this).load(ImageModel.getSmallImage(data.getAvatar())).resize(150, 150).transform(new CircleTransform()).into(avatar);
         Picasso.with(this).load(data.getAvatar()).transform(new BlurTransformation(this, 20)).into(background);
         name.setText(data.getName());
-        JUtils.Log("setData hash:"+hashCode());
 
         sign.setText(data.getSign());
         seedCount.setText(data.getSeedCount() + "");
         visitCount.setText(data.getVisitCount() + "");
         praiseCount.setText(data.getPraiseCount() + "");
         followText.setText(getPresenter().data.getFollowed() == 0 ? "关注" : "取消关注");
-        if (getPresenter().data.getId() == UserModel.getInstance().getCurAccount().getId()) {
-            followText.setVisibility(View.INVISIBLE);
+        if (UserModel.getInstance().isLogin()&&getPresenter().data.getId() != UserModel.getInstance().getCurAccount().getId()) {
+            followText.setVisibility(View.VISIBLE);
         }
-        JUtils.Log("name"+name.getText()+"  sign"+sign.getText());
     }
 
     public void addSeed(List<SeedDetail> data){

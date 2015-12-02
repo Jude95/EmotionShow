@@ -38,13 +38,13 @@ public class SettingActivity extends BeamBaseActivity<SettingPresenter> {
         back.setOnClickListener(v -> finish());
         logout.setOnClickListener(v->{
             UserModel.getInstance().logout();
+            finish();
         });
         feedback.setOnClickListener(v->{
             startActivity(new Intent(this, FeedbackActivity.class));
         });
         account.setOnClickListener(v->{
             startActivity(new Intent(this,AccountSettingActivity.class));
-
         });
     }
 }

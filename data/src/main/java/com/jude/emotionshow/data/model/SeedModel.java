@@ -48,7 +48,7 @@ public class SeedModel extends AbsModel {
         return mServiceAPI.getProcess().compose(new DefaultTransform<>());
     }
     public Observable<List<Category>> getScene(){
-        return mServiceAPI.getScence().compose(new DefaultTransform<>());
+        return mServiceAPI.getScene().compose(new DefaultTransform<>());
     }
     public Observable<Object> publishSeed(SeedEditable data){
         return mServiceAPI.addSeed(data.getContent(), data.getScene(), data.getProcess(), data.getAddress(), data.getScope(), "", mGson.toJson(data.getPictures()))
