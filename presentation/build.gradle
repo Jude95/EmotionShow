@@ -91,5 +91,6 @@ dependencies {
     compile project(':domain')
     compile project(':SMSSDK')
     compile project(':umengfamily')
+    compile project(':IMKit')
 
 }

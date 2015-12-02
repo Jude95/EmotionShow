@@ -49,6 +49,7 @@
             app:rollviewpager_hint_paddingRight="16dp"
             app:rollviewpager_hint_paddingBottom="16dp"/>
         <com.jude.emotionshow.presentation.widget.RecyclerViewPager
+            android:visibility="gone"
             android:layout_marginTop="20dp"
             android:id="@+id/seed_cards"
             android:layout_width="match_parent"
@@ -59,7 +60,7 @@
             app:singlePageFling="true"
             android:clipToPadding="false"/>
         <com.jude.emotionshow.presentation.seed.CategoryViewGroup
-            android:id="@+id/category_scence"
+            android:id="@+id/category_scene"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"

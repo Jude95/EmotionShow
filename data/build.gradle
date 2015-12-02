@@ -36,5 +36,6 @@ dependencies {
     compile dataDependencies.rxJava
     compile dataDependencies.qiniu
     compile project(':domain')
+    compile project(':IMKit')
     compile files('libs/AMap_Location_v2.0.0_20151117.jar')
 }

@@ -24,6 +24,7 @@ import com.jude.emotionshow.presentation.widget.LoopRecyclerViewPagerAdapter;
 import com.jude.emotionshow.presentation.widget.RecyclerViewPager;
 import com.jude.rollviewpager.RollPagerView;
 import com.jude.rollviewpager.adapter.StaticPagerAdapter;
+import com.jude.utils.JUtils;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -42,7 +43,7 @@ public class SeedMainFragment extends BeamFragment<SeedMainPresenter> {
     RollPagerView banner;
     @Bind(R.id.seed_cards)
     RecyclerViewPager seedCards;
-    @Bind(R.id.category_scence)
+    @Bind(R.id.category_scene)
     CategoryViewGroup categoryScence;
     @Bind(R.id.category_process)
     CategoryViewGroup categoryProcess;
@@ -59,10 +60,15 @@ public class SeedMainFragment extends BeamFragment<SeedMainPresenter> {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_seed_main, container, false);
         ButterKnife.bind(this, view);
+        search.setOnClickListener(v -> startActivity(new Intent(getContext(), SearchActivity.class)));
+        return view;
+    }
+
+    private void initSeedCards(){
+        seedCards.setVisibility(View.VISIBLE);
         LinearLayoutManager layout = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         seedCards.setLayoutManager(layout);
         seedCards.setHasFixedSize(true);
-        search.setOnClickListener(v -> startActivity(new Intent(getContext(), SearchActivity.class)));
         seedCards.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int scrollState) {
@@ -131,7 +137,6 @@ public class SeedMainFragment extends BeamFragment<SeedMainPresenter> {
 
             }
         });
-        return view;
     }
 
     public void setBanner(List<Banner> banners) {
@@ -164,7 +169,8 @@ public class SeedMainFragment extends BeamFragment<SeedMainPresenter> {
             }
         }
         if (topic.size()==0){return;}
-
+        initSeedCards();
+        JUtils.Log("topic.size()"+topic.size());
         TopicAdapter adapter = new TopicAdapter(getContext());
         seedCards.setAdapter(new LoopRecyclerViewPagerAdapter<>(seedCards, adapter));
         adapter.addAll(topic);

@@ -37,7 +37,7 @@ public class ServiceResponse<T> extends Subscriber<T> {
     public void onServiceError(int status,String info){
         if(status == Code.UserInvalid){
             UserModel.getInstance().logout();
-            JUtils.Toast("您的账号有风险，请重新登录");
+            JUtils.Toast("请登录后重试");
             return;
         }
         JUtils.Toast(info);

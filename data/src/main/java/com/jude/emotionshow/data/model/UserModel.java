@@ -168,4 +168,8 @@ public class UserModel extends AbsModel {
     public Observable<Object> telBind(String tel,String code){
         return mServiceAPI.bindTel(tel, code).compose(new DefaultTransform<>());
     }
+
+    public PersonBrief getUserBrief(String id){
+        return mServiceAPI.getUserBrief(id);
+    }
 }
