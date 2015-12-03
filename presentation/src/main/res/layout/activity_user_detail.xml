@@ -46,6 +46,7 @@
             android:orientation="horizontal"
             android:layout_width="wrap_content"
             android:gravity="center"
+            android:visibility="gone"
             android:layout_alignParentRight="true"
             android:layout_height="match_parent">
 
@@ -61,8 +62,9 @@
             android:orientation="horizontal"
             android:layout_width="wrap_content"
             android:gravity="center"
+            android:visibility="gone"
             android:layout_toLeftOf="@id/follow"
-            android:layout_marginRight="8dp"
+            android:layout_marginRight="16dp"
             android:layout_height="match_parent">
 
             <ImageView

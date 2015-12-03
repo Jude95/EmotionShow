@@ -10,7 +10,7 @@ import java.io.Serializable;
 public class Account extends PersonDetail  implements Serializable,Cloneable {
     private String token;
     private int gender;
-    @SerializedName("rongToken")
+    @SerializedName("rongtoken")
     private String rongYunToken;
 
     public String getRongYunToken() {

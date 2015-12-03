@@ -251,7 +251,7 @@ public interface ServiceAPI {
     Observable<ThirdInfo> getThirdBind();
 
     @FormUrlEncoded
-    @POST("/home/user/search")
+    @POST("/home/user/getBriefInfo")
     PersonBrief getUserBrief(
             @Field("id") String id);
 

@@ -47,40 +47,45 @@ public class APP extends Application {
 
             /* IMKit SDK调用第一步 初始化 */
             RongIM.init(this);
-            instance = this;
-            JFileManager.getInstance().init(this, Dir.values());
-            JUtils.initialize(this);
-            JUtils.setDebug(BuildConfig.DEBUG, "Emotion");
-            JUtils.Log("real init");
+
+
+            /* 必须在使用 RongIM 的进程注册回调、注册自定义消息等 */
+            if ("com.jude.emotionshow".equals(getCurProcessName(getApplicationContext()))) {
+                instance = this;
+                JFileManager.getInstance().init(this, Dir.values());
+                JUtils.initialize(this);
+                JUtils.setDebug(BuildConfig.DEBUG, "Emotion");
+                JUtils.Log("real init");
 //        ShareSDK.initSDK(this);
-            Beam.init(this);
-            Beam.setActivityLifeCycleDelegateProvider(ActivityDelegate::new);
-            Beam.setViewExpansionDelegateProvider(new ViewExpansionDelegateProvider() {
-                @Override
-                public ViewExpansionDelegate createViewExpansionDelegate(BeamBaseActivity activity) {
-                    return new PaddingTopViewExpansion(activity);
-                }
-            });
-            UserModel.getInstance().getAccountUpdate().subscribe(new Action1<Account>() {
-                @Override
-                public void call(Account account) {
-                    if (account == null
-                            && JActivityManager.getInstance().currentActivity() != null
-                            && !(JActivityManager.getInstance().currentActivity() instanceof LoginActivity)
-                            && !(JActivityManager.getInstance().currentActivity() instanceof LaunchActivity)) {
-                        JActivityManager.getInstance().currentActivity().startActivity(new Intent(JActivityManager.getInstance().currentActivity(), LoginActivity.class));
-                        //JActivityManager.getInstance().closeAllActivity();
+                Beam.init(this);
+                Beam.setActivityLifeCycleDelegateProvider(ActivityDelegate::new);
+                Beam.setViewExpansionDelegateProvider(new ViewExpansionDelegateProvider() {
+                    @Override
+                    public ViewExpansionDelegate createViewExpansionDelegate(BeamBaseActivity activity) {
+                        return new PaddingTopViewExpansion(activity);
                     }
-                }
-            });
-            RongYunModel.getInstance().setRongYunDelegate(new RongYunModel.RongYunDelegate() {
-                @Override
-                public void onPersonClick(Context context, Conversation.ConversationType conversationType, UserInfo userInfo) {
-                    Intent i = new Intent(context, UserPreviewActivity.class);
-                    i.putExtra("id",Integer.parseInt(userInfo.getUserId()));
-                    context.startActivity(i);
-                }
-            });
+                });
+                UserModel.getInstance().getAccountUpdate().subscribe(new Action1<Account>() {
+                    @Override
+                    public void call(Account account) {
+                        if (account == null
+                                && JActivityManager.getInstance().currentActivity() != null
+                                && !(JActivityManager.getInstance().currentActivity() instanceof LoginActivity)
+                                && !(JActivityManager.getInstance().currentActivity() instanceof LaunchActivity)) {
+                            JActivityManager.getInstance().currentActivity().startActivity(new Intent(JActivityManager.getInstance().currentActivity(), LoginActivity.class));
+                            //JActivityManager.getInstance().closeAllActivity();
+                        }
+                    }
+                });
+                RongYunModel.getInstance().setRongYunDelegate(new RongYunModel.RongYunDelegate() {
+                    @Override
+                    public void onPersonClick(Context context, Conversation.ConversationType conversationType, UserInfo userInfo) {
+                        Intent i = new Intent(context, UserPreviewActivity.class);
+                        i.putExtra("id", Integer.parseInt(userInfo.getUserId()));
+                        context.startActivity(i);
+                    }
+                });
+            }
         }
     }
 

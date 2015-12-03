@@ -20,6 +20,7 @@ import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.jude.emotionshow.R;
 import com.jude.emotionshow.data.model.ImageModel;
+import com.jude.emotionshow.data.model.RongYunModel;
 import com.jude.emotionshow.data.model.UserModel;
 import com.jude.emotionshow.domain.entities.PersonDetail;
 import com.jude.emotionshow.domain.entities.SeedDetail;
@@ -64,8 +65,6 @@ public class UserDetailActivity extends BeamDataActivity<UserDetailPresenter, Pe
     ImageView backImg;
     @Bind(R.id.back)
     LinearLayout back;
-    @Bind(R.id.follow_text)
-    TextView followText;
     @Bind(R.id.follow)
     LinearLayout follow;
     @Bind(R.id.recycler)
@@ -74,6 +73,12 @@ public class UserDetailActivity extends BeamDataActivity<UserDetailPresenter, Pe
     ImageView sort;
 
     private static int style = 0;
+    @Bind(R.id.follow_image)
+    ImageView followImage;
+    @Bind(R.id.chat_image)
+    ImageView chatImage;
+    @Bind(R.id.chat)
+    LinearLayout chat;
     private SeedCalendarAdapter adapter;
 
     TextView tvIld;
@@ -84,11 +89,9 @@ public class UserDetailActivity extends BeamDataActivity<UserDetailPresenter, Pe
         setContentView(R.layout.activity_user_detail);
         RecyclerViewHeader header = RecyclerViewHeader.fromXml(this, R.layout.head_user);
         recycler = (RecyclerView) findViewById(R.id.recycler);
-        recycler.setLayoutManager(style == 0?new LinearLayoutManager(this):new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL));
+        recycler.setLayoutManager(style == 0 ? new LinearLayoutManager(this) : new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
         header.attachTo(recycler);
-        JUtils.Log("name" + (name == null));
         ButterKnife.bind(this);
-        JUtils.Log("name" + (name == null));
         recycler.setAdapter(adapter = new SeedCalendarAdapter(this));
 
         back.setOnClickListener(v -> finish());
@@ -101,10 +104,7 @@ public class UserDetailActivity extends BeamDataActivity<UserDetailPresenter, Pe
             }
             recreate();
         });
-        JUtils.Log("Create hash:" + hashCode());
-        avatar.setOnClickListener(v -> {
-            JUtils.Log("name" + name.getText() + "  sign" + sign.getText() + "Click hash:" + name.getContext().hashCode());
-        });
+
         name.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -134,13 +134,17 @@ public class UserDetailActivity extends BeamDataActivity<UserDetailPresenter, Pe
         seedCount.setText(data.getSeedCount() + "");
         visitCount.setText(data.getVisitCount() + "");
         praiseCount.setText(data.getPraiseCount() + "");
-        followText.setText(getPresenter().data.getFollowed() == 0 ? "关注" : "取消关注");
+        followImage.setImageResource(getPresenter().data.getFollowed() == 0 ? R.drawable.follow_add:R.drawable.follow_done);
+        chat.setOnClickListener(v->{
+            RongYunModel.getInstance().chatPerson(this,data.getId()+"",data.getName());
+        });
         if (UserModel.getInstance().isLogin()&&getPresenter().data.getId() != UserModel.getInstance().getCurAccount().getId()) {
-            followText.setVisibility(View.VISIBLE);
+            chat.setVisibility(View.VISIBLE);
+            follow.setVisibility(View.VISIBLE);
         }
     }
 
-    public void addSeed(List<SeedDetail> data){
+    public void addSeed(List<SeedDetail> data) {
         adapter.addAll(data);
     }
 

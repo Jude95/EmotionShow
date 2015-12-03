@@ -2,6 +2,7 @@ package com.jude.emotionshow.data.model;
 
 import android.content.Context;
 import android.net.Uri;
+import android.os.Handler;
 import android.text.TextUtils;
 import android.view.View;
 
@@ -29,6 +30,8 @@ public class RongYunModel extends AbsModel {
     public BehaviorSubject<Integer> mNotifyBehaviorSubject = BehaviorSubject.create();
     public RongYunDelegate mDelegate;
 
+    public String mCacheToken;
+    public Handler hander = new Handler();
     public interface RongYunDelegate{
         void onPersonClick(Context context, Conversation.ConversationType conversationType, UserInfo userInfo);
     }
@@ -39,11 +42,14 @@ public class RongYunModel extends AbsModel {
 
     @Override
     protected void onAppCreate(Context ctx) {
+        JUtils.Log("FUCK");
         UserModel.getInstance().getAccountUpdate().subscribe(user -> {
+            JUtils.Log("I get");
             if (user != null) connectRongYun1(user.getRongYunToken());
+            else loginOut();
         });
-        if (UserModel.getInstance().isLogin())
-            connectRongYun1(UserModel.getInstance().getCurAccount().getRongYunToken());
+//        if (UserModel.getInstance().isLogin())
+//            connectRongYun1(UserModel.getInstance().getCurAccount().getRongYunToken());
     }
 
     public void loginOut(){
@@ -55,24 +61,36 @@ public class RongYunModel extends AbsModel {
     }
 
     public void connectRongYun1(String token){
+
         if (TextUtils.isEmpty(token)){
             JUtils.Log("TOKEN is Empty，Fuck！");
             return;
         }
+        if (mCacheToken!=null&&mCacheToken.equals(token)){
+            JUtils.Log("TOKEN NO Change");
+            return;
+        }
+        mCacheToken = token;
+        JUtils.Log("RongYunToken "+token);
+        final String finalToken = token;
         RongIM.connect(token, new RongIMClient.ConnectCallback() {
             @Override
             public void onTokenIncorrect() {
                 JUtils.Log("融云Token失效");
+                //hander.post(()->JUtils.ToastLong("融云Token失效"+ finalToken));
+
             }
 
             @Override
             public void onSuccess(String s) {
                 JUtils.Log("融云连接成功");
+                //hander.post(()->JUtils.ToastLong("融云连接成功"+finalToken));
                 setRongYun();
             }
 
             @Override
             public void onError(RongIMClient.ErrorCode errorCode) {
+                //hander.post(()->JUtils.ToastLong("融云连接失败" + errorCode.getValue() + ":" + errorCode.getMessage()+ " "+finalToken));
                 JUtils.Log("融云连接失败：" + errorCode.getValue() + ":" + errorCode.getMessage());
             }
         });
@@ -82,14 +100,17 @@ public class RongYunModel extends AbsModel {
         JUtils.Log("setRongYun");
         try {
             RongIM.setUserInfoProvider(userId -> {
+                JUtils.Log("I wanna "+userId);
                 PersonBrief p;
                 try{
                     p = UserModel.getInstance().getUserBrief(userId);
+                    JUtils.Log("I get "+p.getId()+":"+p.getName());
                 }catch (Exception e){
                     return null;
                 }
                 return new UserInfo(userId, p.getName(), Uri.parse(ImageModel.getInstance().getSmallImage(p.getAvatar())));
             }, true);
+
             RongIM.setOnReceiveMessageListener(new RongIMClient.OnReceiveMessageListener() {
                 @Override
                 public boolean onReceived(Message message, int i) {
