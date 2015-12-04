@@ -19,7 +19,6 @@ import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.jude.emotionshow.R;
 import com.jude.emotionshow.data.model.ImageModel;
-import com.jude.emotionshow.data.model.RongYunModel;
 import com.jude.emotionshow.data.model.UserModel;
 import com.jude.emotionshow.domain.entities.PersonDetail;
 import com.jude.emotionshow.domain.entities.SeedDetail;
@@ -107,6 +106,7 @@ public class UserDetailActivity extends BeamDataActivity<UserDetailPresenter, Pe
             }
             recreate();
         });
+        chat.setOnClickListener(v->getPresenter().chat());
     }
 
 
@@ -121,9 +121,6 @@ public class UserDetailActivity extends BeamDataActivity<UserDetailPresenter, Pe
         visitCount.setText(data.getVisitCount() + "");
         praiseCount.setText(data.getPraiseCount() + "");
         followImage.setImageResource(getPresenter().data.getFollowed() == 0 ? R.drawable.follow_add:R.drawable.follow_done);
-        chat.setOnClickListener(v->{
-            RongYunModel.getInstance().chatPerson(this,data.getId()+"",data.getName());
-        });
         if (UserModel.getInstance().isLogin()&&getPresenter().data.getId() != UserModel.getInstance().getCurAccount().getId()) {
             chat.setVisibility(View.VISIBLE);
             follow.setVisibility(View.VISIBLE);

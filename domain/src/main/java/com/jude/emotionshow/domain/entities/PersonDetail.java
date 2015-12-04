@@ -20,7 +20,7 @@ public class PersonDetail extends PersonBrief  implements Serializable,Cloneable
     private int seedCount;
     @SerializedName("zan")
     private int praiseCount;
-    @SerializedName("cared")
+    @SerializedName("relation")
     private int followed;
 
     public int getFollowed() {

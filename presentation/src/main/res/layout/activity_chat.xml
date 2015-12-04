@@ -9,6 +9,8 @@
         android:layout_width="match_parent"
         android:background="?colorPrimary"
         android:layout_height="48dp"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         android:padding="8dp">
 
         <LinearLayout

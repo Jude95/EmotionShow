@@ -178,6 +178,10 @@ public class UserModel extends AbsModel {
     }
 
     public Observable<Object> modBackground(String background){
-        return mServiceAPI.modifyBackGround(background);
+        return mServiceAPI.modifyBackGround(background).compose(new DefaultTransform<>());
+    }
+
+    public Observable<Object> invite(int id){
+        return mServiceAPI.invitePerson(id).compose(new DefaultTransform<>());
     }
 }

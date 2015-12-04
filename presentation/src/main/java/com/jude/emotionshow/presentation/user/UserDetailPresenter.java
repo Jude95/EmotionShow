@@ -2,7 +2,9 @@ package com.jude.emotionshow.presentation.user;
 
 import android.os.Bundle;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.jude.beam.expansion.data.BeamDataActivityPresenter;
+import com.jude.emotionshow.data.model.RongYunModel;
 import com.jude.emotionshow.data.model.SeedModel;
 import com.jude.emotionshow.data.model.UserModel;
 import com.jude.emotionshow.data.server.ServiceResponse;
@@ -54,6 +56,35 @@ public class UserDetailPresenter extends BeamDataActivityPresenter<UserDetailAct
                         getView().addSeed(o);
                     }
                 });
+    }
+
+    public void chat(){
+        if (data.getFollowed() == 0||data.getFollowed() == 2){
+            new MaterialDialog.Builder(getView())
+                    .title("私信提醒")
+                    .content("需先关注后才能发私信")
+                    .positiveText("关注")
+                    .negativeText("取消")
+                    .onPositive((dialog, which) -> follow())
+                    .show();
+            return;
+        }
+        if (data.getFollowed() == 1){
+            new MaterialDialog.Builder(getView())
+                    .title("私信提醒")
+                    .content("需先邀请对方关注你后才能发私信")
+                    .positiveText("邀请")
+                    .negativeText("取消")
+                    .onPositive((dialog, which) -> UserModel.getInstance().invite(data.getId()).subscribe(new ServiceResponse<Object>(){
+                        @Override
+                        public void onNext(Object o) {
+                            JUtils.Toast("邀请已发送");
+                        }
+                    }))
+                    .show();
+            return;
+        }
+        RongYunModel.getInstance().chatPerson(getView(),data.getId()+"",data.getName());
     }
 
     public void follow(){

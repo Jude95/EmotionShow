@@ -276,5 +276,8 @@ public interface ServiceAPI {
             @Field("page") int page,
             @Field("size") int size);
 
-
+    @FormUrlEncoded
+    @POST("/home/user/invite")
+    Observable<List<PersonBrief>> invitePerson(
+            @Field("id") int id);
 }
