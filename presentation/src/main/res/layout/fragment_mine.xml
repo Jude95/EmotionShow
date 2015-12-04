@@ -75,6 +75,32 @@
         android:paddingBottom="4dp"
         android:background="@android:color/white">
         <LinearLayout
+            android:id="@+id/container_score"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:layout_height="48dp">
+            <TextView
+                android:id="@+id/score_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                style="@style/TextAppearance.AppCompat.Body1"
+                tool:text="400"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="幸福币"
+                style="@style/TextAppearance.AppCompat.Body2" />
+        </LinearLayout>
+        <View
+            android:layout_width="0.5dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
+            android:background="@color/gray"/>
+        <LinearLayout
             android:id="@+id/container_seed"
             android:layout_width="0dp"
             android:layout_weight="1"
@@ -168,7 +194,7 @@
             android:layout_weight="1"
             android:layout_height="wrap_content"
             style="@style/Base.TextAppearance.AppCompat.Body1"
-            android:text="印记"/>
+            android:text="么么记"/>
         <ImageView
             android:layout_width="16dp"
             android:layout_height="16dp"
@@ -205,12 +231,66 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/setting"
+        android:id="@+id/chats"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:background="@android:color/white">
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginLeft="@dimen/activity_margin"
+            android:layout_marginRight="@dimen/activity_margin"
+            android:src="@drawable/friends"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            style="@style/Base.TextAppearance.AppCompat.Body1"
+            android:text="我的聊天"/>
+        <ImageView
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:src="@drawable/arrow_right"
+            android:layout_marginRight="16dp"
+            />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/message"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:orientation="horizontal"
         android:gravity="center_vertical"
         android:layout_marginTop="16dp"
+        android:background="@android:color/white">
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginLeft="@dimen/activity_margin"
+            android:layout_marginRight="@dimen/activity_margin"
+            android:src="@drawable/message"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            style="@style/Base.TextAppearance.AppCompat.Body1"
+            android:text="消息"/>
+        <ImageView
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:src="@drawable/arrow_right"
+            android:layout_marginRight="16dp"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/setting"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
         android:background="@android:color/white">
         <ImageView
             android:layout_width="20dp"

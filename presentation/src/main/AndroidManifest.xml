@@ -55,6 +55,14 @@
             android:name="RONG_CLOUD_APP_KEY"
             android:value="${RONGYUN_APPKEY}" />
 
+        <!-- Required . Enable it you can get statistics data with channel -->
+        <meta-data
+            android:name="JPUSH_CHANNEL"
+            android:value="${UMENG_CHANNEL}"/>
+
+        <meta-data
+            android:name="JPUSH_APPKEY"
+            android:value="${JPUSH_APPKEY}" /> <!-- </>值来自开发者平台取得的AppKey-->
 
         <activity
             android:name=".presentation.main.LaunchActivity"
@@ -100,6 +108,17 @@
                 <data
                     android:host="com.jude.emotionshow"
                     android:pathPrefix="/conversation/"
+                    android:scheme="rong" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".presentation.user.ChatListActivity"
+            android:label="消息列表">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data
+                    android:host="com.jude.emotionshow"
+                    android:pathPrefix="/conversationlist"
                     android:scheme="rong" />
             </intent-filter>
         </activity>

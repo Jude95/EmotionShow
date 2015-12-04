@@ -48,6 +48,12 @@
             app:rollviewpager_hint_gravity="right"
             app:rollviewpager_hint_paddingRight="16dp"
             app:rollviewpager_hint_paddingBottom="16dp"/>
+        <com.jude.emotionshow.presentation.seed.ActivityView
+            android:id="@+id/activity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:visibility="gone"/>
         <com.jude.emotionshow.presentation.widget.RecyclerViewPager
             android:visibility="gone"
             android:layout_marginTop="20dp"

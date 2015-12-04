@@ -15,11 +15,11 @@ import com.jude.beam.bijection.RequiresPresenter;
 import com.jude.beam.expansion.data.BeamDataFragment;
 import com.jude.emotionshow.R;
 import com.jude.emotionshow.data.model.ImageModel;
+import com.jude.emotionshow.data.model.RongYunModel;
 import com.jude.emotionshow.domain.entities.Account;
 import com.jude.emotionshow.presentation.setting.AboutActivity;
 import com.jude.emotionshow.presentation.setting.SettingActivity;
 import com.jude.emotionshow.presentation.widget.CircleTransform;
-import com.jude.utils.JUtils;
 import com.squareup.picasso.Picasso;
 
 import butterknife.Bind;
@@ -59,6 +59,14 @@ public class MineFragment extends BeamDataFragment<MinePresenter, Account> {
     LinearLayout about;
     @Bind(R.id.friends)
     LinearLayout friends;
+    @Bind(R.id.score_count)
+    TextView scoreCount;
+    @Bind(R.id.container_score)
+    LinearLayout containerScore;
+    @Bind(R.id.chats)
+    LinearLayout chats;
+    @Bind(R.id.message)
+    LinearLayout message;
 
     public static MineFragment getInstance() {
         if (instance == null) instance = new MineFragment();
@@ -78,22 +86,22 @@ public class MineFragment extends BeamDataFragment<MinePresenter, Account> {
         });
         about.setOnClickListener(v -> startActivity(new Intent(getActivity(), AboutActivity.class)));
         collect.setOnClickListener(v -> startActivity(new Intent(getActivity(), CollectionActivity.class)));
-        friends.setOnClickListener(v-> startActivity(new Intent(getActivity(), FriendsActivity.class)));
+        friends.setOnClickListener(v -> startActivity(new Intent(getActivity(), FriendsActivity.class)));
+        chats.setOnClickListener(v-> RongYunModel.getInstance().chatList(getActivity()));
         return view;
     }
 
     @Override
     public void setData(Account data) {
         super.setData(data);
-        if (data == null){
+        if (data == null) {
             avatar.setImageBitmap(null);
             name.setText("");
             sign.setText("");
             seedCount.setText("0");
             praiseCount.setText("0");
             seed.setOnClickListener(null);
-        }else{
-            JUtils.Log("Mine "+data.getName()+data.getSign());
+        } else {
             Picasso.with(getContext())
                     .load(ImageModel.getSmallImage(data.getAvatar()))
                     .transform(new CircleTransform())

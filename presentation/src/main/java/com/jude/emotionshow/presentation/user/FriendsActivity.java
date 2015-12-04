@@ -43,7 +43,7 @@ public class FriendsActivity extends BeamListActivity<FriendsPresenter, PersonBr
 
     @Override
     protected ListConfig getConfig() {
-        return super.getConfig().setNoMoreAble(false);
+        return super.getConfig().setNoMoreAble(false).setRefreshAble(true);
     }
 
     @Override

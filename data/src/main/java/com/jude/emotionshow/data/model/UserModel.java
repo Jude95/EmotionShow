@@ -124,7 +124,7 @@ public class UserModel extends AbsModel {
     }
 
     public Observable<Object> modify(Account account){
-        return mServiceAPI.modifyInfo(account.getGender(),account.getAddress(),account.getAvatar(),account.getName(),account.getSign(),account.getIntro(),account.getBackground())
+        return mServiceAPI.modifyInfo(account.getGender(),account.getAddress(),account.getAvatar(),account.getName(),account.getSign(),account.getIntro())
                 .doOnNext(data -> updateMyInfo().subscribe(new ServiceResponse<>()))
                 .compose(new DefaultTransform<>());
     }
@@ -175,5 +175,9 @@ public class UserModel extends AbsModel {
 
     public Observable<List<PersonBrief>> getFriends(){
         return mServiceAPI.getFriends("-1").compose(new DefaultTransform<>());
+    }
+
+    public Observable<Object> modBackground(String background){
+        return mServiceAPI.modifyBackGround(background);
     }
 }

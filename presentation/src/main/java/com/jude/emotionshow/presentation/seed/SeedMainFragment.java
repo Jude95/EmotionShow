@@ -18,6 +18,8 @@ import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.jude.emotionshow.R;
 import com.jude.emotionshow.domain.entities.Banner;
 import com.jude.emotionshow.domain.entities.Category;
+import com.jude.emotionshow.domain.entities.Image;
+import com.jude.emotionshow.domain.entities.Seed;
 import com.jude.emotionshow.domain.entities.Topic;
 import com.jude.emotionshow.presentation.main.SearchActivity;
 import com.jude.emotionshow.presentation.widget.LoopRecyclerViewPagerAdapter;
@@ -49,6 +51,8 @@ public class SeedMainFragment extends BeamFragment<SeedMainPresenter> {
     CategoryViewGroup categoryProcess;
     @Bind(R.id.search)
     ImageView search;
+    @Bind(R.id.activity)
+    ActivityView activity;
 
     public static SeedMainFragment getInstance() {
         if (instance == null) instance = new SeedMainFragment();
@@ -64,7 +68,7 @@ public class SeedMainFragment extends BeamFragment<SeedMainPresenter> {
         return view;
     }
 
-    private void initSeedCards(){
+    private void initSeedCards() {
         seedCards.setVisibility(View.VISIBLE);
         LinearLayoutManager layout = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         seedCards.setLayoutManager(layout);
@@ -140,7 +144,7 @@ public class SeedMainFragment extends BeamFragment<SeedMainPresenter> {
     }
 
     public void setBanner(List<Banner> banners) {
-        if (banners==null||banners.size() == 0) {
+        if (banners == null || banners.size() == 0) {
             return;
         }
         banner.setAdapter(new StaticPagerAdapter() {
@@ -162,30 +166,47 @@ public class SeedMainFragment extends BeamFragment<SeedMainPresenter> {
         });
     }
 
+    public void setActivities(List<Seed> list){
+        if(list==null||list.size()==0)return;
+        activity.setVisibility(View.VISIBLE);
+        ArrayList<Image> imageList = new ArrayList<>();
+        for (Seed seed : list) {
+            imageList.add(seed.getPics().get(0));
+        }
+        activity.setImage(imageList);
+    }
+
+
     public void setTopic(List<Topic> topic) {
         for (Topic topic1 : new ArrayList<>(topic)) {
             if (topic1.getData().size() == 0) {
                 topic.remove(topic1);
             }
         }
-        if (topic.size()==0){return;}
+        if (topic.size() == 0) {
+            return;
+        }
         initSeedCards();
-        JUtils.Log("topic.size()"+topic.size());
+        JUtils.Log("topic.size()" + topic.size());
         TopicAdapter adapter = new TopicAdapter(getContext());
         seedCards.setAdapter(new LoopRecyclerViewPagerAdapter<>(seedCards, adapter));
         adapter.addAll(topic);
         seedCards.scrollToPosition(100);
     }
 
-    public void setCategoryScene(List<Category> list){
-        if (list==null||list.size()==0){return;}
-        categoryScence.setting("场景", () -> getPresenter().getCategoryScence());
+    public void setCategoryScene(List<Category> list) {
+        if (list == null || list.size() == 0) {
+            return;
+        }
+        categoryScence.setting("场景", () -> getPresenter().getCategoryScene());
         categoryScence.setCategoryList(list);
     }
 
 
-    public void setCategoryProcess(List<Category> list){
-        if (list==null||list.size()==0){return;}
+    public void setCategoryProcess(List<Category> list) {
+        if (list == null || list.size() == 0) {
+            return;
+        }
         categoryProcess.setting("情感", () -> getPresenter().getCategoryProcess());
         categoryProcess.setCategoryList(list);
     }

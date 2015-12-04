@@ -21,7 +21,8 @@ android {
         manifestPlaceholders = [
                 UMENG_APPKEY    : props['UMENG_APPKEY'],
                 AMAP_APPKEY     : props['AMAP_APPKEY'],
-                RONGYUN_APPKEY  : props['RONGYUN_APPKEY']
+                RONGYUN_APPKEY  : props['RONGYUN_APPKEY'],
+                JPUSH_APPKEY    : props['JPUSH_APPKEY']
         ]
 
     }

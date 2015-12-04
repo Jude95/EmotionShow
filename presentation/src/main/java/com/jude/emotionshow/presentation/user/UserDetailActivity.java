@@ -1,12 +1,11 @@
 package com.jude.emotionshow.presentation.user;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -81,7 +80,6 @@ public class UserDetailActivity extends BeamDataActivity<UserDetailPresenter, Pe
     LinearLayout chat;
     private SeedCalendarAdapter adapter;
 
-    TextView tvIld;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,6 +89,11 @@ public class UserDetailActivity extends BeamDataActivity<UserDetailPresenter, Pe
         recycler = (RecyclerView) findViewById(R.id.recycler);
         recycler.setLayoutManager(style == 0 ? new LinearLayoutManager(this) : new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
         header.attachTo(recycler);
+        header.setOnClickListener(v->{
+            Intent i = new Intent(this, UserPreviewActivity.class);
+            i.putExtra("id", getPresenter().data.getId());
+            startActivity(i);
+        });
         ButterKnife.bind(this);
         recycler.setAdapter(adapter = new SeedCalendarAdapter(this));
 
@@ -103,23 +106,6 @@ public class UserDetailActivity extends BeamDataActivity<UserDetailPresenter, Pe
                 style = 0;
             }
             recreate();
-        });
-
-        name.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                JUtils.Log("name changed");
-            }
         });
     }
 

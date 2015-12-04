@@ -103,4 +103,8 @@ public class SeedModel extends AbsModel {
     public Observable<List<Seed>> searchSeed(String text){
         return mServiceAPI.searchSeed(text).compose(new DefaultTransform<>());
     }
+
+    public Observable<List<Seed>> getActivityList(){
+        return mServiceAPI.getActivityList().compose(new DefaultTransform<>());
+    }
 }

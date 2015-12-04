@@ -5,6 +5,7 @@ import com.jude.emotionshow.domain.entities.Account;
 import com.jude.emotionshow.domain.entities.Banner;
 import com.jude.emotionshow.domain.entities.Category;
 import com.jude.emotionshow.domain.entities.CategoryDetail;
+import com.jude.emotionshow.domain.entities.Notify;
 import com.jude.emotionshow.domain.entities.PersonBrief;
 import com.jude.emotionshow.domain.entities.PersonDetail;
 import com.jude.emotionshow.domain.entities.Seed;
@@ -99,7 +100,12 @@ public interface ServiceAPI {
             @Field("face") String face,
             @Field("name") String name,
             @Field("sign") String sign,
-            @Field("intro") String intro,
+            @Field("intro") String intro
+    );
+
+    @FormUrlEncoded
+    @POST("/home/user/modInfo")
+    Observable<Object> modifyBackGround(
             @Field("bg") String bg
     );
 
@@ -259,4 +265,16 @@ public interface ServiceAPI {
     @POST("/home/user/myFriend")
     Observable<List<PersonBrief>> getFriends(
             @Field("page") String page);
+
+
+    @GET("/home/discover/activity")
+    Observable<List<Seed>> getActivityList();
+
+    @FormUrlEncoded
+    @POST("/home/user/getNotify")
+    Observable<List<Notify>> getNotify(
+            @Field("page") int page,
+            @Field("size") int size);
+
+
 }

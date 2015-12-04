@@ -7,6 +7,7 @@ import com.jude.emotionshow.data.di.DaggerCommonComponent;
 import com.jude.emotionshow.data.server.DefaultTransform;
 import com.jude.emotionshow.domain.api.ServiceAPI;
 import com.jude.emotionshow.domain.entities.Banner;
+import com.jude.emotionshow.domain.entities.Notify;
 import com.jude.emotionshow.domain.entities.Token;
 
 import java.util.List;
@@ -44,5 +45,9 @@ public class CommonModel extends AbsModel {
 
     public Observable<Object> updateAddress(double lat,double lng){
         return mServiceAPI.uploadAddress(lat,lng).compose(new DefaultTransform<>());
+    }
+
+    public Observable<List<Notify>> getNotifyList(int page){
+        return mServiceAPI.getNotify(1,30).compose(new DefaultTransform<>());
     }
 }

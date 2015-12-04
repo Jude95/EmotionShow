@@ -20,6 +20,6 @@ public class FriendsPresenter extends BeamListActivityPresenter<FriendsActivity,
     @Override
     public void onRefresh() {
         super.onRefresh();
-        UserModel.getInstance().getFriends().subscribe(getRefreshSubscriber());
+        UserModel.getInstance().getFriends().unsafeSubscribe(getRefreshSubscriber());
     }
 }
