@@ -9,9 +9,9 @@ import java.util.List;
  */
 public class SeedEditable extends Seed {
     @SerializedName("ctag")
-    private String scene;
+    private int scene;
     @SerializedName("ltag")
-    private String process;
+    private int process;
     private String address;
     @SerializedName("right")
     private int scope;
@@ -35,20 +35,20 @@ public class SeedEditable extends Seed {
         this.pictures = pictures;
     }
 
-    public String getScene() {
-        return scene;
-    }
-
-    public void setScene(String scene) {
-        this.scene = scene;
-    }
-
-    public String getProcess() {
+    public int getProcess() {
         return process;
     }
 
-    public void setProcess(String process) {
+    public void setProcess(int process) {
         this.process = process;
+    }
+
+    public int getScene() {
+        return scene;
+    }
+
+    public void setScene(int scene) {
+        this.scene = scene;
     }
 
     public String getAddress() {

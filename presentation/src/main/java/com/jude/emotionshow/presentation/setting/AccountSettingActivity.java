@@ -3,7 +3,6 @@ package com.jude.emotionshow.presentation.setting;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -23,8 +22,6 @@ import butterknife.ButterKnife;
 @RequiresPresenter(AccountSettingPresenter.class)
 public class AccountSettingActivity extends BeamDataActivity<AccountSettingPresenter, ThirdInfo> {
 
-    @Bind(R.id.back_img)
-    ImageView backImg;
     @Bind(R.id.back)
     LinearLayout back;
     @Bind(R.id.password)
@@ -49,12 +46,12 @@ public class AccountSettingActivity extends BeamDataActivity<AccountSettingPrese
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account_setting);
         ButterKnife.bind(this);
-        back.setOnClickListener(v -> finish());
         password.setOnClickListener(v -> startActivity(new Intent(this, PasswordEditActivity.class)));
         phone.setOnClickListener(v->startActivity(new Intent(this, PhoneEditActivity.class)));
         qq.setOnClickListener(v -> getPresenter().bindQQ());
         wx.setOnClickListener(v -> getPresenter().bindWX());
         weibo.setOnClickListener(v -> getPresenter().bindSina());
+        back.setOnClickListener(v -> finish());
     }
 
     @Override

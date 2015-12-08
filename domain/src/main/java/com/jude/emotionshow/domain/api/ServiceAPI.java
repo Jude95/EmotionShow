@@ -3,6 +3,7 @@ package com.jude.emotionshow.domain.api;
 
 import com.jude.emotionshow.domain.entities.Account;
 import com.jude.emotionshow.domain.entities.Banner;
+import com.jude.emotionshow.domain.entities.Category;
 import com.jude.emotionshow.domain.entities.CategoryDetail;
 import com.jude.emotionshow.domain.entities.CategoryPreview;
 import com.jude.emotionshow.domain.entities.Notify;
@@ -124,8 +125,8 @@ public interface ServiceAPI {
     @POST("/home/history/add")
     Observable<Object> addSeed(
             @Field("content") String content,
-            @Field("ctag") String scene,
-            @Field("ltag") String process,
+            @Field("ctag") int scene,
+            @Field("ltag") int process,
             @Field("address") String address,
             @Field("rights") int scope,
             @Field("tag") String tag,
@@ -282,4 +283,8 @@ public interface ServiceAPI {
     @POST("/home/user/invite")
     Observable<List<PersonBrief>> invitePerson(
             @Field("id") int id);
+
+
+    @GET("/home/history/ctagList")
+    Observable<List<Category>> getCategoryList();
 }

@@ -134,7 +134,7 @@
             android:layout_height="wrap_content"
             android:textColor="@android:color/holo_red_light"
             android:layout_marginLeft="8dp"
-            android:text="咖啡厅"/>
+            android:text="请选择"/>
         <ImageView
             android:layout_width="16dp"
             android:layout_height="match_parent"

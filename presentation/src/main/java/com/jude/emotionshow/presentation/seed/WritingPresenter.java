@@ -9,6 +9,7 @@ import com.jude.emotionshow.data.model.ImageModel;
 import com.jude.emotionshow.data.model.LocationModel;
 import com.jude.emotionshow.data.model.SeedModel;
 import com.jude.emotionshow.data.server.ServiceResponse;
+import com.jude.emotionshow.domain.entities.Category;
 import com.jude.emotionshow.domain.entities.SeedEditable;
 import com.jude.exgridview.PieceViewGroup;
 import com.jude.library.imageprovider.ImageProvider;
@@ -17,6 +18,7 @@ import com.jude.utils.JUtils;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Mr.Jude on 2015/11/21.
@@ -24,6 +26,8 @@ import java.util.ArrayList;
 public class WritingPresenter extends BeamDataActivityPresenter<WritingActivity,SeedEditable> implements  PieceViewGroup.OnViewDeleteListener{
     private ImageProvider provider;
     private ArrayList<Uri> uriArrayList = new ArrayList<>();
+
+    public List<Category> categoryList;
 
     public static final int EXTERNAL_STORAGE_REQ_CODE = 10 ;
 
@@ -48,6 +52,15 @@ public class WritingPresenter extends BeamDataActivityPresenter<WritingActivity,
         }
     };
 
+    public void getCategoryList(){
+        SeedModel.getInstance().getCategoryList().subscribe(new ServiceResponse<List<Category>>(){
+            @Override
+            public void onNext(List<Category> categories) {
+                categoryList = categories;
+            }
+        });
+    }
+
     public void editPicture(){
         if (!getView().requestPermission()){
             return;
@@ -63,11 +76,12 @@ public class WritingPresenter extends BeamDataActivityPresenter<WritingActivity,
     protected void onCreate(WritingActivity view, Bundle savedState) {
         super.onCreate(view, savedState);
         data = new SeedEditable();
-        data.setScene(getView().SCENE[0]);
-        data.setProcess(getView().PROCESS[0]);
+        data.setScene(-1);
+        data.setProcess(0);
         data.setAddress(LocationModel.getInstance().getCurLocation().getAddress());
         provider = new ImageProvider(getView());
         editPicture();
+        getCategoryList();
     }
 
     public void publish(){
@@ -75,6 +89,15 @@ public class WritingPresenter extends BeamDataActivityPresenter<WritingActivity,
             JUtils.Toast("请先选择图片");
             return;
         }
+        if (data.getScene()==-1){
+            JUtils.Toast("请选择场景");
+            return;
+        }
+        if (data.getProcess()<0||data.getProcess()>=getView().PROCESS.length){
+            JUtils.Toast("请选择情感");
+            return;
+        }
+
         getView().getExpansion().showProgressDialog("上传中");
         File[] files = new File[uriArrayList.size()];
         for (int i = 0; i < files.length; i++) {

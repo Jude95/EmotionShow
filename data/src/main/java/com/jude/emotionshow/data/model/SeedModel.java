@@ -8,6 +8,7 @@ import com.jude.emotionshow.data.di.DaggerSeedComponent;
 import com.jude.emotionshow.data.server.DefaultTransform;
 import com.jude.emotionshow.data.server.ServiceResponse;
 import com.jude.emotionshow.domain.api.ServiceAPI;
+import com.jude.emotionshow.domain.entities.Category;
 import com.jude.emotionshow.domain.entities.CategoryDetail;
 import com.jude.emotionshow.domain.entities.CategoryPreview;
 import com.jude.emotionshow.domain.entities.Seed;
@@ -106,5 +107,9 @@ public class SeedModel extends AbsModel {
 
     public Observable<CategoryPreview> getActivityList(){
         return mServiceAPI.getActivityList().compose(new DefaultTransform<>());
+    }
+
+    public Observable<List<Category>> getCategoryList(){
+        return mServiceAPI.getCategoryList().compose(new DefaultTransform<>());
     }
 }

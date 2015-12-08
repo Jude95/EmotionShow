@@ -70,23 +70,24 @@ public class CategoryItemView extends LinearLayout {
         titleZh.setText(categoryPreview.getCategory().getName());
         adapter.clear();
 
-        adapter.addFooter(new RecyclerArrayAdapter.ItemView() {
-            @Override
-            public View onCreateView(ViewGroup parent) {
-                View view = LayoutInflater.from(getContext()).inflate(R.layout.view_category_footer, parent, false);
-                view.setOnClickListener(v->{
-                    Intent i = new Intent(getContext(),CategoryActivity.class);
-                    i.putExtra("category", categoryPreview.getCategory());
-                    getContext().startActivity(i);
-                });
-                return view;
-            }
+        if (categoryPreview.getData().size()>3)
+            adapter.addFooter(new RecyclerArrayAdapter.ItemView() {
+                @Override
+                public View onCreateView(ViewGroup parent) {
+                    View view = LayoutInflater.from(getContext()).inflate(R.layout.view_category_footer, parent, false);
+                    view.setOnClickListener(v->{
+                        Intent i = new Intent(getContext(),CategoryActivity.class);
+                        i.putExtra("category", categoryPreview.getCategory());
+                        getContext().startActivity(i);
+                    });
+                    return view;
+                }
 
-            @Override
-            public void onBindView(View headerView) {
+                @Override
+                public void onBindView(View headerView) {
 
-            }
-        });
+                }
+            });
         adapter.addAll(categoryPreview.getData());
 
         background.setOnClickListener(v->{

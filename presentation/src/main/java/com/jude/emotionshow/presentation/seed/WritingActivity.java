@@ -119,22 +119,23 @@ public class WritingActivity extends BeamDataActivity<WritingPresenter,SeedEdita
     }
 
 
-    String[] SCENE={"咖啡厅","音乐厅","酒吧","操场","KTV","网咖"};
     private void showSceneEdit() {
         int index = 0;
-        for (int i = 0; i < SCENE.length; i++) {
-            if (SCENE[i].equals(getPresenter().data.getScene())){
+        String[] items = new String[getPresenter().categoryList.size()];
+        for (int i = 0; i < getPresenter().categoryList.size(); i++) {
+            items[i] = getPresenter().categoryList.get(i).getName();
+            if (getPresenter().categoryList.get(i).getId()==getPresenter().data.getScene()){
                 index = i;
                 break;
             }
         }
         new MaterialDialog.Builder(this)
                 .title("请选择场景")
-                .items(SCENE)
+                .items(items)
                 .itemsCallbackSingleChoice(index, new MaterialDialog.ListCallbackSingleChoice() {
                     @Override
                     public boolean onSelection(MaterialDialog dialog, View view, int which, CharSequence text) {
-                        getPresenter().data.setScene(text.toString());
+                        getPresenter().data.setScene(getPresenter().categoryList.get(which).getId());
                         sceneText.setText(text);
                         return true;
                     }
@@ -158,7 +159,7 @@ public class WritingActivity extends BeamDataActivity<WritingPresenter,SeedEdita
                 .itemsCallbackSingleChoice(index, new MaterialDialog.ListCallbackSingleChoice() {
                     @Override
                     public boolean onSelection(MaterialDialog dialog, View view, int which, CharSequence text) {
-                        getPresenter().data.setProcess(text.toString());
+                        getPresenter().data.setProcess(which);
                         processText.setText(text);
                         return true;
                     }
