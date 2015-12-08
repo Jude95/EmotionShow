@@ -5,8 +5,17 @@ package com.jude.emotionshow.domain.entities;
  */
 public class Banner {
     private int id;
-    private String url;
-    private String act;
+    private String img;
+    private String action;
+    private int type;
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
 
     public int getId() {
         return id;
@@ -16,19 +25,19 @@ public class Banner {
         this.id = id;
     }
 
-    public String getUrl() {
-        return url;
+    public String getImg() {
+        return img;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
+    public void setImg(String img) {
+        this.img = img;
     }
 
-    public String getAct() {
-        return act;
+    public String getAction() {
+        return action;
     }
 
-    public void setAct(String act) {
-        this.act = act;
+    public void setAction(String action) {
+        this.action = action;
     }
 }

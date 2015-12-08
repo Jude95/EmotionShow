@@ -8,6 +8,7 @@ import com.jude.emotionshow.data.server.DefaultTransform;
 import com.jude.emotionshow.domain.api.ServiceAPI;
 import com.jude.emotionshow.domain.entities.Banner;
 import com.jude.emotionshow.domain.entities.Notify;
+import com.jude.emotionshow.domain.entities.PushSet;
 import com.jude.emotionshow.domain.entities.Token;
 
 import java.util.List;
@@ -49,5 +50,17 @@ public class CommonModel extends AbsModel {
 
     public Observable<List<Notify>> getNotifyList(int page,String type){
         return mServiceAPI.getNotify(1,type,30).compose(new DefaultTransform<>());
+    }
+
+    public Observable<PushSet> getPushSet(){
+        return mServiceAPI.getPushSet().compose(new DefaultTransform<>());
+    }
+
+    public Observable<Object> uploadPushSet(PushSet set){
+        return mServiceAPI.uploadPushSet(
+                set.isReceivePraiseMessage()?1:0,
+                set.isReceiveCommentMessage()?1:0,
+                set.isReceiveFollowMessage()?1:0,
+                set.isReceiveInviteMessage()?1:0).compose(new DefaultTransform<>());
     }
 }

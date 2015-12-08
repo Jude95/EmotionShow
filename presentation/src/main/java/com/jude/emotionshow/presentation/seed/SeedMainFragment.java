@@ -22,6 +22,7 @@ import com.jude.emotionshow.domain.entities.Image;
 import com.jude.emotionshow.domain.entities.Seed;
 import com.jude.emotionshow.domain.entities.Topic;
 import com.jude.emotionshow.presentation.main.SearchActivity;
+import com.jude.emotionshow.presentation.main.WebViewActivity;
 import com.jude.emotionshow.presentation.widget.LoopRecyclerViewPagerAdapter;
 import com.jude.emotionshow.presentation.widget.RecyclerViewPager;
 import com.jude.rollviewpager.RollPagerView;
@@ -152,8 +153,15 @@ public class SeedMainFragment extends BeamFragment<SeedMainPresenter> {
                 ImageView imageView = new ImageView(getContext());
                 imageView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
                 imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+                imageView.setOnClickListener(v->{
+                    if (banners.get(position).getType()==1){
+                        Intent i = new Intent(getActivity(), WebViewActivity.class);
+                        i.putExtra("url",banners.get(position).getAction());
+                        startActivity(i);
+                    }
+                });
                 Picasso.with(container.getContext())
-                        .load(banners.get(position).getUrl())
+                        .load(banners.get(position).getImg())
                         .into(imageView);
                 return imageView;
             }

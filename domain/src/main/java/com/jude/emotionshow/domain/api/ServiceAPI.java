@@ -9,6 +9,7 @@ import com.jude.emotionshow.domain.entities.CategoryPreview;
 import com.jude.emotionshow.domain.entities.Notify;
 import com.jude.emotionshow.domain.entities.PersonBrief;
 import com.jude.emotionshow.domain.entities.PersonDetail;
+import com.jude.emotionshow.domain.entities.PushSet;
 import com.jude.emotionshow.domain.entities.Seed;
 import com.jude.emotionshow.domain.entities.SeedDetail;
 import com.jude.emotionshow.domain.entities.ThirdInfo;
@@ -287,4 +288,16 @@ public interface ServiceAPI {
 
     @GET("/home/history/ctagList")
     Observable<List<Category>> getCategoryList();
+
+
+    @GET("/home/user/getPushset")
+    Observable<PushSet> getPushSet();
+
+    @FormUrlEncoded
+    @POST("/home/user/pushSet")
+    Observable<List<PersonBrief>> uploadPushSet(
+            @Field("zan") int zan,
+            @Field("comment") int comment,
+            @Field("care") int care,
+            @Field("community") int community);
 }
