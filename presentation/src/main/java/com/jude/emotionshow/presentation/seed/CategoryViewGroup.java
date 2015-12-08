@@ -7,7 +7,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.jude.emotionshow.R;
-import com.jude.emotionshow.domain.entities.Category;
+import com.jude.emotionshow.domain.entities.CategoryPreview;
 import com.jude.tagview.TAGView;
 import com.jude.utils.JUtils;
 
@@ -56,14 +56,14 @@ public class CategoryViewGroup extends LinearLayout {
         this.listener = listener;
     }
 
-    public void setCategoryList(List<Category> list){
+    public void setCategoryList(List<CategoryPreview> list){
         categoryContainer.removeAllViews();
-        for (Category category : list) {
+        for (CategoryPreview categoryPreview : list) {
             CategoryItemView item = new CategoryItemView(getContext());
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, JUtils.dip2px(76));
             params.setMargins(0,JUtils.dip2px(8),0,0);
             item.setLayoutParams(params);
-            item.setCategory(category);
+            item.setCategory(categoryPreview);
             categoryContainer.addView(item);
         }
     }

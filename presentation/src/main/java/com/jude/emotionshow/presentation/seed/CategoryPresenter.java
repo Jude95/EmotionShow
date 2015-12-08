@@ -5,6 +5,7 @@ import android.os.Bundle;
 import com.jude.beam.expansion.data.BeamDataActivityPresenter;
 import com.jude.emotionshow.data.model.SeedModel;
 import com.jude.emotionshow.data.server.ServiceResponse;
+import com.jude.emotionshow.domain.entities.Category;
 import com.jude.emotionshow.domain.entities.CategoryDetail;
 import com.jude.emotionshow.domain.entities.Seed;
 
@@ -20,7 +21,8 @@ public class CategoryPresenter extends BeamDataActivityPresenter<CategoryActivit
     @Override
     protected void onCreate(CategoryActivity view, Bundle savedState) {
         super.onCreate(view, savedState);
-        SeedModel.getInstance().getCategoryDetail(getView().getIntent().getStringExtra("name"))
+        Category category = (Category) getView().getIntent().getSerializableExtra("category");
+        SeedModel.getInstance().getCategoryDetail(category.getId()+"",category.getType()+"")
                 .doOnNext(categoryDetail -> data = categoryDetail)
                 .finallyDo(this::loadMore)
                 .subscribe(this);

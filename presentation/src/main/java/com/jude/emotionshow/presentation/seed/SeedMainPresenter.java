@@ -7,10 +7,8 @@ import com.jude.emotionshow.data.model.CommonModel;
 import com.jude.emotionshow.data.model.SeedModel;
 import com.jude.emotionshow.data.server.ServiceResponse;
 import com.jude.emotionshow.domain.entities.Banner;
-import com.jude.emotionshow.domain.entities.Category;
-import com.jude.emotionshow.domain.entities.Seed;
+import com.jude.emotionshow.domain.entities.CategoryPreview;
 import com.jude.emotionshow.domain.entities.Topic;
-
 import java.util.List;
 
 import rx.subjects.BehaviorSubject;
@@ -22,9 +20,9 @@ public class SeedMainPresenter extends Presenter<SeedMainFragment> {
 
     private BehaviorSubject<List<Banner>> mBannerSubject = BehaviorSubject.create();
     private BehaviorSubject<List<Topic>> mTopicSubject = BehaviorSubject.create();
-    private BehaviorSubject<List<Category>> mCategoryProcessSubject = BehaviorSubject.create();
-    private BehaviorSubject<List<Category>> mCategoryScenceSubject = BehaviorSubject.create();
-    private BehaviorSubject<List<Seed>> mActivitiesSubject = BehaviorSubject.create();
+    private BehaviorSubject<List<CategoryPreview>> mCategoryProcessSubject = BehaviorSubject.create();
+    private BehaviorSubject<List<CategoryPreview>> mCategorySceneSubject = BehaviorSubject.create();
+    private BehaviorSubject<CategoryPreview> mActivitiesSubject = BehaviorSubject.create();
 
 
     @Override
@@ -54,31 +52,31 @@ public class SeedMainPresenter extends Presenter<SeedMainFragment> {
         mBannerSubject.subscribe(data -> getView().setBanner(data));
         mTopicSubject.subscribe(data -> getView().setTopic(data));
         mCategoryProcessSubject.subscribe(data -> getView().setCategoryProcess(data));
-        mCategoryScenceSubject.subscribe(data -> getView().setCategoryScene(data));
+        mCategorySceneSubject.subscribe(data -> getView().setCategoryScene(data));
         mActivitiesSubject.subscribe(data->getView().setActivities(data));
     }
 
     public void getCategoryProcess(){
-        SeedModel.getInstance().getProcess().subscribe(new ServiceResponse<List<Category>>() {
+        SeedModel.getInstance().getProcess().subscribe(new ServiceResponse<List<CategoryPreview>>() {
             @Override
-            public void onNext(List<Category> categories) {
+            public void onNext(List<CategoryPreview> categories) {
                 mCategoryProcessSubject.onNext(categories);
             }
         });
     }
     public void getCategoryScene(){
-        SeedModel.getInstance().getScene().subscribe(new ServiceResponse<List<Category>>() {
+        SeedModel.getInstance().getScene().subscribe(new ServiceResponse<List<CategoryPreview>>() {
             @Override
-            public void onNext(List<Category> categories) {
-                mCategoryScenceSubject.onNext(categories);
+            public void onNext(List<CategoryPreview> categories) {
+                mCategorySceneSubject.onNext(categories);
             }
         });
     }
 
     public void getActivities(){
-        SeedModel.getInstance().getActivityList().subscribe(new ServiceResponse<List<Seed>>(){
+        SeedModel.getInstance().getActivityList().subscribe(new ServiceResponse<CategoryPreview>(){
             @Override
-            public void onNext(List<Seed> seeds) {
+            public void onNext(CategoryPreview seeds) {
                 mActivitiesSubject.onNext(seeds);
             }
         });

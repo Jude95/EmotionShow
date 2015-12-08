@@ -3,8 +3,8 @@ package com.jude.emotionshow.domain.api;
 
 import com.jude.emotionshow.domain.entities.Account;
 import com.jude.emotionshow.domain.entities.Banner;
-import com.jude.emotionshow.domain.entities.Category;
 import com.jude.emotionshow.domain.entities.CategoryDetail;
+import com.jude.emotionshow.domain.entities.CategoryPreview;
 import com.jude.emotionshow.domain.entities.Notify;
 import com.jude.emotionshow.domain.entities.PersonBrief;
 import com.jude.emotionshow.domain.entities.PersonDetail;
@@ -35,10 +35,10 @@ public interface ServiceAPI {
     Observable<List<Topic>> getTopic();
 
     @GET("/home/discover/ltagIndex")
-    Observable<List<Category>> getProcess();
+    Observable<List<CategoryPreview>> getProcess();
 
     @GET("/home/discover/ctagIndex")
-    Observable<List<Category>> getScene();
+    Observable<List<CategoryPreview>> getScene();
 
     @FormUrlEncoded
     @POST("/home/user/login")
@@ -197,7 +197,8 @@ public interface ServiceAPI {
     @FormUrlEncoded
     @POST("/home/discover/getTag")
     Observable<CategoryDetail> getCategoryDetail(
-            @Field("name") String name
+            @Field("id") String id,
+            @Field("type") String type
     );
 
     @FormUrlEncoded
@@ -268,12 +269,13 @@ public interface ServiceAPI {
 
 
     @GET("/home/discover/activity")
-    Observable<List<Seed>> getActivityList();
+    Observable<CategoryPreview> getActivityList();
 
     @FormUrlEncoded
     @POST("/home/user/getNotify")
     Observable<List<Notify>> getNotify(
             @Field("page") int page,
+            @Field("type") String type,
             @Field("size") int size);
 
     @FormUrlEncoded

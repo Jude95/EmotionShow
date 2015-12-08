@@ -17,7 +17,7 @@ import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.jude.emotionshow.R;
 import com.jude.emotionshow.data.model.ImageModel;
-import com.jude.emotionshow.domain.entities.Category;
+import com.jude.emotionshow.domain.entities.CategoryPreview;
 import com.jude.emotionshow.domain.entities.Image;
 import com.jude.emotionshow.domain.entities.Seed;
 import com.jude.utils.JUtils;
@@ -61,13 +61,13 @@ public class CategoryItemView extends LinearLayout {
         list.setAdapter(adapter = new Adapter(getContext()));
     }
 
-    public void setCategory(Category category){
+    public void setCategory(CategoryPreview categoryPreview){
         Picasso.with(getContext())
-                .load(category.getTitle().getUrl())
+                .load(categoryPreview.getCategory().getAvatar())
                 .resize(100,100)
                 .into(background);
-        titleEn.setText(category.getTitle().getEn());
-        titleZh.setText(category.getTitle().getCh());
+        titleEn.setText(categoryPreview.getCategory().getNameEn());
+        titleZh.setText(categoryPreview.getCategory().getName());
         adapter.clear();
 
         adapter.addFooter(new RecyclerArrayAdapter.ItemView() {
@@ -76,7 +76,7 @@ public class CategoryItemView extends LinearLayout {
                 View view = LayoutInflater.from(getContext()).inflate(R.layout.view_category_footer, parent, false);
                 view.setOnClickListener(v->{
                     Intent i = new Intent(getContext(),CategoryActivity.class);
-                    i.putExtra("name",category.getTitle().getCh());
+                    i.putExtra("category", categoryPreview.getCategory());
                     getContext().startActivity(i);
                 });
                 return view;
@@ -87,11 +87,11 @@ public class CategoryItemView extends LinearLayout {
 
             }
         });
-        adapter.addAll(category.getData());
+        adapter.addAll(categoryPreview.getData());
 
         background.setOnClickListener(v->{
             Intent i = new Intent(getContext(),CategoryActivity.class);
-            i.putExtra("name",category.getTitle().getCh());
+            i.putExtra("category", categoryPreview.getCategory());
             getContext().startActivity(i);
         });
     }

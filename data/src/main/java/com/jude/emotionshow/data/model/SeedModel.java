@@ -8,8 +8,8 @@ import com.jude.emotionshow.data.di.DaggerSeedComponent;
 import com.jude.emotionshow.data.server.DefaultTransform;
 import com.jude.emotionshow.data.server.ServiceResponse;
 import com.jude.emotionshow.domain.api.ServiceAPI;
-import com.jude.emotionshow.domain.entities.Category;
 import com.jude.emotionshow.domain.entities.CategoryDetail;
+import com.jude.emotionshow.domain.entities.CategoryPreview;
 import com.jude.emotionshow.domain.entities.Seed;
 import com.jude.emotionshow.domain.entities.SeedDetail;
 import com.jude.emotionshow.domain.entities.SeedEditable;
@@ -44,10 +44,10 @@ public class SeedModel extends AbsModel {
         return mServiceAPI.getTopic().compose(new DefaultTransform<>());
     }
 
-    public Observable<List<Category>> getProcess(){
+    public Observable<List<CategoryPreview>> getProcess(){
         return mServiceAPI.getProcess().compose(new DefaultTransform<>());
     }
-    public Observable<List<Category>> getScene(){
+    public Observable<List<CategoryPreview>> getScene(){
         return mServiceAPI.getScene().compose(new DefaultTransform<>());
     }
     public Observable<Object> publishSeed(SeedEditable data){
@@ -82,8 +82,8 @@ public class SeedModel extends AbsModel {
         return mServiceAPI.getUserSeedList(-1, id, 1).compose(new DefaultTransform<>());
     }
 
-    public Observable<CategoryDetail> getCategoryDetail(String name){
-        return mServiceAPI.getCategoryDetail(name).compose(new DefaultTransform<>());
+    public Observable<CategoryDetail> getCategoryDetail(String id,String type){
+        return mServiceAPI.getCategoryDetail(id,type).compose(new DefaultTransform<>());
 
     }
 
@@ -104,7 +104,7 @@ public class SeedModel extends AbsModel {
         return mServiceAPI.searchSeed(text).compose(new DefaultTransform<>());
     }
 
-    public Observable<List<Seed>> getActivityList(){
+    public Observable<CategoryPreview> getActivityList(){
         return mServiceAPI.getActivityList().compose(new DefaultTransform<>());
     }
 }

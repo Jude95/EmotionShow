@@ -242,7 +242,7 @@
             android:layout_height="20dp"
             android:layout_marginLeft="@dimen/activity_margin"
             android:layout_marginRight="@dimen/activity_margin"
-            android:src="@drawable/friends"/>
+            android:src="@drawable/chatlist"/>
         <TextView
             android:layout_width="0dp"
             android:layout_weight="1"

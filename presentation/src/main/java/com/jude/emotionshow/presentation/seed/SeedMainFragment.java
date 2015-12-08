@@ -17,7 +17,7 @@ import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.jude.emotionshow.R;
 import com.jude.emotionshow.domain.entities.Banner;
-import com.jude.emotionshow.domain.entities.Category;
+import com.jude.emotionshow.domain.entities.CategoryPreview;
 import com.jude.emotionshow.domain.entities.Image;
 import com.jude.emotionshow.domain.entities.Seed;
 import com.jude.emotionshow.domain.entities.Topic;
@@ -26,7 +26,6 @@ import com.jude.emotionshow.presentation.widget.LoopRecyclerViewPagerAdapter;
 import com.jude.emotionshow.presentation.widget.RecyclerViewPager;
 import com.jude.rollviewpager.RollPagerView;
 import com.jude.rollviewpager.adapter.StaticPagerAdapter;
-import com.jude.utils.JUtils;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -166,14 +165,23 @@ public class SeedMainFragment extends BeamFragment<SeedMainPresenter> {
         });
     }
 
-    public void setActivities(List<Seed> list){
-        if(list==null||list.size()==0)return;
+    public void setActivities(CategoryPreview categoryPreview){
+        if(categoryPreview==null||categoryPreview.getData().size()==0)return;
         activity.setVisibility(View.VISIBLE);
         ArrayList<Image> imageList = new ArrayList<>();
-        for (Seed seed : list) {
+        for (Seed seed : categoryPreview.getData()) {
             imageList.add(seed.getPics().get(0));
         }
         activity.setImage(imageList);
+        activity.setTitle("双蛋有礼");
+        activity.setMoreListener(new ActivityView.OnMoreListener() {
+            @Override
+            public void more() {
+                Intent i = new Intent(getContext(),CategoryActivity.class);
+                i.putExtra("category",categoryPreview.getCategory());
+                getContext().startActivity(i);
+            }
+        });
     }
 
 
@@ -187,14 +195,13 @@ public class SeedMainFragment extends BeamFragment<SeedMainPresenter> {
             return;
         }
         initSeedCards();
-        JUtils.Log("topic.size()" + topic.size());
         TopicAdapter adapter = new TopicAdapter(getContext());
         seedCards.setAdapter(new LoopRecyclerViewPagerAdapter<>(seedCards, adapter));
         adapter.addAll(topic);
         seedCards.scrollToPosition(100);
     }
 
-    public void setCategoryScene(List<Category> list) {
+    public void setCategoryScene(List<CategoryPreview> list) {
         if (list == null || list.size() == 0) {
             return;
         }
@@ -203,7 +210,7 @@ public class SeedMainFragment extends BeamFragment<SeedMainPresenter> {
     }
 
 
-    public void setCategoryProcess(List<Category> list) {
+    public void setCategoryProcess(List<CategoryPreview> list) {
         if (list == null || list.size() == 0) {
             return;
         }

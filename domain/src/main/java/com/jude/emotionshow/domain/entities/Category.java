@@ -1,56 +1,68 @@
 package com.jude.emotionshow.domain.entities;
 
-import java.util.List;
+import com.google.gson.annotations.SerializedName;
+
+import java.io.Serializable;
 
 /**
- * Created by Mr.Jude on 2015/11/19.
+ * Created by zhuchenxi on 15/12/7.
  */
-public class Category {
-    private Title title;
-    public static class Title{
-        private String ch;
-        private String en;
-        private String url;
+public class Category implements Serializable{
+    private int id;
+    private String name;
+    @SerializedName("name_en")
+    private String nameEn;
+    @SerializedName("url")
+    private String avatar;
+    @SerializedName("bg")
+    private String background;
+    private int type;
 
-        public String getCh() {
-            return ch;
-        }
-
-        public void setCh(String ch) {
-            this.ch = ch;
-        }
-
-        public String getEn() {
-            return en;
-        }
-
-        public void setEn(String en) {
-            this.en = en;
-        }
-
-        public String getUrl() {
-            return url;
-        }
-
-        public void setUrl(String url) {
-            this.url = url;
-        }
-    }
-    private List<Seed> data;
-
-    public Title getTitle() {
-        return title;
+    public String getAvatar() {
+        return avatar;
     }
 
-    public void setTitle(Title title) {
-        this.title = title;
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 
-    public List<Seed> getData() {
-        return data;
+    public String getBackground() {
+        return background;
     }
 
-    public void setData(List<Seed> data) {
-        this.data = data;
+    public void setBackground(String background) {
+        this.background = background;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getNameEn() {
+        return nameEn;
+    }
+
+    public void setNameEn(String nameEn) {
+        this.nameEn = nameEn;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
     }
 }

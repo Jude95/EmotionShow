@@ -52,8 +52,11 @@
             android:id="@+id/activity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:visibility="gone"/>
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:orientation="vertical"
+            android:visibility="gone"
+            android:background="@color/white"/>
         <com.jude.emotionshow.presentation.widget.RecyclerViewPager
             android:visibility="gone"
             android:layout_marginTop="20dp"

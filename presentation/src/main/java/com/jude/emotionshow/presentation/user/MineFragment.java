@@ -88,6 +88,7 @@ public class MineFragment extends BeamDataFragment<MinePresenter, Account> {
         collect.setOnClickListener(v -> startActivity(new Intent(getActivity(), CollectionActivity.class)));
         friends.setOnClickListener(v -> startActivity(new Intent(getActivity(), FriendsActivity.class)));
         chats.setOnClickListener(v-> RongYunModel.getInstance().chatList(getActivity()));
+        message.setOnClickListener(v -> startActivity(new Intent(getActivity(), NotifyActivity.class)));
         return view;
     }
 

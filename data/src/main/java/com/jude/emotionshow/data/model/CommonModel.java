@@ -47,7 +47,7 @@ public class CommonModel extends AbsModel {
         return mServiceAPI.uploadAddress(lat,lng).compose(new DefaultTransform<>());
     }
 
-    public Observable<List<Notify>> getNotifyList(int page){
-        return mServiceAPI.getNotify(1,30).compose(new DefaultTransform<>());
+    public Observable<List<Notify>> getNotifyList(int page,String type){
+        return mServiceAPI.getNotify(1,type,30).compose(new DefaultTransform<>());
     }
 }
