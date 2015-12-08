@@ -147,6 +147,18 @@
                             android:gravity="center"
                             android:layout_marginLeft="8dp"
                             tools:text="2"/>
+                        <ImageView
+                            android:layout_width="16dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="24dp"
+                            android:src="@drawable/score"/>
+                        <TextView
+                            android:id="@+id/score_count"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:layout_marginLeft="8dp"
+                            tools:text="2"/>
                         <View
                             android:layout_weight="1"
                             android:layout_width="0dp"

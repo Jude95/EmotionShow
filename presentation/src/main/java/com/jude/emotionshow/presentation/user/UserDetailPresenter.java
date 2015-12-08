@@ -89,7 +89,7 @@ public class UserDetailPresenter extends BeamDataActivityPresenter<UserDetailAct
 
     public void follow(){
         getView().getExpansion().showProgressDialog("关注中");
-        if (data.getFollowed()==0)
+        if (data.getFollowed()==0||data.getFollowed()==2)
             UserModel.getInstance().follow(id)
                     .finallyDo(()->getView().getExpansion().dismissProgressDialog())
                     .subscribe(new ServiceResponse<Object>(){

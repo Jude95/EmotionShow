@@ -35,8 +35,6 @@ public class NotifyActivity extends BeamBaseActivity<NotifyPresenter> {
     LinearLayout follow;
     @Bind(R.id.invite)
     LinearLayout invite;
-    @Bind(R.id.system)
-    LinearLayout system;
 
     private static final HashMap<Integer,String> mTypeMap = new HashMap<>();
     {
@@ -44,7 +42,6 @@ public class NotifyActivity extends BeamBaseActivity<NotifyPresenter> {
         mTypeMap.put(2,"评论");
         mTypeMap.put(3,"关注");
         mTypeMap.put(4,"私信");
-        mTypeMap.put(5,"系统");
     }
 
     private View.OnClickListener listener = new View.OnClickListener() {
@@ -68,6 +65,5 @@ public class NotifyActivity extends BeamBaseActivity<NotifyPresenter> {
         comment.setOnClickListener(listener);
         follow.setOnClickListener(listener);
         invite.setOnClickListener(listener);
-        system.setOnClickListener(listener);
     }
 }

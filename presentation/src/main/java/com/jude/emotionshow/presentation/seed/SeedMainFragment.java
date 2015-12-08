@@ -18,8 +18,6 @@ import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.jude.emotionshow.R;
 import com.jude.emotionshow.domain.entities.Banner;
 import com.jude.emotionshow.domain.entities.CategoryPreview;
-import com.jude.emotionshow.domain.entities.Image;
-import com.jude.emotionshow.domain.entities.Seed;
 import com.jude.emotionshow.domain.entities.Topic;
 import com.jude.emotionshow.presentation.main.SearchActivity;
 import com.jude.emotionshow.presentation.main.WebViewActivity;
@@ -176,11 +174,7 @@ public class SeedMainFragment extends BeamFragment<SeedMainPresenter> {
     public void setActivities(CategoryPreview categoryPreview){
         if(categoryPreview==null||categoryPreview.getData().size()==0)return;
         activity.setVisibility(View.VISIBLE);
-        ArrayList<Image> imageList = new ArrayList<>();
-        for (Seed seed : categoryPreview.getData()) {
-            imageList.add(seed.getPics().get(0));
-        }
-        activity.setImage(imageList);
+        activity.setImage(categoryPreview.getData());
         activity.setTitle("双蛋有礼");
         activity.setMoreListener(new ActivityView.OnMoreListener() {
             @Override

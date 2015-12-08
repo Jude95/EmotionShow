@@ -60,13 +60,16 @@ public class SeedDetailPresenter extends BeamDataActivityPresenter<SeedDetailAct
     }
 
     public void praise(){
-        SeedModel.getInstance().praise(id).subscribe(new ServiceResponse<Object>() {
-            @Override
-            public void onNext(Object o) {
-                JUtils.Toast("您赞了这条印记");
-                refresh();
-            }
-        });
+        getView().getExpansion().showProgressDialog("点赞中");
+        SeedModel.getInstance().praise(id)
+                .finallyDo(()->getView().getExpansion().dismissProgressDialog())
+                .subscribe(new ServiceResponse<Object>() {
+                    @Override
+                    public void onNext(Object o) {
+                        JUtils.Toast("您赞了这条印记");
+                        refresh();
+                    }
+                });
     }
 
     public void collect(){

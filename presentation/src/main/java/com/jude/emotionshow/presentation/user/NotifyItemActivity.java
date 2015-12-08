@@ -28,8 +28,6 @@ public class NotifyItemActivity extends BeamListActivity<NotifyItemPresenter, No
     ImageView backImg;
     @Bind(R.id.back)
     LinearLayout back;
-    @Bind(R.id.done)
-    LinearLayout done;
     @Bind(R.id.recycler)
     EasyRecyclerView recycler;
     @Bind(R.id.title)
@@ -55,6 +53,9 @@ public class NotifyItemActivity extends BeamListActivity<NotifyItemPresenter, No
 
     @Override
     protected BaseViewHolder getViewHolder(ViewGroup parent, int viewType) {
+        if (getPresenter().type.equals("4")){
+            return new NotifyInviteViewHolder(parent);
+        }
         return new NotifyViewHolder(parent);
     }
 }

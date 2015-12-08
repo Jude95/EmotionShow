@@ -29,7 +29,7 @@ ext {
     exgridviewVersion       = '1.1.5'
     picassoVersion          = '2.5.2'
     qiniuVersion            = '7.0.1'
-    imageproviderVersion    = '2.0.5'
+    imageproviderVersion    = '2.0.8'
     rippleVersion           = '1.0.2'
     recyclerViewHeaderVersion   = '1.2.0'
     pagerSlidingTabStripVersion = '1.0.1'

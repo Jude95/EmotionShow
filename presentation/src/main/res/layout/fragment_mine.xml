@@ -101,14 +101,14 @@
             android:layout_marginBottom="4dp"
             android:background="@color/gray"/>
         <LinearLayout
-            android:id="@+id/container_seed"
+            android:id="@+id/container_fans"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:gravity="center"
             android:orientation="vertical"
             android:layout_height="48dp">
             <TextView
-                android:id="@+id/seed_count"
+                android:id="@+id/fans_count"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="0"
@@ -117,7 +117,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="印记"
+                android:text="粉丝"
                 style="@style/TextAppearance.AppCompat.Body2" />
         </LinearLayout>
         <View

@@ -1,6 +1,7 @@
 package com.jude.emotionshow.presentation.seed;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.AttributeSet;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -8,7 +9,7 @@ import android.widget.TextView;
 
 import com.jude.emotionshow.R;
 import com.jude.emotionshow.data.model.ImageModel;
-import com.jude.emotionshow.domain.entities.Image;
+import com.jude.emotionshow.domain.entities.Seed;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -63,15 +64,20 @@ public class ActivityView extends LinearLayout {
         });
     }
 
-    public void setImage(List<Image> list) {
+    public void setImage(List<Seed> list) {
         for (int i = 0; i < list.size(); i++) {
             setImage(i, list.get(i));
         }
     }
 
-    private void setImage(int position, Image image) {
+    private void setImage(int position, Seed seed) {
         if (position < imageViews.length)
-            Picasso.with(getContext()).load(ImageModel.getSizeImage(image, 600).getUrl()).into(imageViews[position]);
+            Picasso.with(getContext()).load(ImageModel.getSizeImage(seed.getPics().get(0), 600).getUrl()).into(imageViews[position]);
+        imageViews[position].setOnClickListener(v->{
+            Intent i = new Intent(getContext(), SeedDetailActivity.class);
+            i.putExtra("id",seed.getId());
+            getContext().startActivity(i);
+        });
     }
 
     public void setTitle(String titleStr){

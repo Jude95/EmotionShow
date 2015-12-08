@@ -41,10 +41,10 @@ public class MineFragment extends BeamDataFragment<MinePresenter, Account> {
     ImageView headArrows;
     @Bind(R.id.container_user)
     RelativeLayout containerUser;
-    @Bind(R.id.seed_count)
-    TextView seedCount;
-    @Bind(R.id.container_seed)
-    LinearLayout containerSeed;
+    @Bind(R.id.fans_count)
+    TextView fansCount;
+    @Bind(R.id.container_fans)
+    LinearLayout containerFans;
     @Bind(R.id.praise_count)
     TextView praiseCount;
     @Bind(R.id.container_praise)
@@ -99,7 +99,7 @@ public class MineFragment extends BeamDataFragment<MinePresenter, Account> {
             avatar.setImageBitmap(null);
             name.setText("");
             sign.setText("");
-            seedCount.setText("0");
+            fansCount.setText("0");
             praiseCount.setText("0");
             seed.setOnClickListener(null);
         } else {
@@ -110,7 +110,7 @@ public class MineFragment extends BeamDataFragment<MinePresenter, Account> {
             name.setText(data.getName());
             sign.setText(data.getSign());
             praiseCount.setText("" + data.getPraiseCount());
-            seedCount.setText("" + data.getSeedCount());
+            fansCount.setText("" + data.getFansCount());
             seed.setOnClickListener(v -> {
                 Intent i = new Intent(getContext(), UserDetailActivity.class);
                 i.putExtra("id", data.getId());

@@ -22,6 +22,7 @@ import com.jude.utils.JActivityManager;
 import com.jude.utils.JFileManager;
 import com.jude.utils.JUtils;
 
+import cn.jpush.android.api.JPushInterface;
 import io.rong.imkit.RongIM;
 import io.rong.imlib.model.Conversation;
 import io.rong.imlib.model.UserInfo;
@@ -47,7 +48,8 @@ public class APP extends Application {
 
             /* IMKit SDK调用第一步 初始化 */
             RongIM.init(this);
-
+            JPushInterface.setDebugMode(BuildConfig.DEBUG); 	// 设置开启日志,发布时请关闭日志
+            JPushInterface.init(this);     		// 初始化 JPush
 
             /* 必须在使用 RongIM 的进程注册回调、注册自定义消息等 */
             if ("com.jude.emotionshow".equals(getCurProcessName(getApplicationContext()))) {

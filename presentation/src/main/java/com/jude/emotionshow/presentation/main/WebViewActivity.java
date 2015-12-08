@@ -37,6 +37,8 @@ public class WebViewActivity extends BeamBaseActivity<WebViewPresenter> {
         ButterKnife.bind(this);
         back.setOnClickListener(v->finish());
         title.setText(getIntent().getStringExtra("title"));
+        webview.getSettings().setJavaScriptEnabled(true);
+        title.setText(getIntent().getStringExtra("title"));
         webview.loadUrl(getIntent().getStringExtra("url")+"?id="+ HeaderInterceptors.UID+"&token="+HeaderInterceptors.TOKEN);
     }
 }

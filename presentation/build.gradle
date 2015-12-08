@@ -10,7 +10,6 @@ android {
     buildToolsVersion rootProject.ext.androidBuildToolsVersion
 
     defaultConfig {
-        applicationId rootProject.ext.applicationId
         minSdkVersion rootProject.ext.androidMinSdkVersion
         targetSdkVersion rootProject.ext.androidTargetSdkVersion
         versionCode rootProject.ext.versionCode
@@ -19,6 +18,7 @@ android {
         renderscriptTargetApi 23
         renderscriptSupportModeEnabled true
         manifestPlaceholders = [
+                applicationId   : rootProject.ext.applicationId,
                 UMENG_APPKEY    : props['UMENG_APPKEY'],
                 AMAP_APPKEY     : props['AMAP_APPKEY'],
                 RONGYUN_APPKEY  : props['RONGYUN_APPKEY'],
@@ -93,5 +93,6 @@ dependencies {
     compile project(':domain')
     compile project(':SMSSDK')
     compile project(':umengfamily')
+    compile project(':jpush')
 
 }

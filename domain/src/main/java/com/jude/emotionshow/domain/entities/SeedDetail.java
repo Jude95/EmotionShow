@@ -23,8 +23,19 @@ public class SeedDetail extends Seed {
     private int praised;
     @SerializedName("collect")
     private int collectCount;
+    @SerializedName("coins")
+    private int score;
+
+
     private List<Comment> comment;
 
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
     public String getContent() {
         return content;
     }

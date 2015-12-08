@@ -71,7 +71,7 @@
             android:layout_height="wrap_content"
             android:text="赞"
             android:layout_marginLeft="16dp"
-            style="@style/Base.TextAppearance.AppCompat.Title"/>
+            style="@style/Base.TextAppearance.AppCompat.Subhead"/>
     </LinearLayout>
     <LinearLayout
         android:id="@+id/comment"
@@ -90,7 +90,7 @@
             android:layout_height="wrap_content"
             android:text="评论"
             android:layout_marginLeft="16dp"
-            style="@style/Base.TextAppearance.AppCompat.Title"/>
+            style="@style/Base.TextAppearance.AppCompat.Subhead"/>
     </LinearLayout>
     <LinearLayout
         android:id="@+id/follow"
@@ -109,7 +109,7 @@
             android:layout_height="wrap_content"
             android:text="关注"
             android:layout_marginLeft="16dp"
-            style="@style/Base.TextAppearance.AppCompat.Title"/>
+            style="@style/Base.TextAppearance.AppCompat.Subhead"/>
     </LinearLayout>
     <LinearLayout
         android:id="@+id/invite"
@@ -128,26 +128,7 @@
             android:layout_height="wrap_content"
             android:text="私信"
             android:layout_marginLeft="16dp"
-            style="@style/Base.TextAppearance.AppCompat.Title"/>
-    </LinearLayout>
-    <LinearLayout
-        android:id="@+id/system"
-        android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:padding="8dp"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:tag="5">
-        <ImageView
-            android:layout_width="40dp"
-            android:layout_height="match_parent"
-            android:src="@drawable/notify_system"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="系统"
-            android:layout_marginLeft="16dp"
-            style="@style/Base.TextAppearance.AppCompat.Title"/>
+            style="@style/Base.TextAppearance.AppCompat.Subhead"/>
     </LinearLayout>
 
 </LinearLayout>

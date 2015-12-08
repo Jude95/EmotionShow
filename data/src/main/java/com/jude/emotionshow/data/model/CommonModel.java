@@ -49,7 +49,7 @@ public class CommonModel extends AbsModel {
     }
 
     public Observable<List<Notify>> getNotifyList(int page,String type){
-        return mServiceAPI.getNotify(1,type,30).compose(new DefaultTransform<>());
+        return mServiceAPI.getNotify(page,type,30).compose(new DefaultTransform<>());
     }
 
     public Observable<PushSet> getPushSet(){

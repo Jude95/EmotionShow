@@ -83,6 +83,8 @@ public class SeedDetailActivity extends BeamDataActivity<SeedDetailPresenter, Se
         }
     };
     NetImageAdapter mImageAdapter;
+    @Bind(R.id.score_count)
+    TextView scoreCount;
 
 
     @Override
@@ -93,11 +95,11 @@ public class SeedDetailActivity extends BeamDataActivity<SeedDetailPresenter, Se
         back.setOnClickListener(v -> finish());
         replySend.setOnClickListener(v -> getPresenter().comment(curCommentId, reply.getText().toString()));
         praise.setOnClickListener(v -> getPresenter().praise());
-        container.setOnClickListener(v->{
+        container.setOnClickListener(v -> {
             reply.setHint("对印记发表评论");
             curCommentId = 0;
         });
-        more.setOnClickListener(v->showToolDialog());
+        more.setOnClickListener(v -> showToolDialog());
     }
 
     @Override
@@ -111,6 +113,7 @@ public class SeedDetailActivity extends BeamDataActivity<SeedDetailPresenter, Se
         content.setText(data.getContent());
         praiseCount.setText(data.getPraiseCount() + "");
         commentCount.setText(data.getCommentCount() + "");
+        scoreCount.setText(data.getScore()+"");
         pictures.removeAllViews();
         if (data.getPics() != null && data.getPics().size() != 0) {
             pictures.setAdapter(mImageAdapter = new NetImageAdapter(this, data.getPics(), ImageModel.IMAGE_SIZE_SMALL * (4 - Math.min(data.getPics().size(), 3))));
@@ -143,14 +146,14 @@ public class SeedDetailActivity extends BeamDataActivity<SeedDetailPresenter, Se
 
     }
 
-    void showToolDialog(){
+    void showToolDialog() {
         MaterialDialog dialog = new MaterialDialog.Builder(this)
                 .customView(R.layout.dialog_seed_tool, false)
                 .show();
         View view = dialog.getCustomView();
         View share = $(view, R.id.share);
         View collect = $(view, R.id.collect);
-        View report = $(view,R.id.report);
+        View report = $(view, R.id.report);
 
         share.setOnClickListener(v -> {
             dialog.dismiss();
@@ -160,7 +163,7 @@ public class SeedDetailActivity extends BeamDataActivity<SeedDetailPresenter, Se
             getPresenter().collect();
             dialog.dismiss();
         });
-        report.setOnClickListener(v->{
+        report.setOnClickListener(v -> {
             getPresenter().report();
             dialog.dismiss();
         });

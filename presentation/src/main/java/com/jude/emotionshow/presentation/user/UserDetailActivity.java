@@ -26,7 +26,6 @@ import com.jude.emotionshow.presentation.seed.SeedCalendarViewHolder;
 import com.jude.emotionshow.presentation.seed.SeedViewHolder;
 import com.jude.emotionshow.presentation.widget.BlurTransformation;
 import com.jude.emotionshow.presentation.widget.CircleTransform;
-import com.jude.utils.JUtils;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -120,7 +119,8 @@ public class UserDetailActivity extends BeamDataActivity<UserDetailPresenter, Pe
         seedCount.setText(data.getSeedCount() + "");
         visitCount.setText(data.getVisitCount() + "");
         praiseCount.setText(data.getPraiseCount() + "");
-        followImage.setImageResource(getPresenter().data.getFollowed() == 0 ? R.drawable.follow_add:R.drawable.follow_done);
+
+        followImage.setImageResource((getPresenter().data.getFollowed() == 0||getPresenter().data.getFollowed() ==2) ? R.drawable.follow_add:R.drawable.follow_done);
         if (UserModel.getInstance().isLogin()&&getPresenter().data.getId() != UserModel.getInstance().getCurAccount().getId()) {
             chat.setVisibility(View.VISIBLE);
             follow.setVisibility(View.VISIBLE);
@@ -144,9 +144,5 @@ public class UserDetailActivity extends BeamDataActivity<UserDetailPresenter, Pe
         }
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        JUtils.Log("onDestroy");
-    }
+
 }

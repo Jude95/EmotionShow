@@ -10,7 +10,7 @@ import com.jude.emotionshow.domain.entities.Notify;
  * Created by zhuchenxi on 15/12/8.
  */
 public class NotifyItemPresenter extends BeamListActivityPresenter<NotifyItemActivity,Notify> {
-    private String type;
+    public String type;
 
     @Override
     protected void onCreate(NotifyItemActivity view, Bundle savedState) {
