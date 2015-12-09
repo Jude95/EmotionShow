@@ -16,6 +16,7 @@ public class NotifyItemPresenter extends BeamListActivityPresenter<NotifyItemAct
     protected void onCreate(NotifyItemActivity view, Bundle savedState) {
         super.onCreate(view, savedState);
         type = getView().getIntent().getStringExtra("type");
+        if (type == null)type = "1";
         onRefresh();
     }
 

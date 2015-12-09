@@ -78,20 +78,16 @@ public class UserDetailActivity extends BeamDataActivity<UserDetailPresenter, Pe
     LinearLayout chat;
     private SeedCalendarAdapter adapter;
 
-
+    RecyclerViewHeader header;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_detail);
-        RecyclerViewHeader header = RecyclerViewHeader.fromXml(this, R.layout.head_user);
+        header = RecyclerViewHeader.fromXml(this, R.layout.head_user);
         recycler = (RecyclerView) findViewById(R.id.recycler);
         recycler.setLayoutManager(style == 0 ? new LinearLayoutManager(this) : new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
         header.attachTo(recycler);
-        header.setOnClickListener(v->{
-            Intent i = new Intent(this, UserPreviewActivity.class);
-            i.putExtra("id", getPresenter().data.getId());
-            startActivity(i);
-        });
+
         ButterKnife.bind(this);
         recycler.setAdapter(adapter = new SeedCalendarAdapter(this));
 
@@ -119,11 +115,27 @@ public class UserDetailActivity extends BeamDataActivity<UserDetailPresenter, Pe
         seedCount.setText(data.getSeedCount() + "");
         visitCount.setText(data.getVisitCount() + "");
         praiseCount.setText(data.getPraiseCount() + "");
-
-        followImage.setImageResource((getPresenter().data.getFollowed() == 0||getPresenter().data.getFollowed() ==2) ? R.drawable.follow_add:R.drawable.follow_done);
+        switch (data.getFollowed()){
+            case 1:
+                followImage.setImageResource(R.drawable.follow_each);
+                break;
+            case 0:
+            case 2:
+                followImage.setImageResource(R.drawable.follow_add);
+                break;
+            case 3:
+                followImage.setImageResource(R.drawable.follow_done);
+                break;
+        }
         if (UserModel.getInstance().isLogin()&&getPresenter().data.getId() != UserModel.getInstance().getCurAccount().getId()) {
             chat.setVisibility(View.VISIBLE);
             follow.setVisibility(View.VISIBLE);
+        }else{
+            header.setOnClickListener(v->{
+                Intent i = new Intent(this, UserPreviewActivity.class);
+                i.putExtra("id", getPresenter().data.getId());
+                startActivity(i);
+            });
         }
     }
 

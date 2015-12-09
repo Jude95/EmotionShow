@@ -143,7 +143,7 @@ public class SeedDetailActivity extends BeamDataActivity<SeedDetailPresenter, Se
             i.putExtra("id", data.getAuthor().getId());
             startActivity(i);
         });
-
+        praise.setImageResource(data.getPraised()==0?R.drawable.praise:R.drawable.praise_red);
     }
 
     void showToolDialog() {

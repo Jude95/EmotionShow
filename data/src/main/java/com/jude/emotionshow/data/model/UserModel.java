@@ -15,12 +15,17 @@ import com.jude.emotionshow.domain.entities.PersonDetail;
 import com.jude.emotionshow.domain.entities.Seed;
 import com.jude.emotionshow.domain.entities.ThirdInfo;
 import com.jude.utils.JFileManager;
+import com.jude.utils.JUtils;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.inject.Inject;
 
+import cn.jpush.android.api.JPushInterface;
+import cn.jpush.android.api.TagAliasCallback;
 import rx.Observable;
+import rx.functions.Action1;
 import rx.subjects.BehaviorSubject;
 
 /**
@@ -47,6 +52,20 @@ public class UserModel extends AbsModel {
                 public void onServiceError(int status, String info) {
                 }
             });
+        getAccountUpdate().subscribe(new Action1<Account>() {
+            @Override
+            public void call(Account account) {
+                JPushInterface.setAliasAndTags(ctx,
+                        (account != null) ? account.getId() + "" : "",
+                        null,
+                        new TagAliasCallback() {
+                            @Override
+                            public void gotResult(int i, String s, Set<String> set) {
+                                JUtils.Log("Has set Alias");
+                            }
+                        });
+            }
+        });
     }
 
     public Observable<Account> getAccountUpdate(){

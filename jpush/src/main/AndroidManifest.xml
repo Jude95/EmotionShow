@@ -14,7 +14,7 @@
             <intent-filter>
                 <action android:name="cn.jpush.android.ui.PushActivity" />
                 <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="${applicationId}" />
+                <category android:name="com.jude.emotionshow" />
             </intent-filter>
         </activity>
 
@@ -48,7 +48,7 @@
             android:exported="true">
             <intent-filter >
                 <action android:name="cn.jpush.android.intent.DaemonService" />
-                <category android:name="${applicationId}"/>
+                <category android:name="com.jude.emotionshow"/>
             </intent-filter>
         </service>
 
@@ -59,7 +59,7 @@
             android:exported="false">
             <intent-filter android:priority="1000">
                 <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED_PROXY" /> <!--Required 显示通知栏 -->
-                <category android:name="${applicationId}" />
+                <category android:name="com.jude.emotionshow" />
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.USER_PRESENT" />

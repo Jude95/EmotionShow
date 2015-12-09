@@ -37,5 +37,6 @@ dependencies {
     compile dataDependencies.qiniu
     compile project(':domain')
     compile project(':IMKit')
+    compile project(':jpush')
     compile files('libs/AMap_Location_v2.0.0_20151117.jar')
 }

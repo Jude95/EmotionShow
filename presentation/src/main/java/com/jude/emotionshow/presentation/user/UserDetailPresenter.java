@@ -69,7 +69,7 @@ public class UserDetailPresenter extends BeamDataActivityPresenter<UserDetailAct
                     .show();
             return;
         }
-        if (data.getFollowed() == 1){
+        if (data.getFollowed() == 3){
             new MaterialDialog.Builder(getView())
                     .title("私信提醒")
                     .content("需先邀请对方关注你后才能发私信")
