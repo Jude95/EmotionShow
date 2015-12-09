@@ -8,6 +8,15 @@ public class Banner {
     private String img;
     private String action;
     private int type;
+    private String share;
+
+    public String getShare() {
+        return share;
+    }
+
+    public void setShare(String share) {
+        this.share = share;
+    }
 
     public int getType() {
         return type;

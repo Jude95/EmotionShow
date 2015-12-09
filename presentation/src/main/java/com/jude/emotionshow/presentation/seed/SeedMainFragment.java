@@ -155,6 +155,7 @@ public class SeedMainFragment extends BeamFragment<SeedMainPresenter> {
                     if (banners.get(position).getType()==1){
                         Intent i = new Intent(getActivity(), WebViewActivity.class);
                         i.putExtra("url",banners.get(position).getAction());
+                        i.putExtra("share",banners.get(position).getShare());
                         startActivity(i);
                     }
                 });
