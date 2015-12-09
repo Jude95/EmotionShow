@@ -88,11 +88,11 @@ public class SeedModel extends AbsModel {
 
     }
 
-    public Observable<List<Seed>> getCategorySeedList(String name,int page,int type){
+    public Observable<List<Seed>> getCategorySeedList(int id,int page,int type){
         if (type == 0){
-            return mServiceAPI.getSceneSeedList(page,name).compose(new DefaultTransform<>());
+            return mServiceAPI.getSceneSeedList(page,id,1).compose(new DefaultTransform<>());
         }else{
-            return mServiceAPI.getProcessSeedList(page, name).compose(new DefaultTransform<>());
+            return mServiceAPI.getProcessSeedList(page, id,1).compose(new DefaultTransform<>());
         }
 
     }

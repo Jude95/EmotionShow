@@ -2,6 +2,7 @@ package com.jude.emotionshow.presentation.main;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.FragmentTransaction;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -77,7 +78,12 @@ public class MainActivity extends BeamBaseActivity<MainPresenter> {
         if (!UserModel.getInstance().isLogin()){
             focusFind(true);
             focusMine(false);
-            showFind();
+            new Handler().post(new Runnable() {
+                @Override
+                public void run() {
+                    showFind();
+                }
+            });
         }
     }
 

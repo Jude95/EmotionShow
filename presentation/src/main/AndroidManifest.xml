@@ -111,6 +111,7 @@
         <activity android:name=".presentation.user.NotifyItemActivity"/>
         <activity android:name=".presentation.setting.PushSettingActivity"/>
         <activity android:name=".presentation.main.WebViewActivity"/>
+        <activity android:name=".presentation.main.GuideActivity"/>
         <activity android:name=".presentation.user.ChatActivity"
             android:label="聊天">
             <intent-filter>

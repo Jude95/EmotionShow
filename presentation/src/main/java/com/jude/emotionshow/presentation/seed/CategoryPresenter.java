@@ -29,7 +29,7 @@ public class CategoryPresenter extends BeamDataActivityPresenter<CategoryActivit
     }
 
     void loadMore(){
-        SeedModel.getInstance().getCategorySeedList(data.getName(),page,data.getType()).subscribe(new ServiceResponse<List<Seed>>(){
+        SeedModel.getInstance().getCategorySeedList(data.getId(),page,data.getType()).subscribe(new ServiceResponse<List<Seed>>(){
             @Override
             public void onNext(List<Seed> seeds) {
                 getView().addSeed(seeds);

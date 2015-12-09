@@ -207,14 +207,16 @@ public interface ServiceAPI {
     @POST("/home/discover/getByLtag")
     Observable<List<Seed>> getProcessSeedList(
             @Field("page") int page,
-            @Field("ltag") String process
+            @Field("ltag") int id,
+            @Field("type") int type
     );
 
     @FormUrlEncoded
     @POST("/home/discover/getByCtag")
     Observable<List<Seed>> getSceneSeedList(
             @Field("page") int page,
-            @Field("ctag") String process
+            @Field("ctag") int id,
+            @Field("type") int type
     );
     @FormUrlEncoded
     @POST("/home/discover/getHistoryList")
