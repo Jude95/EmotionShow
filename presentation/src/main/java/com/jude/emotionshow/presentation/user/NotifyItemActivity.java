@@ -53,8 +53,15 @@ public class NotifyItemActivity extends BeamListActivity<NotifyItemPresenter, No
 
     @Override
     protected BaseViewHolder getViewHolder(ViewGroup parent, int viewType) {
-        if (getPresenter().type.equals("4")){
-            return new NotifyInviteViewHolder(parent);
+        switch (getPresenter().type){
+            case "1":
+                return new NotifyPraiseViewHolder(parent);
+            case "2":
+                return new NotifyCommentViewHolder(parent);
+            case "3":
+                return new NotifyFollowViewHolder(parent);
+            case "4":
+                return new NotifyInviteViewHolder(parent);
         }
         return new NotifyViewHolder(parent);
     }

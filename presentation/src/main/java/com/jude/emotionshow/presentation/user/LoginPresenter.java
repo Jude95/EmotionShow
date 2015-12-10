@@ -1,5 +1,6 @@
 package com.jude.emotionshow.presentation.user;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -29,7 +30,11 @@ public class LoginPresenter extends Presenter<LoginActivity> {
                 .finallyDo(() -> getView().getExpansion().dismissProgressDialog())
                 .subscribe(new ServiceResponse<Account>() {
                     @Override
-                    public void onNext(Account account) {
+                    public void onNext(Account accountData) {
+                        Intent i = new Intent();
+                        i.putExtra("account",account);
+                        i.putExtra("password",password);
+                        getView().setResult(Activity.RESULT_OK,i);
                         getView().finish();
                         //getView().startActivity(new Intent(getView(), MainActivity.class));
                     }

@@ -12,11 +12,9 @@ public class Location implements Serializable{
     public String city = "重庆市";
     public String country = "中国";
     public String district = "南岸区";
-    public String floor = "";
     public double latitude = 29.53;
     public double longitude = 106.60;
     public String province = "重庆市";
-    public String street = "";
     public int regionCode = 110000;
 
 
@@ -64,16 +62,16 @@ public class Location implements Serializable{
         return country;
     }
 
-    public String getFloor() {
-        return floor;
-    }
 
     public String getProvince() {
         return province;
     }
 
-    public String getStreet() {
-        return street;
+    @Override
+    public boolean equals(Object o) {
+        if (o instanceof Location)
+            return (latitude == ((Location) o).latitude)&&(longitude == ((Location) o).getLongitude());
+        else
+            return false;
     }
-
 }

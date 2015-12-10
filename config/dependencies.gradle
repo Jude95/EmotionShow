@@ -35,6 +35,8 @@ ext {
     pagerSlidingTabStripVersion = '1.0.1'
     photoViewVersion        = '1.2.4'
     progressVersion         = '1.7'
+    SMSSDKVersion           = '1.0.2'
+
 
     //libraries dependencies
     presentationDependencies = [
@@ -58,7 +60,8 @@ ext {
             recyclerViewHeader  : "com.bartoszlipinski.recyclerviewheader:library:${recyclerViewHeaderVersion}",
             pagerSlidingTabStrip: "com.astuetz:pagerslidingtabstrip:${pagerSlidingTabStripVersion}",
             photoView           : "com.commit451:PhotoView:${photoViewVersion}",
-            progress            : "com.pnikosis:materialish-progress:${progressVersion}"
+            progress            : "com.pnikosis:materialish-progress:${progressVersion}",
+            smssdk              : "com.jude:smssdk_mob:${SMSSDKVersion}"
     ]
 
     dataDependencies = [

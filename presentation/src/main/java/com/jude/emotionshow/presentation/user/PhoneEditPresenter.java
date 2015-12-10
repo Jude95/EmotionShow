@@ -5,27 +5,25 @@ import android.os.Bundle;
 import com.jude.beam.bijection.Presenter;
 import com.jude.emotionshow.data.model.UserModel;
 import com.jude.emotionshow.data.server.ServiceResponse;
+import com.jude.smssdk_mob.SMSManager;
 import com.jude.utils.JUtils;
 
-import cn.smssdk.gui.SMSManager;
 
 /**
  * Created by Mr.Jude on 2015/11/26.
  */
 public class PhoneEditPresenter extends Presenter<PhoneEditActivity> {
-    SMSManager smsManager;
     String code;
 
     @Override
     protected void onCreate(PhoneEditActivity view, Bundle savedState) {
         super.onCreate(view, savedState);
-        smsManager = new SMSManager();
     }
 
     @Override
     protected void onCreateView(PhoneEditActivity view) {
         super.onCreateView(view);
-        smsManager.registerTimeListener(getView());
+        SMSManager.getInstance().registerTimeListener(getView());
     }
 
     public void checkTelAndSend(String number){
@@ -38,7 +36,7 @@ public class PhoneEditPresenter extends Presenter<PhoneEditActivity> {
                 .subscribe(new ServiceResponse<Object>() {
                     @Override
                     public void onNext(Object o) {
-                        smsManager.sendMessage(getView(), number);
+                        SMSManager.getInstance().sendMessage(getView(), "86",number);
                     }
                 });
     }

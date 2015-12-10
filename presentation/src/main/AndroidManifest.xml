@@ -66,7 +66,14 @@
         <meta-data
             android:name="JPUSH_APPKEY"
             android:value="${JPUSH_APPKEY}" /> <!-- </>值来自开发者平台取得的AppKey-->
-
+        <meta-data
+            android:name="SMS_MOB_APPKEY"
+            android:value="${SMS_MOB_APPKEY}"
+            />
+        <meta-data
+            android:name="SMS_MOB_APPSECRET"
+            android:value="SMS_MOB_APPSECRET"
+            />
         <activity
             android:name=".presentation.main.LaunchActivity"
             android:theme="@style/LaunchTheme">

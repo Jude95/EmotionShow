@@ -16,6 +16,8 @@
         android:layout_toRightOf="@id/avatar"
         android:orientation="vertical"
         android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_toLeftOf="@+id/relation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
@@ -29,6 +31,8 @@
             android:id="@id/sign"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:ellipsize="end"
             tools:text="Better"/>
     </LinearLayout>
 

@@ -22,9 +22,10 @@ android {
                 UMENG_APPKEY    : props['UMENG_APPKEY'],
                 AMAP_APPKEY     : props['AMAP_APPKEY'],
                 RONGYUN_APPKEY  : props['RONGYUN_APPKEY'],
-                JPUSH_APPKEY    : props['JPUSH_APPKEY']
+                JPUSH_APPKEY    : props['JPUSH_APPKEY'],
+                SMS_MOB_APPKEY    : props['SMS_MOB_APPKEY'],
+                SMS_MOB_APPSECRET    : props['SMS_MOB_APPSECRET'],
         ]
-
     }
 
     productFlavors {
@@ -89,9 +90,9 @@ dependencies {
     compile presentationDependencies.pagerSlidingTabStrip
     //compile presentationDependencies.photoView
     compile presentationDependencies.progress
+    compile presentationDependencies.smssdk
     compile project(':data')
     compile project(':domain')
-    compile project(':SMSSDK')
     compile project(':umengfamily')
     compile project(':jpush')
 

@@ -51,6 +51,7 @@ public class LocationModel extends AbsModel {
         startLocation(ctx);
         registerLocationChange(location -> {
             mLocation = location;
+            JUtils.Log("Location update"+location.getAddress());
             JFileManager.getInstance().getFolder(Dir.Object).writeObjectToFile(location, FILENAME);
             uploadAddress();
         });
@@ -59,9 +60,10 @@ public class LocationModel extends AbsModel {
     public void startLocation(final Context ctx){
         AMapLocationClient mLocationClient = new AMapLocationClient(ctx);
         AMapLocationClientOption option = new AMapLocationClientOption();
-        option.setInterval(600000);
+        option.setInterval(6000);
         mLocationClient.setLocationOption(option);
         mLocationClient.setLocationListener(aMapLocation -> {
+            if (!mLocation.equals(createLocation(aMapLocation)))
             mLocationSubject.onNext(createLocation(aMapLocation));
         });
         mLocationClient.startLocation();
@@ -69,16 +71,14 @@ public class LocationModel extends AbsModel {
 
     private Location createLocation(AMapLocation aMapLocation){
         Location location = new Location();
-        location.address = location.getAddress();
-        location.altitude = location.getAltitude();
-        location.latitude = location.getLatitude();
-        location.longitude = location.getLongitude();
-        location.city = location.getCity();
-        location.country = location.getCountry();
-        location.district = location.getDistrict();
-        location.floor = location.getFloor();
-        location.province = location.getProvince();
-        location.street = location.getStreet();
+        location.address = aMapLocation.getAddress();
+        location.altitude = aMapLocation.getAltitude();
+        location.latitude = aMapLocation.getLatitude();
+        location.longitude = aMapLocation.getLongitude();
+        location.city = aMapLocation.getCity();
+        location.country = aMapLocation.getCountry();
+        location.district = aMapLocation.getDistrict();
+        location.province = aMapLocation.getProvince();
         location.regionCode = Integer.parseInt(aMapLocation.getAdCode());
         return location;
     }

@@ -33,5 +33,5 @@ proguard/
 *.iws
 .idea
 
-signing.properties
-key.properties
+#signing.properties
+#key.properties

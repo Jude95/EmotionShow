@@ -40,6 +40,7 @@ public class ImageViewActivity extends BeamBaseActivity<ImageViewPresenter> impl
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_imageview);
         SwipeBackHelper.getCurrentPage(this).setSwipeBackEnable(false);
         mTv_lock = (TextView) findViewById(R.id.lock);
@@ -60,6 +61,7 @@ public class ImageViewActivity extends BeamBaseActivity<ImageViewPresenter> impl
         }
         mAdapter.setUrls(urls);
         mViewPager.setCurrentItem(index);
+        mViewPager.setOnClickListener(v->finish());
     }
 
     @Override

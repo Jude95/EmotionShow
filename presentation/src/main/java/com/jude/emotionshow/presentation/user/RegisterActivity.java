@@ -15,18 +15,18 @@ import com.jude.beam.bijection.RequiresPresenter;
 import com.jude.beam.expansion.BeamBaseActivity;
 import com.jude.emotionshow.R;
 import com.jude.emotionshow.presentation.seed.WritingPresenter;
+import com.jude.smssdk_mob.TimeListener;
 import com.jude.tagview.TAGView;
 import com.jude.utils.JUtils;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import cn.smssdk.gui.TimeListener;
 
 /**
  * Created by Mr.Jude on 2015/11/20.
  */
 @RequiresPresenter(RegisterPresenter.class)
-public class RegisterActivity extends BeamBaseActivity<RegisterPresenter> implements TimeListener{
+public class RegisterActivity extends BeamBaseActivity<RegisterPresenter> implements TimeListener {
 
     @Bind(R.id.back_img)
     ImageView backImg;
