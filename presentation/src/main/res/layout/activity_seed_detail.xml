@@ -122,19 +122,27 @@
                         android:orientation="horizontal"
                         android:layout_width="match_parent"
                         android:layout_height="48dp">
-                        <ImageView
-                            android:id="@+id/praise"
-                            android:layout_width="16dp"
-                            android:layout_height="match_parent"
-                            android:layout_marginLeft="8dp"
-                            android:src="@drawable/praise"/>
-                        <TextView
-                            android:id="@+id/praise_count"
+                        <LinearLayout
+                            android:id="@+id/praise_container"
+                            android:orientation="horizontal"
                             android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:gravity="center"
-                            android:layout_marginLeft="8dp"
-                            tools:text="2"/>
+                            android:layout_height="match_parent">
+                            <ImageView
+                                android:id="@+id/praise"
+                                android:layout_width="16dp"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="8dp"
+                                android:src="@drawable/praise"/>
+                            <TextView
+                                android:id="@+id/praise_count"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:layout_marginLeft="8dp"
+                                tools:text="2"/>
+
+                        </LinearLayout>
+
                         <ImageView
                             android:layout_width="16dp"
                             android:layout_height="match_parent"

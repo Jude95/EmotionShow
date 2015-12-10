@@ -85,6 +85,8 @@ public class SeedDetailActivity extends BeamDataActivity<SeedDetailPresenter, Se
     NetImageAdapter mImageAdapter;
     @Bind(R.id.score_count)
     TextView scoreCount;
+    @Bind(R.id.praise_container)
+    LinearLayout praiseContainer;
 
 
     @Override
@@ -94,7 +96,7 @@ public class SeedDetailActivity extends BeamDataActivity<SeedDetailPresenter, Se
         ButterKnife.bind(this);
         back.setOnClickListener(v -> finish());
         replySend.setOnClickListener(v -> getPresenter().comment(curCommentId, reply.getText().toString()));
-        praise.setOnClickListener(v -> getPresenter().praise());
+        praiseContainer.setOnClickListener(v -> getPresenter().praise());
         container.setOnClickListener(v -> {
             reply.setHint("对印记发表评论");
             curCommentId = 0;
@@ -113,7 +115,7 @@ public class SeedDetailActivity extends BeamDataActivity<SeedDetailPresenter, Se
         content.setText(data.getContent());
         praiseCount.setText(data.getPraiseCount() + "");
         commentCount.setText(data.getCommentCount() + "");
-        scoreCount.setText(data.getScore()+"");
+        scoreCount.setText(data.getScore() + "");
         pictures.removeAllViews();
         if (data.getPics() != null && data.getPics().size() != 0) {
             pictures.setAdapter(mImageAdapter = new NetImageAdapter(this, data.getPics(), ImageModel.IMAGE_SIZE_SMALL * (4 - Math.min(data.getPics().size(), 3))));
@@ -143,7 +145,7 @@ public class SeedDetailActivity extends BeamDataActivity<SeedDetailPresenter, Se
             i.putExtra("id", data.getAuthor().getId());
             startActivity(i);
         });
-        praise.setImageResource(data.getPraised()==0?R.drawable.praise:R.drawable.praise_red);
+        praise.setImageResource(data.getPraised() == 0 ? R.drawable.praise : R.drawable.praise_red);
     }
 
     void showToolDialog() {
