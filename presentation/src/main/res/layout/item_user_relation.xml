@@ -23,7 +23,7 @@
             android:id="@id/name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="@style/TextAppearance.AppCompat.Subhead"
+            style="@style/TextAppearance.AppCompat.Body1"
             tools:text="Jude"/>
         <TextView
             android:id="@id/sign"

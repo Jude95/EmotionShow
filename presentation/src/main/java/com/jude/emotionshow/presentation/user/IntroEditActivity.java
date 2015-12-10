@@ -36,7 +36,9 @@ public class IntroEditActivity extends BeamDataActivity<IntroEditPresenter,Strin
             setResult(RESULT_OK,i);
             finish();
         });
+
     }
+
 
     @Override
     public void setData(String data) {
