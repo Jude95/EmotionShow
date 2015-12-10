@@ -65,7 +65,7 @@ public class PhoneEditActivity extends BeamBaseActivity<PhoneEditPresenter>   im
             JUtils.Toast("请输入验证码");
             return;
         }
-        getPresenter().edit(account.getText().toString());
+        getPresenter().edit(account.getText().toString(),code.getText().toString());
     }
 
     @Override

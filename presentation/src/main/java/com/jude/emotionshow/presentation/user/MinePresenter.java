@@ -1,5 +1,6 @@
 package com.jude.emotionshow.presentation.user;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.jude.beam.expansion.data.BeamDataFragmentPresenter;
@@ -33,12 +34,19 @@ public class MinePresenter extends BeamDataFragmentPresenter<MineFragment,Accoun
 
                     @Override
                     public void onNext(Account account) {
-                        if (account!=null)
-                        JUtils.Log("Account"+account.getName());
-                        else
-                        JUtils.Log("get null");
                         publishObject(account);
                     }
                 });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        JUtils.Log("onResume");
+        if (UserModel.getInstance().isLogin()&&UserModel.getInstance().getCurAccount().isNeedTel()){
+            Intent i = new Intent(getView().getActivity(),PhoneEditActivity.class);
+            getView().startActivity(i);
+            JUtils.Toast("请先绑定手机号");
+        }
     }
 }

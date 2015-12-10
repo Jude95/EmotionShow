@@ -12,6 +12,16 @@ public class Account extends PersonDetail  implements Serializable,Cloneable {
     private int gender;
     @SerializedName("rongtoken")
     private String rongYunToken;
+    @SerializedName("tel")
+    private boolean needTel;
+
+    public boolean isNeedTel() {
+        return needTel;
+    }
+
+    public void setNeedTel(boolean needTel) {
+        this.needTel = needTel;
+    }
 
     public String getRongYunToken() {
         return rongYunToken;

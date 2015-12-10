@@ -119,6 +119,8 @@ public class MineFragment extends BeamDataFragment<MinePresenter, Account> {
         }
     }
 
+
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();

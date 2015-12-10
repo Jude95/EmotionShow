@@ -5,6 +5,7 @@ import android.os.Bundle;
 import com.jude.beam.bijection.Presenter;
 import com.jude.emotionshow.data.model.UserModel;
 import com.jude.emotionshow.data.server.ServiceResponse;
+import com.jude.emotionshow.domain.entities.Account;
 import com.jude.smssdk_mob.SMSManager;
 import com.jude.utils.JUtils;
 
@@ -13,7 +14,6 @@ import com.jude.utils.JUtils;
  * Created by Mr.Jude on 2015/11/26.
  */
 public class PhoneEditPresenter extends Presenter<PhoneEditActivity> {
-    String code;
 
     @Override
     protected void onCreate(PhoneEditActivity view, Bundle savedState) {
@@ -41,7 +41,7 @@ public class PhoneEditPresenter extends Presenter<PhoneEditActivity> {
                 });
     }
 
-    public void edit(String number){
+    public void edit(String number,String code){
         getView().getExpansion().showProgressDialog("注册中");
         UserModel.getInstance().telBind(number, code)
                 .finallyDo(() -> getView().getExpansion().dismissProgressDialog())
@@ -49,6 +49,8 @@ public class PhoneEditPresenter extends Presenter<PhoneEditActivity> {
                     @Override
                     public void onNext(Object o) {
                         getView().finish();
+                        UserModel.getInstance().getCurAccount().setNeedTel(false);
+                        UserModel.getInstance().updateMyInfo().subscribe(new ServiceResponse<Account>());
                         JUtils.Toast("绑定切换成功");
                     }
                 });
