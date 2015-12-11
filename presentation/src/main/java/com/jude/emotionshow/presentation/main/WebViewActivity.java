@@ -1,11 +1,14 @@
 package com.jude.emotionshow.presentation.main;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -15,6 +18,7 @@ import com.jude.beam.expansion.BeamBaseActivity;
 import com.jude.emotionshow.R;
 import com.jude.emotionshow.data.server.HeaderInterceptors;
 import com.jude.swipbackhelper.SwipeBackHelper;
+import com.jude.utils.JUtils;
 import com.umeng.share.ShareManager;
 
 import butterknife.Bind;
@@ -60,6 +64,25 @@ public class WebViewActivity extends BeamBaseActivity<WebViewPresenter> {
             @Override
             public void onReceivedIcon(WebView view, Bitmap icon) { // 获取到图标
                 super.onReceivedIcon(view, icon);
+            }
+        });
+        webview.setWebViewClient(new WebViewClient(){
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                // TODO Auto-generated method stub
+                //返回值是true的时候控制去WebView打开，为false调用系统浏览器或第三方浏览器
+                JUtils.Log("URL:"+url);
+
+                if (!url.startsWith("http")){
+                    JUtils.Log("系统解决");
+                    Intent i = new Intent(Intent.ACTION_VIEW);
+                    i.setData(Uri.parse(url));
+                    startActivity(i);
+                    return true;
+                }
+                JUtils.Log("自己解决");
+                view.loadUrl(url);
+                return true;
             }
         });
         share.setOnClickListener(v->{

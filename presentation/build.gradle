@@ -35,6 +35,7 @@ android {
         origin{}
     }
 
+
     productFlavors.all { flavor ->
         manifestPlaceholders.put("UMENG_CHANNEL",name)
     }
@@ -55,6 +56,17 @@ android {
             signingConfig signingConfigs.release
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            applicationVariants.all { variant ->
+                variant.outputs.each { output ->
+                    if (output.outputFile != null && output.outputFile.name.endsWith('.apk')
+                            &&'release'.equals(variant.buildType.name)) {
+                        def apkFile = new File(
+                                output.outputFile.getParent(),
+                                "MooShow_${variant.flavorName}_v${variant.versionName}_${buildTime()}.apk")
+                        output.outputFile = apkFile
+                    }
+                }
+            }
         }
         debug {
             signingConfig signingConfigs.release
@@ -98,4 +110,10 @@ dependencies {
     compile project(':umengfamily')
     compile project(':jpush')
 
+}
+
+def buildTime() {
+    def date = new Date()
+    def formattedDate = date.format('yyyyMMdd')
+    return formattedDate
 }

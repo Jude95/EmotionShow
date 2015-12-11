@@ -2,8 +2,8 @@
 ext {
 
     applicationId = "com.jude.emotionshow"
-    versionCode = 3
-    versionName = "1.0"
+    versionCode = 4
+    versionName = "1.1"
     androidBuildToolsVersion = '23.0.1'
     androidMinSdkVersion = 15
     androidTargetSdkVersion = 23
