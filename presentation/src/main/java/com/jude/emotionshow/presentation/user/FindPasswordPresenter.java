@@ -36,7 +36,7 @@ public class FindPasswordPresenter extends Presenter<FindPasswordActivity> {
     }
 
     public void register(String number,String password,String code){
-        getView().getExpansion().showProgressDialog("注册中");
+        getView().getExpansion().showProgressDialog("提交中");
         UserModel.getInstance().findPassword(number, code, password)
                 .finallyDo(() -> getView().getExpansion().dismissProgressDialog())
                 .subscribe(new ServiceResponse<Object>() {
@@ -47,8 +47,7 @@ public class FindPasswordPresenter extends Presenter<FindPasswordActivity> {
                         i.putExtra("password", password);
                         getView().setResult(Activity.RESULT_OK, i);
                         getView().finish();
-
-                        JUtils.Toast("注册成功");
+                        JUtils.Toast("修改成功");
                     }
                 });
     }

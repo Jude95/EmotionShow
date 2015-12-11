@@ -108,7 +108,7 @@ public class RongYunModel extends AbsModel {
                 }catch (Exception e){
                     return null;
                 }
-                return new UserInfo(userId, p.getName(), Uri.parse(ImageModel.getInstance().getSmallImage(p.getAvatar())));
+                return new UserInfo(p.getId()+"", p.getName(), Uri.parse(ImageModel.getInstance().getSmallImage(p.getAvatar())));
             }, true);
 
             RongIM.setOnReceiveMessageListener(new RongIMClient.OnReceiveMessageListener() {

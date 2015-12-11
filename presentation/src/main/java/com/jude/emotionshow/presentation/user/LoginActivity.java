@@ -81,6 +81,7 @@ public class LoginActivity extends BeamBaseActivity<LoginPresenter> {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 10086&&resultCode == RESULT_OK){
+            JUtils.Log("onActivityResult");
             account.setText(data.getStringExtra("account"));
             password.setText(data.getStringExtra("password"));
         }

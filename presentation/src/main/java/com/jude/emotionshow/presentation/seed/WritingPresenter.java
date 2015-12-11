@@ -25,7 +25,7 @@ import java.util.List;
  */
 public class WritingPresenter extends BeamDataActivityPresenter<WritingActivity,SeedEditable> implements  PieceViewGroup.OnViewDeleteListener{
     private ImageProvider provider;
-    private ArrayList<Uri> uriArrayList = new ArrayList<>();
+    public ArrayList<Uri> uriArrayList = new ArrayList<>();
 
     public List<Category> categoryList;
 

@@ -50,11 +50,11 @@ public class RegisterPresenter extends Presenter<RegisterActivity> {
                 .subscribe(new ServiceResponse<Object>() {
                     @Override
                     public void onNext(Object o) {
-                        getView().finish();
                         Intent i = new Intent();
                         i.putExtra("account", number);
                         i.putExtra("password", password);
                         getView().setResult(Activity.RESULT_OK, i);
+                        getView().finish();
                         JUtils.Toast("注册成功");
                     }
                 });

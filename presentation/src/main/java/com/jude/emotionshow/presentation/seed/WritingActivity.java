@@ -1,6 +1,7 @@
 package com.jude.emotionshow.presentation.seed;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -21,6 +22,7 @@ import com.jude.beam.bijection.RequiresPresenter;
 import com.jude.beam.expansion.data.BeamDataActivity;
 import com.jude.emotionshow.R;
 import com.jude.emotionshow.domain.entities.SeedEditable;
+import com.jude.emotionshow.presentation.main.ImageViewActivity;
 import com.jude.exgridview.ImagePieceView;
 import com.jude.exgridview.PieceViewGroup;
 import com.jude.utils.JUtils;
@@ -98,7 +100,14 @@ public class WritingActivity extends BeamDataActivity<WritingPresenter,SeedEdita
     public void addImage(Bitmap bitmap) {
         ImagePieceView pieceView = new ImagePieceView(this);
         pieceView.setImageBitmap(bitmap);
+        pieceView.setTag(images.getChildCount());
         images.addView(pieceView);
+        pieceView.setOnClickListener(v->{
+            Intent i = new Intent(this, ImageViewActivity.class);
+            i.putExtra(ImageViewActivity.KEY_URIS,getPresenter().uriArrayList);
+            i.putExtra(ImageViewActivity.KEY_INDEX,(int)v.getTag());
+            startActivity(i);
+        });
     }
 
     String[] SCOPE = {"全公开","仅朋友可见","仅自己可见","匿名发布"};

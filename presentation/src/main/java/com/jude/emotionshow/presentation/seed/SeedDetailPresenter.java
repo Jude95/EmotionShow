@@ -1,6 +1,7 @@
 package com.jude.emotionshow.presentation.seed;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 
 import com.jude.beam.expansion.data.BeamDataActivityPresenter;
 import com.jude.emotionshow.data.model.SeedModel;
@@ -46,6 +47,9 @@ public class SeedDetailPresenter extends BeamDataActivityPresenter<SeedDetailAct
     }
 
     public void comment(int commentId,String content){
+        if (TextUtils.isEmpty(content)){
+            JUtils.Toast("请填写内容");
+        }
         getView().getExpansion().showProgressDialog("提交中");
         SeedModel.getInstance().comment(id, commentId, content)
                 .finallyDo(() -> getView().getExpansion().dismissProgressDialog())
