@@ -34,9 +34,11 @@ public class GuideActivity extends BeamBaseActivity<GuidePresenter> {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_guide);
         SwipeBackHelper.getCurrentPage(this).setSwipeBackEnable(false);
         ButterKnife.bind(this);
+
         go.setOnClickListener(v->{
             startActivity(new Intent(this, MainActivity.class));
             finish();
