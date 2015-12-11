@@ -16,15 +16,18 @@ import com.jude.beam.bijection.RequiresPresenter;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.jude.emotionshow.R;
+import com.jude.emotionshow.data.model.UserModel;
 import com.jude.emotionshow.domain.entities.Banner;
 import com.jude.emotionshow.domain.entities.CategoryPreview;
 import com.jude.emotionshow.domain.entities.Topic;
 import com.jude.emotionshow.presentation.main.SearchActivity;
 import com.jude.emotionshow.presentation.main.WebViewActivity;
+import com.jude.emotionshow.presentation.user.LoginActivity;
 import com.jude.emotionshow.presentation.widget.LoopRecyclerViewPagerAdapter;
 import com.jude.emotionshow.presentation.widget.RecyclerViewPager;
 import com.jude.rollviewpager.RollPagerView;
 import com.jude.rollviewpager.adapter.StaticPagerAdapter;
+import com.jude.utils.JUtils;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -152,6 +155,11 @@ public class SeedMainFragment extends BeamFragment<SeedMainPresenter> {
                 imageView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
                 imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
                 imageView.setOnClickListener(v->{
+                    if (!UserModel.getInstance().isLogin()){
+                        startActivity(new Intent(getActivity(), LoginActivity.class));
+                        JUtils.Log("请先登录");
+                        return;
+                    }
                     if (banners.get(position).getType()==1){
                         Intent i = new Intent(getActivity(), WebViewActivity.class);
                         i.putExtra("url",banners.get(position).getAction());
