@@ -17,5 +17,6 @@ public class MainPresenter extends Presenter<MainActivity> {
             getView().startActivity(new Intent(getView(), WritingActivity.class));
         else
             getView().startActivity(new Intent(getView(), LoginActivity.class));
+
     }
 }
