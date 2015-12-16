@@ -96,6 +96,15 @@ public class SeedDetailPresenter extends BeamDataActivityPresenter<SeedDetailAct
         });
     }
 
+    public void delete(){
+        SeedModel.getInstance().deleteSeed(id).subscribe(new ServiceResponse<Object>() {
+            @Override
+            public void onNext(Object o) {
+                JUtils.Toast("举报成功");
+            }
+        });
+    }
+
     public void share(){
         String content = mData.getContent();
         ShareManager.getInstance(getView()).share(getView(), content, "么么秀分享", "http://114.215.86.90/meme.php/home/index/share/"+mData.getId(), mData.getPics().get(0).getUrl());

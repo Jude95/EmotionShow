@@ -7,7 +7,8 @@
 ###data－数据处理
 data层负责与服务器，文件，第三方等等提供数据交互以及数据解析。
 Model是data层面向presentation层的接口，向presentation层提供数据服务。拥有生命周期。从Application启动开始，便一直存在，为presentation提供数据处理支持。
-模块指数据库支持模块，网络支持模块，第三方支持模块等等，提供Dagger注入。供Model选择使用。(模块注入部分还没有很规范的实现，毕竟刚刚整合Dagger)
+模块指数据库支持模块，网络支持模块，第三方支持模块等等，提供Dagger注入。供Model选择使用。(模块注入部分还没有很规范的实现，毕竟刚刚整合Dagger)  
+网络模块使用Retrofit
 
 ###domain－数据定义
 包含了数据结构定义，解析定义，异常定义。
@@ -17,6 +18,6 @@ Model是data层面向presentation层的接口，向presentation层提供数据�
 表示层以一个界面为一个单位。每个单位分为presenter与ui2部分。presenter与ui双向绑定。ui层负责数据展示与输入。presenter负责业务逻辑处理（主要是data层进行交互）。
 
 #开发框架
-项目采用[Beam](https://github.com/Jude95/Beam)开发框架，详情见其wiki。MVP架构。
+项目采用[Beam](https://github.com/Jude95/Beam)开发框架，详情见其wiki。MVP架构。Rx事件驱动编程。
 
 

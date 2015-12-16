@@ -54,4 +54,20 @@
             android:layout_height="wrap_content"
             android:text="举报"/>
     </LinearLayout>
+    <LinearLayout
+        android:id="@+id/delete"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@drawable/report"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="删除"/>
+    </LinearLayout>
 </LinearLayout>

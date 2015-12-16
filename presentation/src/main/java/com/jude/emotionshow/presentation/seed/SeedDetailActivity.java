@@ -19,6 +19,7 @@ import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.jude.emotionshow.R;
 import com.jude.emotionshow.data.model.ImageModel;
+import com.jude.emotionshow.data.model.UserModel;
 import com.jude.emotionshow.domain.entities.Comment;
 import com.jude.emotionshow.domain.entities.SeedDetail;
 import com.jude.emotionshow.presentation.main.ImageViewActivity;
@@ -156,6 +157,11 @@ public class SeedDetailActivity extends BeamDataActivity<SeedDetailPresenter, Se
         View share = $(view, R.id.share);
         View collect = $(view, R.id.collect);
         View report = $(view, R.id.report);
+        View delete = $(view, R.id.delete);
+
+        if (getPresenter().mData.getId() != UserModel.getInstance().getCurAccount().getId()){
+            delete.setVisibility(View.GONE);
+        }
 
         share.setOnClickListener(v -> {
             dialog.dismiss();
@@ -167,6 +173,10 @@ public class SeedDetailActivity extends BeamDataActivity<SeedDetailPresenter, Se
         });
         report.setOnClickListener(v -> {
             getPresenter().report();
+            dialog.dismiss();
+        });
+        delete.setOnClickListener(v -> {
+            getPresenter().delete();
             dialog.dismiss();
         });
     }

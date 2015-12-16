@@ -113,4 +113,8 @@ public class SeedModel extends AbsModel {
     public Observable<List<Category>> getCategoryList(){
         return mServiceAPI.getCategoryList().compose(new DefaultTransform<>());
     }
+
+    public Observable<Object> deleteSeed(int id){
+        return mServiceAPI.deleteSeed(id).compose(new DefaultTransform<>());
+    }
 }

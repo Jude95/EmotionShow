@@ -302,4 +302,9 @@ public interface ServiceAPI {
             @Field("comment") int comment,
             @Field("care") int care,
             @Field("community") int community);
+
+    @FormUrlEncoded
+    @POST("/home/history/del")
+    Observable<Object> deleteSeed(
+            @Field("id") int id);
 }
