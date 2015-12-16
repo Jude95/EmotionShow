@@ -24,6 +24,7 @@ import rx.Observable;
 
 /**
  * Created by Mr.Jude on 2015/11/19.
+ * 印记操作部分
  */
 public class SeedModel extends AbsModel {
     @Inject

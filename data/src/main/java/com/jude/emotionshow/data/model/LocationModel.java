@@ -18,7 +18,7 @@ import rx.subjects.BehaviorSubject;
 
 /**
  * Created by Mr.Jude on 2015/1/28.
- * 地理位置的管理
+ * 地理位置的管理API
  */
 public class LocationModel extends AbsModel {
 

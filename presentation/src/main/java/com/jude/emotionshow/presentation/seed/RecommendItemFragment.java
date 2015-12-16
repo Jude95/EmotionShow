@@ -22,7 +22,7 @@ public class RecommendItemFragment extends BeamListFragment<RecommendItemPresent
 
     @Override
     protected ListConfig getConfig() {
-        return super.getConfig().setLoadmoreAble(true).setRefreshAble(true);
+        return super.getConfig().setLoadmoreAble(true).setRefreshAble(true).setNoMoreAble(false);
     }
 
     @Override

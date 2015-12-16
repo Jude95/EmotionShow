@@ -19,6 +19,7 @@ import rx.Observable;
 
 /**
  * Created by Mr.Jude on 2015/11/18.
+ * 通用操作API
  */
 public class CommonModel extends AbsModel {
     public static CommonModel getInstance() {

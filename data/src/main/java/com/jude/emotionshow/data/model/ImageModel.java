@@ -24,6 +24,7 @@ import rx.schedulers.Schedulers;
 
 /**
  * Created by zhuchenxi on 15/7/21.
+ * 图片操作API
  */
 public class ImageModel extends AbsModel {
     public static String UID = "";

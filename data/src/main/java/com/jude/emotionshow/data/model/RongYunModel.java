@@ -21,6 +21,7 @@ import rx.subjects.BehaviorSubject;
 
 /**
  * Created by Mr.Jude on 2015/7/8.
+ * 融云第三方操作的API
  */
 public class RongYunModel extends AbsModel {
 

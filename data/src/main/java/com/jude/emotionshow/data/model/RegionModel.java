@@ -16,6 +16,7 @@ import java.util.ArrayList;
 
 /**
  * Created by Mr.Jude on 2015/7/11.
+ * 区域代码管理API，这里基本只用于选择省市区的三级联动
  */
 public class RegionModel extends AbsModel {
 

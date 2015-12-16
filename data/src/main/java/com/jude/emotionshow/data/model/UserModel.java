@@ -30,6 +30,7 @@ import rx.subjects.BehaviorSubject;
 
 /**
  * Created by Mr.Jude on 2015/11/19.
+ * 用户操作部分
  */
 public class UserModel extends AbsModel {
     public static final String FILE_ACCOUNT = "Account";
