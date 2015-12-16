@@ -100,7 +100,8 @@ public class SeedDetailPresenter extends BeamDataActivityPresenter<SeedDetailAct
         SeedModel.getInstance().deleteSeed(id).subscribe(new ServiceResponse<Object>() {
             @Override
             public void onNext(Object o) {
-                JUtils.Toast("举报成功");
+                JUtils.Toast("删除成功");
+                getView().finish();
             }
         });
     }

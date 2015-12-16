@@ -53,7 +53,6 @@ public class  NetImageAdapter extends ArrayAdapter<Image> {
             Image image = ImageModel.getSizeImage(getItem(position), size);
             Picasso.with(getContext())
                     .load(image.getUrl())
-                    .resize(image.getWidth(), image.getHeight())
                     .into(view);
         }else{
             Picasso.with(getContext())

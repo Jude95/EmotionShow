@@ -246,7 +246,7 @@ public class ImageModel extends AbsModel {
         FileOutputStream baos;
         try {
             baos = new FileOutputStream(tempfile);
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 60, baos);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
             baos.close();
         } catch (IOException e) {
             return null;

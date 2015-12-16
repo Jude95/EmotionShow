@@ -159,7 +159,7 @@ public class SeedDetailActivity extends BeamDataActivity<SeedDetailPresenter, Se
         View report = $(view, R.id.report);
         View delete = $(view, R.id.delete);
 
-        if (getPresenter().mData.getId() != UserModel.getInstance().getCurAccount().getId()){
+        if (getPresenter().mData.getAuthor().getId() != UserModel.getInstance().getCurAccount().getId()){
             delete.setVisibility(View.GONE);
         }
 
