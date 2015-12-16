@@ -53,6 +53,12 @@ public class ImageModel extends AbsModel {
         mUploadManager = new UploadManager();
     }
 
+    /**
+     * 七牛图片API，获取小图链接
+     * @see <a href="http://developer.qiniu.com/docs/v6/api/reference/fop/image/imageview2.html"/>
+     * @param image
+     * @return
+     */
     public static Image getSmallImage(Image image){
         if (image==null||image.getUrl()==null)return null;
         image = calculateScaling(image,IMAGE_SIZE_SMALL,IMAGE_SIZE_SMALL);
@@ -153,7 +159,7 @@ public class ImageModel extends AbsModel {
     }
 
     /**
-     * 同步上传
+     * 同步上传,当所有返回过后才会onComplete
      * @param file 需上传文件
      * @return 上传文件访问地址
      */

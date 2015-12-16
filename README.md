@@ -18,6 +18,14 @@ Model是data层面向presentation层的接口，向presentation层提供数据�
 表示层以一个界面为一个单位。每个单位分为presenter与ui2部分。presenter与ui双向绑定。ui层负责数据展示与输入。presenter负责业务逻辑处理（主要是data层进行交互）。
 
 #开发框架
-项目采用[Beam](https://github.com/Jude95/Beam)开发框架，详情见其wiki。MVP架构。Rx事件驱动编程。
+项目采用[Beam](https://github.com/Jude95/Beam)开发框架，详情见其wiki。MVP架构。
 
-
+##[Rx响应式编程](https://github.com/ReactiveX/RxJava)。
+RX是一个事件驱动编程框架。用链式调用构造事件流。有效处理同步异步的问题，各层之间(特别是data与presentation之间)均使用Rx作为接口。拓展性更强。
+##[Lambda表达式](https://github.com/evant/gradle-retrolambda)
+大量使用Lambda表达式加速开发
+##[ButterKnife](https://github.com/JakeWharton/butterknife)
+JakeWharton大神～
+配合[ButterKnifeZelezny](https://github.com/avast/android-butterknife-zelezny)插件，十分酸爽。
+##[Dagger](https://github.com/google/dagger)
+依赖注入神器，相见恨晚，所以框架对他的适配还不是很好。只有网络模块使用的注入。按新设计应该数据库部分，第三方部分都是使用它注入Model，以实现模块与框架解耦。
