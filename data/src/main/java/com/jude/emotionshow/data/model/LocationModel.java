@@ -60,9 +60,14 @@ public class LocationModel extends AbsModel {
     public void startLocation(final Context ctx){
         AMapLocationClient mLocationClient = new AMapLocationClient(ctx);
         AMapLocationClientOption option = new AMapLocationClientOption();
-        option.setInterval(6000);
+        //每分钟取一下最新位置。
+        //option.setInterval(60000);
+        //只取一次位置
+        option.setOnceLocation(true);
         mLocationClient.setLocationOption(option);
         mLocationClient.setLocationListener(aMapLocation -> {
+            JUtils.Log("GetLocation");
+            //只有位置变动时才上传
             if (!mLocation.equals(createLocation(aMapLocation)))
             mLocationSubject.onNext(createLocation(aMapLocation));
         });

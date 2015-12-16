@@ -33,6 +33,7 @@ android {
         baidu{}
         wandoujia{}
         origin{}
+        qihu360{}
     }
 
 
@@ -67,9 +68,15 @@ android {
                     }
                 }
             }
+            ndk {
+                abiFilters "armeabi", "armeabi-v7a"
+            }
         }
         debug {
             signingConfig signingConfigs.release
+            ndk {
+                abiFilters "armeabi", "armeabi-v7a"
+            }
         }
     }
 

@@ -69,9 +69,9 @@ public class Location implements Serializable{
 
     @Override
     public boolean equals(Object o) {
-        if (o instanceof Location)
-            return (latitude == ((Location) o).latitude)&&(longitude == ((Location) o).getLongitude());
-        else
-            return false;
+        if (o instanceof Location) {
+            return (address.equals(((Location) o).address));
+        }
+        return false;
     }
 }

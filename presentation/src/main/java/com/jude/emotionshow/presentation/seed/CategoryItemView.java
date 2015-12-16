@@ -64,7 +64,6 @@ public class CategoryItemView extends LinearLayout {
     public void setCategory(CategoryPreview categoryPreview){
         Picasso.with(getContext())
                 .load(categoryPreview.getCategory().getAvatar())
-                .resize(100,100)
                 .into(background);
         titleEn.setText(categoryPreview.getCategory().getNameEn());
         titleZh.setText(categoryPreview.getCategory().getName());
@@ -128,7 +127,6 @@ public class CategoryItemView extends LinearLayout {
             Image image = ImageModel.getSmallImage(data.getPics().get(0));
             Picasso.with(getContext())
                     .load(image.getUrl())
-                    .resize(image.getWidth(),image.getHeight())
                     .into((ImageView) itemView);
         }
 
