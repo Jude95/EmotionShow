@@ -101,6 +101,7 @@ public class MineFragment extends BeamDataFragment<MinePresenter, Account> {
             sign.setText("");
             fansCount.setText("0");
             praiseCount.setText("0");
+            scoreCount.setText("0");
             seed.setOnClickListener(null);
         } else {
             Picasso.with(getContext())
@@ -109,6 +110,7 @@ public class MineFragment extends BeamDataFragment<MinePresenter, Account> {
                     .into(avatar);
             name.setText(data.getName());
             sign.setText(data.getSign());
+            scoreCount.setText(data.getCoins()+"");
             praiseCount.setText("" + data.getPraiseCount());
             fansCount.setText("" + data.getFansCount());
             seed.setOnClickListener(v -> {

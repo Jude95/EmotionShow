@@ -100,6 +100,7 @@ public class UserModel extends AbsModel {
 
     public Observable<Account> updateMyInfo(){
         return mServiceAPI.getMyInfo()
+                .onErrorResumeNext(Observable.just(null))
                 .doOnNext(account -> {
                     saveAccount(account);
                     setAccount(account);

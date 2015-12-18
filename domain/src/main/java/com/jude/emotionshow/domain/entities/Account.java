@@ -15,6 +15,16 @@ public class Account extends PersonDetail  implements Serializable,Cloneable {
     @SerializedName("tel")
     private boolean needTel;
 
+    private int coins;
+
+    public int getCoins() {
+        return coins;
+    }
+
+    public void setCoins(int coins) {
+        this.coins = coins;
+    }
+
     public boolean isNeedTel() {
         return needTel;
     }
