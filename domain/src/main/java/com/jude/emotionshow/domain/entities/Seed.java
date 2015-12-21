@@ -12,9 +12,19 @@ public class Seed {
     private int uid;
     private String name;
     private String face;
+    @SerializedName("praise")
+    private int praised;
     @SerializedName("zan")
     private int praiseCount;
     private List<Image> pics;
+
+    public int getPraised() {
+        return praised;
+    }
+
+    public void setPraised(int praised) {
+        this.praised = praised;
+    }
 
     public int getPraiseCount() {
         return praiseCount;

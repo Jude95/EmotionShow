@@ -19,8 +19,6 @@ public class SeedDetail extends Seed {
     private PersonBrief author;
     @SerializedName("commentNum")
     private int commentCount;
-    @SerializedName("praise")
-    private int praised;
     @SerializedName("collect")
     private int collectCount;
     @SerializedName("coins")
@@ -107,14 +105,6 @@ public class SeedDetail extends Seed {
 
     public void setComment(List<Comment> comment) {
         this.comment = comment;
-    }
-
-    public int getPraised() {
-        return praised;
-    }
-
-    public void setPraised(int praised) {
-        this.praised = praised;
     }
 
     public int getCollectCount() {
