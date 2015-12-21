@@ -20,6 +20,7 @@ import butterknife.ButterKnife;
 
 /**
  * Created by zhuchenxi on 15/12/9.
+ * 第一次启动才有的引导页。从LaunchActivity里判断启动
  */
 @RequiresPresenter(GuidePresenter.class)
 public class GuideActivity extends BeamBaseActivity<GuidePresenter> {

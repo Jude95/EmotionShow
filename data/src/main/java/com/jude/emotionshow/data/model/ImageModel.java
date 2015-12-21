@@ -159,7 +159,7 @@ public class ImageModel extends AbsModel {
     }
 
     /**
-     * 同步上传,当所有返回过后才会onComplete
+     * 同步上传,上传完过后会onComplete
      * @param file 需上传文件
      * @return 上传文件访问地址
      */
@@ -190,8 +190,11 @@ public class ImageModel extends AbsModel {
     }
 
 
-
-
+    /**
+     * 同步上传,当所有返回过后才会onComplete
+     * @param file 需上传文件
+     * @return 上传文件访问地址
+     */
     public Observable<Image> putImageSync(Context ctx,final File[] file){
         final int[] count = {0};
         return CommonModel.getInstance().getQiNiuToken()
@@ -223,7 +226,12 @@ public class ImageModel extends AbsModel {
                 .compose(new DefaultTransform<>());
     }
 
-
+    /**
+     * 压缩图片
+     * @param ctx
+     * @param file 待压缩图片
+     * @return
+     */
     private File compressImage(Context ctx,File file){
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inJustDecodeBounds = true;
@@ -246,6 +254,7 @@ public class ImageModel extends AbsModel {
         FileOutputStream baos;
         try {
             baos = new FileOutputStream(tempfile);
+            //质量压缩率100％，不牺牲质量
             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
             baos.close();
         } catch (IOException e) {
@@ -254,6 +263,7 @@ public class ImageModel extends AbsModel {
         return tempfile;
     }
 
+    //获取图片大小
     private Image getSizeFromFile(File file){
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inJustDecodeBounds = true;

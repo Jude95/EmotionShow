@@ -39,6 +39,7 @@ import butterknife.ButterKnife;
 
 /**
  * Created by Mr.Jude on 2015/11/21.
+ * 印记详情界面
  */
 @RequiresPresenter(SeedDetailPresenter.class)
 public class SeedDetailActivity extends BeamDataActivity<SeedDetailPresenter, SeedDetail> {
@@ -105,6 +106,7 @@ public class SeedDetailActivity extends BeamDataActivity<SeedDetailPresenter, Se
         more.setOnClickListener(v -> showToolDialog());
     }
 
+    //设置header与回复
     @Override
     public void setData(SeedDetail data) {
         super.setData(data);

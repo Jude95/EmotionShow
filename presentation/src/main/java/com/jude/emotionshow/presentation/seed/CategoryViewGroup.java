@@ -18,6 +18,7 @@ import butterknife.ButterKnife;
 
 /**
  * Created by Mr.Jude on 2015/11/19.
+ * 场景与情感模块的View，一样对外接口设置数据，显示由自己负责
  */
 public class CategoryViewGroup extends LinearLayout {
 
@@ -56,6 +57,7 @@ public class CategoryViewGroup extends LinearLayout {
         this.listener = listener;
     }
 
+    //显示数据
     public void setCategoryList(List<CategoryPreview> list){
         categoryContainer.removeAllViews();
         for (CategoryPreview categoryPreview : list) {

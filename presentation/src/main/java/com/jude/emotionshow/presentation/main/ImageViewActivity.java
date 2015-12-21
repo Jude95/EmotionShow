@@ -24,6 +24,7 @@ import uk.co.senab.photoview.PhotoView;
 
 /**
 * Created by Mr.Jude on 2015/2/22.
+ * 展示图片的Activity
 */
 @RequiresPresenter(ImageViewPresenter.class)
 public class ImageViewActivity extends BeamBaseActivity<ImageViewPresenter> implements View.OnClickListener{

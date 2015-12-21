@@ -7,6 +7,7 @@ import retrofit.RequestInterceptor;
 
 /**
  * Created by zhuchenxi on 15/10/11.
+ * 添加Header的过滤器，服务器通过header中的信息进行用户识别
  */
 public class HeaderInterceptors implements RequestInterceptor {
     public static String TOKEN = "";

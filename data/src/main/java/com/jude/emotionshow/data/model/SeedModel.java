@@ -24,7 +24,7 @@ import rx.Observable;
 
 /**
  * Created by Mr.Jude on 2015/11/19.
- * 印记操作部分
+ * 印记操作部分，基本都是网络请求操作。找到对应API即可，ctrl＋左键点函数名找到在哪用的。
  */
 public class SeedModel extends AbsModel {
     @Inject
@@ -39,19 +39,38 @@ public class SeedModel extends AbsModel {
     @Override
     protected void onAppCreate(Context ctx) {
         super.onAppCreate(ctx);
+        //模块注入，主要是网络模块
         DaggerSeedComponent.builder().build().inject(this);
     }
 
+
+    /**
+     * 取topic数据
+     * @return
+     */
     public Observable<List<Topic>> getTopic(){
         return mServiceAPI.getTopic().compose(new DefaultTransform<>());
     }
-
+    /**
+     * 取Category数据的Process
+     * @return
+     */
     public Observable<List<CategoryPreview>> getProcess(){
         return mServiceAPI.getProcess().compose(new DefaultTransform<>());
     }
+    /**
+     * 取Category数据的Scene
+     * @return
+     */
     public Observable<List<CategoryPreview>> getScene(){
         return mServiceAPI.getScene().compose(new DefaultTransform<>());
     }
+
+    /**
+     * 发布印记
+     * @param data
+     * @return
+     */
     public Observable<Object> publishSeed(SeedEditable data){
         return mServiceAPI.addSeed(data.getContent(), data.getScene(), data.getProcess(), data.getAddress(), data.getScope(), "", mGson.toJson(data.getPictures()))
                 .doOnNext(o -> UserModel.getInstance().updateMyInfo().subscribe(new ServiceResponse<>()))

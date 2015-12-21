@@ -13,6 +13,7 @@ import com.jude.utils.JUtils;
 
 /**
  * Created by Mr.Jude on 2015/11/21.
+ * 印记的回复ViewHolder
  */
 public class CommentViewHolder extends BaseViewHolder<Comment> {
     public CommentViewHolder(ViewGroup parent) {
@@ -22,6 +23,7 @@ public class CommentViewHolder extends BaseViewHolder<Comment> {
         itemView.setLayoutParams(params);
     }
 
+    //主要是构造Spannable
     @Override
     public void setData(Comment data) {
         SpannableString spannableInfo;

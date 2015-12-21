@@ -19,6 +19,7 @@ import butterknife.ButterKnife;
 
 /**
  * Created by zhuchenxi on 15/12/4.
+ * 就是现在挂着“双蛋有礼”的那一块View。只要传数据进来就行了，怎么显示由本View处理。
  */
 public class ActivityView extends LinearLayout {
 
@@ -54,9 +55,11 @@ public class ActivityView extends LinearLayout {
     }
 
     private void init() {
+        //初始化5个写死的View
         inflate(getContext(), R.layout.view_activity, this);
         ButterKnife.bind(this, this);
         imageViews = new ImageView[]{item1, item2, item3, item4, item5};
+        //响应点击时间
         more.setOnClickListener(v->{
             if (listener!=null){
                 listener.more();
@@ -64,6 +67,7 @@ public class ActivityView extends LinearLayout {
         });
     }
 
+    //显示数据
     public void setImage(List<Seed> list) {
         for (int i = 0; i < list.size(); i++) {
             setImage(i, list.get(i));
@@ -80,6 +84,7 @@ public class ActivityView extends LinearLayout {
         });
     }
 
+    //设置标题，毕竟双蛋过了就不会再挂双蛋有礼了
     public void setTitle(String titleStr){
         title.setText(titleStr);
     }
@@ -89,6 +94,7 @@ public class ActivityView extends LinearLayout {
         void more();
     }
 
+    //“查看更多”
     public void setMoreListener(OnMoreListener listener) {
         this.listener = listener;
     }

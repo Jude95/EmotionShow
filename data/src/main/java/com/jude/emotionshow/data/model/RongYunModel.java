@@ -100,6 +100,7 @@ public class RongYunModel extends AbsModel {
     public void setRongYun(){
         JUtils.Log("setRongYun");
         try {
+            //用户头像提供
             RongIM.setUserInfoProvider(userId -> {
                 JUtils.Log("I wanna "+userId);
                 PersonBrief p;
@@ -111,7 +112,7 @@ public class RongYunModel extends AbsModel {
                 }
                 return new UserInfo(p.getId()+"", p.getName(), Uri.parse(ImageModel.getInstance().getSmallImage(p.getAvatar())));
             }, true);
-
+            //消息接受处理
             RongIM.setOnReceiveMessageListener(new RongIMClient.OnReceiveMessageListener() {
                 @Override
                 public boolean onReceived(Message message, int i) {
@@ -121,13 +122,14 @@ public class RongYunModel extends AbsModel {
                     return true;//自己处理，不处理
                 }
             });
+            //未读消息处理
             RongIM.getInstance().setOnReceiveUnreadCountChangedListener(new RongIM.OnReceiveUnreadCountChangedListener() {
                 @Override
                 public void onMessageIncreased(int i) {
                     mNotifyBehaviorSubject.onNext(i);
                 }
             }, Conversation.ConversationType.PRIVATE);
-
+            //用户对话界面事件处理
             RongIM.getInstance().setConversationBehaviorListener(new RongIM.ConversationBehaviorListener() {
             @Override
             public boolean onUserPortraitClick(Context context, Conversation.ConversationType conversationType, UserInfo userInfo) {
@@ -160,11 +162,20 @@ public class RongYunModel extends AbsModel {
         }
     }
 
-
+    /**
+     * 主动更新用户信息，当修改头像，姓名的时候（未实现）
+     * @param p
+     */
     public void updateRongYunPersonBrief(PersonBrief p){
         RongIM.getInstance().refreshUserInfoCache(new UserInfo(p.getId()+"",p.getName(), Uri.parse(p.getAvatar())));
     }
 
+    /**
+     * 单聊
+     * @param ctx
+     * @param id
+     * @param title
+     */
     public void chatPerson(Context ctx,String id,String title){
 //        Intent i = new Intent(ctx, ChatActivity.class);
 //        i.putExtra("id",id);
@@ -182,7 +193,10 @@ public class RongYunModel extends AbsModel {
 //        ctx.startActivity(i);
         RongIM.getInstance().startGroupChat(ctx,id,title);
     }
-
+    /**
+     * 消息列表
+     * @param ctx
+     */
     public void chatList(Context ctx){
         RongIM.getInstance().startConversationList(ctx);
         //ctx.startActivity(new Intent(ctx, ChatListActivity.class));

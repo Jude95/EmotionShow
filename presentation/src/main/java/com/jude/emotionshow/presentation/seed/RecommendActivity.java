@@ -19,6 +19,7 @@ import butterknife.ButterKnife;
 
 /**
  * Created by Mr.Jude on 2015/11/22.
+ * "最新秀","精选秀"什么的。点进去的Activity
  */
 @RequiresPresenter(RecommendPresenter.class)
 public class RecommendActivity extends BeamBaseActivity<RecommendPresenter> {
@@ -42,6 +43,9 @@ public class RecommendActivity extends BeamBaseActivity<RecommendPresenter> {
         back.setOnClickListener(v -> finish());
         viewpager.setAdapter(pagerAdapter = new SeedFragmentListAdapter(getSupportFragmentManager()));
         tabs.setupWithViewPager(viewpager);
+        title.setText(pagerAdapter.getPageTitle(getIntent().getIntExtra("type",0)));
+
+        //设置当前是选中第几项
         viewpager.setCurrentItem(getIntent().getIntExtra("type",0));
         tabs.setTabTextColors(getResources().getColor(R.color.gray),getResources().getColor(R.color.orange));
         tabs.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
@@ -62,6 +66,9 @@ public class RecommendActivity extends BeamBaseActivity<RecommendPresenter> {
         });
     }
 
+    /**
+     * 这里标题我写死了，也许需要修改为动态，如果要变的话。
+     */
     class SeedFragmentListAdapter extends FragmentPagerAdapter {
 
         public SeedFragmentListAdapter(FragmentManager fm) {

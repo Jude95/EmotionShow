@@ -17,7 +17,7 @@ import java.util.Iterator;
 import cn.jpush.android.api.JPushInterface;
 
 /**
- * 自定义接收器
+ * 自定义接收器。极光推送
  * 
  * 如果不定义这个 Receiver，则：
  * 1) 默认用户会打开主界面

@@ -18,9 +18,11 @@ public class MainPresenter extends Presenter<MainActivity> {
     @Override
     protected void onCreate(MainActivity view, Bundle savedState) {
         super.onCreate(view, savedState);
+        //每次打开更新用户信息
         UserModel.getInstance().updateMyInfo().subscribe(new ServiceResponse<Account>());
     }
 
+    //打开新建Seed前检查是否登录
     public void createSeed(){
         if (UserModel.getInstance().isLogin())
             getView().startActivity(new Intent(getView(), WritingActivity.class));

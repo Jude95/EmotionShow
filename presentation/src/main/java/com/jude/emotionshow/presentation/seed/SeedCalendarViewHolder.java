@@ -18,6 +18,7 @@ import butterknife.ButterKnife;
 
 /**
  * Created by Mr.Jude on 2015/11/24.
+ * 日历模式的印记展示
  */
 public class SeedCalendarViewHolder extends BaseViewHolder<SeedDetail> {
     @Bind(R.id.day)

@@ -39,6 +39,7 @@ public class MinePresenter extends BeamDataFragmentPresenter<MineFragment,Accoun
                 });
     }
 
+    //必须要注册了手机号才能正常使用
     @Override
     protected void onResume() {
         super.onResume();

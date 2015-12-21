@@ -22,6 +22,7 @@ import butterknife.ButterKnife;
 
 /**
  * Created by Mr.Jude on 2015/11/19.
+ * 发现的精选秀什么的View，同样设置数据就行了
  */
 public class TopicView extends FrameLayout {
 

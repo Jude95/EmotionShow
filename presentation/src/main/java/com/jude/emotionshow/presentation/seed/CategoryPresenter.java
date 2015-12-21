@@ -22,12 +22,14 @@ public class CategoryPresenter extends BeamDataActivityPresenter<CategoryActivit
     protected void onCreate(CategoryActivity view, Bundle savedState) {
         super.onCreate(view, savedState);
         Category category = (Category) getView().getIntent().getSerializableExtra("category");
+        //加载Header的信息
         SeedModel.getInstance().getCategoryDetail(category.getId()+"",category.getType()+"")
                 .doOnNext(categoryDetail -> data = categoryDetail)
                 .finallyDo(this::loadMore)
                 .subscribe(this);
     }
 
+    //加载item的数据
     void loadMore(){
         SeedModel.getInstance().getCategorySeedList(data.getId(),page,data.getType()).subscribe(new ServiceResponse<List<Seed>>(){
             @Override

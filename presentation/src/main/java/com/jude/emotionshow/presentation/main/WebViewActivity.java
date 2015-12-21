@@ -50,8 +50,11 @@ public class WebViewActivity extends BeamBaseActivity<WebViewPresenter> {
         SwipeBackHelper.getCurrentPage(this).setSwipeBackEnable(false);
         ButterKnife.bind(this);
         back.setOnClickListener(v -> finish());
+
+        //传入分享网址，key＝"share"
         mShare = getIntent().getStringExtra("share");
         webview.getSettings().setJavaScriptEnabled(true);
+        //传入url，key＝"url"。后面加上身份识别。
         webview.loadUrl(getIntent().getStringExtra("url") + "?id=" + HeaderInterceptors.UID + "&token=" + HeaderInterceptors.TOKEN);
         webview.setWebChromeClient(new WebChromeClient() {
             @Override
@@ -66,6 +69,7 @@ public class WebViewActivity extends BeamBaseActivity<WebViewPresenter> {
                 super.onReceivedIcon(view, icon);
             }
         });
+        //设置页面跳转方式
         webview.setWebViewClient(new WebViewClient(){
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
@@ -85,6 +89,7 @@ public class WebViewActivity extends BeamBaseActivity<WebViewPresenter> {
                 return true;
             }
         });
+        //分享
         share.setOnClickListener(v->{
             ShareManager.getInstance(this).share(this, " ", mTitle, mShare, "http://7xnrrg.com2.z0.glb.qiniucdn.com/logo72.png");
         });

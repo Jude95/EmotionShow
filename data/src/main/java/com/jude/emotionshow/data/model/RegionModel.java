@@ -54,6 +54,10 @@ public class RegionModel extends AbsModel {
         dbHelper = new RegionDBHelper(ctx, "citycode.db", null, 1);
     }
 
+    /**
+     * 取省列表
+     * @return
+     */
     public ArrayList<Region> getProvinceList(){
         open();
         String where = KEY_LEVEL + "='" + 1 +"'";
@@ -83,6 +87,11 @@ public class RegionModel extends AbsModel {
         }
     }
 
+    /**
+     * 取市列表
+     * @param provinceCode
+     * @return
+     */
     public ArrayList<Region> getCityList(int provinceCode){
         open();
         String where = KEY_LEVEL + "='" + 2 +"' and "+KEY_PARENTID+"='"+provinceCode+"'";
@@ -112,6 +121,11 @@ public class RegionModel extends AbsModel {
         }
     }
 
+    /**
+     * 取区列表
+     * @param cityCode
+     * @return
+     */
     public ArrayList<Region> getRegionList(int cityCode){
         open();
         String where = KEY_LEVEL + "='" + 3 +"' and "+KEY_PARENTID+"='"+cityCode+"'";
@@ -141,6 +155,11 @@ public class RegionModel extends AbsModel {
         }
     }
 
+    /**
+     * 通过code(区代码)找区
+     * @param code
+     * @return
+     */
     public Region findRegionByCode(int code){
         open();
         String where = KEY_CID + "='" + code +"' ";
@@ -168,6 +187,11 @@ public class RegionModel extends AbsModel {
         }
     }
 
+    /**
+     * 找区代码对于的区的省
+     * @param code
+     * @return
+     */
     public Region findProvince(int code){
         Region region = findRegionByCode(code);
         if (region == null){
@@ -178,7 +202,11 @@ public class RegionModel extends AbsModel {
         }
         return region;
     }
-
+    /**
+     * 找区代码对于的区的市
+     * @param code
+     * @return
+     */
     public Region findCity(int code){
         Region region = findRegionByCode(code);
         if (region == null){
@@ -192,7 +220,11 @@ public class RegionModel extends AbsModel {
             return findRegionByCode(region.getParentId());
         }
     }
-
+    /**
+     * 找区代码对于的区
+     * @param code
+     * @return
+     */
     public Region findRegion(int code){
         Region region = findRegionByCode(code);
         if (region == null){

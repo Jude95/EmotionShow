@@ -2,6 +2,10 @@ package com.jude.emotionshow.presentation.widget;
 
 import android.support.v7.widget.RecyclerView;
 
+/**
+ * 实现TopicView的循环滑动
+ * @param <VH>
+ */
 public class LoopRecyclerViewPagerAdapter<VH extends RecyclerView.ViewHolder>
         extends RecyclerViewPagerAdapter<VH> {
 

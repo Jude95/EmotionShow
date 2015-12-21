@@ -87,6 +87,7 @@ public class MainActivity extends BeamBaseActivity<MainPresenter> {
         }
     }
 
+    //显示发现
     void showFind(){
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.show(SeedMainFragment.getInstance());
@@ -94,8 +95,8 @@ public class MainActivity extends BeamBaseActivity<MainPresenter> {
         transaction.commit();
     }
 
+    //显示我
     void showMine(){
-
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.hide(SeedMainFragment.getInstance());
         transaction.show(MineFragment.getInstance());

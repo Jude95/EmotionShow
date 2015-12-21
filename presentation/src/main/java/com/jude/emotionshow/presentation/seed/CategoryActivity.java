@@ -24,6 +24,7 @@ import butterknife.ButterKnife;
 
 /**
  * Created by Mr.Jude on 2015/11/22.
+ * “暗恋”，“热恋”什么的点进去的Activity。
  */
 @RequiresPresenter(CategoryPresenter.class)
 public class CategoryActivity extends BeamDataActivity<CategoryPresenter, CategoryDetail> {
@@ -55,10 +56,15 @@ public class CategoryActivity extends BeamDataActivity<CategoryPresenter, Catego
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_category);
+        /**
+         * 这里加载Header
+         * @see <a href="https://github.com/blipinsk/RecyclerViewHeader"/>
+         */
         RecyclerViewHeader header = RecyclerViewHeader.fromXml(this, R.layout.head_category);
         recycler = (RecyclerView) findViewById(R.id.recycler);
         recycler.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
         header.attachTo(recycler);
+
         ButterKnife.bind(this);
         back.setOnClickListener(v -> finish());
         recycler.setAdapter(adapter = new SeedAdapter(this));
@@ -67,6 +73,7 @@ public class CategoryActivity extends BeamDataActivity<CategoryPresenter, Catego
         });
     }
 
+    //填充Header
     @Override
     public void setData(CategoryDetail data) {
         title.setText(data.getName());

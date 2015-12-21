@@ -1,6 +1,7 @@
 package com.jude.emotionshow.data.model;
 
 import android.content.Context;
+import android.support.annotation.Nullable;
 
 import com.jude.beam.model.AbsModel;
 import com.jude.emotionshow.data.di.DaggerUserComponent;
@@ -37,6 +38,7 @@ public class UserModel extends AbsModel {
 
     @Inject ServiceAPI mServiceAPI;
     private Account userAccountData = null;
+    //有缓存当前帐号的功能，订阅即收到当前帐号和后续变动
     public BehaviorSubject<Account> userAccountDataBehaviorSubject = BehaviorSubject.create();
 
     public static UserModel getInstance() {
@@ -45,17 +47,15 @@ public class UserModel extends AbsModel {
     @Override
     protected void onAppCreate(Context ctx) {
         super.onAppCreate(ctx);
+        //模块注入
         DaggerUserComponent.builder().build().inject(this);
+        //帐号是持久化存储了的，服务器不拒绝(返回400)就永不失效。
         setAccount((Account) JFileManager.getInstance().getFolder(Dir.Object).readObjectFromFile(FILE_ACCOUNT));
-        if (isLogin())
-            updateMyInfo().subscribe(new ServiceResponse<Account>() {
-                @Override
-                public void onServiceError(int status, String info) {
-                }
-            });
+        //当帐号变动就更新JPush
         getAccountUpdate().subscribe(new Action1<Account>() {
             @Override
             public void call(Account account) {
+                //设置别名
                 JPushInterface.setAliasAndTags(ctx,
                         (account != null) ? account.getId() + "" : "",
                         null,
@@ -68,21 +68,25 @@ public class UserModel extends AbsModel {
             }
         });
     }
-
+    //返回帐号的Behavior以供订阅
     public Observable<Account> getAccountUpdate(){
         return userAccountDataBehaviorSubject.compose(new DefaultTransform<>());
     }
-
+    //同步取当前帐号，可能为空
+    @Nullable
     public Account getCurAccount(){
         return userAccountData;
     }
+    //是否登录
     public boolean isLogin(){
         return userAccountData != null;
     }
 
+    //登录
     public Observable<Account> login(String account,String password){
         return mServiceAPI.login(account,password,"0")
                 .doOnNext(account1 -> {
+                    //登录后应用帐号
                     saveAccount(account1);
                     setAccount(account1);
                 })
@@ -97,17 +101,18 @@ public class UserModel extends AbsModel {
                 })
                 .compose(new DefaultTransform<>());
     }
-
+    //更新账号信息
     public Observable<Account> updateMyInfo(){
         return mServiceAPI.getMyInfo()
                 .onErrorResumeNext(Observable.just(null))
                 .doOnNext(account -> {
+                    //应用更新的账号信息
                     saveAccount(account);
                     setAccount(account);
                 })
                 .compose(new DefaultTransform<>());
     }
-
+    //持久化保存帐号
     void saveAccount(Account account){
         if (account == null){
             JFileManager.getInstance().getFolder(Dir.Object).deleteChild(FILE_ACCOUNT);
@@ -115,11 +120,13 @@ public class UserModel extends AbsModel {
             JFileManager.getInstance().getFolder(Dir.Object).writeObjectToFile(account, FILE_ACCOUNT);
         }
     }
-
+    //应用帐号
     void setAccount(Account account){
         userAccountData = account;
+        //发布帐号变动
         userAccountDataBehaviorSubject
                 .onNext(account);
+        //设置帐号，虽然这里不太优雅，应该由他们订阅帐号变动
         if (account!=null){
             ImageModel.UID = account.getId()+"";
             HeaderInterceptors.TOKEN = account.getToken();
@@ -131,6 +138,7 @@ public class UserModel extends AbsModel {
         }
     }
 
+    //发布空帐号即为登出
     public void logout(){
         saveAccount(null);
         setAccount(null);

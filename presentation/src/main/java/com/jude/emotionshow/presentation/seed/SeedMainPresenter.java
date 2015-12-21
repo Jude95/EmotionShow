@@ -18,6 +18,7 @@ import rx.subjects.BehaviorSubject;
  */
 public class SeedMainPresenter extends Presenter<SeedMainFragment> {
 
+    //用Behavior做内存缓存处理，View消失时数据不会消失，View显示时重新订阅就可以收到数据，再进行展示。
     private BehaviorSubject<List<Banner>> mBannerSubject = BehaviorSubject.create();
     private BehaviorSubject<List<Topic>> mTopicSubject = BehaviorSubject.create();
     private BehaviorSubject<List<CategoryPreview>> mCategoryProcessSubject = BehaviorSubject.create();
@@ -56,6 +57,7 @@ public class SeedMainPresenter extends Presenter<SeedMainFragment> {
         mActivitiesSubject.subscribe(data->getView().setActivities(data));
     }
 
+    //主动刷新数据
     public void getCategoryProcess(){
         SeedModel.getInstance().getProcess().subscribe(new ServiceResponse<List<CategoryPreview>>() {
             @Override

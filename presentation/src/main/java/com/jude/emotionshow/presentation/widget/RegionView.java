@@ -21,6 +21,9 @@ import com.jude.library.imageprovider.Utils;
 
 import java.util.ArrayList;
 
+/**
+ * 没什么用的省市区三级联动选择。
+ */
 public class RegionView extends LinearLayout {
         private RecyclerView province;
         private RegionAdapter provinceAdapter;

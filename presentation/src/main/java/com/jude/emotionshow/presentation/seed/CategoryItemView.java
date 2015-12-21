@@ -28,6 +28,7 @@ import butterknife.ButterKnife;
 
 /**
  * Created by Mr.Jude on 2015/11/19.
+ * 暗恋那一排，由CategoryViewGroup动态创建本View
  */
 public class CategoryItemView extends LinearLayout {
 
@@ -57,6 +58,7 @@ public class CategoryItemView extends LinearLayout {
         setOrientation(HORIZONTAL);
         inflate(getContext(), R.layout.view_category_item, this);
         ButterKnife.bind(this, this);
+        //RecyclerView 设置为横向
         list.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         list.setAdapter(adapter = new Adapter(getContext()));
     }
@@ -69,6 +71,7 @@ public class CategoryItemView extends LinearLayout {
         titleZh.setText(categoryPreview.getCategory().getName());
         adapter.clear();
 
+        //更多
         if (categoryPreview.getData().size()>3)
             adapter.addFooter(new RecyclerArrayAdapter.ItemView() {
                 @Override

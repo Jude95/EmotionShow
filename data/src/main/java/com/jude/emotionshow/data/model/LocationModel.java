@@ -36,19 +36,23 @@ public class LocationModel extends AbsModel {
         return JUtils.distance(mLocation.getLongitude(), mLocation.getLatitude(), lng, lat);
     }
 
+    //注册位置变动通知
     public Subscription registerLocationChange(Action1<Location> action1){
         return mLocationSubject.subscribe(action1);
     }
-
+    //取当前位置
     public Location getCurLocation(){
         return mLocation;
     }
 
     @Override
     protected void onAppCreateOnBackThread(Context ctx) {
+        //启动时读取存储的上次的地点，避免不知道选择所处位置的情况。
         mLocation = (Location) JFileManager.getInstance().getFolder(Dir.Object).readObjectFromFile(FILENAME);
+        //如果没有，那我也没办法，new一个，有默认位置。
         if (mLocation == null)mLocation = new Location();
         startLocation(ctx);
+        //先注册一个，位置一变动就保存起来并上传服务器。＝ ＝不要问为什么要搜集用户隐私。
         registerLocationChange(location -> {
             mLocation = location;
             JUtils.Log("Location update"+location.getAddress());
@@ -57,18 +61,23 @@ public class LocationModel extends AbsModel {
         });
     }
 
+    /**
+     * 配置高德
+     * @param ctx
+     */
     public void startLocation(final Context ctx){
         AMapLocationClient mLocationClient = new AMapLocationClient(ctx);
         AMapLocationClientOption option = new AMapLocationClientOption();
         //每分钟取一下最新位置。
         //option.setInterval(60000);
-        //只取一次位置
+        //只取一次位置就够了，我相信他不会移动太多距离，有问题再修改吧。
         option.setOnceLocation(true);
         mLocationClient.setLocationOption(option);
         mLocationClient.setLocationListener(aMapLocation -> {
             JUtils.Log("GetLocation");
-            //只有位置变动时才上传
-            if (!mLocation.equals(createLocation(aMapLocation)))
+            //只有位置变动时才上传，就算每分钟获取，不进行网络请求也不会费电。
+            if (!mLocation.equals(createLocation(aMapLocation)));
+            //位置有变动，发布新位置
             mLocationSubject.onNext(createLocation(aMapLocation));
         });
         mLocationClient.startLocation();
@@ -88,6 +97,9 @@ public class LocationModel extends AbsModel {
         return location;
     }
 
+    /**
+     * 上传用户位置
+     */
     public void uploadAddress(){
         if (UserModel.getInstance().isLogin())
         CommonModel.getInstance().updateAddress(mLocation.getLatitude(), mLocation.getLongitude())

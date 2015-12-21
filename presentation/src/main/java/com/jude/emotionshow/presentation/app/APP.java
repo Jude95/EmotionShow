@@ -67,6 +67,7 @@ public class APP extends Application {
                         return new PaddingTopViewExpansion(activity);
                     }
                 });
+                //当发布空帐户＝退出登录，按情况打开登录界面
                 UserModel.getInstance().getAccountUpdate().subscribe(new Action1<Account>() {
                     @Override
                     public void call(Account account) {
@@ -79,7 +80,9 @@ public class APP extends Application {
                         }
                     }
                 });
+                //融云的回调设置
                 RongYunModel.getInstance().setRongYunDelegate(new RongYunModel.RongYunDelegate() {
+                    //当用户头像被点击
                     @Override
                     public void onPersonClick(Context context, Conversation.ConversationType conversationType, UserInfo userInfo) {
                         Intent i = new Intent(context, UserPreviewActivity.class);

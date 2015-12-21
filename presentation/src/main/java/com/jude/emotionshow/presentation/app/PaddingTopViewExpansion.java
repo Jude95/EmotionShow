@@ -11,6 +11,7 @@ import com.jude.utils.JUtils;
 
 /**
  * Created by zhuchenxi on 15/9/26.
+ * 统一提供每个Activity的视图拓展方法。
  */
 public class PaddingTopViewExpansion extends DefaultViewExpansionDelegate {
     public PaddingTopViewExpansion(BeamBaseActivity activity) {
@@ -19,6 +20,7 @@ public class PaddingTopViewExpansion extends DefaultViewExpansionDelegate {
 
     private MaterialDialog mProgressDialog;
 
+    //给ToolBar的效果做适配，不过本APP没有使用Toolbar
     @Override
     public void setToolbar(View view) {
         Toolbar toolbar = (Toolbar)view.findViewById(com.jude.beam.R.id.toolbar);
@@ -31,6 +33,7 @@ public class PaddingTopViewExpansion extends DefaultViewExpansionDelegate {
         }
     }
 
+    //显示加载Dialog
     @Override
     public void showProgressDialog(String title) {
         if (mProgressDialog!=null)mProgressDialog.dismiss();

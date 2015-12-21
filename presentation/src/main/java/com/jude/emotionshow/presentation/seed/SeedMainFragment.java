@@ -38,6 +38,7 @@ import butterknife.ButterKnife;
 
 /**
  * Created by Mr.Jude on 2015/11/18.
+ * 发现主界面
  */
 @RequiresPresenter(SeedMainPresenter.class)
 public class SeedMainFragment extends BeamFragment<SeedMainPresenter> {
@@ -74,6 +75,10 @@ public class SeedMainFragment extends BeamFragment<SeedMainPresenter> {
         LinearLayoutManager layout = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         seedCards.setLayoutManager(layout);
         seedCards.setHasFixedSize(true);
+        /**
+         *         下面2堆设置TopicView的滑动时尺寸变化的效果，
+         *         @see <a href="https://github.com/lsjwzh/RecyclerViewPager"/>
+         */
         seedCards.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int scrollState) {
@@ -179,7 +184,7 @@ public class SeedMainFragment extends BeamFragment<SeedMainPresenter> {
             }
         });
     }
-
+    //设置活动部分View
     public void setActivities(CategoryPreview categoryPreview){
         if(categoryPreview==null||categoryPreview.getData().size()==0)return;
         activity.setVisibility(View.VISIBLE);
@@ -195,7 +200,7 @@ public class SeedMainFragment extends BeamFragment<SeedMainPresenter> {
         });
     }
 
-
+    //设置精选秀之类的
     public void setTopic(List<Topic> topic) {
         for (Topic topic1 : new ArrayList<>(topic)) {
             if (topic1.getData().size() == 0) {

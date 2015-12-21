@@ -69,6 +69,7 @@ public class SearchActivity extends BeamBaseActivity<SearchPresenter> {
         });
     }
 
+
     class SeedFragmentListAdapter extends FragmentPagerAdapter {
         ArrayList<Fragment> list = new ArrayList<>();
 

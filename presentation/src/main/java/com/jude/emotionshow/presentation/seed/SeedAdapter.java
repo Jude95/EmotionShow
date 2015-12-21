@@ -9,6 +9,7 @@ import com.jude.emotionshow.domain.entities.Seed;
 
 /**
  * Created by Mr.Jude on 2015/11/22.
+ * 印记的适配器，用得少。
  */
 public class SeedAdapter  extends RecyclerArrayAdapter<Seed>{
     public SeedAdapter(Context context) {
