@@ -33,7 +33,7 @@
 
 
         <TextView
-            android:text="印记"
+            android:text="么么记"
             android:layout_centerInParent="true"
             android:textSize="18sp"
             android:textStyle="bold"
