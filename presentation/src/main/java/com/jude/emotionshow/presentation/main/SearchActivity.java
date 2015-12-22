@@ -103,7 +103,7 @@ public class SearchActivity extends BeamBaseActivity<SearchPresenter> {
                 case 0:
                     return "用户";
                 case 1:
-                    return "印记";
+                    return "内容";
                 default:
                     throw new RuntimeException("页数不存在");
             }
