@@ -1,8 +1,8 @@
 package com.jude.emotionshow.presentation.seed;
 
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -62,7 +62,7 @@ public class CategoryActivity extends BeamDataActivity<CategoryPresenter, Catego
          */
         RecyclerViewHeader header = RecyclerViewHeader.fromXml(this, R.layout.head_category);
         recycler = (RecyclerView) findViewById(R.id.recycler);
-        recycler.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
+        recycler.setLayoutManager(new GridLayoutManager(this, 2));
         header.attachTo(recycler);
 
         ButterKnife.bind(this);

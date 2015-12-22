@@ -7,6 +7,7 @@ import com.google.gson.annotations.SerializedName;
  */
 public class CategoryDetail extends Category {
 
+    @SerializedName("zan")
     private int praiseCount;
     @SerializedName("visit")
     private int visitCount;
