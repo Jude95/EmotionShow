@@ -22,7 +22,3 @@ allprojects {
 }
 
 apply from: 'config/dependencies.gradle'
-
-task clean(type: Delete) {
-    delete rootProject.buildDir
-}
