@@ -45,8 +45,8 @@ public class MineFragment extends BeamDataFragment<MinePresenter, Account> {
     TextView fansCount;
     @Bind(R.id.container_fans)
     LinearLayout containerFans;
-    @Bind(R.id.praise_count)
-    TextView praiseCount;
+    @Bind(R.id.follow_count)
+    TextView followCount;
     @Bind(R.id.container_praise)
     LinearLayout containerPraise;
     @Bind(R.id.collect)
@@ -100,7 +100,7 @@ public class MineFragment extends BeamDataFragment<MinePresenter, Account> {
             name.setText("");
             sign.setText("");
             fansCount.setText("0");
-            praiseCount.setText("0");
+            followCount.setText("0");
             scoreCount.setText("0");
             seed.setOnClickListener(null);
         } else {
@@ -111,7 +111,7 @@ public class MineFragment extends BeamDataFragment<MinePresenter, Account> {
             name.setText(data.getName());
             sign.setText(data.getSign());
             scoreCount.setText(data.getCoins()+"");
-            praiseCount.setText("" + data.getPraiseCount());
+            followCount.setText("" + data.getFansCount());
             fansCount.setText("" + data.getFansCount());
             seed.setOnClickListener(v -> {
                 Intent i = new Intent(getContext(), UserDetailActivity.class);
