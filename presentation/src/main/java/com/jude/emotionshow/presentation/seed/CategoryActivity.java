@@ -1,8 +1,8 @@
 package com.jude.emotionshow.presentation.seed;
 
 import android.os.Bundle;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -24,7 +24,7 @@ import butterknife.ButterKnife;
 
 /**
  * Created by Mr.Jude on 2015/11/22.
- * “暗恋”，“热恋”什么的点进去的Activity。
+ * “暗恋”，“热恋”····和“查看更多”什么的点进去的Activity。
  */
 @RequiresPresenter(CategoryPresenter.class)
 public class CategoryActivity extends BeamDataActivity<CategoryPresenter, CategoryDetail> {
@@ -57,14 +57,14 @@ public class CategoryActivity extends BeamDataActivity<CategoryPresenter, Catego
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_category);
         /**
-         * 这里加载Header
+         * 这里加载头部Header
          * @see <a href="https://github.com/blipinsk/RecyclerViewHeader"/>
          */
         RecyclerViewHeader header = RecyclerViewHeader.fromXml(this, R.layout.head_category);
         recycler = (RecyclerView) findViewById(R.id.recycler);
-        recycler.setLayoutManager(new GridLayoutManager(this, 2));
+        //设置成瀑布流的样式
+        recycler.setLayoutManager(new StaggeredGridLayoutManager(2, 1));
         header.attachTo(recycler);
-
         ButterKnife.bind(this);
         back.setOnClickListener(v -> finish());
         recycler.setAdapter(adapter = new SeedAdapter(this));
@@ -78,12 +78,12 @@ public class CategoryActivity extends BeamDataActivity<CategoryPresenter, Catego
     public void setData(CategoryDetail data) {
         title.setText(data.getName());
         Picasso.with(this).load(ImageModel.getLargeImage(data.getBackground())).into(background);
-        seedCount.setText(data.getSeedCount()+"");
-        visitCount.setText(data.getVisitCount()+"");
-        praiseCount.setText(data.getPraiseCount()+"");
+        seedCount.setText(data.getSeedCount() + "");
+        visitCount.setText(data.getVisitCount() + "");
+        praiseCount.setText(data.getPraiseCount() + "");
     }
 
-    public void addSeed(List<Seed> data){
+    public void addSeed(List<Seed> data) {
         adapter.addAll(data);
     }
 }

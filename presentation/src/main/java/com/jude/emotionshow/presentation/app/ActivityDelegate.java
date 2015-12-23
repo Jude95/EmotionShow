@@ -7,7 +7,6 @@ import com.jude.beam.bijection.ActivityLifeCycleDelegate;
 import com.jude.swipbackhelper.SwipeBackHelper;
 import com.jude.utils.JActivityManager;
 import com.umeng.analytics.MobclickAgent;
-
 /**
  * Created by Mr.Jude on 2015/9/9.
  * Activity的生命周期代理，会注入到每个Activity当中。相当于在每个Activity对应毁掉中中执行下面的回调。

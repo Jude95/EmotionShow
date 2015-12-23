@@ -36,6 +36,7 @@ public class CategoryPresenter extends BeamDataActivityPresenter<CategoryActivit
             public void onNext(List<Seed> seeds) {
                 getView().addSeed(seeds);
                 page++;
+             //   JUtils.Toast("第"+page+"页");
             }
         });
     }
