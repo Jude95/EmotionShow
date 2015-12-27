@@ -68,16 +68,17 @@ public class CategoryActivity extends BeamDataActivity<CategoryPresenter, Catego
         mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_widget);
         //设置刷新时动画的颜色，可以设置4个
         mSwipeRefreshLayout.setColorSchemeResources(android.R.color.holo_blue_light, android.R.color.holo_red_light, android.R.color.holo_orange_light, android.R.color.holo_green_light);
-        JUtils.Log("TAG", "刷新不了--------");
+       
         mSwipeRefreshLayout.setOnRefreshListener(() -> {
             new Handler().postDelayed(() -> {
+                JUtils.Log("TAG", "刷新不了--------");
                 mSwipeRefreshLayout.setRefreshing(false);
             }, 3000);
         });
         RecyclerViewHeader header = RecyclerViewHeader.fromXml(this, R.layout.head_category);
         recycler = (RecyclerView) findViewById(R.id.recycler);
         recycler.setLayoutManager(new StaggeredGridLayoutManager(2, 1));
-//        header.attachTo(recycler, false);
+        header.attachTo(recycler, false);
         ButterKnife.bind(this);
         back.setOnClickListener(v -> finish());
         recycler.setAdapter(adapter = new SeedAdapter(this));
