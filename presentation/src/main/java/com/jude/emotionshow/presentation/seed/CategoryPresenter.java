@@ -30,6 +30,18 @@ public class CategoryPresenter extends BeamDataActivityPresenter<CategoryActivit
                 .subscribe(this);
     }
 
+    void refresh(){
+        SeedModel.getInstance().getCategorySeedList(data.getId(),0,data.getType()).subscribe(new ServiceResponse<List<Seed>>(){
+            @Override
+            public void onNext(List<Seed> seeds) {
+                getView().clearSeed();
+                getView().addSeed(seeds);
+                page=1;
+                JUtils.Toast("第" + page + "页");
+            }
+        });
+    }
+
     //加载item的数据
     void loadMore(){
         SeedModel.getInstance().getCategorySeedList(data.getId(),page,data.getType()).subscribe(new ServiceResponse<List<Seed>>(){

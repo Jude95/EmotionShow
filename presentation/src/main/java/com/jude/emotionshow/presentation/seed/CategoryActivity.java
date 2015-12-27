@@ -1,7 +1,6 @@
 package com.jude.emotionshow.presentation.seed;
 
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
@@ -67,9 +66,7 @@ public class CategoryActivity extends BeamDataActivity<CategoryPresenter, Catego
         //设置刷新时动画的颜色
         mSwipeRefreshLayout.setColorSchemeResources(android.R.color.black);
         mSwipeRefreshLayout.setOnRefreshListener(() -> {
-            new Handler().postDelayed(() -> {
-                mSwipeRefreshLayout.setRefreshing(false);
-            }, 3000);
+            getPresenter().refresh();
         });
         RecyclerViewHeader header = RecyclerViewHeader.fromXml(this, R.layout.head_category);
         recycler = (RecyclerView) findViewById(R.id.recycler);
@@ -91,6 +88,11 @@ public class CategoryActivity extends BeamDataActivity<CategoryPresenter, Catego
         seedCount.setText(data.getSeedCount() + "");
         visitCount.setText(data.getVisitCount() + "");
         praiseCount.setText(data.getPraiseCount() + "");
+    }
+
+    public void clearSeed(){
+        mSwipeRefreshLayout.setRefreshing(false);
+        adapter.clear();
     }
 
     public void addSeed(List<Seed> data) {
