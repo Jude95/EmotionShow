@@ -42,11 +42,11 @@
             tools:Text="FUCK" />
     </RelativeLayout>
 
-    <android.support.v4.widget.SwipeRefreshLayout
-        android:id="@+id/swipe_refresh_widget"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:overScrollMode="always">
+    <!--<android.support.v4.widget.SwipeRefreshLayout-->
+        <!--android:id="@+id/swipe_refresh_widget"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:overScrollMode="always">-->
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycler"
@@ -54,7 +54,7 @@
             android:layout_height="wrap_content">
             
         </android.support.v7.widget.RecyclerView>
-    </android.support.v4.widget.SwipeRefreshLayout>
+    <!--</android.support.v4.widget.SwipeRefreshLayout>-->
 </LinearLayout>
 
 
