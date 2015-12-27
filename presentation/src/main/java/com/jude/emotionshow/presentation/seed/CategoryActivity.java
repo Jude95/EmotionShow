@@ -1,6 +1,7 @@
 package com.jude.emotionshow.presentation.seed;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
@@ -50,7 +51,6 @@ public class CategoryActivity extends BeamDataActivity<CategoryPresenter, Catego
     TextView praiseCount;
     @Bind(R.id.container_praise)
     LinearLayout containerPraise;
-
     private SeedAdapter adapter;
     private SwipeRefreshLayout mSwipeRefreshLayout;
 
@@ -62,17 +62,15 @@ public class CategoryActivity extends BeamDataActivity<CategoryPresenter, Catego
          * 这里加载头部Header
          * @see <a href="https://github.com/blipinsk/RecyclerViewHeader"/>
          */
-     /*   //上下拉刷新控件
+        //上下拉刷新控件
         mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_widget);
-        //设置刷新时动画的颜色，可以设置4个
-        mSwipeRefreshLayout.setColorSchemeResources(android.R.color.holo_blue_light, android.R.color.holo_red_light, android.R.color.holo_orange_light, android.R.color.holo_green_light);
-       
+        //设置刷新时动画的颜色
+        mSwipeRefreshLayout.setColorSchemeResources(android.R.color.black);
         mSwipeRefreshLayout.setOnRefreshListener(() -> {
             new Handler().postDelayed(() -> {
-                JUtils.Log("TAG", "刷新不了--------");
                 mSwipeRefreshLayout.setRefreshing(false);
             }, 3000);
-        });*/
+        });
         RecyclerViewHeader header = RecyclerViewHeader.fromXml(this, R.layout.head_category);
         recycler = (RecyclerView) findViewById(R.id.recycler);
         recycler.setLayoutManager(new StaggeredGridLayoutManager(2, 1));

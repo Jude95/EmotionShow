@@ -8,6 +8,7 @@ import com.jude.emotionshow.data.server.ServiceResponse;
 import com.jude.emotionshow.domain.entities.Category;
 import com.jude.emotionshow.domain.entities.CategoryDetail;
 import com.jude.emotionshow.domain.entities.Seed;
+import com.jude.utils.JUtils;
 
 import java.util.List;
 
@@ -36,7 +37,7 @@ public class CategoryPresenter extends BeamDataActivityPresenter<CategoryActivit
             public void onNext(List<Seed> seeds) {
                 getView().addSeed(seeds);
                 page++;
-//                JUtils.Toast("第" + page + "页");
+                JUtils.Toast("第" + page + "页");
             }
         });
     }
