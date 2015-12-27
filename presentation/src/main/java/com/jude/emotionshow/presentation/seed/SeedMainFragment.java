@@ -186,6 +186,7 @@ public class SeedMainFragment extends BeamFragment<SeedMainPresenter> {
     }
     //设置活动部分View
     public void setActivities(CategoryPreview categoryPreview){
+        
         if(categoryPreview==null||categoryPreview.getData().size()==0)return;
         activity.setVisibility(View.VISIBLE);
         activity.setImage(categoryPreview.getData());
