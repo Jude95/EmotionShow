@@ -19,7 +19,7 @@ import butterknife.ButterKnife;
 public class PayViewHolder extends BaseViewHolder<Pay> {
     @Bind(R.id.tv_detail)
     TextView detail;
-    @Bind(R.id.tv_price)
+    @Bind(R.id.tv_money)
     TextView price;
     @Bind(R.id.tv_time)
     TextView time;
