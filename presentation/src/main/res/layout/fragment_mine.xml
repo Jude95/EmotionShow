@@ -1,159 +1,173 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tool="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#efefef">
+    android:background="#efefef"
+    android:orientation="vertical">
+
     <RelativeLayout
         android:layout_width="match_parent"
-        android:background="?colorPrimary"
-        android:layout_height="48dp">
+        android:layout_height="48dp"
+        android:background="?colorPrimary">
 
         <TextView
-            android:text="我"
-            android:layout_centerInParent="true"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:textColor="@color/white"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="我"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
     </RelativeLayout>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
             <RelativeLayout
                 android:id="@+id/container_user"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@android:color/white">
+
                 <ImageView
                     android:id="@+id/avatar"
                     android:layout_width="56dp"
                     android:layout_height="56dp"
-                    android:layout_margin="16dp"/>
+                    android:layout_margin="16dp" />
+
                 <TextView
                     android:id="@+id/name"
+                    style="@style/TextAppearance.AppCompat.Subhead"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    tool:text="Jude"
-                    style="@style/TextAppearance.AppCompat.Subhead"
-                    android:layout_toRightOf="@+id/avatar"
                     android:layout_alignTop="@+id/avatar"
-                    android:layout_marginTop="4dp"/>
+                    android:layout_marginTop="4dp"
+                    android:layout_toRightOf="@+id/avatar"
+                    tool:text="Jude" />
+
                 <TextView
                     android:id="@+id/sign"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_toRightOf="@+id/avatar"
                     android:layout_alignBottom="@+id/avatar"
                     android:layout_marginBottom="4dp"
                     android:layout_toLeftOf="@+id/head_arrows"
-                    android:singleLine="true"
+                    android:layout_toRightOf="@+id/avatar"
                     android:ellipsize="end"
-                    tool:text="标题注解：新番源自日语词汇“新番组”，意思是新节目。许多情况下，新番可以说就是新番动画的代名词。"/>
+                    android:singleLine="true"
+                    tool:text="标题注解：新番源自日语词汇“新番组”，意思是新节目。许多情况下，新番可以说就是新番动画的代名词。" />
 
                 <ImageView
                     android:id="@+id/head_arrows"
                     android:layout_width="16dp"
                     android:layout_height="16dp"
-                    android:src="@drawable/arrow_right"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="16dp"
-                    android:layout_marginLeft="16dp"
-                    android:layout_alignTop="@+id/avatar"
                     android:layout_alignBottom="@+id/avatar"
-                    />
+                    android:layout_alignParentRight="true"
+                    android:layout_alignTop="@+id/avatar"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:src="@drawable/arrow_right" />
 
 
             </RelativeLayout>
 
 
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="4dp"
+                android:background="@android:color/white"
                 android:paddingBottom="4dp"
-                android:background="@android:color/white">
+                android:paddingTop="4dp">
+
                 <LinearLayout
                     android:id="@+id/container_score"
                     android:layout_width="0dp"
+                    android:layout_height="48dp"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:orientation="vertical"
-                    android:layout_height="48dp">
+                    android:orientation="vertical">
+
                     <TextView
                         android:id="@+id/score_count"
+                        style="@style/TextAppearance.AppCompat.Body1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="0"
-                        style="@style/TextAppearance.AppCompat.Body1"
-                        tool:text="400"/>
+                        tool:text="400" />
+
                     <TextView
+                        style="@style/TextAppearance.AppCompat.Body2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="幸福币"
-                        style="@style/TextAppearance.AppCompat.Body2" />
+                        android:text="幸福币" />
                 </LinearLayout>
+
                 <View
                     android:layout_width="0.5dp"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="4dp"
                     android:layout_marginBottom="4dp"
-                    android:background="@color/gray"/>
+                    android:layout_marginTop="4dp"
+                    android:background="@color/gray" />
+
                 <LinearLayout
                     android:id="@+id/container_fans"
                     android:layout_width="0dp"
+                    android:layout_height="48dp"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:orientation="vertical"
-                    android:layout_height="48dp">
+                    android:orientation="vertical">
+
                     <TextView
                         android:id="@+id/fans_count"
+                        style="@style/TextAppearance.AppCompat.Body1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="0"
-                        style="@style/TextAppearance.AppCompat.Body1"
-                        tool:text="400"/>
+                        tool:text="400" />
+
                     <TextView
+                        style="@style/TextAppearance.AppCompat.Body2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="粉丝"
-                        style="@style/TextAppearance.AppCompat.Body2" />
+                        android:text="粉丝" />
                 </LinearLayout>
+
                 <View
                     android:layout_width="0.5dp"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="4dp"
                     android:layout_marginBottom="4dp"
-                    android:background="@color/gray"/>
+                    android:layout_marginTop="4dp"
+                    android:background="@color/gray" />
 
                 <LinearLayout
                     android:id="@+id/container_praise"
                     android:layout_width="0dp"
+                    android:layout_height="48dp"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:orientation="vertical"
-                    android:layout_height="48dp">
+                    android:orientation="vertical">
+
                     <TextView
                         android:id="@+id/follow_count"
+                        style="@style/TextAppearance.AppCompat.Body1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="0"
-                        style="@style/TextAppearance.AppCompat.Body1"
-                        tool:text="400"/>
+                        tool:text="400" />
+
                     <TextView
+                        style="@style/TextAppearance.AppCompat.Body2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="关注"
-                        style="@style/TextAppearance.AppCompat.Body2" />
+                        android:text="关注" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -161,189 +175,293 @@
                 android:id="@+id/collect"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
                 android:layout_marginTop="16dp"
-                android:background="@android:color/white">
+                android:background="@android:color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
                 <ImageView
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:layout_marginLeft="@dimen/activity_margin"
                     android:layout_marginRight="@dimen/activity_margin"
-                    android:src="@drawable/collection"/>
+                    android:src="@drawable/collection" />
+
                 <TextView
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
                     style="@style/Base.TextAppearance.AppCompat.Body1"
-                    android:text="我的收藏"/>
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="我的收藏" />
+
                 <ImageView
                     android:layout_width="16dp"
                     android:layout_height="16dp"
-                    android:src="@drawable/arrow_right"
                     android:layout_marginRight="16dp"
-                    />
+                    android:src="@drawable/arrow_right" />
             </LinearLayout>
+
             <LinearLayout
                 android:id="@+id/seed"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:orientation="horizontal"
+                android:background="@android:color/white"
                 android:gravity="center_vertical"
-                android:background="@android:color/white">
+                android:orientation="horizontal">
+
                 <ImageView
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:layout_marginLeft="@dimen/activity_margin"
                     android:layout_marginRight="@dimen/activity_margin"
-                    android:src="@drawable/seed"/>
+                    android:src="@drawable/seed" />
+
                 <TextView
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
                     style="@style/Base.TextAppearance.AppCompat.Body1"
-                    android:text="么么记"/>
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="么么记" />
+
                 <ImageView
                     android:layout_width="16dp"
                     android:layout_height="16dp"
-                    android:src="@drawable/arrow_right"
                     android:layout_marginRight="16dp"
-                    />
+                    android:src="@drawable/arrow_right" />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/friends"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:orientation="horizontal"
+                android:background="@android:color/white"
                 android:gravity="center_vertical"
-                android:background="@android:color/white">
+                android:orientation="horizontal">
+
                 <ImageView
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:layout_marginLeft="@dimen/activity_margin"
                     android:layout_marginRight="@dimen/activity_margin"
-                    android:src="@drawable/friends"/>
+                    android:src="@drawable/friends" />
+
                 <TextView
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
                     style="@style/Base.TextAppearance.AppCompat.Body1"
-                    android:text="我的朋友"/>
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="我的朋友" />
+
                 <ImageView
                     android:layout_width="16dp"
                     android:layout_height="16dp"
-                    android:src="@drawable/arrow_right"
                     android:layout_marginRight="16dp"
-                    />
+                    android:src="@drawable/arrow_right" />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/chats"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:orientation="horizontal"
+                android:background="@android:color/white"
                 android:gravity="center_vertical"
-                android:background="@android:color/white">
+                android:orientation="horizontal">
+
                 <ImageView
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:layout_marginLeft="@dimen/activity_margin"
                     android:layout_marginRight="@dimen/activity_margin"
-                    android:src="@drawable/chatlist"/>
+                    android:src="@drawable/chatlist" />
+
                 <TextView
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
                     style="@style/Base.TextAppearance.AppCompat.Body1"
-                    android:text="我的聊天"/>
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="我的聊天" />
+
                 <ImageView
                     android:layout_width="16dp"
                     android:layout_height="16dp"
-                    android:src="@drawable/arrow_right"
                     android:layout_marginRight="16dp"
-                    />
+                    android:src="@drawable/arrow_right" />
             </LinearLayout>
 
+            <LinearLayout
+                android:id="@+id/ll_order"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginTop="16dp"
+                android:background="@android:color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginLeft="@dimen/activity_margin"
+                    android:layout_marginRight="@dimen/activity_margin"
+                    android:src="@drawable/message" />
+
+                <TextView
+                    style="@style/Base.TextAppearance.AppCompat.Body1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="我的订单" />
+
+                <ImageView
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:layout_marginRight="16dp"
+                    android:src="@drawable/arrow_right" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_money"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@android:color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginLeft="@dimen/activity_margin"
+                    android:layout_marginRight="@dimen/activity_margin"
+                    android:src="@drawable/setting" />
+
+                <TextView
+                    style="@style/Base.TextAppearance.AppCompat.Body1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="幸福币明细" />
+
+                <ImageView
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:layout_marginRight="16dp"
+                    android:src="@drawable/arrow_right" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_address"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@android:color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginLeft="@dimen/activity_margin"
+                    android:layout_marginRight="@dimen/activity_margin"
+                    android:src="@drawable/about" />
+
+                <TextView
+                    style="@style/Base.TextAppearance.AppCompat.Body1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="收货地址管理" />
+
+                <ImageView
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:layout_marginRight="16dp"
+                    android:src="@drawable/arrow_right" />
+            </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/message"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
                 android:layout_marginTop="16dp"
-                android:background="@android:color/white">
+                android:background="@android:color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
                 <ImageView
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:layout_marginLeft="@dimen/activity_margin"
                     android:layout_marginRight="@dimen/activity_margin"
-                    android:src="@drawable/message"/>
+                    android:src="@drawable/message" />
+
                 <TextView
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
                     style="@style/Base.TextAppearance.AppCompat.Body1"
-                    android:text="消息"/>
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="消息" />
+
                 <ImageView
                     android:layout_width="16dp"
                     android:layout_height="16dp"
-                    android:src="@drawable/arrow_right"
                     android:layout_marginRight="16dp"
-                    />
+                    android:src="@drawable/arrow_right" />
             </LinearLayout>
+
             <LinearLayout
                 android:id="@+id/setting"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:orientation="horizontal"
+                android:background="@android:color/white"
                 android:gravity="center_vertical"
-                android:background="@android:color/white">
+                android:orientation="horizontal">
+
                 <ImageView
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:layout_marginLeft="@dimen/activity_margin"
                     android:layout_marginRight="@dimen/activity_margin"
-                    android:src="@drawable/setting"/>
+                    android:src="@drawable/setting" />
+
                 <TextView
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
                     style="@style/Base.TextAppearance.AppCompat.Body1"
-                    android:text="设置"/>
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="设置" />
+
                 <ImageView
                     android:layout_width="16dp"
                     android:layout_height="16dp"
-                    android:src="@drawable/arrow_right"
                     android:layout_marginRight="16dp"
-                    />
+                    android:src="@drawable/arrow_right" />
             </LinearLayout>
+
             <LinearLayout
                 android:id="@+id/about"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:orientation="horizontal"
+                android:background="@android:color/white"
                 android:gravity="center_vertical"
-                android:background="@android:color/white">
+                android:orientation="horizontal">
+
                 <ImageView
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:layout_marginLeft="@dimen/activity_margin"
                     android:layout_marginRight="@dimen/activity_margin"
-                    android:src="@drawable/about"/>
+                    android:src="@drawable/about" />
+
                 <TextView
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
                     style="@style/Base.TextAppearance.AppCompat.Body1"
-                    android:text="关于"/>
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="关于" />
+
                 <ImageView
                     android:layout_width="16dp"
                     android:layout_height="16dp"
-                    android:src="@drawable/arrow_right"
                     android:layout_marginRight="16dp"
-                    />
+                    android:src="@drawable/arrow_right" />
             </LinearLayout>
         </LinearLayout>
 

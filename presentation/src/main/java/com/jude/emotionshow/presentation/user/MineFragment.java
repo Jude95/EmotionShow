@@ -19,6 +19,9 @@ import com.jude.emotionshow.data.model.RongYunModel;
 import com.jude.emotionshow.domain.entities.Account;
 import com.jude.emotionshow.presentation.setting.AboutActivity;
 import com.jude.emotionshow.presentation.setting.SettingActivity;
+import com.jude.emotionshow.presentation.shop.AddressListActivity;
+import com.jude.emotionshow.presentation.shop.PayDetailActivity;
+import com.jude.emotionshow.presentation.shop.OrderListActivity;
 import com.jude.emotionshow.presentation.widget.CircleTransform;
 import com.squareup.picasso.Picasso;
 
@@ -67,6 +70,12 @@ public class MineFragment extends BeamDataFragment<MinePresenter, Account> {
     LinearLayout chats;
     @Bind(R.id.message)
     LinearLayout message;
+    @Bind(R.id.ll_order)
+    LinearLayout order;
+    @Bind(R.id.ll_money)
+    LinearLayout money;
+    @Bind(R.id.ll_address)
+    LinearLayout address;
 
     public static MineFragment getInstance() {
         if (instance == null) instance = new MineFragment();
@@ -89,6 +98,9 @@ public class MineFragment extends BeamDataFragment<MinePresenter, Account> {
         friends.setOnClickListener(v -> startActivity(new Intent(getActivity(), FriendsActivity.class)));
         chats.setOnClickListener(v-> RongYunModel.getInstance().chatList(getActivity()));
         message.setOnClickListener(v -> startActivity(new Intent(getActivity(), NotifyActivity.class)));
+        order.setOnClickListener(v -> startActivity(new Intent(getActivity(), OrderListActivity.class)));
+        money.setOnClickListener(v -> startActivity(new Intent(getActivity(), PayDetailActivity.class)));
+        address.setOnClickListener(v -> startActivity(new Intent(getActivity(), AddressListActivity.class)));
         return view;
     }
 

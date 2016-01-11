@@ -116,7 +116,7 @@ dependencies {
     compile project(':domain')
     compile project(':umengfamily')
     compile project(':jpush')
-
+    compile project(':flowlayout-lib')
 }
 
 def buildTime() {
