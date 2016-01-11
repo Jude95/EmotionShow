@@ -56,7 +56,7 @@ public class ShopModel extends AbsModel {
         return mServiceAPI.getGoodsDetail(id).compose(new DefaultTransform<>());
     }
 
-    public Observable<Object> confirmOrder(int gid, int num, String info, String address, String name, String phone, String postCode) {
+    public Observable<Order> confirmOrder(int gid, int num, String info, String address, String name, String phone, String postCode) {
         return mServiceAPI.order(gid, num, info, address, name, phone, postCode).compose(new DefaultTransform<>());
     }
 

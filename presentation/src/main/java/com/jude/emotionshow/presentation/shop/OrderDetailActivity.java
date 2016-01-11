@@ -90,7 +90,8 @@ public class OrderDetailActivity extends BeamDataActivity<OrderDetailPresenter, 
         money.setText(data.getPrice());
         num.setText(data.getNum() + "");
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        time.setText(sdf.format(new Date(data.getTime() * 100)));
+        JUtils.Log("time:"+data.getTime()*1000+" "+new Date().getTime());
+        time.setText(sdf.format(new Date(data.getTime() * 1000)));
         name.setText(data.getName());
         phone.setText(data.getPhone());
         address.setText(data.getAddress());

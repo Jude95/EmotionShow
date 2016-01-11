@@ -37,16 +37,17 @@ public class OrderConfirmPresenter extends Presenter<OrderConfirmActivity> {
         getView().setView(order);
     }
 
+    //确认订单，成功后返回订单
     public void confirmOrder(Address address) {
         ShopModel.getInstance().confirmOrder(order.getGid(), order.getNum(), order.getInfo(),
                 address.getCity() + address.getAddress(), address.getName(),
                 address.getPhone(), address.getAddcode())
-                .subscribe(new ServiceResponse<Object>() {
+                .subscribe(new ServiceResponse<Order>() {
                     @Override
-                    public void onNext(Object o) {
+                    public void onNext(Order o) {
                         JUtils.Toast("提交成功");
                         Intent intent = new Intent(getView(),OrderSuccessActivity.class);
-                        intent.putExtra("id",order.getId());
+                        intent.putExtra("id",o.getId());
                         getView().startActivity(intent);
                         getView().finish();
                     }

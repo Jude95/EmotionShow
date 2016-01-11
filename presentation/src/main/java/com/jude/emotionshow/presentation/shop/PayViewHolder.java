@@ -36,6 +36,6 @@ public class PayViewHolder extends BaseViewHolder<Pay> {
         detail.setText(data.getInfo());
         price.setText(data.getCoins());
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        time.setText(sdf.format(new Date(data.getTime() * 100)));
+        time.setText(sdf.format(new Date(data.getTime() * 1000)));
     }
 }

@@ -340,7 +340,7 @@ public interface ServiceAPI {
 
     @FormUrlEncoded
     @POST("/home/shop/order")
-    Observable<Object> order(
+    Observable<Order> order(
             @Field("gid")int gid,
             @Field("num")int num,
             @Field("info")String info,

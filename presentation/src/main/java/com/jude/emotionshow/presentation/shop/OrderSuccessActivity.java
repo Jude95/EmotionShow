@@ -23,5 +23,7 @@ public class OrderSuccessActivity extends BeamBaseActivity<OrderSuccessPresenter
             startActivity(intent);
             finish();
         });
+        $(R.id.back).setOnClickListener(v -> finish());
+        $(R.id.tg_back).setOnClickListener(v -> finish());
     }
 }

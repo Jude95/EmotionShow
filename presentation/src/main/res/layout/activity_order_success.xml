@@ -65,7 +65,7 @@
             app:tag_text="查看订单" />
 
         <com.jude.tagview.TAGView
-            android:id="@+id/tg_shop"
+            android:id="@+id/tg_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
