@@ -2,7 +2,6 @@ package com.jude.emotionshow.presentation.main;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.app.FragmentTransaction;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -14,6 +13,7 @@ import com.jude.beam.expansion.BeamBaseActivity;
 import com.jude.emotionshow.R;
 import com.jude.emotionshow.data.model.UserModel;
 import com.jude.emotionshow.presentation.seed.SeedMainFragment;
+import com.jude.emotionshow.presentation.shop.ShopMainFragment;
 import com.jude.emotionshow.presentation.user.LoginActivity;
 import com.jude.emotionshow.presentation.user.MineFragment;
 import com.jude.swipbackhelper.SwipeBackHelper;
@@ -33,8 +33,10 @@ public class MainActivity extends BeamBaseActivity<MainPresenter> {
     LinearLayout find;
     @Bind(R.id.mine)
     LinearLayout mine;
+    @Bind(R.id.ll_shop)
+    LinearLayout shop;
     @Bind(R.id.kiss)
-    ImageView kiss;
+    LinearLayout kiss;
     @Bind(R.id.img_find)
     ImageView imgFind;
     @Bind(R.id.tv_find)
@@ -43,6 +45,10 @@ public class MainActivity extends BeamBaseActivity<MainPresenter> {
     ImageView imgMine;
     @Bind(R.id.tv_mine)
     TextView tvMine;
+    @Bind(R.id.iv_shop)
+    ImageView ivShop;
+    @Bind(R.id.tv_shop)
+    TextView tvShop;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +59,7 @@ public class MainActivity extends BeamBaseActivity<MainPresenter> {
         find.setOnClickListener(v -> {
             focusFind(true);
             focusMine(false);
+            focusShop(false);
             showFind();
         });
         mine.setOnClickListener(v -> {
@@ -62,12 +69,20 @@ public class MainActivity extends BeamBaseActivity<MainPresenter> {
             }
             focusFind(false);
             focusMine(true);
+            focusShop(false);
             showMine();
+        });
+        shop.setOnClickListener(v -> {
+            focusFind(false);
+            focusMine(false);
+            focusShop(true);
+            showShop();
         });
         kiss.setOnClickListener(v-> getPresenter().createSeed());
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.add(R.id.container, MineFragment.getInstance());
         transaction.add(R.id.container, SeedMainFragment.getInstance());
+        transaction.add(R.id.container,ShopMainFragment.getInstance());
         transaction.commit();
         showFind();
     }
@@ -75,16 +90,16 @@ public class MainActivity extends BeamBaseActivity<MainPresenter> {
     @Override
     protected void onResume() {
         super.onResume();
-        if (!UserModel.getInstance().isLogin()){
-            focusFind(true);
-            focusMine(false);
-            new Handler().post(new Runnable() {
-                @Override
-                public void run() {
-                    showFind();
-                }
-            });
-        }
+//        if (!UserModel.getInstance().isLogin()){
+//            focusFind(true);
+//            focusMine(false);
+//            new Handler().post(new Runnable() {
+//                @Override
+//                public void run() {
+//                    showFind();
+//                }
+//            });
+//        }
     }
 
     //显示发现
@@ -92,6 +107,7 @@ public class MainActivity extends BeamBaseActivity<MainPresenter> {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.show(SeedMainFragment.getInstance());
         transaction.hide(MineFragment.getInstance());
+        transaction.hide(ShopMainFragment.getInstance());
         transaction.commit();
     }
 
@@ -100,6 +116,15 @@ public class MainActivity extends BeamBaseActivity<MainPresenter> {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.hide(SeedMainFragment.getInstance());
         transaction.show(MineFragment.getInstance());
+        transaction.hide(ShopMainFragment.getInstance());
+        transaction.commit();
+    }
+
+    private void showShop(){
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.show(ShopMainFragment.getInstance());
+        transaction.hide(MineFragment.getInstance());
+        transaction.hide(SeedMainFragment.getInstance());
         transaction.commit();
     }
 
@@ -111,5 +136,10 @@ public class MainActivity extends BeamBaseActivity<MainPresenter> {
     void focusMine(boolean focus) {
         imgMine.setImageResource(focus ? R.drawable.mine_red : R.drawable.mine_gray);
         tvMine.setTextColor(getResources().getColor(focus ? R.color.orange_deep : R.color.gray));
+    }
+
+    private void focusShop(boolean focus){
+        ivShop.setImageResource(focus ? R.drawable.ic_shop_red : R.drawable.ic_shop_gray);
+        tvShop.setTextColor(getResources().getColor(focus ? R.color.orange_deep : R.color.gray));
     }
 }

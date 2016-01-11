@@ -1,1 +1,1 @@
-include ':presentation', ':data', ':domain', ':umengfamily', ':IMKit', ':jpush'
+include ':presentation', ':data', ':domain', ':umengfamily', ':IMKit', ':jpush',':flowlayout-lib'

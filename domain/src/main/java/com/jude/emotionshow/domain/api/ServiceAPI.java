@@ -2,11 +2,17 @@ package com.jude.emotionshow.domain.api;
 
 
 import com.jude.emotionshow.domain.entities.Account;
+import com.jude.emotionshow.domain.entities.Address;
 import com.jude.emotionshow.domain.entities.Banner;
 import com.jude.emotionshow.domain.entities.Category;
 import com.jude.emotionshow.domain.entities.CategoryDetail;
 import com.jude.emotionshow.domain.entities.CategoryPreview;
+import com.jude.emotionshow.domain.entities.Goods;
+import com.jude.emotionshow.domain.entities.GoodsDetail;
 import com.jude.emotionshow.domain.entities.Notify;
+import com.jude.emotionshow.domain.entities.Order;
+import com.jude.emotionshow.domain.entities.OrderDetail;
+import com.jude.emotionshow.domain.entities.Pay;
 import com.jude.emotionshow.domain.entities.PersonBrief;
 import com.jude.emotionshow.domain.entities.PersonDetail;
 import com.jude.emotionshow.domain.entities.PushSet;
@@ -307,4 +313,50 @@ public interface ServiceAPI {
     @POST("/home/history/del")
     Observable<Object> deleteSeed(
             @Field("id") int id);
+
+    @FormUrlEncoded
+    @POST("/home/shop/addAddress")
+    Observable<Object> addAddress(
+            @Field("name")String name,
+            @Field("phone")String phone,
+            @Field("city")String city,
+            @Field("address")String address,
+            @Field("addcode")String addcode);
+
+    @GET("/home/shop/getAddress")
+    Observable<List<Address>> getAddressList();
+
+    @FormUrlEncoded
+    @POST("/home/shop/delAddress")
+    Observable<Object> delAddress(@Field("id")int id);
+
+    @FormUrlEncoded
+    @POST("/home/shop/goodsList")
+    Observable<List<Goods>> getGoodsList(@Field("type")int type,@Field("page")int page,@Field("order")int sort);
+
+    @FormUrlEncoded
+    @POST("/home/shop/goodsItem")
+    Observable<GoodsDetail> getGoodsDetail(@Field("id")int id);
+
+    @FormUrlEncoded
+    @POST("/home/shop/order")
+    Observable<Object> order(
+            @Field("gid")int gid,
+            @Field("num")int num,
+            @Field("info")String info,
+            @Field("address") String address,
+            @Field("name")String name,
+            @Field("phone")String phone,
+            @Field("addcode")String postCode);
+
+    @GET("/home/shop/myOrder")
+    Observable<List<Order>> getOrderList();
+
+    @FormUrlEncoded
+    @POST("/home/shop/orderItem")
+    Observable<OrderDetail> getOrderItem(@Field("id")int id);
+
+    @FormUrlEncoded
+    @POST("/home/user/coinsRecode")
+    Observable<List<Pay>> getPayList(@Field("cost")int cost,@Field("page")int page);
 }

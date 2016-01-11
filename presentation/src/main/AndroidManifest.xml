@@ -147,6 +147,14 @@
                     android:scheme="rong" />
             </intent-filter>
         </activity>
+        <activity android:name=".presentation.shop.GoodsDetailActivity" android:windowSoftInputMode="stateHidden|adjustPan"/>
+        <activity android:name=".presentation.shop.OrderConfirmActivity"/>
+        <activity android:name=".presentation.shop.OrderSuccessActivity"/>
+        <activity android:name=".presentation.shop.AddressAddActivity"/>
+        <activity android:name=".presentation.shop.AddressListActivity"/>
+        <activity android:name=".presentation.shop.PayDetailActivity"/>
+        <activity android:name=".presentation.shop.OrderDetailActivity"/>
+        <activity android:name=".presentation.shop.OrderListActivity"/>
         <!-- User defined. 用户自定义的广播接收器-->
         <receiver
             android:name=".presentation.app.PushReceiver"

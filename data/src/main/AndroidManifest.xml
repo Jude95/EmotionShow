@@ -15,7 +15,8 @@
             com.jude.emotionshow.data.model.RegionModel,
             com.jude.emotionshow.data.model.UserModel,
             com.jude.emotionshow.data.model.RongYunModel,
-            com.jude.emotionshow.data.model.LocationModel"
+            com.jude.emotionshow.data.model.LocationModel,
+            com.jude.emotionshow.data.model.ShopModel"
             />
     </application>
 

@@ -17,7 +17,7 @@ import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.jude.emotionshow.R;
 import com.jude.emotionshow.data.model.RegionModel;
 import com.jude.emotionshow.domain.entities.Region;
-import com.jude.library.imageprovider.Utils;
+import com.jude.utils.JUtils;
 
 import java.util.ArrayList;
 
@@ -67,7 +67,7 @@ public class RegionView extends LinearLayout {
 
 
             View divider1 = new View(getContext());
-            divider1.setLayoutParams(new LayoutParams(Utils.dip2px(0.3f), ViewGroup.LayoutParams.MATCH_PARENT));
+            divider1.setLayoutParams(new LayoutParams(JUtils.dip2px(0.3f), ViewGroup.LayoutParams.MATCH_PARENT));
             divider1.setBackgroundColor(Color.GRAY);
             addView(divider1);
 
@@ -87,7 +87,7 @@ public class RegionView extends LinearLayout {
             addView(city);
 
             View divider2 = new View(getContext());
-            divider2.setLayoutParams(new LayoutParams(Utils.dip2px(0.3f), ViewGroup.LayoutParams.MATCH_PARENT));
+            divider2.setLayoutParams(new LayoutParams(JUtils.dip2px(0.3f), ViewGroup.LayoutParams.MATCH_PARENT));
             divider2.setBackgroundColor(Color.GRAY);
             addView(divider2);
 
@@ -161,11 +161,11 @@ public class RegionView extends LinearLayout {
                 public RegionVH(View view) {
                     super(new MaterialRippleLayout(view.getContext()));
                     tv = new TextView(getContext());
-                    tv.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, Utils.dip2px(48)));
+                    tv.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, JUtils.dip2px(48)));
                     tv.setGravity(Gravity.CENTER);
                     ((MaterialRippleLayout)itemView).addView(tv);
                     ((MaterialRippleLayout)itemView).setRippleColor(getContext().getResources().getColor(R.color.gray));
-                    itemView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, Utils.dip2px(48)));
+                    itemView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, JUtils.dip2px(48)));
                 }
 
                 @Override
@@ -175,7 +175,7 @@ public class RegionView extends LinearLayout {
                     itemView.setOnClickListener(new OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            Utils.Log("onClick");
+                            JUtils.Log("onClick");
                             callback.selected(rg);
                         }
                     });
@@ -204,12 +204,12 @@ public class RegionView extends LinearLayout {
             public View onCreateView(ViewGroup parent) {
                 MaterialRippleLayout layout = new MaterialRippleLayout(getContext());
                 TextView tv = new TextView(parent.getContext());
-                tv.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, Utils.dip2px(48)));
+                tv.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, JUtils.dip2px(48)));
                 tv.setGravity(Gravity.CENTER);
                 tv.setText(title);
                 layout.addView(tv);
                 layout.setRippleColor(getContext().getResources().getColor(R.color.gray));
-                layout.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, Utils.dip2px(48)));
+                layout.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, JUtils.dip2px(48)));
 
                 return layout;
             }
@@ -219,7 +219,7 @@ public class RegionView extends LinearLayout {
                 headerView.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Utils.Log("onClick");
+                        JUtils.Log("onClick");
                         callback.selected(region);
                     }
                 });
