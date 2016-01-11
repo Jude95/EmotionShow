@@ -52,6 +52,7 @@ public class OrderDetailActivity extends BeamDataActivity<OrderDetailPresenter, 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_detail);
         ButterKnife.bind(this);
+        $(R.id.back).setOnClickListener(v -> finish());
     }
 
     @OnClick(R.id.tv_copy)

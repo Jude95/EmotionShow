@@ -66,13 +66,12 @@
                 android:id="@+id/tv_goods_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="name" />
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/tv_goods_des"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="类型描述" />
+                android:layout_height="wrap_content" />
 
             <View
                 android:layout_width="match_parent"
@@ -109,8 +108,7 @@
                 <TextView
                     android:id="@+id/tv_num"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="1" />
+                    android:layout_height="wrap_content"/>
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
@@ -118,7 +116,8 @@
     <TextView
         android:id="@+id/tv_time"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/activity_margin" />
 
     <View
         android:layout_width="match_parent"
@@ -151,7 +150,8 @@
         <TextView
             android:id="@+id/tv_phone"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:textSize="18sp" />
     </LinearLayout>
 
     <LinearLayout

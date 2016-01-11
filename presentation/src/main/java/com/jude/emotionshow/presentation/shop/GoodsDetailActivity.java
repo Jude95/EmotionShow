@@ -198,10 +198,6 @@ public class GoodsDetailActivity extends BeamDataActivity<GoodsDetailPresenter, 
     public boolean headerFootReached(MotionEvent event) {
         if (contentScrollView.getScrollY() + contentScrollView.getHeight() >= content.getHeight()) {
             if (!hasLoaded) {
-                if (TextUtils.isEmpty(intro)) {
-                    err.setVisibility(View.VISIBLE);
-                    return true;
-                }
                 hasLoaded = true;
                 webView.loadUrl(intro);
             }
@@ -214,7 +210,6 @@ public class GoodsDetailActivity extends BeamDataActivity<GoodsDetailPresenter, 
     public boolean footerHeadReached(MotionEvent event) {
         //下拉返回点
         if (webView.getScrollY() == 0) {
-            err.setVisibility(View.GONE);
             return true;
         }
         return false;
@@ -224,9 +219,13 @@ public class GoodsDetailActivity extends BeamDataActivity<GoodsDetailPresenter, 
     @Override
     public void onPageChanged(int stub) {
         if (stub == GoodsDetailLayout.SCREEN_FOOTER) {
+            if (TextUtils.isEmpty(intro)) {
+                err.setVisibility(View.VISIBLE);
+            }
             isWebViewPage = true;
             ok.animate().translationY(JUtils.dip2px(48)).setDuration(500);
         } else {
+            err.setVisibility(View.GONE);
             isWebViewPage = false;
             ok.animate().translationY(0).setDuration(500);
         }

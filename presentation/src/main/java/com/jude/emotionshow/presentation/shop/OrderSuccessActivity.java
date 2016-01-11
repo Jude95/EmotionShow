@@ -11,14 +11,17 @@ import com.jude.emotionshow.R;
  * Created by mike on 2015/12/25.
  */
 @RequiresPresenter(OrderSuccessPresenter.class)
-public class OrderSuccessActivity extends BeamBaseActivity<OrderSuccessPresenter>{
+public class OrderSuccessActivity extends BeamBaseActivity<OrderSuccessPresenter> {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_success);
 
-        Intent intent = new Intent(OrderSuccessActivity.this,OrderDetailActivity.class);
-        intent.putExtra("id",getIntent().getIntExtra("id",-1));
-        $(R.id.tg_order_detail).setOnClickListener(v -> startActivity(intent));
+        Intent intent = new Intent(OrderSuccessActivity.this, OrderDetailActivity.class);
+        intent.putExtra("id", getIntent().getIntExtra("id", -1));
+        $(R.id.tg_order_detail).setOnClickListener(v -> {
+            startActivity(intent);
+            finish();
+        });
     }
 }

@@ -1,5 +1,6 @@
 package com.jude.emotionshow.presentation.shop;
 
+import android.content.Intent;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -37,6 +38,11 @@ public class OrderViewHolder extends BaseViewHolder<Order> {
         name.setText(data.getGoodsName());
         des.setText(data.getInfo());
         money.setText(data.getPrice());
-        num.setText(data.getNum());
+        num.setText(data.getNum()+"");
+        itemView.setOnClickListener(v -> {
+            Intent intent = new Intent(getContext(),OrderDetailActivity.class);
+            intent.putExtra("id",data.getId());
+            getContext().startActivity(intent);
+        });
     }
 }
