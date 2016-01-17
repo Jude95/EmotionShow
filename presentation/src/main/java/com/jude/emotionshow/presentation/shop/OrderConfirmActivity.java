@@ -100,7 +100,11 @@ public class OrderConfirmActivity extends BeamBaseActivity<OrderConfirmPresenter
     }
 
     public void setView(Order order) {
-        Picasso.with(OrderConfirmActivity.this).load(order.getPic()).into(img);
+        if (TextUtils.isEmpty(order.getPic())){
+            Picasso.with(OrderConfirmActivity.this).load(R.mipmap.ic_launcher).into(img);
+        }else {
+            Picasso.with(OrderConfirmActivity.this).load(order.getPic()).into(img);
+        }
         name.setText(order.getGoodsName());
         des.setText(TextUtils.isEmpty(order.getDes()) ? "" : order.getDes().substring(0, order.getDes().length() - 1));
         money.setText(order.getPrice());

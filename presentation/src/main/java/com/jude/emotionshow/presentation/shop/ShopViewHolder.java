@@ -1,6 +1,7 @@
 package com.jude.emotionshow.presentation.shop;
 
 import android.content.Intent;
+import android.text.TextUtils;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -31,7 +32,11 @@ public class ShopViewHolder extends BaseViewHolder<Goods> {
 
     @Override
     public void setData(Goods data) {
-        Picasso.with(getContext()).load(data.getPic()).into(image);
+        if (TextUtils.isEmpty(data.getPic())){
+            Picasso.with(getContext()).load(R.mipmap.ic_launcher).into(image);
+        }else {
+            Picasso.with(getContext()).load(data.getPic()).into(image);
+        }
         name.setText(data.getName());
         price.setText(data.getPrice());
         itemView.setOnClickListener(v -> {

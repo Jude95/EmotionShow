@@ -1,6 +1,7 @@
 package com.jude.emotionshow.presentation.shop;
 
 import android.content.Intent;
+import android.text.TextUtils;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -34,7 +35,11 @@ public class OrderViewHolder extends BaseViewHolder<Order> {
 
     @Override
     public void setData(Order data) {
-        Picasso.with(getContext()).load(data.getPic()).into(img);
+        if (TextUtils.isEmpty(data.getPic())){
+            Picasso.with(getContext()).load(R.mipmap.ic_launcher).into(img);
+        }else {
+            Picasso.with(getContext()).load(data.getPic()).into(img);
+        }
         name.setText(data.getGoodsName());
         des.setText(data.getInfo());
         money.setText(data.getPrice());

@@ -84,7 +84,11 @@ public class OrderDetailActivity extends BeamDataActivity<OrderDetailPresenter, 
     public void setData(OrderDetail data) {
         postCompany = data.getPost_company();
         postId = data.getPost_code();
-        Picasso.with(OrderDetailActivity.this).load(data.getPic()).into(img);
+        if (TextUtils.isEmpty(data.getPic())){
+            Picasso.with(OrderDetailActivity.this).load(R.mipmap.ic_launcher).into(img);
+        }else {
+            Picasso.with(OrderDetailActivity.this).load(data.getPic()).into(img);
+        }
         goodsName.setText(data.getGoodsName());
         des.setText(data.getInfo());
         money.setText(data.getPrice());

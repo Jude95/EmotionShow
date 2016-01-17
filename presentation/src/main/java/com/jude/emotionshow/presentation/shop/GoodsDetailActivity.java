@@ -96,7 +96,11 @@ public class GoodsDetailActivity extends BeamDataActivity<GoodsDetailPresenter, 
     @Override
     public void setData(GoodsDetail data) {
         intro = data.getIntro();
-        Picasso.with(this).load(data.getPic()).into(img);
+        if (TextUtils.isEmpty(data.getPic())){
+            Picasso.with(this).load(R.mipmap.ic_launcher).into(img);
+        }else {
+            Picasso.with(this).load(data.getPic()).into(img);
+        }
         name.setText(data.getName());
         money.setText(data.getPrice());
 //        category.setAdapter(categoryAdapter = new TagAdapter<String>(data.getInfo().get(0).getValue()) {
