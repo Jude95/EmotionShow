@@ -23,6 +23,8 @@ public class AddSubView extends LinearLayout {
     OnNumChangeListener onNumChangeListener;
 
     int num;
+    int MAX_NUM = Integer.MAX_VALUE;
+    int MIN_NUM = 0;
 
     public AddSubView(Context context) {
         super(context);
@@ -60,25 +62,7 @@ public class AddSubView extends LinearLayout {
 
         @Override
         public void afterTextChanged(Editable s) {
-            String numString = s.toString();
-            if (TextUtils.isEmpty(numString)) {
-                num = 1;
-                if (onNumChangeListener != null) {
-                    onNumChangeListener.onNumChange(AddSubView.this, num);
-                }
-            } else {
-                int numInt = Integer.parseInt(numString);
-                if (numInt < 1) {
-                    textNum.setText("1");
-                } else {
-                    // 设置EditText光标位置 为文本末端
-                    textNum.setSelection(textNum.getText().toString().length());
-                    num = numInt;
-                    if (onNumChangeListener != null) {
-                        onNumChangeListener.onNumChange(AddSubView.this, num);
-                    }
-                }
-            }
+            updateText(s.toString());
         }
 
         @Override
@@ -93,29 +77,73 @@ public class AddSubView extends LinearLayout {
 
     }
 
+    private void updateText(String numString) {
+        if (TextUtils.isEmpty(numString)) {
+            num = MIN_NUM;
+            if (onNumChangeListener != null) {
+                onNumChangeListener.onNumChange(AddSubView.this, num);
+            }
+        } else {
+            int numInt = Integer.parseInt(numString);
+            if (numInt < MIN_NUM) {
+                textNum.setText(MIN_NUM + "");
+            } else {
+                if (numInt > MAX_NUM) {
+                    num = MAX_NUM;
+                    textNum.setText(MAX_NUM + "");
+                } else {
+                    num = numInt;
+                }
+                // 设置EditText光标位置 为文本末端
+                textNum.setSelection(textNum.getText().toString().length());
+                if (onNumChangeListener != null) {
+                    onNumChangeListener.onNumChange(AddSubView.this, num);
+                }
+            }
+        }
+    }
+
+    private void updateMaxText() {
+        String numString = textNum.getText().toString();
+        if (TextUtils.isEmpty(numString)) {
+            num = MIN_NUM;
+            textNum.setText(MIN_NUM + "");
+        } else {
+            int numInt = Integer.parseInt(numString);
+            if (numInt > MAX_NUM) {
+                num = MAX_NUM;
+                textNum.setText(MAX_NUM + "");
+                textNum.setSelection(textNum.getText().toString().length());
+                if (onNumChangeListener != null) {
+                    onNumChangeListener.onNumChange(AddSubView.this, num);
+                }
+            }
+        }
+    }
+
     class OnButtonClickListener implements OnClickListener {
 
         @Override
         public void onClick(View v) {
             String numString = textNum.getText().toString();
             if (TextUtils.isEmpty(numString)) {
-                num = 1;
-                textNum.setText("1");
+                num = MIN_NUM;
+                textNum.setText(MIN_NUM + "");
             } else {
-                if (v.getId() == R.id.add) {
-                    if (--num < 1) { // 先减，再判断
+                if (v.getId() == R.id.sub) {
+                    if (--num < MIN_NUM) { // 先减，再判断
                         num++;
-                        textNum.setText("1");
+                        textNum.setText(MIN_NUM + "");
                     } else {
                         textNum.setText(String.valueOf(num));
                         if (onNumChangeListener != null) {
                             onNumChangeListener.onNumChange(AddSubView.this, num);
                         }
                     }
-                } else if (v.getId() == R.id.sub) {
-                    if (++num < 1) { // 先加，再判断
+                } else if (v.getId() == R.id.add) {
+                    if (++num > MAX_NUM) { // 先加，再判断
                         num--;
-                        textNum.setText("1");
+                        textNum.setText(MAX_NUM + "");
                     } else {
                         textNum.setText(String.valueOf(num));
 
@@ -130,6 +158,11 @@ public class AddSubView extends LinearLayout {
 
     public int getNum() {
         return num;
+    }
+
+    public void setMaxNum(int maxNum) {
+        this.MAX_NUM = maxNum;
+        updateMaxText();
     }
 
     public interface OnNumChangeListener {

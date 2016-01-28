@@ -11,7 +11,7 @@ import com.jude.emotionshow.domain.entities.Goods;
  */
 public class GoodsListPresenter extends BeamListFragmentPresenter<GoodsListFragment, Goods> {
     private int type;
-    private int sort = 0;//0升序 1降序
+    private int sort = 1;//0升序 1降序
 
     @Override
     protected void onCreate(GoodsListFragment view, Bundle savedState) {
@@ -43,5 +43,15 @@ public class GoodsListPresenter extends BeamListFragmentPresenter<GoodsListFragm
             sort = 0;
             onRefresh();
         }
+    }
+
+    public void sortByDesc() {
+        sort = 1;
+        onRefresh();
+    }
+
+    public void sortByAsc() {
+        sort = 0;
+        onRefresh();
     }
 }

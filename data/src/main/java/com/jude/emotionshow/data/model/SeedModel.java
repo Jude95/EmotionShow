@@ -136,4 +136,8 @@ public class SeedModel extends AbsModel {
     public Observable<Object> deleteSeed(int id){
         return mServiceAPI.deleteSeed(id).compose(new DefaultTransform<>());
     }
+
+    public Observable<Object> delComment(int id){
+        return mServiceAPI.delComment(id).compose(new DefaultTransform<>());
+    }
 }

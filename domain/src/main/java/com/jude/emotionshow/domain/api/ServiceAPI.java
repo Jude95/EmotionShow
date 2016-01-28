@@ -9,6 +9,7 @@ import com.jude.emotionshow.domain.entities.CategoryDetail;
 import com.jude.emotionshow.domain.entities.CategoryPreview;
 import com.jude.emotionshow.domain.entities.Goods;
 import com.jude.emotionshow.domain.entities.GoodsDetail;
+import com.jude.emotionshow.domain.entities.GoodsNum;
 import com.jude.emotionshow.domain.entities.Notify;
 import com.jude.emotionshow.domain.entities.Order;
 import com.jude.emotionshow.domain.entities.OrderDetail;
@@ -108,7 +109,10 @@ public interface ServiceAPI {
             @Field("face") String face,
             @Field("name") String name,
             @Field("sign") String sign,
-            @Field("intro") String intro
+            @Field("intro") String intro,
+            @Field("street")String street,
+            @Field("realname")String realname,
+            @Field("lovestatus")int lovestatus
     );
 
     @FormUrlEncoded
@@ -359,4 +363,21 @@ public interface ServiceAPI {
     @FormUrlEncoded
     @POST("/home/user/coinsRecode")
     Observable<List<Pay>> getPayList(@Field("cost")int cost,@Field("page")int page);
+
+    @FormUrlEncoded
+    @POST("/home/shop/goodsNum")
+    Observable<GoodsNum> getGoodsNum(@Field("id")int id, @Field("data")String data);
+
+    @FormUrlEncoded
+    @POST("/home/history/delComment")
+    Observable<Object> delComment(@Field("id")int id);
+
+    @FormUrlEncoded
+    @POST("/home/shop/modAddress")
+    Observable<Object> modAddress(@Field("id")int id,
+                                  @Field("name")String name,
+                                  @Field("phone")String phone,
+                                  @Field("city")String city,
+                                  @Field("address")String address,
+                                  @Field("addcode")String addcode);
 }

@@ -30,9 +30,11 @@
                 android:text="返回"
                 android:textColor="@color/white"
                 android:textSize="17sp" />
+
         </LinearLayout>
 
         <TextView
+            android:id="@+id/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
@@ -40,6 +42,17 @@
             android:textColor="@color/white"
             android:textSize="18sp"
             android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:text="删除"
+            android:textColor="@color/white"
+            android:visibility="gone" />
     </RelativeLayout>
 
     <LinearLayout

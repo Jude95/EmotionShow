@@ -60,7 +60,7 @@
                 android:id="@+id/tv_kiss"
                 android:layout_width="wrap_content"
                 android:layout_height="24dp"
-                android:text="发现"
+                android:text="秀秀"
                 android:textColor="@color/gray"
                 android:textSize="13sp" />
         </LinearLayout>

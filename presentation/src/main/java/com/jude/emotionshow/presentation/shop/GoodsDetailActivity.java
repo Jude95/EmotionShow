@@ -71,6 +71,8 @@ public class GoodsDetailActivity extends BeamDataActivity<GoodsDetailPresenter, 
     FloatingActionButton back;
     @Bind(R.id.tv_err)
     TextView err;
+    @Bind(R.id.tv_count)
+    TextView tvCount;
 
     Order order;
 
@@ -96,13 +98,14 @@ public class GoodsDetailActivity extends BeamDataActivity<GoodsDetailPresenter, 
     @Override
     public void setData(GoodsDetail data) {
         intro = data.getIntro();
-        if (TextUtils.isEmpty(data.getPic())){
+        if (TextUtils.isEmpty(data.getPic())) {
             Picasso.with(this).load(R.mipmap.ic_launcher).into(img);
-        }else {
+        } else {
             Picasso.with(this).load(data.getPic()).into(img);
         }
         name.setText(data.getName());
         money.setText(data.getPrice());
+        tvCount.setText(data.getNum() + "");
 //        category.setAdapter(categoryAdapter = new TagAdapter<String>(data.getInfo().get(0).getValue()) {
 //            @Override
 //            public View getView(FlowLayout parent, int position, String s) {
@@ -147,10 +150,17 @@ public class GoodsDetailActivity extends BeamDataActivity<GoodsDetailPresenter, 
                 @Override
                 public void onSelected(int selectPosSet) {
                     stringMap.put(infoItem.getKey(), infoItem.getValue().get(selectPosSet));
+                    getPresenter().getNum(data.getId(), stringMap);
                 }
             });
             flowContainer.addView(flowLayouts[i]);
         }
+        getPresenter().getNum(data.getId(), stringMap);
+    }
+
+    public void updateGoodsNum(int num) {
+        addSubView.setMaxNum(num);
+        tvCount.setText(num+"");
     }
 
     private void setupView() {
@@ -160,17 +170,27 @@ public class GoodsDetailActivity extends BeamDataActivity<GoodsDetailPresenter, 
                 startActivity(new Intent(this, LoginActivity.class));
                 return;
             }
+            if (addSubView.getNum() == 0) {
+                JUtils.Toast("没有存货了");
+                return;
+            }
             Intent intent = new Intent(this, OrderConfirmActivity.class);
             order.setNum(addSubView.getNum());
             StringBuilder sb = new StringBuilder();
+            String[] str = new String[stringMap.size()];
+            int i = 0;
             for (Map.Entry entry : stringMap.entrySet()) {
                 String val = (String) entry.getValue();
                 sb.append(val).append(",");
+                str[i] = val;
+                i++;
             }
+            sb.deleteCharAt(sb.length() - 1);
             //界面描述
             order.setDes(sb.toString());
+            JUtils.Log(new Gson().toJson(str));
             //传入后台
-            order.setInfo(new Gson().toJson(stringMap));
+            order.setInfo(new Gson().toJson(str));
             intent.putExtra("order", order);
             startActivity(intent);
             finish();
@@ -220,6 +240,7 @@ public class GoodsDetailActivity extends BeamDataActivity<GoodsDetailPresenter, 
     }
 
     private boolean isWebViewPage;
+
     @Override
     public void onPageChanged(int stub) {
         if (stub == GoodsDetailLayout.SCREEN_FOOTER) {
@@ -237,7 +258,7 @@ public class GoodsDetailActivity extends BeamDataActivity<GoodsDetailPresenter, 
 
     @Override
     public void onBackPressed() {
-        if (isWebViewPage){
+        if (isWebViewPage) {
             container.backToContent();
             return;
         }

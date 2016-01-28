@@ -41,11 +41,11 @@ public class GoodsListFragment extends BeamListFragment<GoodsListPresenter,Goods
 
     //降序1
     public void sortByDesc(){
-//        getPresenter().sortByDesc();
+        getPresenter().sortByDesc();
     }
 
     //升序0
-    public void sortByAscOrDesc(){
-        getPresenter().sortByAscOrDesc();
+    public void sortByAsc(){
+        getPresenter().sortByAsc();
     }
 }

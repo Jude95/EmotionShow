@@ -1,8 +1,8 @@
 package com.jude.emotionshow.presentation.shop;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.jude.beam.bijection.RequiresPresenter;
 import com.jude.beam.expansion.BeamBaseActivity;
+import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.emotionshow.R;
 import com.jude.emotionshow.domain.entities.Address;
 import com.jude.emotionshow.domain.entities.Order;
@@ -43,7 +44,7 @@ public class OrderConfirmActivity extends BeamBaseActivity<OrderConfirmPresenter
     @Bind(R.id.back)
     LinearLayout back;
     @Bind(R.id.recycler)
-    RecyclerView recyclerView;
+    EasyRecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +56,7 @@ public class OrderConfirmActivity extends BeamBaseActivity<OrderConfirmPresenter
         setupView();
     }
 
-    private void setData() {
+    public void setData() {
         String addr = JUtils.getSharedPreference().getString("default_address", "");
         if (!TextUtils.isEmpty(addr)) {
             selected = new Address();
@@ -79,6 +80,10 @@ public class OrderConfirmActivity extends BeamBaseActivity<OrderConfirmPresenter
         recyclerView.setLayoutManager(new LinearLayoutManager(OrderConfirmActivity.this));
         recyclerView.setAdapter(addressAdapter = new AddressAdapter(OrderConfirmActivity.this, addressList));
         addressAdapter.setOnSelectedListener(this);
+        recyclerView.setEmptyView(R.layout.item_address_empty);
+        recyclerView.getEmptyView().findViewById(R.id.ll_address).setOnClickListener(v -> {
+            startActivityForResult(new Intent(OrderConfirmActivity.this, AddressAddActivity.class), 120);
+        });
     }
 
     public void setAddressList(List<Address> addresses) {
@@ -100,18 +105,22 @@ public class OrderConfirmActivity extends BeamBaseActivity<OrderConfirmPresenter
     }
 
     public void setView(Order order) {
-        if (TextUtils.isEmpty(order.getPic())){
+        if (TextUtils.isEmpty(order.getPic())) {
             Picasso.with(OrderConfirmActivity.this).load(R.mipmap.ic_launcher).into(img);
-        }else {
+        } else {
             Picasso.with(OrderConfirmActivity.this).load(order.getPic()).into(img);
         }
         name.setText(order.getGoodsName());
-        des.setText(TextUtils.isEmpty(order.getDes()) ? "" : order.getDes().substring(0, order.getDes().length() - 1));
-        money.setText(order.getPrice());
+        des.setText(order.getDes());
+        money.setText(Integer.valueOf(order.getPrice()) * order.getNum() + "");
         num.setText(order.getNum() + "");
     }
 
     private Address selected = null;
+
+    public Address getSelected() {
+        return selected;
+    }
 
     @Override
     public void onSelectedChanged(int position) {

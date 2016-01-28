@@ -62,7 +62,11 @@ public class NotifyActivity extends BeamBaseActivity<NotifyPresenter> {
         back.setOnClickListener(v->finish());
         done.setOnClickListener(v->startActivity(new Intent(this, PushSettingActivity.class)));
         praise.setOnClickListener(listener);
-        comment.setOnClickListener(listener);
+//        comment.setOnClickListener(listener);
+        comment.setOnClickListener(v -> {
+            Intent intent = new Intent(NotifyActivity.this,NotifyCommentActivity.class);
+            startActivity(intent);
+        });
         follow.setOnClickListener(listener);
         invite.setOnClickListener(listener);
     }

@@ -23,8 +23,8 @@ public class PayViewHolder extends BaseViewHolder<Pay> {
     TextView price;
     @Bind(R.id.tv_time)
     TextView time;
-    @Bind(R.id.tv_balance)
-    TextView balance;
+//    @Bind(R.id.tv_balance)
+//    TextView balance;
 
     public PayViewHolder(ViewGroup parent) {
         super(parent, R.layout.item_pay);

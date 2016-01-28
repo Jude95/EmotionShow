@@ -155,6 +155,7 @@
         <activity android:name=".presentation.shop.PayDetailActivity"/>
         <activity android:name=".presentation.shop.OrderDetailActivity"/>
         <activity android:name=".presentation.shop.OrderListActivity"/>
+        <activity android:name=".presentation.user.NotifyCommentActivity"/>
         <!-- User defined. 用户自定义的广播接收器-->
         <receiver
             android:name=".presentation.app.PushReceiver"

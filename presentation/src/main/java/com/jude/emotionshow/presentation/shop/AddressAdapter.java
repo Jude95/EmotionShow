@@ -1,6 +1,7 @@
 package com.jude.emotionshow.presentation.shop;
 
-import android.content.Context;
+import android.app.Activity;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -27,11 +28,12 @@ import butterknife.ButterKnife;
  */
 public class AddressAdapter extends RecyclerView.Adapter<AddressAdapter.ViewHolder> {
     public int mSelectedItem = -1;
+    private int lastSelectedItem = -1;
     public List<Address> mItems;
-    private Context mContext;
+    private Activity mContext;
     private int addressId;
 
-    public AddressAdapter(Context context, List<Address> items) {
+    public AddressAdapter(Activity context, List<Address> items) {
         mContext = context;
         mItems = items;
         addressId = JUtils.getSharedPreference().getInt("default_address_id", 0);
@@ -41,10 +43,15 @@ public class AddressAdapter extends RecyclerView.Adapter<AddressAdapter.ViewHold
     public void onBindViewHolder(AddressAdapter.ViewHolder holder, final int position) {
         Address address = mItems.get(position);
         holder.name.setText(address.getName());
-        holder.address.setText(address.getAddress());
+        holder.address.setText(address.getCity() + address.getAddress());
         holder.phone.setText(address.getPhone());
-        holder.mRadio.setChecked(address.getId() == addressId);
-        holder.itemView.setOnLongClickListener(v -> showDeleteDialog(address.getId()));
+        if (address.getId() == addressId) {
+            holder.mRadio.setChecked(true);
+            lastSelectedItem = position;
+        } else {
+            holder.mRadio.setChecked(false);
+        }
+        holder.itemView.setOnLongClickListener(v -> showDeleteDialog(address.getId(), position));
     }
 
     @Override
@@ -74,16 +81,24 @@ public class AddressAdapter extends RecyclerView.Adapter<AddressAdapter.ViewHold
             View.OnClickListener clickListener = v -> {
                 mSelectedItem = getAdapterPosition();
                 addressId = mItems.get(mSelectedItem).getId();
-                notifyItemRangeChanged(0, mItems.size());
+//                notifyItemRangeChanged(0, mItems.size());
+                notifyItemChanged(mSelectedItem);
+                notifyItemChanged(lastSelectedItem);
+                lastSelectedItem = mSelectedItem;
                 if (listener != null)
                     listener.onSelectedChanged(mSelectedItem);
             };
-            itemView.setOnClickListener(clickListener);
+            itemView.setOnClickListener(v -> {
+                mSelectedItem = getAdapterPosition();
+                Intent intent = new Intent(mContext, AddressAddActivity.class);
+                intent.putExtra("address", mItems.get(mSelectedItem));
+                mContext.startActivityForResult(intent, 120);
+            });
             mRadio.setOnClickListener(clickListener);
         }
     }
 
-    private boolean showDeleteDialog(int id) {
+    private boolean showDeleteDialog(int id, int position) {
         new MaterialDialog.Builder(mContext)
                 .title("删除地址")
                 .content("是否删除该条地址?")
@@ -97,6 +112,12 @@ public class AddressAdapter extends RecyclerView.Adapter<AddressAdapter.ViewHold
                                     .subscribe(new ServiceResponse<Object>() {
                                         @Override
                                         public void onNext(Object o) {
+                                            if (JUtils.getSharedPreference().getInt("default_address_id", -1) == mItems.get(position).getId() || getItemCount() <= 1) {
+                                                JUtils.getSharedPreference().edit().remove("default_address_id").apply();
+                                                JUtils.getSharedPreference().edit().remove("default_address").apply();
+                                            }
+                                            mItems.remove(position);
+                                            notifyItemRemoved(position);
                                             JUtils.Toast("删除成功");
                                         }
                                     });

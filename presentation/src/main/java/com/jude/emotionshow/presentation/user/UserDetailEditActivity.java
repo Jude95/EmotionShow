@@ -64,17 +64,26 @@ public class UserDetailEditActivity extends BeamDataActivity<UserDetailEditPrese
     ImageView flag;
     @Bind(R.id.name_label)
     TextView nameLabel;
-    @Bind(R.id.sign_label)
-    TextView signLabel;
-    @Bind(R.id.sign)
-    EditText sign;
-    @Bind(R.id.viewSign)
-    RelativeLayout viewSign;
+//    @Bind(R.id.sign_label)
+//    TextView signLabel;
+//    @Bind(R.id.sign)
+//    EditText sign;
+//    @Bind(R.id.viewSign)
+//    RelativeLayout viewSign;
     @Bind(R.id.address_label)
     TextView addressLabel;
     @Bind(R.id.intro_label)
     TextView introLabel;
-
+    @Bind(R.id.et_street)
+    EditText street;
+    @Bind(R.id.et_real_name)
+    EditText realName;
+    @Bind(R.id.rg_love)
+    RadioGroup groupLove;
+    @Bind(R.id.love)
+    RadioButton rbLove;
+    @Bind(R.id.lose)
+    RadioButton rbLose;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,22 +93,22 @@ public class UserDetailEditActivity extends BeamDataActivity<UserDetailEditPrese
         back.setOnClickListener(v -> finish());
         done.setOnClickListener(v -> getPresenter().submit());
         avatar.setOnClickListener(v -> showSelectorDialog());
-        sign.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                getPresenter().data.setSign(s.toString());
-            }
-        });
+//        sign.addTextChangedListener(new TextWatcher() {
+//            @Override
+//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+//
+//            }
+//
+//            @Override
+//            public void onTextChanged(CharSequence s, int start, int before, int count) {
+//
+//            }
+//
+//            @Override
+//            public void afterTextChanged(Editable s) {
+//                getPresenter().data.setSign(s.toString());
+//            }
+//        });
         name.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -116,7 +125,48 @@ public class UserDetailEditActivity extends BeamDataActivity<UserDetailEditPrese
                 getPresenter().data.setName(s.toString());
             }
         });
+        street.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                getPresenter().data.setStreet(s.toString());
+            }
+        });
+        realName.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                getPresenter().data.setRealname(s.toString());
+            }
+        });
         genderSelect.setOnCheckedChangeListener((group, checkedId) -> getPresenter().data.setGender(checkedId == R.id.male ? 0 : 1));
+        groupLove.setOnCheckedChangeListener((group, checkedId) -> {
+            int loveId = 1;
+            if (R.id.love==checkedId){
+                loveId = 2;
+            }else if (checkedId==R.id.lose){
+                loveId = 3;
+            }
+            getPresenter().data.setLovestatus(loveId);
+        });
         viewAddress.setOnClickListener(v -> showCityDialog(LocationModel.getInstance().getCurLocation().regionCode));
         viewIntro.setOnClickListener(v -> {
             Intent i = new Intent(this, IntroEditActivity.class);
@@ -148,9 +198,13 @@ public class UserDetailEditActivity extends BeamDataActivity<UserDetailEditPrese
         name.setText(data.getName());
         if (data.getGender() == 0) male.setChecked(true);
         else female.setChecked(true);
+        if (data.getLovestatus()==2) rbLove.setChecked(true);
+        else if (data.getLovestatus()==3)rbLose.setChecked(true);
         address.setText(data.getAddress());
-        sign.setText(data.getSign());
+//        sign.setText(data.getSign());
         intro.setText(data.getIntro());
+        street.setText(data.getStreet());
+        realName.setText(data.getRealname());
     }
 
     public void showSelectorDialog() {

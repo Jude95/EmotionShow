@@ -128,7 +128,7 @@
             android:layout_height="0.5dp"
             android:background="@color/gray" />
 
-        <android.support.v7.widget.RecyclerView
+        <com.jude.easyrecyclerview.EasyRecyclerView
             android:id="@+id/recycler"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />

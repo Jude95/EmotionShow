@@ -21,14 +21,15 @@
             android:textStyle="bold" />
 
 
-        <ImageView
-            android:id="@+id/search"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
+        <TextView
+            android:id="@+id/tv_note"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:padding="14dp"
-            android:src="@drawable/search" />
+            android:text="赚幸福币"
+            android:textColor="@color/white" />
     </RelativeLayout>
 
     <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"

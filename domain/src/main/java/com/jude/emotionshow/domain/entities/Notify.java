@@ -10,9 +10,10 @@ public class Notify {
     private int type;
     private String content;
     private long time;
-    private String data;
+    private int data;
     private String name;
     private String face;
+    private int cid;
 
     public String getContent() {
         return content;
@@ -22,11 +23,11 @@ public class Notify {
         this.content = content;
     }
 
-    public String getData() {
+    public int getData() {
         return data;
     }
 
-    public void setData(String data) {
+    public void setData(int data) {
         this.data = data;
     }
 
@@ -84,5 +85,13 @@ public class Notify {
 
     public void setUid(int uid) {
         this.uid = uid;
+    }
+
+    public int getCid() {
+        return cid;
+    }
+
+    public void setCid(int cid) {
+        this.cid = cid;
     }
 }

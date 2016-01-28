@@ -49,6 +49,7 @@ public class SeedDetailPresenter extends BeamDataActivityPresenter<SeedDetailAct
     public void comment(int commentId,String content){
         if (TextUtils.isEmpty(content)){
             JUtils.Toast("请填写内容");
+            return;
         }
         getView().getExpansion().showProgressDialog("提交中");
         SeedModel.getInstance().comment(id, commentId, content)

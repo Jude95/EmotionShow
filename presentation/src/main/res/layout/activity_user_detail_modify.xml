@@ -1,279 +1,397 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:fresco="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
-    android:background="#f1f1f1">
+    android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:background="?colorPrimary"
         android:layout_height="48dp"
+        android:background="?colorPrimary"
         android:focusable="true"
         android:focusableInTouchMode="true"
         android:padding="8dp">
 
         <LinearLayout
             android:id="@+id/back"
-            android:orientation="horizontal"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
             <ImageView
                 android:id="@+id/back_img"
                 android:layout_width="24dp"
                 android:layout_height="match_parent"
-                android:src="@drawable/back"/>
+                android:src="@drawable/back" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="返回"
-                android:textSize="17sp"
                 android:gravity="center"
-                android:textColor="@color/white"/>
+                android:text="返回"
+                android:textColor="@color/white"
+                android:textSize="17sp" />
         </LinearLayout>
 
 
         <TextView
-            android:text="修改资料"
-            android:layout_centerInParent="true"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:textColor="@color/white"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="修改资料"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
         <LinearLayout
             android:id="@+id/done"
-            android:orientation="horizontal"
             android:layout_width="wrap_content"
+            android:layout_height="match_parent"
             android:layout_alignParentRight="true"
-            android:layout_height="match_parent">
+            android:orientation="horizontal">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="完成"
-                android:textSize="17sp"
                 android:gravity="center"
-                android:textColor="@color/white"/>
+                android:text="完成"
+                android:textColor="@color/white"
+                android:textSize="17sp" />
         </LinearLayout>
 
     </RelativeLayout>
 
-    <RelativeLayout
-        android:id="@+id/viewFace"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:background="@color/white"
-        android:clickable="true">
+        android:layout_height="match_parent">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="16dp"
-            android:text="头像"
-            android:textSize="16sp" />
-
-        <ImageView
-            android:id="@+id/avatar"
-            android:layout_width="56dp"
-            android:layout_height="56dp"
-            android:layout_margin="8dp"
-            android:layout_toLeftOf="@+id/flag" />
-
-        <ImageView
-            android:id="@+id/flag"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="16dp"
-            android:src="@drawable/arrow_right" />
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/viewName"
-        android:layout_width="match_parent"
-        android:layout_height="72dp"
-        android:background="@color/white"
-        android:clickable="true">
-
-        <TextView
-            android:id="@+id/name_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="16dp"
-            android:text="昵称"
-            android:textSize="16sp" />
-
-        <EditText
-            android:id="@+id/name"
+        <LinearLayout xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical"
-            android:layout_centerVertical="true"
-            tools:text="尼玛"
-            android:textSize="14sp"
-            android:textColor="@color/gray"
-            android:background="@null"
-            android:layout_marginLeft="16dp"
-            android:layout_toRightOf="@+id/name_label"/>
-
-
-    </RelativeLayout>
-    <RelativeLayout
-        android:id="@+id/viewSign"
-        android:layout_width="match_parent"
-        android:layout_height="72dp"
-        android:background="@color/white"
-        android:clickable="true">
-
-        <TextView
-            android:id="@+id/sign_label"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="16dp"
-            android:text="签名"
-            android:textSize="16sp" />
+            android:background="#f1f1f1"
+            android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/sign"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical"
-            android:layout_centerVertical="true"
-            tools:text="尼玛"
-            android:textSize="14sp"
-            android:textColor="@color/gray"
-            android:background="@null"
-            android:layout_marginLeft="16dp"
-            android:layout_toRightOf="@+id/sign_label"/>
-
-
-    </RelativeLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="72dp"
-        android:layout_marginTop="16dp"
-        android:background="@color/white"
-        android:gravity="center_vertical">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="16dp"
-            android:text="性别"
-            android:textSize="16sp" />
-
-        <RadioGroup
-            android:id="@+id/genderSelect"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <RadioButton
-                android:id="@+id/male"
-                android:layout_width="wrap_content"
+            <RelativeLayout
+                android:id="@+id/viewFace"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:textColor="@color/gray"
+                android:layout_marginTop="8dp"
+                android:background="@color/white"
+                android:clickable="true">
 
-                android:text="男" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="16dp"
+                    android:text="头像"
+                    android:textSize="16sp" />
 
-            <RadioButton
-                android:id="@+id/female"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:textColor="@color/gray"
+                <ImageView
+                    android:id="@+id/avatar"
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:layout_margin="8dp"
+                    android:layout_toLeftOf="@+id/flag" />
 
-                android:text="女" />
-        </RadioGroup>
-    </LinearLayout>
+                <ImageView
+                    android:id="@+id/flag"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="16dp"
+                    android:src="@drawable/arrow_right" />
+            </RelativeLayout>
 
-    <LinearLayout
-        android:id="@+id/viewAddress"
-        android:layout_width="match_parent"
-        android:layout_height="72dp"
-        android:background="@color/white"
-        android:gravity="center_vertical"
-        android:clickable="true">
+            <RelativeLayout
+                android:id="@+id/viewRealName"
+                android:layout_width="match_parent"
+                android:layout_height="72dp"
+                android:background="@color/white"
+                android:clickable="true">
 
-        <TextView
-            android:id="@+id/address_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="16dp"
-            android:text="地区"
-            android:textSize="16sp" />
+                <TextView
+                    android:id="@+id/real_name_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="16dp"
+                    android:text="姓名"
+                    android:textSize="16sp" />
 
-        <TextView
-            android:id="@+id/address"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:singleLine="true"
-            android:ellipsize="end"
-            android:textColor="@color/gray"
+                <EditText
+                    android:id="@+id/et_real_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="16dp"
+                    android:layout_toRightOf="@+id/real_name_label"
+                    android:background="@null"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/gray"
+                    android:textSize="14sp"
+                    tools:text="尼玛" />
+            </RelativeLayout>
 
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="16dp"
-            android:layout_toRightOf="@+id/flag2" />
+            <RelativeLayout
+                android:id="@+id/viewName"
+                android:layout_width="match_parent"
+                android:layout_height="72dp"
+                android:background="@color/white"
+                android:clickable="true">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="16dp"
-            android:src="@drawable/arrow_right" />
+                <TextView
+                    android:id="@+id/name_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="16dp"
+                    android:text="昵称"
+                    android:textSize="16sp" />
 
-    </LinearLayout>
+                <EditText
+                    android:id="@+id/name"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="16dp"
+                    android:layout_toRightOf="@+id/name_label"
+                    android:background="@null"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/gray"
+                    android:textSize="14sp"
+                    tools:text="尼玛" />
 
-    <LinearLayout
-        android:id="@+id/viewIntro"
-        android:layout_width="match_parent"
-        android:layout_height="72dp"
-        android:gravity="center_vertical"
-        android:background="@color/white"
-        android:clickable="true">
 
-        <TextView
-            android:id="@+id/intro_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="16dp"
-            android:text="简介"
-            android:textSize="16sp" />
+            </RelativeLayout>
 
-        <TextView
-            android:id="@+id/intro"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:singleLine="true"
-            android:ellipsize="end"
-            android:textColor="@color/gray"
+            <!--<RelativeLayout-->
+                <!--android:id="@+id/viewSign"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="72dp"-->
+                <!--android:background="@color/white"-->
+                <!--android:clickable="true">-->
 
-            android:layout_marginLeft="16dp"
-            android:layout_toRightOf="@+id/intro_label" />
+                <!--<TextView-->
+                    <!--android:id="@+id/sign_label"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_centerVertical="true"-->
+                    <!--android:layout_marginLeft="16dp"-->
+                    <!--android:text="签名"-->
+                    <!--android:textSize="16sp" />-->
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="16dp"
-            android:src="@drawable/arrow_right" />
+                <!--<EditText-->
+                    <!--android:id="@+id/sign"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:layout_centerVertical="true"-->
+                    <!--android:layout_marginLeft="16dp"-->
+                    <!--android:layout_toRightOf="@+id/sign_label"-->
+                    <!--android:background="@null"-->
+                    <!--android:gravity="center_vertical"-->
+                    <!--android:textColor="@color/gray"-->
+                    <!--android:textSize="14sp"-->
+                    <!--tools:text="尼玛" />-->
 
-    </LinearLayout>
 
+            <!--</RelativeLayout>-->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="72dp"
+                android:background="@color/white"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="16dp"
+                    android:text="状态"
+                    android:textSize="16sp" />
+
+                <RadioGroup
+                    android:id="@+id/rg_love"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:checkedButton="@+id/single"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/single"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:text="单身"
+                        android:textColor="@color/gray" />
+
+                    <RadioButton
+                        android:id="@+id/love"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:text="热恋"
+                        android:textColor="@color/gray" />
+
+                    <RadioButton
+                        android:id="@+id/lose"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:text="失恋"
+                        android:textColor="@color/gray" />
+                </RadioGroup>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="72dp"
+                android:layout_marginTop="16dp"
+                android:background="@color/white"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="16dp"
+                    android:text="性别"
+                    android:textSize="16sp" />
+
+                <RadioGroup
+                    android:id="@+id/genderSelect"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/male"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:text="男"
+                        android:textColor="@color/gray" />
+
+                    <RadioButton
+                        android:id="@+id/female"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:text="女"
+                        android:textColor="@color/gray" />
+                </RadioGroup>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/viewAddress"
+                android:layout_width="match_parent"
+                android:layout_height="72dp"
+                android:background="@color/white"
+                android:clickable="true"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:id="@+id/address_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="16dp"
+                    android:text="地区"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/address"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="16dp"
+                    android:layout_toRightOf="@+id/flag2"
+                    android:layout_weight="1"
+
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:textColor="@color/gray" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="16dp"
+                    android:src="@drawable/arrow_right" />
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_addr"
+                android:layout_width="match_parent"
+                android:layout_height="72dp"
+                android:background="@color/white"
+                android:clickable="true">
+
+                <TextView
+                    android:id="@+id/tv_name_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="16dp"
+                    android:text="街道"
+                    android:textSize="16sp" />
+
+                <EditText
+                    android:id="@+id/et_street"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="16dp"
+                    android:layout_toRightOf="@+id/tv_name_label"
+                    android:background="@null"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/gray"
+                    android:textSize="14sp" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/viewIntro"
+                android:layout_width="match_parent"
+                android:layout_height="72dp"
+                android:background="@color/white"
+                android:clickable="true"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:id="@+id/intro_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="16dp"
+                    android:text="简介"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/intro"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_toRightOf="@+id/intro_label"
+                    android:layout_weight="1"
+                    android:ellipsize="end"
+
+                    android:singleLine="true"
+                    android:textColor="@color/gray" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="16dp"
+                    android:src="@drawable/arrow_right" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

@@ -121,7 +121,7 @@ public class MineFragment extends BeamDataFragment<MinePresenter, Account> {
                     .transform(new CircleTransform())
                     .into(avatar);
             name.setText(data.getName());
-            sign.setText(data.getSign());
+            sign.setText(data.getIntro());
             scoreCount.setText(data.getCoins()+"");
             followCount.setText("" + data.getFansCount());
             fansCount.setText("" + data.getFansCount());

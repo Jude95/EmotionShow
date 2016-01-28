@@ -14,6 +14,7 @@ public class Account extends PersonDetail  implements Serializable,Cloneable {
     private String rongYunToken;
     @SerializedName("tel")
     private boolean needTel;
+    private int finnished;
 
     private int coins;
 
@@ -56,6 +57,14 @@ public class Account extends PersonDetail  implements Serializable,Cloneable {
 
     public void setToken(String token) {
         this.token = token;
+    }
+
+    public int getFinnished() {
+        return finnished;
+    }
+
+    public void setFinnished(int finnished) {
+        this.finnished = finnished;
     }
 
     @Override

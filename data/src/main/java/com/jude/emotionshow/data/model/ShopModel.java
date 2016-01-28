@@ -9,6 +9,7 @@ import com.jude.emotionshow.domain.api.ServiceAPI;
 import com.jude.emotionshow.domain.entities.Address;
 import com.jude.emotionshow.domain.entities.Goods;
 import com.jude.emotionshow.domain.entities.GoodsDetail;
+import com.jude.emotionshow.domain.entities.GoodsNum;
 import com.jude.emotionshow.domain.entities.Order;
 import com.jude.emotionshow.domain.entities.OrderDetail;
 import com.jude.emotionshow.domain.entities.Pay;
@@ -68,7 +69,15 @@ public class ShopModel extends AbsModel {
         return mServiceAPI.getOrderItem(id).compose(new DefaultTransform<>());
     }
 
-    public Observable<List<Pay>> getPayList(int cost,int page){
+    public Observable<List<Pay>> getPayList(int cost, int page) {
         return mServiceAPI.getPayList(cost, page).compose(new DefaultTransform<>());
+    }
+
+    public Observable<GoodsNum> getGoodsNum(int id, String data) {
+        return mServiceAPI.getGoodsNum(id, data).compose(new DefaultTransform<>());
+    }
+
+    public Observable<Object> modAddress(int id, String name, String phone, String address, String addressDetail, String postCode) {
+        return mServiceAPI.modAddress(id, name, phone, address, addressDetail, postCode).compose(new DefaultTransform<>());
     }
 }

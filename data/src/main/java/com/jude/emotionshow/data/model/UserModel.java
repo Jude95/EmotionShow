@@ -153,7 +153,7 @@ public class UserModel extends AbsModel {
     }
 
     public Observable<Object> modify(Account account){
-        return mServiceAPI.modifyInfo(account.getGender(),account.getAddress(),account.getAvatar(),account.getName(),account.getSign(),account.getIntro())
+        return mServiceAPI.modifyInfo(account.getGender(),account.getAddress(),account.getAvatar(),account.getName(),account.getSign(),account.getIntro(),account.getStreet(),account.getRealname(),account.getLovestatus())
                 .doOnNext(data -> updateMyInfo().subscribe(new ServiceResponse<>()))
                 .compose(new DefaultTransform<>());
     }

@@ -14,6 +14,9 @@ public class PersonBrief implements Serializable,Cloneable{
     private String avatar;
     private String sign;
     private int type;
+    private String street;
+    private String realname;
+    private int lovestatus;
 
     public String getSign() {
         return sign;
@@ -53,5 +56,29 @@ public class PersonBrief implements Serializable,Cloneable{
 
     public void setAvatar(String avatar) {
         this.avatar = avatar;
+    }
+
+    public String getStreet() {
+        return street;
+    }
+
+    public void setStreet(String street) {
+        this.street = street;
+    }
+
+    public String getRealname() {
+        return realname;
+    }
+
+    public void setRealname(String realname) {
+        this.realname = realname;
+    }
+
+    public int getLovestatus() {
+        return lovestatus;
+    }
+
+    public void setLovestatus(int lovestatus) {
+        this.lovestatus = lovestatus;
     }
 }

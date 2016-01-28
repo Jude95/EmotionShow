@@ -23,7 +23,11 @@ public class OrderConfirmPresenter extends Presenter<OrderConfirmActivity> {
         super.onCreate(view, savedState);
         order = (Order) getView().getIntent().getSerializableExtra("order");
 
-        ShopModel.getInstance().getAddress().subscribe(new ServiceResponse<List<Address>>(){
+        onRefresh();
+    }
+
+    private void onRefresh() {
+        ShopModel.getInstance().getAddress().subscribe(new ServiceResponse<List<Address>>() {
             @Override
             public void onNext(List<Address> addresses) {
                 getView().setAddressList(addresses);
@@ -46,11 +50,21 @@ public class OrderConfirmPresenter extends Presenter<OrderConfirmActivity> {
                     @Override
                     public void onNext(Order o) {
                         JUtils.Toast("提交成功");
-                        Intent intent = new Intent(getView(),OrderSuccessActivity.class);
-                        intent.putExtra("id",o.getId());
+                        Intent intent = new Intent(getView(), OrderSuccessActivity.class);
+                        intent.putExtra("id", o.getId());
                         getView().startActivity(intent);
                         getView().finish();
                     }
                 });
+    }
+
+    @Override
+    protected void onResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == 120 && resultCode == getView().RESULT_OK) {
+            onRefresh();
+            if (JUtils.getSharedPreference().getInt("default_address_id", -1) == getView().getSelected().getId()) {
+                getView().setData();
+            }
+        }
     }
 }

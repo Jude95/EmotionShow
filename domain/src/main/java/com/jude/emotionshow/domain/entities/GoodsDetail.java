@@ -9,6 +9,7 @@ public class GoodsDetail extends Goods {
     private String intro;
     private String selled;
     private List<InfoItem> info;
+    private int num;
 
     public String getIntro() {
         return intro;
@@ -32,6 +33,14 @@ public class GoodsDetail extends Goods {
 
     public void setInfo(List<InfoItem> info) {
         this.info = info;
+    }
+
+    public int getNum() {
+        return num;
+    }
+
+    public void setNum(int num) {
+        this.num = num;
     }
 
     public class InfoItem {

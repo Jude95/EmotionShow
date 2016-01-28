@@ -5,10 +5,12 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.text.Editable;
 import android.text.InputType;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
@@ -34,7 +36,7 @@ import butterknife.ButterKnife;
  * Created by Mr.Jude on 2015/11/21.
  */
 @RequiresPresenter(WritingPresenter.class)
-public class WritingActivity extends BeamDataActivity<WritingPresenter,SeedEditable> {
+public class WritingActivity extends BeamDataActivity<WritingPresenter, SeedEditable> {
 
     @Bind(R.id.back_img)
     ImageView backImg;
@@ -69,7 +71,7 @@ public class WritingActivity extends BeamDataActivity<WritingPresenter,SeedEdita
         setContentView(R.layout.activity_writting);
         ButterKnife.bind(this);
         back.setOnClickListener(v -> finish());
-        done.setOnClickListener(v->getPresenter().publish());
+        done.setOnClickListener(v -> getPresenter().publish());
         scopeContainer.setOnClickListener(v -> showScopeTypeEdit());
         processContainer.setOnClickListener(v -> showProcessEdit());
         sceneContainer.setOnClickListener(v -> showSceneEdit());
@@ -78,7 +80,7 @@ public class WritingActivity extends BeamDataActivity<WritingPresenter,SeedEdita
         images.setOKImageRes(R.drawable.pic_ok);
         images.setOnViewDeleteListener(getPresenter());
         addressText.setText(getPresenter().data.getAddress());
-        addressContainer.setOnClickListener(v->showAddressEdit());
+        addressContainer.setOnClickListener(v -> showAddressEdit());
         content.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -102,15 +104,16 @@ public class WritingActivity extends BeamDataActivity<WritingPresenter,SeedEdita
         pieceView.setImageBitmap(bitmap);
         pieceView.setTag(images.getChildCount());
         images.addView(pieceView);
-        pieceView.setOnClickListener(v->{
+        pieceView.setOnClickListener(v -> {
             Intent i = new Intent(this, ImageViewActivity.class);
-            i.putExtra(ImageViewActivity.KEY_URIS,getPresenter().uriArrayList);
-            i.putExtra(ImageViewActivity.KEY_INDEX,(int)v.getTag());
+            i.putExtra(ImageViewActivity.KEY_URIS, getPresenter().uriArrayList);
+            i.putExtra(ImageViewActivity.KEY_INDEX, (int) v.getTag());
             startActivity(i);
         });
     }
 
-    String[] SCOPE = {"全公开","仅朋友可见","仅自己可见","匿名发布"};
+    String[] SCOPE = {"全公开", "仅朋友可见", "仅自己可见", "匿名发布"};
+
     private void showScopeTypeEdit() {
         new MaterialDialog.Builder(this)
                 .title("请选择公开方式")
@@ -133,9 +136,9 @@ public class WritingActivity extends BeamDataActivity<WritingPresenter,SeedEdita
         String[] items = new String[getPresenter().categoryList.size()];
         for (int i = 0; i < getPresenter().categoryList.size(); i++) {
             items[i] = getPresenter().categoryList.get(i).getName();
-            if (getPresenter().categoryList.get(i).getId()==getPresenter().data.getScene()){
+            if (getPresenter().categoryList.get(i).getId() == getPresenter().data.getScene()) {
                 index = i;
-                break;
+//                break;
             }
         }
         new MaterialDialog.Builder(this)
@@ -144,8 +147,23 @@ public class WritingActivity extends BeamDataActivity<WritingPresenter,SeedEdita
                 .itemsCallbackSingleChoice(index, new MaterialDialog.ListCallbackSingleChoice() {
                     @Override
                     public boolean onSelection(MaterialDialog dialog, View view, int which, CharSequence text) {
-                        getPresenter().data.setScene(getPresenter().categoryList.get(which).getId());
-                        sceneText.setText(text);
+                        if (text.equals("其他")) {
+                            new MaterialDialog.Builder(WritingActivity.this)
+                                    .title("添加场景")
+                                    .input("", "", new MaterialDialog.InputCallback() {
+                                        @Override
+                                        public void onInput(@NonNull MaterialDialog dialog, CharSequence input) {
+                                            if (!TextUtils.isEmpty(input)) {
+                                                getPresenter().data.setScene(getPresenter().categoryList.get(which).getId());
+                                                sceneText.setText(input);
+                                            }
+                                        }
+                                    })
+                                    .show();
+                        } else {
+                            getPresenter().data.setScene(getPresenter().categoryList.get(which).getId());
+                            sceneText.setText(text);
+                        }
                         return true;
                     }
                 })
@@ -153,23 +171,41 @@ public class WritingActivity extends BeamDataActivity<WritingPresenter,SeedEdita
                 .show();
     }
 
-    String[] PROCESS={"暗恋","追求","热恋","异地恋","平淡期","求婚"};
+    String[] PROCESS = {"幸福", "快乐", "忧郁", "悲伤", "痛苦", "无助", "失望", "委屈", "压抑", "感动", "其他"};
+    int index = 0;
+
     private void showProcessEdit() {
-        int index = 0;
-        for (int i = 0; i < PROCESS.length; i++) {
-            if (PROCESS[i].equals(getPresenter().data.getProcess())){
-                index = i;
-                break;
-            }
-        }
+//        int index = 0;
+//        for (int i = 0; i < PROCESS.length; i++) {
+//            if (PROCESS[i].equals(getPresenter().data.getProcess())){
+//                index = i;
+//                break;
+//            }
+//        }
         new MaterialDialog.Builder(this)
                 .title("请选择场景")
                 .items(PROCESS)
                 .itemsCallbackSingleChoice(index, new MaterialDialog.ListCallbackSingleChoice() {
                     @Override
                     public boolean onSelection(MaterialDialog dialog, View view, int which, CharSequence text) {
-                        getPresenter().data.setProcess(which);
-                        processText.setText(text);
+                        if (text.equals("其他")) {
+                            new MaterialDialog.Builder(WritingActivity.this)
+                                    .title("添加状态")
+                                    .input("", "", new MaterialDialog.InputCallback() {
+                                        @Override
+                                        public void onInput(@NonNull MaterialDialog dialog, CharSequence input) {
+                                            if (!TextUtils.isEmpty(input)) {
+                                                getPresenter().data.setProcess(which);
+                                                processText.setText(input);
+                                                index = which;
+                                            }
+                                        }
+                                    })
+                                    .show();
+                        } else {
+                            getPresenter().data.setProcess(which);
+                            processText.setText(text);
+                        }
                         return true;
                     }
                 })
@@ -195,10 +231,10 @@ public class WritingActivity extends BeamDataActivity<WritingPresenter,SeedEdita
                 }).show();
     }
 
-    public boolean requestPermission(){
+    public boolean requestPermission() {
         //判断当前Activity是否已经获得了该权限
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
-                ||ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                || ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
 
             //如果App的权限申请曾经被用户拒绝过，就需要在这里跟用户做出解释
             if (ActivityCompat.shouldShowRequestPermissionRationale(this,
@@ -207,7 +243,7 @@ public class WritingActivity extends BeamDataActivity<WritingPresenter,SeedEdita
             } else {
                 //进行权限请求
                 ActivityCompat.requestPermissions(this,
-                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.CAMERA},
+                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA},
                         WritingPresenter.EXTERNAL_STORAGE_REQ_CODE);
                 return false;
             }

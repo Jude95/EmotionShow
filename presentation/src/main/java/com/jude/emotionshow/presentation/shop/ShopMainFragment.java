@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.jude.beam.bijection.BeamFragment;
 import com.jude.beam.bijection.RequiresPresenter;
 import com.jude.emotionshow.R;
@@ -23,6 +24,7 @@ import com.jude.emotionshow.data.model.UserModel;
 import com.jude.emotionshow.domain.entities.Banner;
 import com.jude.emotionshow.presentation.main.WebViewActivity;
 import com.jude.emotionshow.presentation.user.LoginActivity;
+import com.jude.emotionshow.presentation.user.UserDetailEditActivity;
 import com.jude.rollviewpager.RollPagerView;
 import com.jude.rollviewpager.adapter.StaticPagerAdapter;
 import com.jude.utils.JUtils;
@@ -35,6 +37,7 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Created by mike on 2015/12/23.
@@ -55,6 +58,8 @@ public class ShopMainFragment extends BeamFragment<ShopMainPresenter> {
     ImageView menu;
     @Bind(R.id.tv_all)
     TextView menuAll;
+    @Bind(R.id.ll_exchange)
+    LinearLayout menuExchangeContainer;
     @Bind(R.id.tv_exchange)
     TextView menuExchange;
     @Bind(R.id.ll_price)
@@ -87,6 +92,9 @@ public class ShopMainFragment extends BeamFragment<ShopMainPresenter> {
         return view;
     }
 
+    boolean toggleMenuExchange = false;
+    boolean toggleMenuPrice = false;
+
     private void setupView() {
 //        popupWindow = new ListPopupWindow(getActivity());
 //        popupWindow.setAdapter(new PriceAdapter(getActivity()));
@@ -109,10 +117,14 @@ public class ShopMainFragment extends BeamFragment<ShopMainPresenter> {
             viewPager.setCurrentItem(0, true);
         });
 
-        menuExchange.setOnClickListener(v -> {
+        menuExchangeContainer.setOnClickListener(v -> {
             if (viewPager.getCurrentItem() == 1) {
-                pagerAdapter.currentFragment.sortByAscOrDesc();
-                ivExchange.setImageResource(R.drawable.ic_menu_up);
+                ivExchange.setImageResource(toggleMenuExchange ? R.drawable.ic_menu_down_red : R.drawable.ic_menu_up);
+                if (!toggleMenuExchange)
+                    pagerAdapter.currentFragment.sortByAsc();
+                else
+                    pagerAdapter.currentFragment.sortByDesc();
+                toggleMenuExchange = !toggleMenuExchange;
                 return;
             }
             viewPager.setCurrentItem(1, true);
@@ -120,11 +132,16 @@ public class ShopMainFragment extends BeamFragment<ShopMainPresenter> {
 
         menuPriceContainer.setOnClickListener(v -> {
             if (viewPager.getCurrentItem() == 2) {
-                pagerAdapter.currentFragment.sortByAscOrDesc();
-                ivMenuPrice.setImageResource(R.drawable.ic_menu_up);
+                ivMenuPrice.setImageResource(toggleMenuPrice ? R.drawable.ic_menu_down_red : R.drawable.ic_menu_up);
+                if (!toggleMenuPrice)
+                    pagerAdapter.currentFragment.sortByAsc();
+                else
+                    pagerAdapter.currentFragment.sortByDesc();
+                toggleMenuPrice = !toggleMenuPrice;
                 return;
             }
             viewPager.setCurrentItem(2, true);
+
 //            popupWindow.setAnchorView(v);
 //            popupWindow.show();
         });
@@ -203,12 +220,12 @@ public class ShopMainFragment extends BeamFragment<ShopMainPresenter> {
 
     private void setMenuExchange(boolean focus) {
         menuExchange.setTextColor(getResources().getColor(focus ? R.color.orange : R.color.dark_gray));
-        ivExchange.setImageResource(focus ? R.drawable.ic_menu_down_red : R.drawable.ic_menu_down_grey);
+        ivExchange.setImageResource(focus ? (toggleMenuExchange ? R.drawable.ic_menu_up : R.drawable.ic_menu_down_red) : R.drawable.ic_menu_down_grey);
     }
 
     private void setMenuPrice(boolean focus) {
         menuPrice.setTextColor(getResources().getColor(focus ? R.color.orange : R.color.dark_gray));
-        ivMenuPrice.setImageResource(focus ? R.drawable.ic_menu_down_red : R.drawable.ic_menu_down_grey);
+        ivMenuPrice.setImageResource(focus ? (toggleMenuPrice ? R.drawable.ic_menu_up : R.drawable.ic_menu_down_red) : R.drawable.ic_menu_down_grey);
     }
 
     public void setBanner(List<Banner> banners) {
@@ -306,4 +323,22 @@ public class ShopMainFragment extends BeamFragment<ShopMainPresenter> {
     }
 
     String[] d = new String[]{"0-100", "100-200", "500", "600"};
+
+    @OnClick(R.id.tv_note)
+    public void note() {
+        boolean isF = UserModel.getInstance().getCurAccount().getFinnished() == 0;
+        new MaterialDialog.Builder(getActivity())
+                .content("1.1、常规送币：平时发布“秀”获得了“赞”可得相应比例的幸福币；\n\n1.2、活动送币：参与活动发布“秀”获得了“赞”可得相应比例的幸福币；\n\n1.3、完善资料赚取幸福币")
+                .title("赚幸福币")
+                .negativeText(isF ? "完善资料" : "已完善资料")
+                .onNegative((dialog, which) -> {
+                    if (isF) {//0未完善
+                        startActivity(new Intent(getActivity(), UserDetailEditActivity.class));
+                    } else {
+                        JUtils.Toast("你已完善了资料");
+                    }
+                })
+                .positiveText("确定")
+                .show();
+    }
 }

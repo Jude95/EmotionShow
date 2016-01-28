@@ -1,9 +1,11 @@
 package com.jude.emotionshow.domain.entities;
 
+import java.io.Serializable;
+
 /**
  * Created by mike on 2015/12/24.
  */
-public class Address {
+public class Address implements Serializable{
     private int id;
     private String name;
     private String phone;

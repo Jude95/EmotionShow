@@ -231,7 +231,7 @@ public class SeedMainFragment extends BeamFragment<SeedMainPresenter> {
         if (list == null || list.size() == 0) {
             return;
         }
-        categoryProcess.setting("情感", () -> getPresenter().getCategoryProcess());
+        categoryProcess.setting("心情", () -> getPresenter().getCategoryProcess());
         categoryProcess.setCategoryList(list);
     }
 
