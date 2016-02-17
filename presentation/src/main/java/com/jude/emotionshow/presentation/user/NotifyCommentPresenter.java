@@ -2,6 +2,7 @@ package com.jude.emotionshow.presentation.user;
 
 import android.os.Bundle;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.jude.beam.bijection.Presenter;
 import com.jude.emotionshow.data.model.CommonModel;
 import com.jude.emotionshow.data.model.SeedModel;
@@ -35,12 +36,23 @@ public class NotifyCommentPresenter extends Presenter<NotifyCommentActivity> {
 
             @Override
             public void onNext(List<Notify> notifies) {
+                if (notifies.size() != 0 && JUtils.getSharedPreference().getBoolean("notifyComment", true)) {
+                    new MaterialDialog.Builder(getView())
+                            .content("左边滑动可以删除评论")
+                            .title("提示")
+                            .negativeText("不再提示")
+                            .onNegative((dialog, which) -> {
+                                JUtils.getSharedPreference().edit().putBoolean("notifyComment", false).apply();
+                            })
+                            .positiveText("知道了")
+                            .show();
+                }
                 getView().setNotifyList(notifies);
             }
         });
     }
 
-    public void delComment(int id){
+    public void delComment(int id) {
         SeedModel.getInstance().delComment(id)
                 .subscribe(new Subscriber<Object>() {
                     @Override

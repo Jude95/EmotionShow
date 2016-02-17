@@ -15,19 +15,24 @@ import rx.Subscriber;
 /**
  * Created by Mr.Jude on 2015/11/21.
  */
-public class SeedDetailPresenter extends BeamDataActivityPresenter<SeedDetailActivity,SeedDetail> {
+public class SeedDetailPresenter extends BeamDataActivityPresenter<SeedDetailActivity, SeedDetail> {
     public int id;
     public SeedDetail mData;
+
     @Override
     protected void onCreate(SeedDetailActivity view, Bundle savedState) {
         super.onCreate(view, savedState);
-        id = getView().getIntent().getIntExtra("id",0);
-        refresh();
+        id = getView().getIntent().getIntExtra("id", -1);
+        if (id == -1) {
+            getView().finish();
+            JUtils.Toast("对不起，该印记已被删除");
+        } else
+            refresh();
     }
 
-    private void refresh(){
+    private void refresh() {
         SeedModel.getInstance().getSeedDetail(id)
-                .doOnNext(data->mData = data)
+                .doOnNext(data -> mData = data)
                 .unsafeSubscribe(new Subscriber<SeedDetail>() {
                     @Override
                     public void onCompleted() {
@@ -46,8 +51,8 @@ public class SeedDetailPresenter extends BeamDataActivityPresenter<SeedDetailAct
                 });
     }
 
-    public void comment(int commentId,String content){
-        if (TextUtils.isEmpty(content)){
+    public void comment(int commentId, String content) {
+        if (TextUtils.isEmpty(content)) {
             JUtils.Toast("请填写内容");
             return;
         }
@@ -64,10 +69,10 @@ public class SeedDetailPresenter extends BeamDataActivityPresenter<SeedDetailAct
                 });
     }
 
-    public void praise(){
+    public void praise() {
         getView().getExpansion().showProgressDialog("点赞中");
         SeedModel.getInstance().praise(id)
-                .finallyDo(()->getView().getExpansion().dismissProgressDialog())
+                .finallyDo(() -> getView().getExpansion().dismissProgressDialog())
                 .subscribe(new ServiceResponse<Object>() {
                     @Override
                     public void onNext(Object o) {
@@ -77,18 +82,20 @@ public class SeedDetailPresenter extends BeamDataActivityPresenter<SeedDetailAct
                 });
     }
 
-    public void collect(){
+    public void collect() {
         getView().getExpansion().showProgressDialog("收藏中");
         SeedModel.getInstance().collect(id)
                 .finallyDo(() -> getView().getExpansion().dismissProgressDialog())
                 .subscribe(new ServiceResponse<Object>() {
                     @Override
                     public void onNext(Object o) {
+                        getView().updateCollect(id);
                         JUtils.Toast("您收藏了这条印记");
                     }
                 });
     }
-    public void report(){
+
+    public void report() {
         SeedModel.getInstance().report(id).subscribe(new ServiceResponse<Object>() {
             @Override
             public void onNext(Object o) {
@@ -97,7 +104,7 @@ public class SeedDetailPresenter extends BeamDataActivityPresenter<SeedDetailAct
         });
     }
 
-    public void delete(){
+    public void delete() {
         SeedModel.getInstance().deleteSeed(id).subscribe(new ServiceResponse<Object>() {
             @Override
             public void onNext(Object o) {
@@ -107,11 +114,23 @@ public class SeedDetailPresenter extends BeamDataActivityPresenter<SeedDetailAct
         });
     }
 
-    public void share(){
+    public void share() {
         String content = mData.getContent();
-        ShareManager.getInstance(getView()).share(getView(), content, "么么秀分享", "http://114.215.86.90/meme.php/home/index/share/"+mData.getId(), mData.getPics().get(0).getUrl());
+        ShareManager.getInstance(getView()).share(getView(), content, "么么秀分享", "http://114.215.86.90/meme.php/home/index/share/" + mData.getId(), mData.getPics().get(0).getUrl());
     }
 
 
+    public void unCollect() {
+        getView().getExpansion().showProgressDialog("取消收藏");
+        SeedModel.getInstance().unCollect(id)
+                .finallyDo(() -> getView().getExpansion().dismissProgressDialog())
+                .subscribe(new ServiceResponse<Object>() {
+                    @Override
+                    public void onNext(Object o) {
+                        getView().updateCollect(-1);
+                        JUtils.Toast("您取消收藏了这条印记");
+                    }
+                });
+    }
 }
 

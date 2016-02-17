@@ -380,4 +380,8 @@ public interface ServiceAPI {
                                   @Field("city")String city,
                                   @Field("address")String address,
                                   @Field("addcode")String addcode);
+
+    @FormUrlEncoded
+    @POST("/home/history/unCollect")
+    Observable<Object> unCollect(@Field("id")int id);
 }

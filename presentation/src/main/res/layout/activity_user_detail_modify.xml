@@ -298,7 +298,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="16dp"
-                    android:text="地区"
+                    android:text="邮寄地址"
                     android:textSize="16sp" />
 
                 <TextView

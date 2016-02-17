@@ -1,4 +1,4 @@
-package com.jude.emotionshow.presentation.seed;
+package com.jude.emotionshow.presentation.user;
 
 import android.content.Intent;
 import android.view.ViewGroup;
@@ -15,6 +15,7 @@ import com.jude.emotionshow.data.model.SeedModel;
 import com.jude.emotionshow.data.server.ServiceResponse;
 import com.jude.emotionshow.domain.entities.Image;
 import com.jude.emotionshow.domain.entities.Seed;
+import com.jude.emotionshow.presentation.seed.SeedDetailActivity;
 import com.jude.emotionshow.presentation.widget.CircleTransform;
 import com.jude.utils.JUtils;
 import com.squareup.picasso.Picasso;
@@ -22,10 +23,7 @@ import com.squareup.picasso.Picasso;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-/**
- * Created by Mr.Jude on 2015/11/22.
- */
-public class SeedViewHolder extends BaseViewHolder<Seed> {
+public class CollectSeedViewHolder extends BaseViewHolder<Seed> {
     @Bind(R.id.image)
     ImageView image;
     @Bind(R.id.avatar)
@@ -39,7 +37,7 @@ public class SeedViewHolder extends BaseViewHolder<Seed> {
     @Bind(R.id.iv_praise)
     ImageView ivPraise;
 
-    public SeedViewHolder(ViewGroup parent) {
+    public CollectSeedViewHolder(ViewGroup parent) {
         super(parent, R.layout.item_seed);
         ButterKnife.bind(this, itemView);
     }
@@ -80,6 +78,7 @@ public class SeedViewHolder extends BaseViewHolder<Seed> {
         itemView.setOnClickListener(v -> {
             Intent i = new Intent(getContext(), SeedDetailActivity.class);
             i.putExtra("id", data.getId());
+            i.putExtra("collectId",data.getId());
             getContext().startActivity(i);
         });
     }

@@ -1,15 +1,12 @@
 package com.jude.emotionshow.presentation.shop;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
@@ -48,7 +45,8 @@ public class GoodsDetailActivity extends BeamDataActivity<GoodsDetailPresenter, 
     @Bind(R.id.header)
     ScrollView contentScrollView;
     @Bind(R.id.footer)
-    WebView webView;
+    TextView footer;
+//    WebView webView;
     @Bind(R.id.ll_content)
     LinearLayout content;
     @Bind(R.id.tg_ok)
@@ -200,20 +198,20 @@ public class GoodsDetailActivity extends BeamDataActivity<GoodsDetailPresenter, 
     }
 
     private void setWebView() {
-        webView.getSettings().setJavaScriptEnabled(true);
-        webView.setWebViewClient(new WebViewClient() {
-            @Override
-            public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                if (!url.startsWith("http")) {
-                    Intent i = new Intent(Intent.ACTION_VIEW);
-                    i.setData(Uri.parse(url));
-                    startActivity(i);
-                    return true;
-                }
-                view.loadUrl(url);
-                return true;
-            }
-        });
+//        webView.getSettings().setJavaScriptEnabled(true);
+//        webView.setWebViewClient(new WebViewClient() {
+//            @Override
+//            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+//                if (!url.startsWith("http")) {
+//                    Intent i = new Intent(Intent.ACTION_VIEW);
+//                    i.setData(Uri.parse(url));
+//                    startActivity(i);
+//                    return true;
+//                }
+//                view.loadUrl(url);
+//                return true;
+//            }
+//        });
     }
 
     private boolean hasLoaded;
@@ -223,7 +221,8 @@ public class GoodsDetailActivity extends BeamDataActivity<GoodsDetailPresenter, 
         if (contentScrollView.getScrollY() + contentScrollView.getHeight() >= content.getHeight()) {
             if (!hasLoaded) {
                 hasLoaded = true;
-                webView.loadUrl(intro);
+                footer.setText(intro);
+//                webView.loadUrl(intro);
             }
             return true;
         }
@@ -233,7 +232,8 @@ public class GoodsDetailActivity extends BeamDataActivity<GoodsDetailPresenter, 
     @Override
     public boolean footerHeadReached(MotionEvent event) {
         //下拉返回点
-        if (webView.getScrollY() == 0) {
+//        if (webView.getScrollY() == 0) {
+        if (footer.getScrollY()==0){
             return true;
         }
         return false;

@@ -66,8 +66,8 @@ public class SeedDetailActivity extends BeamDataActivity<SeedDetailPresenter, Se
     TextView praiseCount;
     @Bind(R.id.comment_count)
     TextView commentCount;
-    @Bind(R.id.more)
-    ImageView more;
+    @Bind(R.id.ll_more_container)
+    LinearLayout more;
     @Bind(R.id.comment_list)
     LinearWrapContentRecyclerView commentList;
     @Bind(R.id.reply)
@@ -104,12 +104,14 @@ public class SeedDetailActivity extends BeamDataActivity<SeedDetailPresenter, Se
             curCommentId = 0;
         });
         more.setOnClickListener(v -> showToolDialog());
+        collectId = getIntent().getIntExtra("collectId", -1);
     }
+
+    int collectId;
 
     //设置header与回复
     @Override
     public void setData(SeedDetail data) {
-        super.setData(data);
         Picasso.with(this).load(ImageModel.getSmallImage(data.getAuthor().getAvatar()))
                 .transform(new CircleTransform())
                 .into(avatar);
@@ -160,9 +162,14 @@ public class SeedDetailActivity extends BeamDataActivity<SeedDetailPresenter, Se
         View collect = $(view, R.id.collect);
         View report = $(view, R.id.report);
         View delete = $(view, R.id.delete);
+        TextView tvCollect = $(view, R.id.tv_collect);
 
         if (getPresenter().mData.getAuthor().getId() != UserModel.getInstance().getCurAccount().getId()) {
             delete.setVisibility(View.GONE);
+        }
+
+        if (collectId != -1) {
+            tvCollect.setText("取消收藏");
         }
 
         share.setOnClickListener(v -> {
@@ -170,7 +177,11 @@ public class SeedDetailActivity extends BeamDataActivity<SeedDetailPresenter, Se
             getPresenter().share();
         });
         collect.setOnClickListener(v -> {
-            getPresenter().collect();
+            if (collectId != -1) {
+                getPresenter().unCollect();
+            } else {
+                getPresenter().collect();
+            }
             dialog.dismiss();
         });
         report.setOnClickListener(v -> {
@@ -181,6 +192,10 @@ public class SeedDetailActivity extends BeamDataActivity<SeedDetailPresenter, Se
             getPresenter().delete();
             dialog.dismiss();
         });
+    }
+
+    public void updateCollect(int id) {
+        collectId = id;
     }
 
 }

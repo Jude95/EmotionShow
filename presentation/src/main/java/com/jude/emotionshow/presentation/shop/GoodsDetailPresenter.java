@@ -23,6 +23,7 @@ public class GoodsDetailPresenter extends BeamDataActivityPresenter<GoodsDetailA
     }
 
     public void getNum(int id, Map<String, String> stringMap) {
+//        getView().getExpansion().showProgressPage();
         String[] buffer = new String[stringMap.size()];
         int i = 0;
         for (Map.Entry entry : stringMap.entrySet()) {
@@ -31,19 +32,21 @@ public class GoodsDetailPresenter extends BeamDataActivityPresenter<GoodsDetailA
             i++;
         }
         ShopModel.getInstance()
-                .getGoodsNum(id, new Gson().toJson(buffer)).subscribe(new Subscriber<GoodsNum>() {
-            @Override
-            public void onCompleted() {
-            }
+                .getGoodsNum(id, new Gson().toJson(buffer))
+//                .finallyDo(() -> getView().getExpansion().dismissProgressPage())
+                .subscribe(new Subscriber<GoodsNum>() {
+                    @Override
+                    public void onCompleted() {
+                    }
 
-            @Override
-            public void onError(Throwable e) {
-            }
+                    @Override
+                    public void onError(Throwable e) {
+                    }
 
-            @Override
-            public void onNext(GoodsNum num) {
-                getView().updateGoodsNum(num.getNum());
-            }
-        });
+                    @Override
+                    public void onNext(GoodsNum num) {
+                        getView().updateGoodsNum(num.getNum());
+                    }
+                });
     }
 }

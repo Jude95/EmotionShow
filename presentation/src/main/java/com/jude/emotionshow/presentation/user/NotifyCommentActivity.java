@@ -57,6 +57,7 @@ public class NotifyCommentActivity extends BeamBaseActivity<NotifyCommentPresent
         recyclerView.setLayoutManager(new LinearLayoutManager(NotifyCommentActivity.this));
         recyclerView.addItemDecoration(new LinearItemDecoration(Color.BLACK));
         recyclerView.setAdapter(adapter = new SlideItemAdapter(notifyList));
+        recyclerView.setEmptyView(R.layout.beam_view_list_con_empty);
     }
 
     public void setNotifyList(List<Notify> notifies) {

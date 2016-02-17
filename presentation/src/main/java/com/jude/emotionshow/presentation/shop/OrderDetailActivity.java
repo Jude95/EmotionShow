@@ -84,9 +84,9 @@ public class OrderDetailActivity extends BeamDataActivity<OrderDetailPresenter, 
     public void setData(OrderDetail data) {
         postCompany = data.getPost_company();
         postId = data.getPost_code();
-        if (TextUtils.isEmpty(data.getPic())){
+        if (TextUtils.isEmpty(data.getPic())) {
             Picasso.with(OrderDetailActivity.this).load(R.mipmap.ic_launcher).into(img);
-        }else {
+        } else {
             Picasso.with(OrderDetailActivity.this).load(data.getPic()).into(img);
         }
         goodsName.setText(data.getGoodsName());
@@ -94,11 +94,17 @@ public class OrderDetailActivity extends BeamDataActivity<OrderDetailPresenter, 
         money.setText(data.getPrice());
         num.setText(data.getNum() + "");
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        JUtils.Log("time:"+data.getTime()*1000+" "+new Date().getTime());
+        JUtils.Log("time:" + data.getTime() * 1000 + " " + new Date().getTime());
         time.setText(sdf.format(new Date(data.getTime() * 1000)));
         name.setText(data.getName());
         phone.setText(data.getPhone());
         address.setText(data.getAddress());
-        postCode.setText(data.getPost_code());
+        if (0 == data.getStatus()) {
+            postCode.setText("已下单");
+        } else if (1 == data.getStatus()) {
+            postCode.setText(data.getPost_code());
+        } else if (2 == data.getStatus()) {
+            postCode.setText("已取消");
+        }
     }
 }

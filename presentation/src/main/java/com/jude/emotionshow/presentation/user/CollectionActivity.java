@@ -13,7 +13,6 @@ import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.emotionshow.R;
 import com.jude.emotionshow.domain.entities.Seed;
-import com.jude.emotionshow.presentation.seed.SeedViewHolder;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -51,6 +50,6 @@ public class CollectionActivity extends BeamListActivity<CollectionPresenter, Se
 
     @Override
     protected BaseViewHolder getViewHolder(ViewGroup parent, int viewType) {
-        return new SeedViewHolder(parent);
+        return new CollectSeedViewHolder(parent);
     }
 }

@@ -326,7 +326,12 @@ public class ShopMainFragment extends BeamFragment<ShopMainPresenter> {
 
     @OnClick(R.id.tv_note)
     public void note() {
-        boolean isF = UserModel.getInstance().getCurAccount().getFinnished() == 0;
+        if (!UserModel.getInstance().isLogin()) {
+            startActivity(new Intent(getActivity(), LoginActivity.class));
+            JUtils.Log("请先登录");
+            return;
+        }
+        boolean isF = UserModel.getInstance().getCurAccount().getFinished() == 0;
         new MaterialDialog.Builder(getActivity())
                 .content("1.1、常规送币：平时发布“秀”获得了“赞”可得相应比例的幸福币；\n\n1.2、活动送币：参与活动发布“秀”获得了“赞”可得相应比例的幸福币；\n\n1.3、完善资料赚取幸福币")
                 .title("赚幸福币")
