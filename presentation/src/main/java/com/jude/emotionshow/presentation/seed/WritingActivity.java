@@ -80,7 +80,7 @@ public class WritingActivity extends BeamDataActivity<WritingPresenter, SeedEdit
         images.setOKImageRes(R.drawable.pic_ok);
         images.setOnViewDeleteListener(getPresenter());
         addressText.setText(getPresenter().data.getAddress());
-        addressContainer.setOnClickListener(v -> showAddressEdit());
+        addressContainer.setOnClickListener(v -> startActivityForResult(new Intent(WritingActivity.this, LocationActivity.class), 100));
         content.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -249,6 +249,14 @@ public class WritingActivity extends BeamDataActivity<WritingPresenter, SeedEdit
             }
         }
         return true;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 100 && resultCode == RESULT_OK) {
+            addressText.setText(data.getStringExtra("location"));
+        }
     }
 
     @Override

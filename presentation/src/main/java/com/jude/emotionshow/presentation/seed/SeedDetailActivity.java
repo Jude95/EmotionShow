@@ -112,15 +112,22 @@ public class SeedDetailActivity extends BeamDataActivity<SeedDetailPresenter, Se
     //设置header与回复
     @Override
     public void setData(SeedDetail data) {
-        Picasso.with(this).load(ImageModel.getSmallImage(data.getAuthor().getAvatar()))
-                .transform(new CircleTransform())
-                .into(avatar);
-        name.setText(data.getAuthor().getName());
+        if (data.getAuthor() != null) {
+            Picasso.with(this).load(ImageModel.getSmallImage(data.getAuthor().getAvatar()))
+                    .transform(new CircleTransform())
+                    .into(avatar);
+            name.setText(data.getAuthor().getName());
+            authorContainer.setOnClickListener(v -> {
+                Intent i = new Intent(this, UserPreviewActivity.class);
+                i.putExtra("id", data.getAuthor().getId());
+                startActivity(i);
+            });
+        }
         time.setText(new JTimeTransform(data.getTime()).toString("MM月dd日 HH:mm"));
         content.setText(data.getContent());
         praiseCount.setText(data.getPraiseCount() == 0 ? "赞" : data.getPraiseCount() + "");
         commentCount.setText(data.getCommentCount() == 0 ? "评论" : data.getCommentCount() + "");
-        scoreCount.setText(data.getScore() == 0 ? "幸福币" : data.getScore() + "");
+        scoreCount.setText(Float.valueOf(data.getScore()) <= 0.0 ? "幸福币" : data.getScore());
         pictures.removeAllViews();
         if (data.getPics() != null && data.getPics().size() != 0) {
             pictures.setAdapter(mImageAdapter = new NetImageAdapter(this, data.getPics(), ImageModel.IMAGE_SIZE_SMALL * (4 - Math.min(data.getPics().size(), 3))));
@@ -145,11 +152,7 @@ public class SeedDetailActivity extends BeamDataActivity<SeedDetailPresenter, Se
         mCommentAdapter.addAll(data.getComment());
         commentList.setAdapter(mCommentAdapter);
         reply.setText("");
-        authorContainer.setOnClickListener(v -> {
-            Intent i = new Intent(this, UserPreviewActivity.class);
-            i.putExtra("id", data.getAuthor().getId());
-            startActivity(i);
-        });
+
         praise.setImageResource(data.getPraised() == 0 ? R.drawable.praise : R.drawable.praise_red);
     }
 
@@ -164,7 +167,7 @@ public class SeedDetailActivity extends BeamDataActivity<SeedDetailPresenter, Se
         View delete = $(view, R.id.delete);
         TextView tvCollect = $(view, R.id.tv_collect);
 
-        if (getPresenter().mData.getAuthor().getId() != UserModel.getInstance().getCurAccount().getId()) {
+        if (getPresenter().mData.getAuthor()!=null&&getPresenter().mData.getAuthor().getId() != UserModel.getInstance().getCurAccount().getId()) {
             delete.setVisibility(View.GONE);
         }
 

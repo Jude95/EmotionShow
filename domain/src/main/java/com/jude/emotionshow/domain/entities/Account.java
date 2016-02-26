@@ -16,13 +16,13 @@ public class Account extends PersonDetail  implements Serializable,Cloneable {
     private boolean needTel;
     private int finished;
 
-    private int coins;
+    private String coins;
 
-    public int getCoins() {
+    public String getCoins() {
         return coins;
     }
 
-    public void setCoins(int coins) {
+    public void setCoins(String coins) {
         this.coins = coins;
     }
 

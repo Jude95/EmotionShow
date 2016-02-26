@@ -185,6 +185,7 @@ public class UserDetailEditActivity extends BeamDataActivity<UserDetailEditPrese
         dialog = new MaterialDialog.Builder(this)
                 .title("选择感兴趣的地区")
                 .customView(view, false)
+                .positiveText("取消")
                 .show();
     }
 

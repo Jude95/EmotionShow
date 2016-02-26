@@ -7,6 +7,7 @@ import com.jude.beam.expansion.data.BeamDataActivityPresenter;
 import com.jude.emotionshow.data.model.CommonModel;
 import com.jude.emotionshow.data.server.ServiceResponse;
 import com.jude.emotionshow.domain.entities.PushSet;
+import com.jude.utils.JUtils;
 
 /**
  * Created by zhuchenxi on 15/12/8.
@@ -20,7 +21,9 @@ public class PushSettingPresenter extends BeamDataActivityPresenter<PushSettingA
 
     public void upload(){
         //getView().getExpansion().showProgressDialog("修改中");
-        CommonModel.getInstance().uploadPushSet(getView().getPushSet())
+        PushSet pushSet = getView().getPushSet();
+        JUtils.Log(pushSet.toString());
+        CommonModel.getInstance().uploadPushSet(pushSet)
                 .finallyDo(()->getView().getExpansion().dismissProgressDialog())
                 .subscribe(new ServiceResponse<Object>());
     }

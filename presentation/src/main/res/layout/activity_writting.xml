@@ -151,7 +151,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
                 android:layout_weight="1"
-                android:text="请选择"
+                android:text="美景"
                 android:textColor="@android:color/holo_red_light" />
 
             <ImageView

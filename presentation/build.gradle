@@ -96,8 +96,8 @@ dependencies {
     compile presentationDependencies.beam
     compile presentationDependencies.swipeBackHelper
     compile presentationDependencies.butterKnife
-    compile (presentationDependencies.utils)
-    compile (presentationDependencies.materialDialogsCore){ transitive = true }
+    compile(presentationDependencies.utils)
+    compile(presentationDependencies.materialDialogsCore) { transitive = true }
     compile presentationDependencies.tagview
     compile presentationDependencies.rollviewpager
     compile presentationDependencies.picasso
@@ -117,6 +117,7 @@ dependencies {
     compile project(':umengfamily')
     compile project(':jpush')
     compile project(':flowlayout-lib')
+    compile files('libs/AMap_Search_V2.8.0_20160105.jar')
 }
 
 def buildTime() {

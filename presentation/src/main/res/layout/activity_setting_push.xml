@@ -55,6 +55,7 @@
         <Switch
             android:id="@+id/switch_comment"
             android:layout_width="wrap_content"
+            android:clickable="false"
             android:layout_height="wrap_content" />
     </LinearLayout>
 
@@ -71,6 +72,7 @@
             style="@style/Base.TextAppearance.AppCompat.Subhead"/>
         <Switch
             android:id="@+id/switch_praise"
+            android:clickable="false"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
@@ -88,6 +90,7 @@
             style="@style/Base.TextAppearance.AppCompat.Subhead"/>
         <Switch
             android:id="@+id/switch_invite"
+            android:clickable="false"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
@@ -105,6 +108,7 @@
             style="@style/Base.TextAppearance.AppCompat.Subhead"/>
         <Switch
             android:id="@+id/switch_follow"
+            android:clickable="false"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>

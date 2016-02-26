@@ -22,16 +22,16 @@ public class SeedDetail extends Seed {
     @SerializedName("collect")
     private int collectCount;
     @SerializedName("coins")
-    private int score;
+    private String score;
 
 
     private List<Comment> comment;
 
-    public int getScore() {
+    public String getScore() {
         return score;
     }
 
-    public void setScore(int score) {
+    public void setScore(String score) {
         this.score = score;
     }
     public String getContent() {

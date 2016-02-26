@@ -122,7 +122,7 @@ public class MineFragment extends BeamDataFragment<MinePresenter, Account> {
                     .into(avatar);
             name.setText(data.getName());
             sign.setText(data.getIntro());
-            scoreCount.setText(data.getCoins()+"");
+            scoreCount.setText(data.getCoins());
             followCount.setText("" + data.getFansCount());
             fansCount.setText("" + data.getFansCount());
             seed.setOnClickListener(v -> {

@@ -53,4 +53,14 @@ public class PushSet {
     public void setReceivePraiseMessage(boolean receivePraiseMessage) {
         isReceivePraiseMessage = receivePraiseMessage;
     }
+
+    @Override
+    public String toString() {
+        return "PushSet{" +
+                "isReceivePraiseMessage=" + isReceivePraiseMessage +
+                ", isReceiveCommentMessage=" + isReceiveCommentMessage +
+                ", isReceiveInviteMessage=" + isReceiveInviteMessage +
+                ", isReceiveFollowMessage=" + isReceiveFollowMessage +
+                '}';
+    }
 }
